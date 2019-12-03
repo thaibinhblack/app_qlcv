@@ -1,0 +1,31 @@
+<template>
+<div id="page-ds-trung-tam">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-7" style="margin:auto">
+            <div class="card">
+                <form action="">
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên Trung Tâm</label>
+                        <div class="col-sm-8">
+                            <b-input type="text"  placeholder="Mã chức năng" required></b-input>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label" >Mô tả</label>
+                        <div class="col-sm-8">
+                            <b-input type="textarea" minlength="    "
+                            maxlength="255" placeholder="Mô tả chức năng"   required></b-input>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label" >Ghi chú</label>
+                        <div class="col-sm-8">
+                            <b-input type="text"  placeholder="Mã chức năng" required></b-input>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
