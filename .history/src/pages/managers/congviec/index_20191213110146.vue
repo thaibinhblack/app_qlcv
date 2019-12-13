@@ -255,13 +255,13 @@ export default {
             console.log(cong_viec_filter)
             console.log('test công việc' ,cong_viec_filter)
             this.list1 = this.list2 = this.list3 = []
-            this.list1 = cong_viec_filter.filter((value,index,array) => {
+            this.list1 = cong_viec.filter((value,index,array) => {
                 return array[index].trang_thai == 1
             })
-            this.list2 = cong_viec_filter.filter((value,index,array) => {
+            this.list2 = cong_viec.filter((value,index,array) => {
                 return array[index].trang_thai == 2
             })
-                this.list3 = cong_viec_filter.filter((value,index,array) => {
+                this.list3 = cong_viec.filter((value,index,array) => {
                 return array[index].trang_thai == 3
             })
            

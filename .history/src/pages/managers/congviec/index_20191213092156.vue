@@ -5,26 +5,9 @@
             <ul class="list-filter">
                 <li>
                     <b-field>
-                        <b-select v-model="cannhan_selected">
-                            <option value="0"> --Công việc của dự án--</option>
-                             <option value="1"> --Công việc cá nhân--</option>
-                           
-                        </b-select>
-                    </b-field>
-                </li>
-                  <li>
-                    <b-field>
-                        <b-select v-model="duan_selected">
-                            <option value="0"> --Tất cả  dự án--</option>
-                          
-                            <option v-for="(da,index) in du_an" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
-                        </b-select>
-                    </b-field>
-                </li>
-                <li>
-                    <b-field>
                         <b-select v-model="selected_project">
                             <option value="0"> --Tất cả  dự án khách hàng--</option>
+                            <option value="-1"> --Công việc cá nhân  --</option>
                             <option v-for="(da,index) in du_an_kh" :key="index" :value="da.id_du_an_kh"> {{da.ten_du_an_kh}}</option>
                         </b-select>
                     </b-field>
@@ -35,15 +18,6 @@
                             <option value="0"> --Tất cả loại công việc --</option>
                           
                             <option v-for="(lcv,index) in loai_cv" :key="index" :value="lcv.id_loai_cv">{{lcv.ten_loai_cv}}</option>
-                        </b-select>
-                    </b-field>
-                </li>
-                <li>
-                    <b-field>
-                        <b-select v-model="nhanvien_duan">
-                            <option value="0"> --Nhân viên nhận việc--</option>
-                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
-                           
                         </b-select>
                     </b-field>
                 </li>
@@ -205,11 +179,7 @@ export default {
     data()
     {
         return {
-            cannhan_selected: 0,
-            du_an: [],
-            duan_selected: 0,
             du_an_kh: [],
-            du_an_kh_tmp: [],
             selected_project: 0,
             list1: [],
             list2: [],
@@ -239,53 +209,10 @@ export default {
             ],
             open: 0,
             loai_cv: [],
-            selected_lcv: 0,
-            nhanvien_duan: 0,
-            users: []
+            selected_lcv: 0
         }
     },
     watch:{
-        nhanvien_duan(newVal)
-        {
-            console.log(newVal, this.cong_viec)
-           
-            var cong_viec_filter = this.cong_viec.filter((value,index,array) => {
-                return array[index].nguoi_nhan_viec == newVal
-            })
-            console.log(cong_viec_filter)
-            console.log('test công việc' ,cong_viec_filter)
-            this.list1 = this.list2 = this.list3 = []
-            this.list1 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 1
-            })
-            this.list2 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 2
-            })
-                this.list3 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 3
-            })
-           
-
-        },
-        cannhan_selected(newVal)
-        {
-            if(newVal == 0)
-            {
-                this.api_cong_viec(this.selected_project,this.duan_selected)
-            }
-            else
-            {
-                this.api_cong_viec(-1,this.duan_selected)
-            }
-        },
-        duan_selected(newVal)
-        {
-            this.du_an_kh = this.du_an_kh_tmp.filter((value,index,array) => {
-                return array[index].id_du_an == newVal
-            })
-            this.selected_project = 0
-            this.api_cong_viec(0,newVal)
-        },
         isActiveModal(newVal)
         {
             if(newVal == false)
@@ -296,7 +223,7 @@ export default {
         },
         selected_project(newVal)
         {
-            this.api_cong_viec(newVal,this.duan_selected)
+            this.api_cong_viec(newVal)
         },
         selected_lcv(newVal)
         {
@@ -316,18 +243,14 @@ export default {
         }
     },
     methods: {
-        api_du_an()
+        get_name_du_an()
         {
-            this.axios.get(this.$store.state.config.API_URL + 'du-an?api_token='+this.$cookies.get("token")).then((response) => {
-                this.du_an = response.data
-                
-            })
+
         },
         api_du_an_kh()
         {
             this.axios.get(this.$store.state.config.API_URL + 'du-an-kh?api_token='+this.$cookies.get("token")).then((response) => {
                 this.du_an_kh = response.data
-                this.du_an_kh_tmp = response.data
                 this.du_an_selected = response.data.filter((value,index,array) => {
                 return array[index].id_du_an_kh == this.$route.query.id_du_an_kh
                 })[0]
@@ -335,9 +258,9 @@ export default {
                     // this.cong_viec = response.data
             })
         },
-        api_cong_viec(ID,id_du_an)
+        api_cong_viec(ID)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')).then((response) => {
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'?api_token='+this.$cookies.get('token')).then((response) => {
                 console.log(response.data)
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
@@ -446,12 +369,6 @@ export default {
             
           })
         },
-        api_nhanvien()
-        {
-            this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                this.users = response.data
-            })
-        }
     },
     beforeCreate()
     {
@@ -474,16 +391,13 @@ export default {
                 { name: 'ghi_chu', type: 'string'}
             ],
             url: this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token'),
-        }
-    
+            }
     },
     created()
     {
-        this.api_du_an()
         this.api_loai_cv()
         this.api_du_an_kh()
-        this.api_cong_viec(0,0)
-        this.api_nhanvien()
+        this.api_cong_viec(0)
     }
 }
 </script>

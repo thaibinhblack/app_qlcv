@@ -43,7 +43,7 @@
                  <div class="form-group row">
                     <label for="inputPassword3"  class="col-sm-3 col-form-label">Họ và Tên</label>
                     <div class="col-sm-9">
-                    <b-input type="text" placeholder="Họ và Tên" icon="account" v-model="user.display_name"></b-input>
+                    <b-input type="text" placeholder="Họ và Tên" icon="account" v-model="user.DISPLAY_NAME"></b-input>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -168,7 +168,6 @@ export default {
             user.append("USERNAME",this.user.username_nd)
             user.append("PASSWORD",this.user.password_nd)
             user.append("ID_NHOM",this.user.id_nhom)
-            user.append("DISPLAY_NAME", this.user.display_name)
             user.append("SDT_ND",this.user.sdt_nd)
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)
@@ -199,7 +198,6 @@ export default {
             user.append("USERNAME",this.user.username_nd)
             user.append("PASSWORD",this.user.password_nd)
             user.append("ID_NHOM",this.user.id_nhom)
-            user.append("DISPLAY_NAME", this.user.display_name)
             user.append("SDT_ND",this.user.sdt_nd)
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)

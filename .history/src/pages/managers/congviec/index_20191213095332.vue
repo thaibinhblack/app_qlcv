@@ -38,15 +38,6 @@
                         </b-select>
                     </b-field>
                 </li>
-                <li>
-                    <b-field>
-                        <b-select v-model="nhanvien_duan">
-                            <option value="0"> --Nhân viên nhận việc--</option>
-                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
-                           
-                        </b-select>
-                    </b-field>
-                </li>
             </ul>
         <!-- <b-navbar class="menu-left" style="height:20px;padding:0">
             <template slot="start">
@@ -239,34 +230,10 @@ export default {
             ],
             open: 0,
             loai_cv: [],
-            selected_lcv: 0,
-            nhanvien_duan: 0,
-            users: []
+            selected_lcv: 0
         }
     },
     watch:{
-        nhanvien_duan(newVal)
-        {
-            console.log(newVal, this.cong_viec)
-           
-            var cong_viec_filter = this.cong_viec.filter((value,index,array) => {
-                return array[index].nguoi_nhan_viec == newVal
-            })
-            console.log(cong_viec_filter)
-            console.log('test công việc' ,cong_viec_filter)
-            this.list1 = this.list2 = this.list3 = []
-            this.list1 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 1
-            })
-            this.list2 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 2
-            })
-                this.list3 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 3
-            })
-           
-
-        },
         cannhan_selected(newVal)
         {
             if(newVal == 0)
@@ -446,12 +413,6 @@ export default {
             
           })
         },
-        api_nhanvien()
-        {
-            this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                this.users = response.data
-            })
-        }
     },
     beforeCreate()
     {
@@ -474,8 +435,7 @@ export default {
                 { name: 'ghi_chu', type: 'string'}
             ],
             url: this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token'),
-        }
-    
+            }
     },
     created()
     {
@@ -483,7 +443,6 @@ export default {
         this.api_loai_cv()
         this.api_du_an_kh()
         this.api_cong_viec(0,0)
-        this.api_nhanvien()
     }
 }
 </script>

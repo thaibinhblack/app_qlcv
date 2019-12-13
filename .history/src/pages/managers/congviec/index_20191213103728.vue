@@ -245,28 +245,6 @@ export default {
         }
     },
     watch:{
-        nhanvien_duan(newVal)
-        {
-            console.log(newVal, this.cong_viec)
-           
-            var cong_viec_filter = this.cong_viec.filter((value,index,array) => {
-                return array[index].nguoi_nhan_viec == newVal
-            })
-            console.log(cong_viec_filter)
-            console.log('test công việc' ,cong_viec_filter)
-            this.list1 = this.list2 = this.list3 = []
-            this.list1 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 1
-            })
-            this.list2 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 2
-            })
-                this.list3 = cong_viec_filter.filter((value,index,array) => {
-                return array[index].trang_thai == 3
-            })
-           
-
-        },
         cannhan_selected(newVal)
         {
             if(newVal == 0)
@@ -446,12 +424,6 @@ export default {
             
           })
         },
-        api_nhanvien()
-        {
-            this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                this.users = response.data
-            })
-        }
     },
     beforeCreate()
     {
@@ -474,9 +446,15 @@ export default {
                 { name: 'ghi_chu', type: 'string'}
             ],
             url: this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token'),
+        },
+        api_nhanvien()
+        {
+            this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
+                this.users = response.data
+            })
         }
-    
     },
+   
     created()
     {
         this.api_du_an()

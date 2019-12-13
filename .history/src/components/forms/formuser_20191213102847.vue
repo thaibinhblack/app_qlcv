@@ -199,7 +199,6 @@ export default {
             user.append("USERNAME",this.user.username_nd)
             user.append("PASSWORD",this.user.password_nd)
             user.append("ID_NHOM",this.user.id_nhom)
-            user.append("DISPLAY_NAME", this.user.display_name)
             user.append("SDT_ND",this.user.sdt_nd)
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)
