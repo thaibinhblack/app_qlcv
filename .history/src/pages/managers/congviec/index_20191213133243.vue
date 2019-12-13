@@ -272,8 +272,8 @@ export default {
                 console.log(newVal, this.cong_viec)
            
                 var cong_viec_filter = this.cong_viec
-                // console.log(cong_viec_filter)
-                // console.log('test công việc' ,cong_viec_filter)
+                console.log(cong_viec_filter)
+                console.log('test công việc' ,cong_viec_filter)
                 this.list1 = this.list2 = this.list3 = []
                 this.list1 = cong_viec_filter.filter((value,index,array) => {
                     return array[index].trang_thai == 1

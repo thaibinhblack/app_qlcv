@@ -290,17 +290,16 @@ export default {
           this.users = response.data
           if(this.update == false)
           {
-              // this.selected_user_giaoviec = response.data.filter((value,index,array) => {
-              //   return array[index].id_nd == this.getUser.id_nd
-              // })[0]
+              this.selected_user_giaoviec = response.data.filter((value,index,array) => {
+                return array[index].id_nd == this.getUser.id_nd
+              })[0]
              
                 this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-                  // if(this.ca_nhan == true)
-                  // {
-                  //   this.selected_user_tiepnhan = response.data.filter((value,index,array) => {
-                  //     return array[index].id_nd == response.data[0].id_nd
-                  //   })[0]
-                  // }
+                  if(response.data.length == 0)
+                  {
+                    this.$cookies.remove('token')
+                    this.$router.push('/')
+                  }
                   this.my_info = response.data.filter((value,index,array) => {
                       return array[index].id_nd == response.data[0].id_nd
                     })[0]

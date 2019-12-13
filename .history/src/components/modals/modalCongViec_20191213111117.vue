@@ -290,9 +290,9 @@ export default {
           this.users = response.data
           if(this.update == false)
           {
-              // this.selected_user_giaoviec = response.data.filter((value,index,array) => {
-              //   return array[index].id_nd == this.getUser.id_nd
-              // })[0]
+              this.selected_user_giaoviec = response.data.filter((value,index,array) => {
+                return array[index].id_nd == this.getUser.id_nd
+              })[0]
              
                 this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
                   // if(this.ca_nhan == true)
