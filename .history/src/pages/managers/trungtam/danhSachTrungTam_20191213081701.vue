@@ -54,12 +54,5 @@ export default {
             url: this.$store.state.config.API_URL + 'trung-tam?api_token='+this.$cookies.get('token'),
             }
     },
-    methods: 
-    {
-        onRowclick: function (event) {
-            this.customer_edit = event.args.row.bounddata
-            this.update = true;
-        },
-    }
 }
 </script>

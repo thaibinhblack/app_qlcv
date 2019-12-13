@@ -126,7 +126,6 @@ export default {
                         trang_thai_kh: 1
                     }
                     const type = response.data.success == true ? 'is-success' : 'is-danger'
-                    app.$emit('update_khachhang',false)
                     app.$buefy.notification.open({
                         duration: 1500,
                         message: response.data.message,

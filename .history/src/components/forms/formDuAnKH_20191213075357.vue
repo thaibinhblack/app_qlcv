@@ -193,7 +193,7 @@ export default {
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_khach_hang)
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
             const app = this;
-            if(!this.du_an_kh.trang_thai_du_an)
+            if(this.du_an_kh.trang_thai_du_an)
             {
                 app.$buefy.notification.open({
                         duration: 1500,

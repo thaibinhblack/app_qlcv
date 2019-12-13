@@ -129,7 +129,7 @@ export default {
                         duration: 1500,
                         message: 'Chưa thêm trạng thái cho dự án',
                         position: 'is-bottom-right',
-                        type: 'is-warning',
+                        type: 'is-warnning',
                         hasIcon: true
                     })
                 }
@@ -193,31 +193,17 @@ export default {
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_khach_hang)
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
             const app = this;
-            if(!this.du_an_kh.trang_thai_du_an)
-            {
+            this.axios.post(this.$store.state.config.API_URL + 'du-an-kh/'+this.du_an_kh.id_du_an_kh+'?api_token='+this.$cookies.get('token'), du_an).then((response) => {
+                console.log(response.data)
                 app.$buefy.notification.open({
-                        duration: 1500,
-                        message: 'Chưa chọn trang thái dự án',
-                        position: 'is-bottom-right',
-                        type: 'is-wartning',
-                        hasIcon: true
-                    })
-            }
-            else
-            {
-                this.axios.post(this.$store.state.config.API_URL + 'du-an-kh/'+this.du_an_kh.id_du_an_kh+'?api_token='+this.$cookies.get('token'), du_an).then((response) => {
-                    console.log(response.data)
-                    app.$buefy.notification.open({
-                        duration: 1500,
-                        message: response.data.message,
-                        position: 'is-bottom-right',
-                        type: 'is-success',
-                        hasIcon: true
-                    })
-                    this.$emit('clear',false)
+                    duration: 1500,
+                    message: response.data.message,
+                    position: 'is-bottom-right',
+                    type: 'is-success',
+                    hasIcon: true
                 })
-            }
-           
+                this.$emit('clear',false)
+            })
         },
         searchKH()
         {

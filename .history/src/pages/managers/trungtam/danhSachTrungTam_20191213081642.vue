@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 15px;">
+    <div class="row">
         <JqxGrid ref="myGrid"
                 :width="'99%'" :source="dataAdapter" :columns="columns"  @rowclick="onRowclick($event)"
                 :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true"/>
@@ -54,12 +54,5 @@ export default {
             url: this.$store.state.config.API_URL + 'trung-tam?api_token='+this.$cookies.get('token'),
             }
     },
-    methods: 
-    {
-        onRowclick: function (event) {
-            this.customer_edit = event.args.row.bounddata
-            this.update = true;
-        },
-    }
 }
 </script>

@@ -56,7 +56,7 @@ export default {
     },
     methods: 
     {
-        onRowclick: function (event) {
+         onRowclick: function (event) {
             this.customer_edit = event.args.row.bounddata
             this.update = true;
         },

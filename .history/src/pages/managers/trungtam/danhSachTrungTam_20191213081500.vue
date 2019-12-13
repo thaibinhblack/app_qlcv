@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 15px;">
+    <div class="row">
         <JqxGrid ref="myGrid"
                 :width="'99%'" :source="dataAdapter" :columns="columns"  @rowclick="onRowclick($event)"
                 :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true"/>
@@ -30,10 +30,11 @@ export default {
             dataAdapter: new jqx.dataAdapter(this.source),
             columns: [
                 {text: 'ID_TT', datafield: 'id_tt', hidden: true},
-                {text: 'Tên trung tâm', datafield: 'ten_tt', width: 240},
-                {text: 'Mô tả', datafield: 'mo_ta_tt', width: 300},
-                {text: 'Ghi chú', datafield: 'ghi_chu_tt', width: 300},
-                {text: 'Trạng thái', datafield: 'trang_thai_tt', width: 100,filtertype: 'checkedlist'},
+                {text: 'Tên trung tâm', datafield: 'ten_tt', width: 240, filtertype: 'checkedlist'},
+                {text: 'Mô tả', datafield: 'mo_ta_tt', width: 240},
+                {text: 'Ghi chú', datafield: 'ghi_chu_tt', width: 240},
+                {text: 'Trạng thái', datafield: 'trang_thai_tt', width: 100},
+                {text: 'Trạng thái', datafield: 'trang_thai_nhom', width: 240, filtertype: 'checkedlist'},
                 {text: 'Ngày tạo', datafield: 'created_at', width: 240},
             ],
         }
@@ -54,12 +55,5 @@ export default {
             url: this.$store.state.config.API_URL + 'trung-tam?api_token='+this.$cookies.get('token'),
             }
     },
-    methods: 
-    {
-        onRowclick: function (event) {
-            this.customer_edit = event.args.row.bounddata
-            this.update = true;
-        },
-    }
 }
 </script>

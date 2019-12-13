@@ -122,53 +122,38 @@ export default {
             console.log(this.selected_kh.id_khach_hang)
             if(this.selected_kh.id_khach_hang)
             {
+                const du_an = new FormData();
+                du_an.append("P_ID_DU_AN",this.du_an_kh.id_du_an)
+                du_an.append("P_TEN_DU_AN_KH",this.du_an_kh.ten_du_an_kh)
+                du_an.append("P_MO_TA_DU_AN",this.du_an_kh.mo_ta_du_an)
+                du_an.append("P_GHI_CHU_DU_AN",this.du_an_kh.ghi_chu_du_an)
+                du_an.append("P_TRANG_THAI_DU_AN",this.du_an_kh.trang_thai_du_an)
+                du_an.append("P_ID_KHACH_HANG",this.selected_kh.id_khach_hang)
+                // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
                 const app = this;
-                if(this.du_an_kh.trang_thai_du_an)
-                {
-                     app.$buefy.notification.open({
+                this.axios.post(this.$store.state.config.API_URL + 'du-an-kh?api_token='+this.$cookies.get('token'), du_an).then((response) => {
+                    app.du_an_kh = {
+                        id_du_an: 0,
+                        trang_thai_du_an: 1,
+                        ten_kh: ''
+                    }
+                    app.$buefy.notification.open({
                         duration: 1500,
-                        message: 'Chưa thêm trạng thái cho dự án',
+                        message: response.data.message,
                         position: 'is-bottom-right',
-                        type: 'is-warning',
+                        type: 'is-success',
                         hasIcon: true
                     })
-                }
-                else
-                {
-                    const du_an = new FormData();
-                    du_an.append("P_ID_DU_AN",this.du_an_kh.id_du_an)
-                    du_an.append("P_TEN_DU_AN_KH",this.du_an_kh.ten_du_an_kh)
-                    du_an.append("P_MO_TA_DU_AN",this.du_an_kh.mo_ta_du_an)
-                    du_an.append("P_GHI_CHU_DU_AN",this.du_an_kh.ghi_chu_du_an)
-                    du_an.append("P_TRANG_THAI_DU_AN",this.du_an_kh.trang_thai_du_an)
-                    du_an.append("P_ID_KHACH_HANG",this.selected_kh.id_khach_hang)
-                    // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
-                    
-                    this.axios.post(this.$store.state.config.API_URL + 'du-an-kh?api_token='+this.$cookies.get('token'), du_an).then((response) => {
-                        app.du_an_kh = {
-                            id_du_an: 0,
-                            trang_thai_du_an: 1,
-                            ten_kh: ''
-                        }
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.data.message,
-                            position: 'is-bottom-right',
-                            type: 'is-success',
-                            hasIcon: true
-                        })
-                        app.$emit('create_project',true)
-                    }).catch(() => {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: 'Lỗi server',
-                            position: 'is-bottom-right',
-                            type: 'is-danger',
-                            hasIcon: true
-                        })
+                    app.$emit('create_project',true)
+                }).catch(() => {
+                    app.$buefy.notification.open({
+                        duration: 1500,
+                        message: 'Lỗi server',
+                        position: 'is-bottom-right',
+                        type: 'is-danger',
+                        hasIcon: true
                     })
-                }
-              
+                })
             }
             else
             {
@@ -193,31 +178,17 @@ export default {
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_khach_hang)
             // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
             const app = this;
-            if(!this.du_an_kh.trang_thai_du_an)
-            {
+            this.axios.post(this.$store.state.config.API_URL + 'du-an-kh/'+this.du_an_kh.id_du_an_kh+'?api_token='+this.$cookies.get('token'), du_an).then((response) => {
+                console.log(response.data)
                 app.$buefy.notification.open({
-                        duration: 1500,
-                        message: 'Chưa chọn trang thái dự án',
-                        position: 'is-bottom-right',
-                        type: 'is-wartning',
-                        hasIcon: true
-                    })
-            }
-            else
-            {
-                this.axios.post(this.$store.state.config.API_URL + 'du-an-kh/'+this.du_an_kh.id_du_an_kh+'?api_token='+this.$cookies.get('token'), du_an).then((response) => {
-                    console.log(response.data)
-                    app.$buefy.notification.open({
-                        duration: 1500,
-                        message: response.data.message,
-                        position: 'is-bottom-right',
-                        type: 'is-success',
-                        hasIcon: true
-                    })
-                    this.$emit('clear',false)
+                    duration: 1500,
+                    message: response.data.message,
+                    position: 'is-bottom-right',
+                    type: 'is-success',
+                    hasIcon: true
                 })
-            }
-           
+                this.$emit('clear',false)
+            })
         },
         searchKH()
         {
