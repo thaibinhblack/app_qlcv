@@ -38,10 +38,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-3 col-form-label" >Quyền</label>
+                    <label for="inputPassword3" class="col-sm-3 col-form-label" >Phòng</label>
                     <div class="col-sm-9">
                         <b-field>
-                            <b-select v-model="user.id_rule" placeholder="Quyền">
+                            <b-select v-model="user.id_rule" placeholder="Danh sách phòng ban">
                                 <option value="0">Nhân viên</option>
                                 <option value="1">Quản lí</option>
                             </b-select>
@@ -183,7 +183,6 @@ export default {
             user.append("SDT_ND",this.user.sdt_nd)
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)
-            user.append("P_ID_RULE",this.user.id_rule)
             user.append("NGAY_SINH",this.user.ngay_sinh_nd.getDate() +'-'+this.user.ngay_sinh_nd.getMonth() + '-' + this.user.ngay_sinh_nd.getFullYear())
             const app = this;
             this.axios.post(this.$store.state.config.API_URL + 'resignter',user).then((response) => {
@@ -215,7 +214,6 @@ export default {
             user.append("SDT_ND",this.user.sdt_nd)
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)
-            user.append("P_ID_RULE",this.user.id_rule)
             user.append("NGAY_SINH",this.user.ngay_sinh_nd.getDate() +'-'+this.user.ngay_sinh_nd.getMonth() + '-' + this.user.ngay_sinh_nd.getFullYear())
             const app = this;
             this.axios.post(this.$store.state.config.API_URL + 'user/'+this.user.id_nd+'?api_token='+this.$cookies.get('token'),user).then((response) => {

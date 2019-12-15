@@ -41,7 +41,7 @@
                     <label for="inputPassword3" class="col-sm-3 col-form-label" >Quyền</label>
                     <div class="col-sm-9">
                         <b-field>
-                            <b-select v-model="user.id_rule" placeholder="Quyền">
+                            <b-select v-model="user.id_rule" placeholder="Danh sách phòng ban">
                                 <option value="0">Nhân viên</option>
                                 <option value="1">Quản lí</option>
                             </b-select>

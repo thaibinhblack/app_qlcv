@@ -52,7 +52,6 @@ import { mapGetters } from 'vuex';
                 columns: [
                     {text: 'ID_ND', datafield: 'id_nd', hidden: true},
                     {text: 'ID_RULE', datafield: 'id_rule', hidden: true},
-                    {text: 'id_nhom', datafield: 'id_nhom', hidden: true},
                     {text: 'Username', datafield: 'username_nd', width: 240},
                     {text: 'Họ & Tên', datafield: 'display_name', width: 240},
                     {text: 'Email', datafield: 'email_nd', width: 240},
@@ -106,7 +105,6 @@ import { mapGetters } from 'vuex';
                         datafields: [
                             { name: 'id_nd', type: 'number'},
                             { name: 'id_rule', type: 'number'},
-                            { name: 'id_nhom', type: 'number'},
                             { name: 'username_nd' , type: 'string' },
                             { name: 'display_name', type: 'string'},
                             { name: 'email_nd', type: 'string' },
@@ -135,8 +133,7 @@ import { mapGetters } from 'vuex';
                 datatype: "json",
                 datafields: [
                      { name: 'id_nd', type: 'number'},
-                    { name: 'id_rule', type: 'number'},
-                     { name: 'id_nhom', type: 'number'},
+                      { name: 'id_rule', type: 'number'},
                     { name: 'username_nd' , type: 'string' },
                     { name: 'display_name', type: 'string'},
                     { name: 'email_nd', type: 'string' },

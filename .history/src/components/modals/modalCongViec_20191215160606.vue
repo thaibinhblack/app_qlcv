@@ -64,7 +64,7 @@
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc</label>
             <div class="col-sm-8">
                 <b-input disabled type="text" v-if="update == false" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
-                <b-input v-else disabled type="text" v-model="nguoi_nhap"></b-input>
+                <b-input disabled type="text" v-model="cong_viec.nguoi_nhap"></b-input>
             </div>
           </div>
         </div>
@@ -236,13 +236,7 @@ export default {
       }
     },
     computed:{
-      ...mapGetters(["getUser"]),
-      nguoi_nhap()
-      {
-        return this.users.filter((value,index,array) => {
-          return array[index].id_nd == this.cong_viec_edit.nguoi_nhap
-        })[0].display_name
-      }
+      ...mapGetters(["getUser"])
     },
     watch:
     {
@@ -351,7 +345,7 @@ export default {
           cong_viec.append("P_TRANG_THAI",this.cong_viec.trang_thai)
           cong_viec.append("P_ID_LOAI_CV",this.cong_viec.id_loai_cv)
           cong_viec.append("P_ACTION",P_ACTION)
-          cong_viec.append("P_NGUOI_NHAP",this.my_info.id_nd)
+          cong_viec.append("P_NGUOI_NHAP",this.my_info.username_nd)
           if(this.ca_nhan == true)
           {
               cong_viec.append("P_TYPE",0)

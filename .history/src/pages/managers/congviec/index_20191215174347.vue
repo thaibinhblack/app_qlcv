@@ -52,7 +52,7 @@
                     <b-field>
                         <b-select v-model="month_selected">
                             <option value="0"> --Tất cả các tháng trong năm--</option>
-                             <option v-for="i in 12" :key="i" :value="i"> --Tháng {{i}}--</option>
+                             <option v-for="i in 12" :key="i"> --Tháng {{i}}--</option>
                            
                         </b-select>
                     </b-field>
@@ -267,41 +267,10 @@ export default {
     watch:{
         month_selected(newVal)
         {
-            if(newVal != 0)
-            {
-
-                const cong_viec = this.cong_viec.filter((value,index,array) => {
-                    console.log(array[index].ngay_tiep_nhan.slice(5,7))
-                    return array[index].ngay_tiep_nhan.slice(5,7) == newVal
-                })
-                console.log(cong_viec,newVal)
-                this.list1 = this.list2 = this.list3 = []
-                this.list1 =  cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 1
-                })
-                this.list2 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 2
-                })
-                    this.list3 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 3
-                })
-            }
-            else
-            {
-                const cong_viec = this.cong_viec
-                console.log(cong_viec,newVal)
-                this.list1 = this.list2 = this.list3 = []
-                this.list1 =  cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 1
-                })
-                this.list2 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 2
-                })
-                    this.list3 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 3
-                })
-            }
-            
+            const cong_viec = this.cong_viec.filter((value,index,array) => {
+                return array[index].ngay_tiep_nhan.slice(0,2) == newVal
+            })
+            console.log(cong_viec,newVal)
         },
         nhanvien_duan(newVal)
         {

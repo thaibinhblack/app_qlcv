@@ -64,7 +64,7 @@
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc</label>
             <div class="col-sm-8">
                 <b-input disabled type="text" v-if="update == false" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
-                <b-input v-else disabled type="text" v-model="nguoi_nhap"></b-input>
+                <b-input disabled type="text" v-model="nguoi_nhap"></b-input>
             </div>
           </div>
         </div>

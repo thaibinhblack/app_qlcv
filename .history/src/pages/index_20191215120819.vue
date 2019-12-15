@@ -53,7 +53,7 @@ export default {
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
                 this.commitUser(response.data[0])
                 // console.log(response.data)
-                if(response.data[0].id_rule == 0 )
+                if(response.data[0].id_rule == 1 )
                 {
                     this.$router.push('/cong-viec')
                 }

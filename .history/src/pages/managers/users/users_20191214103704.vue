@@ -135,8 +135,7 @@ import { mapGetters } from 'vuex';
                 datatype: "json",
                 datafields: [
                      { name: 'id_nd', type: 'number'},
-                    { name: 'id_rule', type: 'number'},
-                     { name: 'id_nhom', type: 'number'},
+                      { name: 'id_rule', type: 'number'},
                     { name: 'username_nd' , type: 'string' },
                     { name: 'display_name', type: 'string'},
                     { name: 'email_nd', type: 'string' },
