@@ -125,7 +125,7 @@
                     <h3 style="line-height:36px">Công việc đang nhận ({{list2.length}}) <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
                  <div class="search-task">
-                     <b-input v-model="search_list2" type="text" placeholder="Tìm kiếm công việc" ></b-input>
+                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
                 </div>
                 <draggable class="list-group" :list="list2" group="people"  @change="update_task_2">
                   
@@ -164,7 +164,7 @@
                     <h3 style="line-height:36px">Công việc hoàn thành ({{list3.length}})  <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
                  <div class="search-task">
-                     <b-input v-model="search_list3" type="text" placeholder="Tìm kiếm công việc" ></b-input>
+                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
                 </div>
                 <draggable class="list-group" :list="list3" group="people"  @change="update_task_3">
                   
@@ -275,9 +275,7 @@ export default {
             nhanvien_duan: 0,
             users: [],
             my_info: {},
-            search_list1: "",
-            search_list2: "",
-            search_list3: ""
+            search_list1: ""
         }
     },
     watch:{
@@ -288,24 +286,6 @@ export default {
                 return array[index].ten_cv.includes(val)
             })
             this.list1 = search
-            console.log(search)
-        },
-        search_list2(val)
-        {
-            const search = this.list2_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list2 = search
-            console.log(search)
-        },
-        search_list3(val)
-        {
-            const search = this.list3_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list3 = search
             console.log(search)
         },
         month_selected(newVal)

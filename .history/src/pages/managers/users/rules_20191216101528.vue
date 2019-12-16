@@ -232,7 +232,7 @@ export default {
         },
         updateFunctionRule()
         {
-            var i = 1;
+            const i = 1;
             this.functions_check_rule.forEach((check) => {
             
                     if(check.length >= 1)

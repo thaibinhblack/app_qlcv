@@ -232,7 +232,7 @@ export default {
         },
         updateFunctionRule()
         {
-            var i = 1;
+            const i = 1;
             this.functions_check_rule.forEach((check) => {
             
                     if(check.length >= 1)
@@ -271,9 +271,6 @@ export default {
                     }
                     else
                     {
-                        check.sort()
-                        const functions = []
-                        const data = new FormData()
                         data.append("ID_ND",this.user_selected)
                         data.append("ID_CN", i)
                         data.append("FUNCTIONS",[i+'.0', i+'.0', i+'.0', i+'.0'])

@@ -4,7 +4,6 @@
         <div class="col-md-12 col-lg-12">
             <ul class="list-filter">
                 
-                <li><a href="/"><b-button icon-left="home" size="6"></b-button></a></li>
                 <li>
                     <b-field>
                         <b-select v-model="cannhan_selected">
@@ -73,7 +72,7 @@
         </b-navbar> -->
         </div>
     </div>
-    <div class="row" style="margin-top: 10px;">
+    <div class="row" style="margin-top: 50px;">
         <div :class="zoom">
             <div class="card card-task" :class="{not: zoom == 'col-12'}">
                 <div class="card-title">
@@ -125,7 +124,7 @@
                     <h3 style="line-height:36px">Công việc đang nhận ({{list2.length}}) <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
                  <div class="search-task">
-                     <b-input v-model="search_list2" type="text" placeholder="Tìm kiếm công việc" ></b-input>
+                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
                 </div>
                 <draggable class="list-group" :list="list2" group="people"  @change="update_task_2">
                   
@@ -164,7 +163,7 @@
                     <h3 style="line-height:36px">Công việc hoàn thành ({{list3.length}})  <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
                  <div class="search-task">
-                     <b-input v-model="search_list3" type="text" placeholder="Tìm kiếm công việc" ></b-input>
+                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
                 </div>
                 <draggable class="list-group" :list="list3" group="people"  @change="update_task_3">
                   
@@ -242,9 +241,7 @@ export default {
             list1: [],
             list1_tmp: [],
             list2: [],
-            list2_tmp: [],
             list3: [],
-            list3_tmp: [],
             update: false,
             cong_viec_edit: {},
             cong_viec: [],
@@ -275,9 +272,7 @@ export default {
             nhanvien_duan: 0,
             users: [],
             my_info: {},
-            search_list1: "",
-            search_list2: "",
-            search_list3: ""
+            search_list1: ""
         }
     },
     watch:{
@@ -288,24 +283,6 @@ export default {
                 return array[index].ten_cv.includes(val)
             })
             this.list1 = search
-            console.log(search)
-        },
-        search_list2(val)
-        {
-            const search = this.list2_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list2 = search
-            console.log(search)
-        },
-        search_list3(val)
-        {
-            const search = this.list3_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list3 = search
             console.log(search)
         },
         month_selected(newVal)
@@ -322,10 +299,10 @@ export default {
                 this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                this.list2 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             }
@@ -337,10 +314,10 @@ export default {
                 this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                this.list2 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             }
@@ -496,10 +473,10 @@ export default {
                 this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                this.list2 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             }
@@ -510,10 +487,10 @@ export default {
                 this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                this.list2 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             }
@@ -548,10 +525,10 @@ export default {
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = response.data.filter((value,index,array) => {
+                this.list2 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
+                 this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             })
@@ -565,10 +542,10 @@ export default {
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = response.data.filter((value,index,array) => {
+                this.list2 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp =  this.list3 = response.data.filter((value,index,array) => {
+                 this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             })
@@ -688,10 +665,10 @@ export default {
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
-                this.list2_tmp = this.list2 = response.data.filter((value,index,array) => {
+                this.list2 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 2
                 })
-                this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
+                 this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
             })
@@ -757,8 +734,8 @@ export default {
 
 <style scoped>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
-.list-group {min-height: 50px;max-height: 360px;overflow: hidden;overflow-y: scroll;height: 360px;padding: 5px;}
-.card-title {padding: 5px; background: #209cee;color: #fff;}
+.list-group {min-height: 50px;max-height: 320px;overflow: hidden;overflow-y: scroll;height: 320px;padding: 5px;}
+.card-title {padding: 5px; background: #01458E}
 /* .card-task {padding: 10px;} */
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}
@@ -794,7 +771,6 @@ export default {
 .card-task.not,.card-form {display: none}
 .card-form.zoom {display: block;}
 .btn-munus {border:none; background: transparent;color: #fff;font-size: 18px;height: 20px; margin-right: 10px;;}
-.ten_cv {width: 90%;display: inline-block; font-size: 12.5px;}
-.list-filter>li {display: inline-block;margin-left: 5px;margin-top: 5px;font-size: 12.5px;}
-.list-filter {font-size: 12.5px;}
+.ten_cv {width: 90%;display: inline-block;  }
+.list-filter>li {display: inline-block;margin-left: 5px;margin-top: 5px;}
 </style>

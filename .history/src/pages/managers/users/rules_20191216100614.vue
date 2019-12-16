@@ -232,7 +232,6 @@ export default {
         },
         updateFunctionRule()
         {
-            var i = 1;
             this.functions_check_rule.forEach((check) => {
             
                     if(check.length >= 1)
@@ -269,36 +268,6 @@ export default {
                             hasIcon: true
                         })
                     }
-                    else
-                    {
-                        check.sort()
-                        const functions = []
-                        const data = new FormData()
-                        data.append("ID_ND",this.user_selected)
-                        data.append("ID_CN", i)
-                        data.append("FUNCTIONS",[i+'.0', i+'.0', i+'.0', i+'.0'])
-                        this.axios.post(this.$store.state.config.API_URL + 'function_user', data).then((response) => {
-                            app.commit_Update(true)
-                            check_update = true
-                        }).catch(() => {
-                            check_update = false
-                        })
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: `Cập nhật quyền cho người dùng thành công`,
-                            position: 'is-bottom-right',
-                            type: 'is-success',
-                            hasIcon: true
-                        })
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: `Cập nhật quyền cho người dùng thất bại`,
-                            position: 'is-bottom-right',
-                            type: 'is-danger',
-                            hasIcon: true
-                        })
-                    }
-                    i = i + 1;
                     
             })
         }
