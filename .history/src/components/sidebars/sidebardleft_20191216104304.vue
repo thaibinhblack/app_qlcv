@@ -34,7 +34,7 @@
                 <b-menu-item icon="account" label="Danh sách khách hàng" @click="$router.push('/khach-hang')"></b-menu-item>
             </b-menu-item>
         </b-menu-list>
-        <b-menu-list>
+        <b-menu-list v-if="getAction_danhmuc.xem == '5.1' || getAction_danhmuc.them == '5.2' || getAction_danhmuc.sua == '5.3' || getAction_danhmuc.xoa == '5.4' || getAction_danhmuc.xuat == '5.5'">
             <b-menu-item
                 icon="link"
                >
@@ -53,7 +53,7 @@
         </b-menu-list>
        
 
-        <b-menu-list v-if="getAction_danhmuc.xem == '5.1' || getAction_danhmuc.them == '5.2' || getAction_danhmuc.sua == '5.3' || getAction_danhmuc.xoa == '5.4' || getAction_danhmuc.xuat == '5.5'">
+        <b-menu-list>
             <b-menu-item
                 icon="home-outline"
                >

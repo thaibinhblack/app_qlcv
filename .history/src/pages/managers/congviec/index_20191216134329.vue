@@ -457,15 +457,7 @@ export default {
                 this.cong_viec_edit = {}
                 if(this.cannhan_selected != 3)
                 {
-                    if(this.my_info.id_rule == 0)
-                    {
-                        this.api_cong_viec_by_id(this.cannhan_selected,this.duan_selected,this.my_info.id_nd)
-                    }
-                    else
-                    {
-                        this.api_cong_viec( this.cannhan_selected, this.duan_selected)
-                    }
-                    
+                    this.api_cong_viec( this.cannhan_selected, this.duan_selected)
                 }
                 else
                 {
@@ -481,14 +473,7 @@ export default {
                 this.cong_viec_edit = {}
                 if(this.cannhan_selected != 3)
                 {
-                    if(this.my_info.id_rule == 0)
-                    {
-                        this.api_cong_viec_by_id(this.cannhan_selected,this.duan_selected,this.my_info.id_nd)
-                    }
-                    else
-                    {
-                        this.api_cong_viec( this.cannhan_selected, this.duan_selected)
-                    }
+                    this.api_cong_viec( this.cannhan_selected, this.duan_selected)
                 }
                 else
                 {
