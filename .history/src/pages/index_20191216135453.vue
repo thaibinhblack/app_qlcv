@@ -29,12 +29,12 @@ export default {
         {
             this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
                 // console.log(response.dât)
-                // this.user = response.data[0]
-                // if(this.user)
-                // {
-                //     this.$cookies.remove('token')
-                //     this.$router.push('/login')
-                // }
+                this.user = response.data[0]
+                if(this.user)
+                {
+                    this.$cookies.remove('token')
+                    this.$router.push('/login')
+                }
                 this.axios.get(this.$store.state.config.API_URL + 'function_user?ID_ND'+response.data.id_nd).then((response) => {
                    console.log(response.data)
                    response.data.results.forEach(result => {
@@ -56,7 +56,6 @@ export default {
         },
         api_get_token(){
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-                this.user = response.data[0]
                 if(!response.data[0].id_rule)
                 {
                     this.$cookies.remove('token');

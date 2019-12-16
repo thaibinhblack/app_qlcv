@@ -56,7 +56,7 @@ export default {
         },
         api_get_token(){
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-                this.user = response.data[0]
+                this.user = response.datapp0
                 if(!response.data[0].id_rule)
                 {
                     this.$cookies.remove('token');
