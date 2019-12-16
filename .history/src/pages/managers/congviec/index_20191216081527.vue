@@ -9,7 +9,7 @@
                         <b-select v-model="cannhan_selected">
                             <option value="0"> --Công việc của dự án--</option>
                             <option value="1"> --Công việc cá nhân--</option>
-                            <option value="3" v-if="my_info.id_rule > 0">--Công việc chưa phân công---</option>
+                            <option value="3">--Công việc chưa phân công---</option>
                         </b-select>
                     </b-field>
                 </li>
@@ -78,9 +78,6 @@
                 <div class="card-title">
                     <h3 style="line-height:36px">Danh sách công việc được giao  <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
-                <div class="search-task">
-                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
-                </div>
                 <draggable class="list-group" :list="list1" group="people"  >
                   
                     <div
@@ -100,7 +97,7 @@
                         </b-button>
                          <span class="ten_cv">{{element.ten_cv}} <span v-if="element.ten_du_an_kh"> - {{element.ten_du_an_kh}} </span> </span>  <br/>
                         <div class="bottom" v-if="open == element.id_cv_da">
-                            <!-- <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khachahng': '#canhan'}}</small><br/> -->
+                            <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khachahng': '#canhan'}}</small><br/>
                             <small>{{element.ngay_hoan_thanh}}</small>
                         </div>
                          <b-progress type="is-info"  :value="Math.floor(element.tien_do)" show-value style="margin-top:10px;"></b-progress>
@@ -142,7 +139,7 @@
                         </b-button>
                          <span class="ten_cv">{{element.ten_cv}} <span v-if="element.ten_du_an_kh"> - {{element.ten_du_an_kh}} </span> </span>  <br/>
                         <div class="bottom" v-if="open == element.id_cv_da">
-                            <!-- <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khyc': '#tunhap'}}</small><br/> -->
+                            <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khachahng': '#canhan'}}</small><br/>
                             <small>{{element.ngay_hoan_thanh}}</small>
                         </div>
                          <b-progress type="is-info"  :value="Math.floor(element.tien_do)" show-value style="margin-top:10px;"></b-progress>
@@ -178,7 +175,7 @@
                         </b-button>
                          <span class="ten_cv">{{element.ten_cv}} <span v-if="element.ten_du_an_kh"> - {{element.ten_du_an_kh}} </span> </span>  <br/>
                         <div class="bottom" v-if="open == element.id_cv_da">
-                            <!-- <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khachahng': '#canhan'}}</small><br/> -->
+                            <small>Người giao việc: {{element.username_nd}} </small> - <small>{{element.type_cv == 1? '#khachahng': '#canhan'}}</small><br/>
                             <small>{{element.ngay_hoan_thanh}}</small>
                         </div>
                          <b-progress type="is-info"  :value="Math.floor(element.tien_do)" show-value style="margin-top:10px;"></b-progress>
@@ -233,7 +230,6 @@ export default {
             du_an_kh_tmp: [],
             selected_project: 0,
             list1: [],
-            list1_tmp: [],
             list2: [],
             list3: [],
             update: false,
@@ -265,20 +261,10 @@ export default {
             selected_lcv: 0,
             nhanvien_duan: 0,
             users: [],
-            my_info: {},
-            search_list1: ""
+            my_info: {}
         }
     },
     watch:{
-        search_list1(val)
-        {
-            const search = this.list1_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list1 = search
-            console.log(search)
-        },
         month_selected(newVal)
         {
             if(newVal != 0)
@@ -290,7 +276,7 @@ export default {
                 })
                 console.log(cong_viec,newVal)
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -304,7 +290,7 @@ export default {
             {
                 const cong_viec = this.cong_viec
                 console.log(cong_viec,newVal)
-                this.list1_tmp = this.list1 = this.list2 = this.list3 = []
+                this.list1 = this.list2 = this.list3 = []
                 this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
@@ -393,10 +379,6 @@ export default {
                 }
                 
             }
-            else if(newVal == 3)
-            {
-                this.api_cong_viec_chua_phan_cong()
-            }
             else
             {
                 //  if(this.my_info.id_rule > 0)
@@ -425,32 +407,16 @@ export default {
             if(newVal == false)
             {
                 this.cong_viec_edit = {}
-                if(this.cannhan_selected != 3)
-                {
-                    this.api_cong_viec( this.cannhan_selected, this.duan_selected)
-                }
-                else
-                {
-                    this.api_cong_viec_chua_phan_cong()
-                }
             }
-            // this.api_cong_viec()
+            this.api_cong_viec()
         },
         isModalBaoCao(newVal)
         {
             if(newVal == false)
             {
                 this.cong_viec_edit = {}
-                if(this.cannhan_selected != 3)
-                {
-                    this.api_cong_viec( this.cannhan_selected, this.duan_selected)
-                }
-                else
-                {
-                    this.api_cong_viec_chua_phan_cong()
-                }
             }
-           
+            this.api_cong_viec( this.cannhan_selected, this.duan_selected)
         },
         selected_project(newVal)
         {
@@ -464,7 +430,7 @@ export default {
                     return array[index].id_loai_cv == newVal
                 })
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -478,7 +444,7 @@ export default {
             {
                 const cong_viec = this.cong_viec
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -516,7 +482,7 @@ export default {
                 console.log(response.data)
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
+                this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = response.data.filter((value,index,array) => {
@@ -533,7 +499,7 @@ export default {
                 console.log(response.data)
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
+                this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = response.data.filter((value,index,array) => {
@@ -650,22 +616,6 @@ export default {
                 return array[index].id_cv_da == id
             })[0]
             this.isModalBaoCao = true
-        },
-        api_cong_viec_chua_phan_cong()
-        {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec-chua-phan-cong?api_token='+this.$cookies.get('token')).then((response) => {
-                 this.cong_viec = response.data
-                this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 1
-                })
-                this.list2 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 2
-                })
-                 this.list3 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 3
-                })
-            })
         }
     },
     beforeCreate()
@@ -728,7 +678,7 @@ export default {
 
 <style scoped>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
-.list-group {min-height: 50px;max-height: 320px;overflow: hidden;overflow-y: scroll;}
+.list-group {min-height: 50px;}
 .card-task {padding: 10px;}
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}

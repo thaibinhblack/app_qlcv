@@ -78,9 +78,6 @@
                 <div class="card-title">
                     <h3 style="line-height:36px">Danh sách công việc được giao  <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
                 </div>
-                <div class="search-task">
-                     <b-input v-model="search_list1" type="text" placeholder="Tìm kiếm công việc" ></b-input>
-                </div>
                 <draggable class="list-group" :list="list1" group="people"  >
                   
                     <div
@@ -233,7 +230,6 @@ export default {
             du_an_kh_tmp: [],
             selected_project: 0,
             list1: [],
-            list1_tmp: [],
             list2: [],
             list3: [],
             update: false,
@@ -265,20 +261,10 @@ export default {
             selected_lcv: 0,
             nhanvien_duan: 0,
             users: [],
-            my_info: {},
-            search_list1: ""
+            my_info: {}
         }
     },
     watch:{
-        search_list1(val)
-        {
-            const search = this.list1_tmp.filter((value,index,array) => {
-                console.log(array[index].ten_cv.match('/^123.*$/'))
-                return array[index].ten_cv.includes(val)
-            })
-            this.list1 = search
-            console.log(search)
-        },
         month_selected(newVal)
         {
             if(newVal != 0)
@@ -290,7 +276,7 @@ export default {
                 })
                 console.log(cong_viec,newVal)
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -304,7 +290,7 @@ export default {
             {
                 const cong_viec = this.cong_viec
                 console.log(cong_viec,newVal)
-                this.list1_tmp = this.list1 = this.list2 = this.list3 = []
+                this.list1 = this.list2 = this.list3 = []
                 this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
@@ -464,7 +450,7 @@ export default {
                     return array[index].id_loai_cv == newVal
                 })
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -478,7 +464,7 @@ export default {
             {
                 const cong_viec = this.cong_viec
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                this.list1 =  cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = cong_viec.filter((value,index,array) => {
@@ -516,7 +502,7 @@ export default {
                 console.log(response.data)
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
+                this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = response.data.filter((value,index,array) => {
@@ -533,7 +519,7 @@ export default {
                 console.log(response.data)
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
+                this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = response.data.filter((value,index,array) => {
@@ -656,7 +642,7 @@ export default {
             this.axios.get(this.$store.state.config.API_URL + 'cong-viec-chua-phan-cong?api_token='+this.$cookies.get('token')).then((response) => {
                  this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
-                this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
+                this.list1 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 1
                 })
                 this.list2 = response.data.filter((value,index,array) => {
@@ -728,7 +714,7 @@ export default {
 
 <style scoped>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
-.list-group {min-height: 50px;max-height: 320px;overflow: hidden;overflow-y: scroll;}
+.list-group {min-height: 50px;max-height: 350px;overflow: hidden;overflow-y: scroll;}
 .card-task {padding: 10px;}
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}

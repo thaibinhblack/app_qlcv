@@ -728,7 +728,7 @@ export default {
 
 <style scoped>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
-.list-group {min-height: 50px;max-height: 320px;overflow: hidden;overflow-y: scroll;}
+.list-group {min-height: 50px;max-height: 350px;overflow: hidden;overflow-y: scroll;}
 .card-task {padding: 10px;}
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}

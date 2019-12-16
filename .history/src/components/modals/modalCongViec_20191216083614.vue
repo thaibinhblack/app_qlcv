@@ -405,7 +405,7 @@ export default {
             const app = this;
             cong_viec.append("P_NOI_DUNG_CV", this.cong_viec_edit.noi_dung_cv)
             cong_viec.append("P_NGUOI_GIAO_VIEC",this.selected_user_giaoviec.id_nd)
-            cong_viec.append("P_NGAY_TIEP_NHAN",this.cong_viec_edit.ngay_tiep_nhan.getFullYear() + '-' + ( this.cong_viec_edit.ngay_tiep_nhan.getMonth() + 1) + '-' + this.cong_viec_edit.ngay_tiep_nhan.getDate())
+            cong_viec.append("P_NGAY_TIEP_NHAN",this.cong_viec_edit.ngay_tiep_nhan)
             cong_viec.append("P_NGUOI_NHAN_VIEC",this.selected_user_tiepnhan.id_nd)
             cong_viec.append("P_NGAY_HOAN_THANH",this.cong_viec_edit.ngay_hoan_thanh.getFullYear() + '-' + ( this.cong_viec_edit.ngay_hoan_thanh.getMonth() + 1) + '-' + this.cong_viec_edit.ngay_hoan_thanh.getDate())
             cong_viec.append("P_TIEN_DO",this.cong_viec_edit.tien_do)

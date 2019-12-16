@@ -57,7 +57,7 @@
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
-              <multiselect :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
+              <multiselect :disabled="selected_user_tiepnhan.id_nd && update" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -403,13 +403,8 @@ export default {
         {
             const cong_viec = new FormData()
             const app = this;
-            cong_viec.append("P_NOI_DUNG_CV", this.cong_viec_edit.noi_dung_cv)
-            cong_viec.append("P_NGUOI_GIAO_VIEC",this.selected_user_giaoviec.id_nd)
-            cong_viec.append("P_NGAY_TIEP_NHAN",this.cong_viec_edit.ngay_tiep_nhan.getFullYear() + '-' + ( this.cong_viec_edit.ngay_tiep_nhan.getMonth() + 1) + '-' + this.cong_viec_edit.ngay_tiep_nhan.getDate())
-            cong_viec.append("P_NGUOI_NHAN_VIEC",this.selected_user_tiepnhan.id_nd)
-            cong_viec.append("P_NGAY_HOAN_THANH",this.cong_viec_edit.ngay_hoan_thanh.getFullYear() + '-' + ( this.cong_viec_edit.ngay_hoan_thanh.getMonth() + 1) + '-' + this.cong_viec_edit.ngay_hoan_thanh.getDate())
             cong_viec.append("P_TIEN_DO",this.cong_viec_edit.tien_do)
-            cong_viec.append("P_NGAY_CAM_KET",this.cong_viec_edit.ngay_cam_ket.getFullYear() + '-' + ( this.cong_viec_edit.ngay_cam_ket.getMonth() + 1) + '-' + this.cong_viec_edit.ngay_cam_ket.getDate())
+            cong_viec.append("P_NGAY_CAM_KET",this.cong_viec.ngay_cam_ket.getFullYear() + '-' + ( this.cong_viec.ngay_cam_ket.getMonth() + 1) + '-' + this.cong_viec.ngay_cam_ket.getDate())
             this.axios.post(this.$store.state.config.API_URL + 'capnhat_congviec/'+this.cong_viec_edit.id_cv_da+'?api_token='+this.$cookies.get('token'),cong_viec).then((response) => {
               app.$buefy.notification.open({
                   duration: 1500,
