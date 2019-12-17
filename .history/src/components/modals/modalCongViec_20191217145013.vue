@@ -4,21 +4,21 @@
     <form @submit.prevent="api_cong_viec(1)" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
-          <div class="form-group row">
-              <div class="col-sm-4 col-form-label">Dự án</div>
+          <!-- <div class="form-group row">
+              <div class="col-sm-4 col-form-label">Dự án KH</div>
               <div class="col-sm-8">
                 <b-field>
-                  <multiselect v-model="selected_du_an" :options="du_an" label="ten_du_an" track-by="ten_du_an" placeholder="Danh sách dự án"
-                  :multiple="false"  :show-labels="false"></multiselect>
+                  <multiselect :disabled="update" v-model="selected_du_an" :options="du_an" label="ten_du_an" track-by="id_du_an" :tagPlaceholder="'123'"
+                  :multiple="false"></multiselect>
                 </b-field>
               </div> 
-         </div>
+         </div> -->
           <div class="form-group row" >
               <div class="col-sm-4 col-form-label">Dự án KH</div>
               <div class="col-sm-8">
                 <b-field>
                   <multiselect :disabled="update" v-model="selected_du_an_kh" :options="du_an_kh" label="ten_du_an_kh" track-by="id_du_an_kh" 
-                  :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
+                  :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"></multiselect>
                 </b-field>
               </div>
           </div>
@@ -28,6 +28,7 @@
                 <b-field>
                     <multiselect :options="loai_cv"
                     v-model="selected_loai_cv"
+                     @select="chose_lcv"
                     :multiple="false"
                     group-values="children"
                     group-label="parent"
@@ -60,14 +61,14 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
             <div class="col-sm-8">
-                <multiselect   :show-labels="false" :disabled="update" v-model="selected_user_giaoviec" :options="users_giaoviec" label="display_name" track-by="id_nd" ></multiselect>
+                <multiselect :disabled="update" v-model="selected_user_giaoviec" :options="users_giaoviec" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
-              <multiselect  :show-labels="false" :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
+              <multiselect :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -184,7 +185,7 @@
 import Multiselect from 'vue-multiselect'
 import { mapGetters } from 'vuex'
 export default {
-    props: ["update","selected_project", "isActiveModal", "cong_viec_edit","ca_nhan", "loai_cv"],
+    props: ["update", "du_an", "du_an_kh", "selected_project", "isActiveModal", "cong_viec_edit","ca_nhan", "loai_cv"],
     components:
     {
       Multiselect
@@ -204,16 +205,14 @@ export default {
           ngay_cam_ket: new Date(),
           type: false
         },
-        selected_du_an: {},
+       
         selected_du_an_kh: [],
         users: [],
         users_giaoviec: [],
         selected_user_tiepnhan: {},
         selected_user_giaoviec: {},
         my_info: {},
-        selected_loai_cv: null,
-        du_an: [],
-        du_an_kh: []
+        selected_loai_cv: null
       }
     },
     computed:{
@@ -252,35 +251,21 @@ export default {
         this.cong_viec = newVal
        
       },
-      selected_du_an(val)
+      selected_du_an_kh(newVal)
       {
-        this.api_du_an_kh(val.id_du_an)
-         this.api_users_giaoviec()
-      },
-      // selected_du_an_kh()
-      // {
-       
-      // }
+        // if(newVal.length == 0)
+        // {
+        //   this.id_du_an_kh = 0
+        // }
+        // else
+        // {
+        //   this.id_du_an_kh = newVal[0].id_du_an_kh
+        // }
+        this.api_users_giaoviec()
+      }
     },
     methods:
     {
-      api_du_an()
-      {
-          this.axios.get(this.$store.state.config.API_URL + 'du-an?api_token='+this.$cookies.get("token")).then((response) => {
-              this.du_an = response.data
-          })
-      },
-      api_du_an_kh(id)
-      {
-          this.axios.get(this.$store.state.config.API_URL + 'du-an-kh?api_token='+this.$cookies.get("token")+'&id_du_an='+id).then((response) => {
-              this.du_an_kh = response.data
-              // this.du_an_kh_tmp = response.data
-              // this.du_an_selected = response.data.filter((value,index,array) => {
-              // return array[index].id_du_an_kh == this.$route.query.id_du_an_kh
-              // })[0]
-                  // this.cong_viec = response.data
-          })
-      },
       formatDate (date) {
           if (!date) return null
           const [year, month, day] = date.split('-')
@@ -288,7 +273,7 @@ export default {
       },
       api_users_giaoviec()
       {
-        this.axios.get(this.$store.state.config.API_URL + 'user-giaoviec?api_token='+this.$cookies.get('token')+'&id_du_an='+this.selected_du_an.id_du_an).then((response) => {
+        this.axios.get(this.$store.state.config.API_URL + 'user-giaoviec?api_token='+this.$cookies.get('token')+'&id_du_an='+this.selected_du_an_kh.id_du_an).then((response) => {
             this.users_giaoviec = response.data
             if(this.update == false)
             {
@@ -487,7 +472,6 @@ export default {
         this.selected_du_an_kh = this.du_an.filter((value,index,array) => {
           return array[index].id_du_an_kh == this.selected_project
         })
-      this.api_du_an()
       this.api_users()
       this.api_users_giaoviec()
       console.log(this.loai_cv)

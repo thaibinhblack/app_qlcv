@@ -5,11 +5,11 @@
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
-              <div class="col-sm-4 col-form-label">Dự án</div>
+              <div class="col-sm-4 col-form-label">Dự án KH</div>
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an" :options="du_an" label="ten_du_an" track-by="ten_du_an" placeholder="Danh sách dự án"
-                  :multiple="false"  :show-labels="false"></multiselect>
+                  :multiple="false"></multiselect>
                 </b-field>
               </div> 
          </div>
@@ -18,7 +18,7 @@
               <div class="col-sm-8">
                 <b-field>
                   <multiselect :disabled="update" v-model="selected_du_an_kh" :options="du_an_kh" label="ten_du_an_kh" track-by="id_du_an_kh" 
-                  :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
+                  :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"></multiselect>
                 </b-field>
               </div>
           </div>
@@ -28,6 +28,7 @@
                 <b-field>
                     <multiselect :options="loai_cv"
                     v-model="selected_loai_cv"
+                     @select="chose_lcv"
                     :multiple="false"
                     group-values="children"
                     group-label="parent"
@@ -60,14 +61,14 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
             <div class="col-sm-8">
-                <multiselect   :show-labels="false" :disabled="update" v-model="selected_user_giaoviec" :options="users_giaoviec" label="display_name" track-by="id_nd" ></multiselect>
+                <multiselect :disabled="update" v-model="selected_user_giaoviec" :options="users_giaoviec" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
-              <multiselect  :show-labels="false" :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
+              <multiselect :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -255,12 +256,11 @@ export default {
       selected_du_an(val)
       {
         this.api_du_an_kh(val.id_du_an)
-         this.api_users_giaoviec()
       },
-      // selected_du_an_kh()
-      // {
-       
-      // }
+      selected_du_an_kh()
+      {
+        this.api_users_giaoviec()
+      }
     },
     methods:
     {
@@ -288,7 +288,7 @@ export default {
       },
       api_users_giaoviec()
       {
-        this.axios.get(this.$store.state.config.API_URL + 'user-giaoviec?api_token='+this.$cookies.get('token')+'&id_du_an='+this.selected_du_an.id_du_an).then((response) => {
+        this.axios.get(this.$store.state.config.API_URL + 'user-giaoviec?api_token='+this.$cookies.get('token')+'&id_du_an='+this.selected_du_an_kh[0].id_du_an_kh).then((response) => {
             this.users_giaoviec = response.data
             if(this.update == false)
             {
