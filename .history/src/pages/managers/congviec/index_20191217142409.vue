@@ -40,6 +40,7 @@
                     <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
+                            @select="chose_lcv"
                             :multiple="false"
                             group-values="children"
                             group-label="parent"
@@ -482,7 +483,6 @@ export default {
         },
         selected_lcv(newVal)
         {
-            console.log(newVal)
             if(newVal.id_loai_cv != 0)
             {
                 const cong_viec = this.cong_viec.filter((value,index,array) => {
@@ -536,7 +536,8 @@ export default {
         },
         api_cong_viec(ID,id_du_an)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')).then((response) => {
+            const date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-01'
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')+'&DATE='+date).then((response) => {
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {

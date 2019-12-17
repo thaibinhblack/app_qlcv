@@ -464,9 +464,6 @@ export default {
      
         if(this.cong_viec_edit.id_cv_da)
         {
-          this.selected_loai_cv = this.loai_cv.filter((value,index,array) => {
-            return array[index].id_loai_cv == this.cong_viec_edit.id_loai_cv
-          })[0]
           this.cong_viec = this.cong_viec_edit
         }
         this.selected_du_an_kh = this.du_an.filter((value,index,array) => {

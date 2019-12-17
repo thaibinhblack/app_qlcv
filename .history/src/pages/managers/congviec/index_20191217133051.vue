@@ -5,11 +5,6 @@
             <ul class="list-filter">
                 
                 <li><a href="/"><b-button icon-left="home" size="6"></b-button></a></li>
-                <li><b-field>
-                        <b-button icon-left="update" @click="reset_cong_viec()">
-
-                        </b-button>
-                    </b-field></li>
                 <li>
                     <b-field>
                         <b-select v-model="cannhan_selected">
@@ -38,23 +33,11 @@
                 </li>
                 <li>
                     <b-field>
-                            <multiselect :options="loai_cv"
-                            v-model="selected_lcv"
-                            :multiple="false"
-                            group-values="children"
-                            group-label="parent"
-                            :group-select="false"
-                            :show-labels="false"
-                            track-by="ten_loai_cv"
-                            placeholder="Loại công việc"
-                            label="ten_loai_cv">
-                        </multiselect>
-
-                        <!-- <b-select v-model="selected_lcv">
+                        <b-select v-model="selected_lcv">
                             <option value="0"> --Tất cả loại công việc --</option>
                           
                             <option v-for="(lcv,index) in loai_cv" :key="index" :value="lcv.id_loai_cv">{{lcv.ten_loai_cv}}</option>
-                        </b-select> -->
+                        </b-select>
                     </b-field>
                 </li>
                 <li>
@@ -70,20 +53,27 @@
                     <b-field>
                         <b-select v-model="hinhthuc_loc">
                             <option value="0"> --Chọn hình thức lọc theo thời gian--</option>
-                            <option value="1">--Lọc ngày tiếp nhận--</option>
-                            <option value="2">--Lọc ngày giao việc--</option>
-                            <option value="3">--Lọc ngày hoàn thành--</option>
-                            <option value="4">--Lọc ngày cam kết--</option>
+                            <option value="1">--Lọc theo tháng--</option>
+                            <option value="2">--Lọc từ ngày đến ngày--</option>
                            
                         </b-select>
                     </b-field>
                 </li>
-                 <li v-if="hinhthuc_loc != 0">
+                 <li>
                     <b-field>
-                        <b-input type="date" v-model="time_start"></b-input>
-                        <b-input type="date" style="margin-left: 7px;" v-model="time_end"></b-input>
-                        <b-button style="margin-left:7px" @click="filter_date_cv()">Lọc</b-button>
-                    </b-field>  
+                        <b-select v-model="month_selected">
+                            <option value="0"> --Tất cả các tháng trong năm--</option>
+                             <option v-for="i in 12" :key="i" :value="i"> --Tháng {{i}}--</option>
+                           
+                        </b-select>
+                    </b-field>
+                </li>
+                 <li>
+                    <b-field>
+                        <b-input type="date"></b-input>
+                        <b-input type="date" style="margin-left: 7px;"></b-input>
+                    </b-field>
+                     
                 </li>
             </ul>
         <!-- <b-navbar class="menu-left" style="height:20px;padding:0">
@@ -248,7 +238,6 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import draggable from "vuedraggable";
 export default {
@@ -257,7 +246,6 @@ export default {
         JqxGrid,
         'modal-congviec': () => import('@/components/modals/modalCongViec.vue'),
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
-        Multiselect
     },
     data()
     {
@@ -307,9 +295,7 @@ export default {
             search_list1: "",
             search_list2: "",
             search_list3: "",
-            hinhthuc_loc: 0,
-            time_start: null,
-            time_end: null
+            hinhthuc_loc: 0
         }
     },
     watch:{
@@ -373,7 +359,7 @@ export default {
         {
             if(newVal != 0)
             {
-                this.api_cong_viec_by_id(newVal)
+                this.api_cong_viec_by_id(this.selected_project,this.duan_selected,newVal)
             }
             else
             {
@@ -383,7 +369,7 @@ export default {
                 }
                 else
                 {
-                    this.api_cong_viec_by_id(this.my_info.id_nd)
+                    this.api_cong_viec_by_id(this.selected_project,this.duan_selected,this.my_info.id_nd)
                 }
                 
             }
@@ -482,11 +468,10 @@ export default {
         },
         selected_lcv(newVal)
         {
-            console.log(newVal)
-            if(newVal.id_loai_cv != 0)
+            if(newVal != 0)
             {
                 const cong_viec = this.cong_viec.filter((value,index,array) => {
-                    return array[index].id_loai_cv == newVal.id_loai_cv
+                    return array[index].id_loai_cv == newVal
                 })
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
@@ -536,7 +521,8 @@ export default {
         },
         api_cong_viec(ID,id_du_an)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')).then((response) => {
+            const date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-01'
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')+'&DATE='+date).then((response) => {
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
@@ -550,9 +536,9 @@ export default {
                 })
             })
         },
-        api_cong_viec_by_id(id_nd)
+        api_cong_viec_by_id(ID,id_du_an,id_nd)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token')+'&ID_ND='+id_nd).then((response) => {
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')+'&ID_ND='+id_nd).then((response) => {
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
@@ -708,55 +694,6 @@ export default {
                     return array[index].trang_thai == 3
                 })
             })
-        },
-        filter_date_cv()
-        {
-            if(this.time_start && this.time_end)
-            {
-                if(this.time_end < this.time_start)
-                {
-                    const app = this;
-
-                     app.$buefy.notification.open({
-                        duration: 1500,
-                        message: 'Thời gian cuối không được nhỏ hơn thời gian đầu',
-                        position: 'is-bottom-right',
-                        type: 'is-warning',
-                        hasIcon: true
-                    })
-                }
-                else
-                {
-                    this.axios.get(this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token')+'&time_start='+this.time_start+'&time_end='+this.time_end+'&status='+this.hinhthuc_loc)
-                    .then((response) => {
-                        this.cong_viec = response.data
-                        this.list1 = this.list2 = this.list3 = []
-                        this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
-                            return array[index].trang_thai == 1
-                        })
-                        this.list2_tmp = this.list2 = response.data.filter((value,index,array) => {
-                            return array[index].trang_thai == 2
-                        })
-                        this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
-                            return array[index].trang_thai == 3
-                        })
-                    })
-                }
-            }
-        },
-        reset_cong_viec()
-        {   if(this.my_info.id_rule > 0)
-            { 
-            
-            this.api_cong_viec(0,0)
-            
-            }
-            else
-            {
-                this.api_cong_viec_by_id(this.my_info.id_nd)
-
-            }
-            this.hinhthuc_loc = 0
         }
     },
     beforeCreate()
@@ -802,7 +739,7 @@ export default {
               }
               else
               {
-                  this.api_cong_viec_by_id(response.data[0].id_nd)
+                  this.api_cong_viec_by_id(0,0,response.data[0].id_nd)
 
               }
                 this.api_nhanvien()

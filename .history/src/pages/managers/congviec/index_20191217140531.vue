@@ -38,18 +38,18 @@
                 </li>
                 <li>
                     <b-field>
+                         <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
+                            @select="chose_lcv"
                             :multiple="false"
                             group-values="children"
                             group-label="parent"
                             :group-select="false"
                             :show-labels="false"
                             track-by="ten_loai_cv"
-                            placeholder="Loại công việc"
-                            label="ten_loai_cv">
-                        </multiselect>
-
+                            label="ten_loai_cv"></multiselect>
+                        </b-field>
                         <!-- <b-select v-model="selected_lcv">
                             <option value="0"> --Tất cả loại công việc --</option>
                           
@@ -373,7 +373,7 @@ export default {
         {
             if(newVal != 0)
             {
-                this.api_cong_viec_by_id(newVal)
+                this.api_cong_viec_by_id(this.selected_project,this.duan_selected,newVal)
             }
             else
             {
@@ -383,7 +383,7 @@ export default {
                 }
                 else
                 {
-                    this.api_cong_viec_by_id(this.my_info.id_nd)
+                    this.api_cong_viec_by_id(this.selected_project,this.duan_selected,this.my_info.id_nd)
                 }
                 
             }
@@ -482,7 +482,6 @@ export default {
         },
         selected_lcv(newVal)
         {
-            console.log(newVal)
             if(newVal.id_loai_cv != 0)
             {
                 const cong_viec = this.cong_viec.filter((value,index,array) => {
@@ -536,7 +535,8 @@ export default {
         },
         api_cong_viec(ID,id_du_an)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')).then((response) => {
+            const date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-01'
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')+'&DATE='+date).then((response) => {
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
@@ -550,9 +550,9 @@ export default {
                 })
             })
         },
-        api_cong_viec_by_id(id_nd)
+        api_cong_viec_by_id(ID,id_du_an,id_nd)
         {
-            this.axios.get(this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token')+'&ID_ND='+id_nd).then((response) => {
+            this.axios.get(this.$store.state.config.API_URL + 'cong-viec/'+ID+'/'+id_du_an+'?api_token='+this.$cookies.get('token')+'&ID_ND='+id_nd).then((response) => {
                 this.cong_viec = response.data
                 this.list1 = this.list2 = this.list3 = []
                 this.list1_tmp = this.list1 = response.data.filter((value,index,array) => {
@@ -753,7 +753,7 @@ export default {
             }
             else
             {
-                this.api_cong_viec_by_id(this.my_info.id_nd)
+                this.api_cong_viec_by_id(0,0,this.my_info.id_nd)
 
             }
             this.hinhthuc_loc = 0
@@ -802,7 +802,7 @@ export default {
               }
               else
               {
-                  this.api_cong_viec_by_id(response.data[0].id_nd)
+                  this.api_cong_viec_by_id(0,0,response.data[0].id_nd)
 
               }
                 this.api_nhanvien()

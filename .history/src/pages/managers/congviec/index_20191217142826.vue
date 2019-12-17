@@ -40,6 +40,7 @@
                     <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
+                            @select="chose_lcv"
                             :multiple="false"
                             group-values="children"
                             group-label="parent"

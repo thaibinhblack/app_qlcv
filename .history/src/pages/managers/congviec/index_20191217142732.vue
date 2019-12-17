@@ -40,6 +40,7 @@
                     <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
+                            @select="chose_lcv"
                             :multiple="false"
                             group-values="children"
                             group-label="parent"
@@ -482,7 +483,6 @@ export default {
         },
         selected_lcv(newVal)
         {
-            console.log(newVal)
             if(newVal.id_loai_cv != 0)
             {
                 const cong_viec = this.cong_viec.filter((value,index,array) => {
