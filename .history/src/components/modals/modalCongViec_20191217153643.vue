@@ -324,10 +324,6 @@ export default {
                   //   })[0]
                   // }
                   this.my_info = response.data[0]
-                  if(response.data[0].id_rule == 0)
-                  {
-                    this.users = response.data
-                  }
                 })
               
           }

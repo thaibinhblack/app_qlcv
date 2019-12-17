@@ -67,14 +67,13 @@
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
-             <!-- :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1"  -->
-              <multiselect  :show-labels="false" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
+              <multiselect  :show-labels="false" :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
           <div class="form-group row">        
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc</label>
             <div class="col-sm-8">
-                <b-input disabled type="text" v-if="update == false" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
+                <b-input disabled type="text" v-if="update == false || my_info.id_rule > 0" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
                 <b-input v-else disabled type="text" v-model="nguoi_nhap"></b-input>
             </div>
           </div>
@@ -323,11 +322,9 @@ export default {
                   //     return array[index].id_nd == response.data[0].id_nd
                   //   })[0]
                   // }
-                  this.my_info = response.data[0]
-                  if(response.data[0].id_rule == 0)
-                  {
-                    this.users = response.data
-                  }
+                  this.my_info = response.data.filter((value,index,array) => {
+                      return array[index].id_nd == response.data[0].id_nd
+                    })[0]
                 })
               
           }

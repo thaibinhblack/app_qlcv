@@ -482,38 +482,37 @@ export default {
         },
         selected_lcv(newVal)
         {
-            this.api_fileter_loai_cv(newVal.id_loai_cv)
-            // console.log(newVal)
-            // if(newVal.id_loai_cv != 0)
-            // {
-            //     const cong_viec = this.cong_viec.filter((value,index,array) => {
-            //         return array[index].id_loai_cv == newVal.id_loai_cv
-            //     })
-            //     this.list1 = this.list2 = this.list3 = []
-            //     this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 1
-            //     })
-            //     this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 2
-            //     })
-            //     this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 3
-            //     })
-            // }
-            // else
-            // {
-            //     const cong_viec = this.cong_viec
-            //     this.list1 = this.list2 = this.list3 = []
-            //     this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 1
-            //     })
-            //     this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 2
-            //     })
-            //     this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
-            //         return array[index].trang_thai == 3
-            //     })
-            // }
+            console.log(newVal)
+            if(newVal.id_loai_cv != 0)
+            {
+                const cong_viec = this.cong_viec.filter((value,index,array) => {
+                    return array[index].id_loai_cv == newVal.id_loai_cv
+                })
+                this.list1 = this.list2 = this.list3 = []
+                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 1
+                })
+                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 2
+                })
+                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 3
+                })
+            }
+            else
+            {
+                const cong_viec = this.cong_viec
+                this.list1 = this.list2 = this.list3 = []
+                this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 1
+                })
+                this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 2
+                })
+                this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+                    return array[index].trang_thai == 3
+                })
+            }
         }
     },
     methods: {

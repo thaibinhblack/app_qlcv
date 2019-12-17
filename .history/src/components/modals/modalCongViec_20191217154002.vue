@@ -244,6 +244,13 @@ export default {
     },
     watch:
     {
+      cong_viec(val)
+      {
+        if(val.tien_do > 0)
+        {
+          this.cong_viec.trang_thai = 1
+        }
+      },
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv
