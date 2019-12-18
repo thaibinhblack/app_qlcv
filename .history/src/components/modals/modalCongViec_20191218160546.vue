@@ -100,7 +100,7 @@
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                 <div class="col-sm-8">
                   <b-field >
-                    <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh" data-date-format="dd-mm-yyyy">
+                    <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh">
                   </b-field>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày cam kết</label>
                 <div class="col-sm-8">
                   <b-field >
-                       <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_cam_ket" data-date-format="dd-mm-yyyy">
+                       <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_cam_ket">
                   </b-field>
                 </div>
             </div>
