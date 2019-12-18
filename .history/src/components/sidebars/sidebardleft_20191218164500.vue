@@ -149,7 +149,7 @@ import { mapGetters } from 'vuex'
 </script>
 
 <style scoped>
-#sidebar {position: absolute;width:calc(100% - 15px);height: 100%;background: #e9ebee;font-size: 13px;}
+#sidebar {position: absolute;width: 100%;height: 100%;background: #e9ebee;font-size: 13px;}
 #sidebar .menu-list a.is-active {background: #0051e9 !important;}
 #sidebar .menu-list a.is-active:hover {color: #fff !important;}
 </style>
