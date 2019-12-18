@@ -125,7 +125,7 @@ export default {
             if(this.selected_kh.id_khach_hang)
             {
                 
-                if(!this.du_an_kh.trang_thai_du_an)
+                if(this.du_an_kh.trang_thai_du_an)
                 {
                      app.$buefy.notification.open({
                         duration: 1500,
