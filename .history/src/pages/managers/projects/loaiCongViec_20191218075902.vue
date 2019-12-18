@@ -1,6 +1,7 @@
 <template>
 <div id="page-loai-cv">
-    <div class="row" v-if="getAction_loaicv.them == '6.2' || getAction_loaicv.sua == '6.3'">
+    {{getAction_danhmuc}}
+    <div class="row" v-if="getAction_danhmuc.them == '5.2' || getAction_danhmuc.sua == '5.3'">
         <div class="col-sm-12 col-md-12 col-lg-12" style="margin:auto">
             <div class="card">
                 <p class="background">Danh mục loại công việc</p>
@@ -33,7 +34,10 @@ export default {
             dataAdapter: new jqx.dataAdapter(this.source),
             columns: [
                 {text: 'ID_LOAI_CV', datafield: 'id_loai_cv', hidden: true},
-                {text: 'Công việc cha', datafield: 'parent'},
+                {text: 'Công việc cha', datafield: 'parent',  cellsrenderer: (index, datafield, value, defaultvalue, column, rowdata) => { 
+
+                    console.log(index,value,defaultvalue,column,rowdata)
+                }},
                 {text: 'Tên loại công việc', datafield: 'ten_loai_cv', width: 240},
                 {text: 'Mô tả', datafield: 'mo_ta', width: 400},
                 {text: 'Trạng thái', datafield: 'trang_thai', width: 240, filtertype: 'checkedlist', cellsrenderer: (index, datafield, value, defaultvalue, column, rowdata) => {
@@ -59,7 +63,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getAction_danhmuc", "getAction_loaicv"])
+        ...mapGetters(["getAction_danhmuc"])
     },
     watch:
     {

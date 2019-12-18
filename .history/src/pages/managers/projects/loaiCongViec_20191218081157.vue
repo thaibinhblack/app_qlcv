@@ -1,5 +1,6 @@
 <template>
 <div id="page-loai-cv">
+    {{getAction_danhmuc}}
     <div class="row" v-if="getAction_loaicv.them == '6.2' || getAction_loaicv.sua == '6.3'">
         <div class="col-sm-12 col-md-12 col-lg-12" style="margin:auto">
             <div class="card">

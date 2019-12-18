@@ -82,7 +82,7 @@
                         :icon="props.expanded ? 'menu-down' : 'menu-up'">
                     </b-icon>
                 </template>
-                <b-menu-item v-if="getAction_loaicv.xem == '6.1'" icon="" label="Danh mục loại công việc" @click="$router.push('/loai-cv')"></b-menu-item>
+                <b-menu-item icon="" label="Danh mục loại công việc" @click="$router.push('/loai-cv')"></b-menu-item>
                 <b-menu-item icon="" label="Danh sách công việc" @click="$router.push('/cong-viec')"></b-menu-item>
                 
             </b-menu-item>

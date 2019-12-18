@@ -49,6 +49,12 @@
                             placeholder="Loại công việc"
                             label="ten_loai_cv">
                         </multiselect>
+
+                        <!-- <b-select v-model="selected_lcv">
+                            <option value="0"> --Tất cả loại công việc --</option>
+                          
+                            <option v-for="(lcv,index) in loai_cv" :key="index" :value="lcv.id_loai_cv">{{lcv.ten_loai_cv}}</option>
+                        </b-select> -->
                     </b-field>
                 </li>
                 <li>
@@ -294,7 +300,7 @@ export default {
             ],
             open: 0,
             loai_cv: [],
-            selected_lcv: null,
+            selected_lcv: 0,
             nhanvien_duan: 0,
             users: [],
             my_info: {},
@@ -477,6 +483,37 @@ export default {
         selected_lcv(newVal)
         {
             this.api_fileter_loai_cv(newVal.id_loai_cv)
+            // console.log(newVal)
+            // if(newVal.id_loai_cv != 0)
+            // {
+            //     const cong_viec = this.cong_viec.filter((value,index,array) => {
+            //         return array[index].id_loai_cv == newVal.id_loai_cv
+            //     })
+            //     this.list1 = this.list2 = this.list3 = []
+            //     this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 1
+            //     })
+            //     this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 2
+            //     })
+            //     this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 3
+            //     })
+            // }
+            // else
+            // {
+            //     const cong_viec = this.cong_viec
+            //     this.list1 = this.list2 = this.list3 = []
+            //     this.list1_tmp = this.list1 =  cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 1
+            //     })
+            //     this.list2_tmp = this.list2 = cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 2
+            //     })
+            //     this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
+            //         return array[index].trang_thai == 3
+            //     })
+            // }
         }
     },
     methods: {
@@ -641,6 +678,7 @@ export default {
                 
             })
             this.loai_cv = object_loai_cv
+            console.log(this.loai_cv)
           })
         },
         api_nhanvien()
@@ -736,8 +774,6 @@ export default {
 
             }
             this.hinhthuc_loc = 0
-            this.selected_lcv = null
-
         }
     },
     beforeCreate()

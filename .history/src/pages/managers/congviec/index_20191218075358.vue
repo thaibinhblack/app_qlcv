@@ -294,7 +294,7 @@ export default {
             ],
             open: 0,
             loai_cv: [],
-            selected_lcv: null,
+            selected_lcv: 0,
             nhanvien_duan: 0,
             users: [],
             my_info: {},

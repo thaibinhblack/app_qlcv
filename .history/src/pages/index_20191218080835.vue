@@ -10,10 +10,11 @@
 </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     components: {
         'sidebar-left': () => import('@/components/sidebars/sidebardleft.vue'),
+        'tool-header': () => import('@/components/sidebars/toolheader.vue')
     },
     data()
     {
