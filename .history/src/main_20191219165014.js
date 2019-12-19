@@ -10,17 +10,17 @@ import store from './store'
 import VueDraggable from 'vue-draggable'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import VueCookies from 'vue-cookies'
-// import * as firebase from 'firebase'
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAMLI2Ig_IBew5MYCS3iH_wWB_pTZrNmvE",
-//   authDomain: "qlcv-ed447.firebaseapp.com",
-//   databaseURL: "https://qlcv-ed447.firebaseio.com",
-//   projectId: "qlcv-ed447",
-//   storageBucket: "qlcv-ed447.appspot.com",
-//   messagingSenderId: "476967849113",
-//   appId: "1:476967849113:web:d8dc1343a55d874291bc08",
-//   measurementId: "G-FHQDLRBJJ4"
-// };
+import * as firebase from 'firebase'
+const firebaseConfig = {
+  apiKey: "AIzaSyAMLI2Ig_IBew5MYCS3iH_wWB_pTZrNmvE",
+  authDomain: "qlcv-ed447.firebaseapp.com",
+  databaseURL: "https://qlcv-ed447.firebaseio.com",
+  projectId: "qlcv-ed447",
+  storageBucket: "qlcv-ed447.appspot.com",
+  messagingSenderId: "476967849113",
+  appId: "1:476967849113:web:d8dc1343a55d874291bc08",
+  measurementId: "G-FHQDLRBJJ4"
+};
 // firebase.initializeApp(firebaseConfig)
 // const messaging = firebase.messaging();
 // messaging.usePublicVapidKey('BEpNcDZIQE6n7nDApkogiUOTYWrxnG_E4e0HpdOLFX_Y2f0VvOe98JIMvl6OMdH0RhwMh5wsJJXo6cFvF8x_b9Q')
