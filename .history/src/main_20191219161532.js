@@ -10,7 +10,7 @@ import store from './store'
 import VueDraggable from 'vue-draggable'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import VueCookies from 'vue-cookies'
-import * as firebase from 'firebase'
+import * as frebase from 'firebase'
 const firebaseConfig = {
   apiKey: "AIzaSyAMLI2Ig_IBew5MYCS3iH_wWB_pTZrNmvE",
   authDomain: "qlcv-ed447.firebaseapp.com",
@@ -44,20 +44,7 @@ Vue.use(VueAxios,axios)
 Vue.use(VueSession)
 Vue.use(JqxGrid)
 Vue.config.productionTip = false
-axios.post(" https://fcm.googleapis.com/fcm/send",{
-  to: "d4FAIhfvIvfmiInpyLIsdp:APA91bEUPaabGH1slTBkIKH4iyEbexjmMYBYBGO5a66ku0_j5_LBLu57T_Jhc_9EgHLUOgvAFskc-tZaaQVoTMxJCWS9soAHqX8otwB46qH1JTdEeN-84i-pKHzZz20PdvdBvpVbNSgI",
-  notification: {
-    title: "FCM Message 123123",
-    body: "This is an FCM Message 123123"
-  }
-},{
-  headers:{
-    'Authorization': "key=AAAAbw1_zJk:APA91bFMY0Q97hPijmpUJ5xwSUYrnBhN7_JOPs8_BKe34tRKLb4CY6D39CWT1-a-t2Cpzaf88QfMVAC14QOzodZNhT4FUyFppQg1lNpkFPDU7sWvUuuGIbP31i2hD9tURPHvCjpfYbMa",
-    'Content-Type': 'application/json'
-  }
-}).then((response) => {
-  console.log(response)
-})
+
 new Vue({
   render: h => h(App),
   router,

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
     <link rel="stylesheet" type="text/css" href="./styles/jqx.base.css" />
     <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css" />
-    <link rel="manifest" href="./manitest.json">
     <style>
           body::-webkit-scrollbar {
   width: 5px;
@@ -33,6 +32,22 @@ body,html {
 
     </style>
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <script src="./OneSignalSDKWorker.js"></script>
+    <script src="./OneSignalSDKUpdaterWorker.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+            appId: "7a6a796d-3167-4926-a93e-66b90b130399",
+            subdomainName: "QLCV",
+            notifyButton: {
+              enable: true,
+            },
+          });
+        });
+        OneSignal.showNativePrompt();
+    </script>
     <title>app</title>
   </head>
   <body >
@@ -41,5 +56,4 @@ body,html {
   </body>
   <script src="./vendor/bootstrap/js/jquery-3.4.1.min.js"></script>
   <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
-
 </html>

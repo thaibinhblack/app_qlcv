@@ -7,6 +7,7 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
     <link rel="stylesheet" type="text/css" href="./styles/jqx.base.css" />
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css" />
     <style>
           body::-webkit-scrollbar {
   width: 5px;
@@ -17,17 +18,26 @@ body::-webkit-scrollbar-track {
 }
 /* Handle */
 body::-webkit-scrollbar-thumb {
-  background: #f65e39;
+  background: #0051e9;
 }
 /* Handle on hover */
 body::-webkit-scrollbar-thumb:hover {
-  background: #f65e39;
+  background: #0051e9;
 }
+.background {padding: 7px 15px;background: #0051e9; color: #fff;}
+body,html {
+  font-size: 13px;;
+}
+.btn-form {margin: 0 15px;color: #fff;}
+
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     <title>app</title>
   </head>
   <body >
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script src="./vendor/bootstrap/js/jquery-3.4.1.min.js"></script>
+  <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
 </html>

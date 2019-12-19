@@ -141,7 +141,7 @@
                 </JqxGrid>
             </div>
         </div>
-        <div class="col-4 col-md-4 col-sm-6 col-lg-3 col-xl-3 item-group-task">
+        <div class="col-md-4 col-sm-6 col-lg-3 col-xl-3 item-group-task">
             <div class="card card-task" :class="{not: zoom == 'col-12'}">
                 <div class="card-title">
                     <h3 style="line-height:36px">Công việc đang nhận ({{list2.length}}) <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>
@@ -193,7 +193,7 @@
             </div>
            
         </div>
-         <div class="col-4 col-md-4 col-sm-6 col-lg-3 col-xl-3 item-group-task">
+         <div class="col-md-4 col-sm-6 col-lg-3 col-xl-3 item-group-task">
             <div class="card card-task" :class="{not: zoom == 'col-12'}">
                 <div class="card-title">
                     <h3 style="line-height:36px">Công việc hoàn thành ({{list3.length}})  <b-button @click="zoomLayout()" class="btn-zoom" icon-right="plus"></b-button></h3>

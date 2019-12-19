@@ -47,8 +47,8 @@ Vue.config.productionTip = false
 axios.post(" https://fcm.googleapis.com/fcm/send",{
   to: "d4FAIhfvIvfmiInpyLIsdp:APA91bEUPaabGH1slTBkIKH4iyEbexjmMYBYBGO5a66ku0_j5_LBLu57T_Jhc_9EgHLUOgvAFskc-tZaaQVoTMxJCWS9soAHqX8otwB46qH1JTdEeN-84i-pKHzZz20PdvdBvpVbNSgI",
   notification: {
-    title: "FCM Message 123123",
-    body: "This is an FCM Message 123123"
+    title: "FCM Message",
+    body: "This is an FCM Message"
   }
 },{
   headers:{
