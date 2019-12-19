@@ -198,7 +198,7 @@
             <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
             <div class="col-sm-8">
               <b-field>
-                <b-input type="date" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
+                <b-input type="date" v-model="thamdinh.tham_dinh_thoi_gian" placeholder="Thẩm định thời gian"></b-input>
               </b-field>
             </div> 
           </div>
@@ -527,13 +527,13 @@ export default {
         {
           const tham_dinh = new FormData();
           tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
-          tham_dinh.append("P_THAM_DINH_CHAT_LUONG",this.thamdinh.tham_dinh_chat_luong)
-          tham_dinh.append("P_THAM_DINH_KHOI_LUONG",this.thamdinh.tham_dinh_khoi_luong)
+          tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
+          tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
           console.log(this.thamdinh)
-          this.axios.post(this.$store.state.config.API_URL + 'tham-dinh-cong-viec/'+this.cong_viec.id_cv_da+'?api_token='+this.$cookies.get('token'),tham_dinh)
-          .then((response) => {
+          // this.axios.post(this.$store.state.config.API_URL + 'tham-dinh-cong-viec/'+this.cong_viec.id_cv_da+'?api_token='+this.$cookies.get('token'),tham_dinh)
+          // .then((response) => {
 
-          })
+          // })
         }
     },
     created()

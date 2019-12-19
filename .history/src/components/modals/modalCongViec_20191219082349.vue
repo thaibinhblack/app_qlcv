@@ -191,56 +191,17 @@
         <b-button>Lưu file</b-button>
       </form>
   </b-tab-item>
-  <b-tab-item label="Thẩm định">
-    <form @submit.prevent="api_tham_dinh()">
+  <b-tab-item label="Chấm công">
+    <form>
       <div class="row">
           <div class="form-group col-sm-12 col-md-6 row">
             <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
             <div class="col-sm-8">
               <b-field>
-                <b-input type="date" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
+                <b-input type="text" placeholder="Thẩm định thời gian"></b-input>
               </b-field>
             </div> 
-          </div>
-
-          <div class="form-group col-sm-12 col-md-6 row">
-            <div class="col-sm-4 col-form-label">Thẩm định chất lượng</div>
-            <div class="col-sm-8">
-              <b-field>
-                <b-input type="text" v-model="thamdinh.tham_dinh_chat_luong" placeholder="Thẩm định chất lượng"></b-input>
-              </b-field>
-            </div> 
-          </div>
-
-          <div class="form-group col-sm-12 col-md-6 row">
-            <div class="col-sm-4 col-form-label">Thẩm định khối lượng</div>
-            <div class="col-sm-8">
-              <b-field>
-                <b-input type="text" v-model="thamdinh.tham_dinh_khoi_luong" placeholder="Thẩm định khối lượng"></b-input>
-              </b-field>
-            </div> 
-          </div>
-
-          <div class="form-group col-sm-12 col-md-6 row">
-            <div class="col-sm-4 col-form-label">Người thẩm định {{my_info.display_name}}</div>
-            <div class="col-sm-8">
-              <b-field>
-                <b-input disabled type="text" v-model="my_info.display_name" @input="my_info.display_name" ></b-input>
-              </b-field>
-            </div> 
-          </div>
-
-          <div class="form-group col-sm-12 col-md-6 row">
-            <div class="col-sm-4 col-form-label">Ngày thẩm đinh</div>
-            <div class="col-sm-8">
-              <b-field>
-                <b-input disabled v-model="thamdinh.ngay_tham_dinh" type="date" placeholder="Ngày thẩm định"></b-input>
-              </b-field>
-            </div> 
-          </div>
-          <div class="col-sm-12 col-md-12">
-            <button type="submit"  class="btn btn-primary btn-form" style="margin-left:0" >Lưu lại</button>
-        </div>    
+        </div>
       </div>
     </form>
   </b-tab-item>
@@ -281,10 +242,7 @@ export default {
         selected_loai_cv: null,
         du_an: [],
         du_an_kh: [],
-        nguoi_nhap: "",
-        thamdinh: {
-          ngay_tham_dinh: new Date().toISOString().substr(0,10)
-        }
+        nguoi_nhap: ""
       }
     },
     computed:{
@@ -523,25 +481,10 @@ export default {
           this.axis.post(this.$store.state.config.API_URL + 'file',form_fle).then(() => {
           })
         },
-        api_tham_dinh()
-        {
-          const tham_dinh = new FormData();
-          tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
-          tham_dinh.append("P_THAM_DINH_CHAT_LUONG",this.thamdinh.tham_dinh_chat_luong)
-          tham_dinh.append("P_THAM_DINH_KHOI_LUONG",this.thamdinh.tham_dinh_khoi_luong)
-          console.log(this.thamdinh)
-          this.axios.post(this.$store.state.config.API_URL + 'tham-dinh-cong-viec/'+this.cong_viec.id_cv_da+'?api_token='+this.$cookies.get('token'),tham_dinh)
-          .then((response) => {
-
-          })
-        }
     },
     created()
     {
      
-        this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.my_info = response.data[0]
-        })
         if(this.cong_viec_edit.id_cv_da)
         {
           this.axios.get(this.$store.state.config.API_URL + 'loai-cv/'+this.cong_viec_edit.id_loai_cv).then((response) => {

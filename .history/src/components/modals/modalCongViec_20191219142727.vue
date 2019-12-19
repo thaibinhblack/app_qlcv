@@ -198,7 +198,7 @@
             <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
             <div class="col-sm-8">
               <b-field>
-                <b-input type="date" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
+                <b-input type="date" v-model="thamdinh.tham_dinh_thoi_gian" placeholder="Thẩm định thời gian"></b-input>
               </b-field>
             </div> 
           </div>
@@ -222,10 +222,10 @@
           </div>
 
           <div class="form-group col-sm-12 col-md-6 row">
-            <div class="col-sm-4 col-form-label">Người thẩm định {{my_info.display_name}}</div>
+            <div class="col-sm-4 col-form-label">Người thẩm định</div>
             <div class="col-sm-8">
               <b-field>
-                <b-input disabled type="text" v-model="my_info.display_name" @input="my_info.display_name" ></b-input>
+                <b-input disabled type="text" v-model="my_info.display_name" @input="my_info.display_name" placeholder="Người thẩm định"></b-input>
               </b-field>
             </div> 
           </div>
@@ -527,21 +527,17 @@ export default {
         {
           const tham_dinh = new FormData();
           tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
-          tham_dinh.append("P_THAM_DINH_CHAT_LUONG",this.thamdinh.tham_dinh_chat_luong)
-          tham_dinh.append("P_THAM_DINH_KHOI_LUONG",this.thamdinh.tham_dinh_khoi_luong)
-          console.log(this.thamdinh)
+          tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
+          tham_dinh.append("P_THAM_DINH_TGIAN",this.thamdinh.tham_dinh_tgian)
           this.axios.post(this.$store.state.config.API_URL + 'tham-dinh-cong-viec/'+this.cong_viec.id_cv_da+'?api_token='+this.$cookies.get('token'),tham_dinh)
           .then((response) => {
-
+            console.log(response.data)
           })
         }
     },
     created()
     {
      
-        this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.my_info = response.data[0]
-        })
         if(this.cong_viec_edit.id_cv_da)
         {
           this.axios.get(this.$store.state.config.API_URL + 'loai-cv/'+this.cong_viec_edit.id_loai_cv).then((response) => {
