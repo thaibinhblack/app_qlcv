@@ -80,7 +80,6 @@ export default {
         loai_cv_edit(newVal)
         {
             this.loai_cv = newVal;
-        
             if(newVal.parent >0)
             {
                 this.parent = true
@@ -134,7 +133,6 @@ export default {
             form_loai_cv.append("P_TEN_LOAI_CV", this.loai_cv.ten_loai_cv)
             form_loai_cv.append("P_MO_TA", this.loai_cv.mo_ta)
             form_loai_cv.append("P_TRANG_THAI", this.loai_cv.trang_thai)
-             form_loai_cv.append("P_PARENT",this.loai_cv.parent)
             const app = this;
             this.axios.post(this.$store.state.config.API_URL + 'loai-cv/'+this.loai_cv.id_loai_cv+'?api_token='+this.$cookies.get('token'),form_loai_cv).then((response) => {
                
