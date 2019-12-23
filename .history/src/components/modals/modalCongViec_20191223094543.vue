@@ -221,7 +221,7 @@
         <b-button>Lưu file</b-button>
       </form>
   </b-tab-item>
-  <b-tab-item label="Thẩm định" v-if="my_info.id_rule > 0">
+  <b-tab-item label="Thẩm định">
     <form @submit.prevent="api_tham_dinh()">
       <div class="row">
           <div class="form-group col-sm-12 col-md-6 row">

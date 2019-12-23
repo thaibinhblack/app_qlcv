@@ -79,7 +79,10 @@
               <multiselect :disabled="cong_viec.trang_thai == 3"   :show-labels="false" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
-             <div class="form-group row">        
+          
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày tiếp nhận</label>
               <div class="col-sm-8">
                 <b-field >
@@ -115,9 +118,6 @@
                   </b-field>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-           
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
@@ -174,13 +174,8 @@
                 <div class="col-sm-8">
                   <b-input type="text" disabled v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
                 </div>
-              </div>
-              <div class="form-group row">        
-                  <label for="inputPassword3" class="col-sm-4 col-form-label" >Người thẩm định</label>
-                  <div class="col-sm-8">
-                    <b-input type="text" disabled v-model="nguoi_tham_dinh" ></b-input>
-                  </div>
-              </div>
+            </div>
+
         
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái</label>
@@ -221,7 +216,7 @@
         <b-button>Lưu file</b-button>
       </form>
   </b-tab-item>
-  <b-tab-item label="Thẩm định" v-if="my_info.id_rule > 0">
+  <b-tab-item label="Thẩm định">
     <form @submit.prevent="api_tham_dinh()">
       <div class="row">
           <div class="form-group col-sm-12 col-md-6 row">
@@ -319,17 +314,6 @@ export default {
     },
     computed:{
       ...mapGetters(["getUser"]),
-      nguoi_tham_dinh()
-      {
-        if(this.cong_viec.nguoi_tham_dinh != null)
-        {
-          return this.users.filter((value,index,array) => {
-            return array[index].id_nd == this.cong_viec.nguoi_tham_dinh
-          })[0].display_name
-        }
-        else
-         return "Chưa có người thẩm định"
-      }
     },
     watch:
     {

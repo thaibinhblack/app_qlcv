@@ -567,7 +567,7 @@ export default {
             this.cong_viec_edit.ngay_giao_viec =  this.cong_viec_edit.ngay_giao_viec != null ? this.cong_viec_edit.ngay_giao_viec.slice(0,10) : null
             this.cong_viec_edit.ngay_hoan_thanh =  this.cong_viec_edit.ngay_hoan_thanh != null ? this.cong_viec_edit.ngay_hoan_thanh.slice(0,10) : null
             this.cong_viec_edit.ngay_cam_ket =   this.cong_viec_edit.ngay_cam_ket != null ? this.cong_viec_edit.ngay_cam_ket.slice(0,10) : null
-            this.cong_viec_edit.ngay_tham_dinh =   this.cong_viec_edit.ngay_tham_dinh != null ? this.cong_viec_edit.ngay_tham_dinh.slice(0,10) : null
+            this.cong_viec_edit.ngay_cam_ket =   this.cong_viec_edit.ngay_tham_dinh != null ? this.cong_viec_edit.ngay_tham_dinh.slice(0,10) : null
             this.update = true
             this.isActiveModal = true
         },

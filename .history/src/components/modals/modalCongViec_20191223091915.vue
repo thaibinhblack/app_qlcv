@@ -54,15 +54,15 @@
           <div class="form-group row">        
             <label for="inputPassword3" :disabled="cong_viec.trang_thai == 3"   class="col-sm-4 col-form-label" >Nội dung</label>
             <div class="col-sm-8">
-              <b-input type="textarea"  minlength="" :disabled="cong_viec.trang_thai == 3" 
+              <b-input type="textarea"  minlength=""
               maxlength="255" placeholder="Nội dung"  v-model="cong_viec.noi_dung_cv" required  ></b-input>
             </div>
           </div>
            <div class="form-group row">        
-            <label for="inputPassword3"    class="col-sm-4 col-form-label" >Ghi chú</label>
+            <label for="inputPassword3" :disabled="cong_viec.trang_thai == 3"   class="col-sm-4 col-form-label" >Ghi chú</label>
             <div class="col-sm-8">
               <b-input type="text"  minlength=""
-              maxlength="255" placeholder="Ghi chú" :disabled="cong_viec.trang_thai == 3"  v-model="cong_viec.noi_dung_cv" required  ></b-input>
+              maxlength="255" placeholder="Ghi chú"  v-model="cong_viec.noi_dung_cv" required  ></b-input>
             </div>
           </div>
           <div class="form-group row">        
@@ -79,7 +79,10 @@
               <multiselect :disabled="cong_viec.trang_thai == 3"   :show-labels="false" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
-             <div class="form-group row">        
+          
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày tiếp nhận</label>
               <div class="col-sm-8">
                 <b-field >
@@ -115,9 +118,6 @@
                   </b-field>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-           
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
@@ -148,19 +148,13 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Mã JIRA</label>
                 <div class="col-sm-8">
-                  <b-input type="text" :disabled="cong_viec.trang_thai == 3" v-model="cong_viec.ma_jra" placeholder="Mã JIIRA" ></b-input>
+                  <b-input type="text" v-model="cong_viec.ma_jra" placeholder="Mã JIIRA" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày thẩm định</label>
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày thẩm đinh</label>
                 <div class="col-sm-8">
                   <b-input type="date" disabled v-model="cong_viec.ngay_tham_dinh" ></b-input>
-                </div>
-            </div>
-            <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định thời gian</label>
-                <div class="col-sm-8">
-                  <b-input type="number" disabled v-model="cong_viec.tham_dinh_tgian" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
@@ -174,13 +168,8 @@
                 <div class="col-sm-8">
                   <b-input type="text" disabled v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
                 </div>
-              </div>
-              <div class="form-group row">        
-                  <label for="inputPassword3" class="col-sm-4 col-form-label" >Người thẩm định</label>
-                  <div class="col-sm-8">
-                    <b-input type="text" disabled v-model="nguoi_tham_dinh" ></b-input>
-                  </div>
-              </div>
+            </div>
+
         
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái</label>
@@ -221,14 +210,14 @@
         <b-button>Lưu file</b-button>
       </form>
   </b-tab-item>
-  <b-tab-item label="Thẩm định" v-if="my_info.id_rule > 0">
+  <b-tab-item label="Thẩm định">
     <form @submit.prevent="api_tham_dinh()">
       <div class="row">
           <div class="form-group col-sm-12 col-md-6 row">
             <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
             <div class="col-sm-8">
               <b-field>
-                <b-input type="text" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
+                <b-input type="date" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
               </b-field>
             </div> 
           </div>
@@ -319,17 +308,6 @@ export default {
     },
     computed:{
       ...mapGetters(["getUser"]),
-      nguoi_tham_dinh()
-      {
-        if(this.cong_viec.nguoi_tham_dinh != null)
-        {
-          return this.users.filter((value,index,array) => {
-            return array[index].id_nd == this.cong_viec.nguoi_tham_dinh
-          })[0].display_name
-        }
-        else
-         return "Chưa có người thẩm định"
-      }
     },
     watch:
     {
