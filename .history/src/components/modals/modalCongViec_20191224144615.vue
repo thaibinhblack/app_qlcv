@@ -65,10 +65,10 @@
             </div>
           </div>
            <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Ghi chú</label>
+            <label for="inputPassword3"    class="col-sm-4 col-form-label" >Ghi chú</label>
             <div class="col-sm-8">
               <b-input type="text"  minlength=""
-              maxlength="255" placeholder="Ghi chú" :disabled="cong_viec.trang_thai == 3"  v-model="cong_viec.ghi_chu" required  ></b-input>
+              maxlength="255" placeholder="Ghi chú" :disabled="cong_viec.trang_thai == 3"  v-model="cong_viec.noi_dung_cv" required  ></b-input>
             </div>
           </div>
           <div class="form-group row">        
@@ -85,10 +85,7 @@
               <multiselect :disabled="cong_viec.trang_thai == 3"   :show-labels="false" v-model="selected_user_tiepnhan" :options="users" label="display_name" track-by="id_nd"></multiselect>
             </div>
           </div>
-            
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="form-group row">        
+             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày tiếp nhận</label>
               <div class="col-sm-8">
                 <b-field >
@@ -124,6 +121,9 @@
                   </b-field>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+           
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
@@ -450,7 +450,6 @@ export default {
           cong_viec.append("P_TRANG_THAI_LTRINH",this.cong_viec.trang_thai_ltrinh)
           cong_viec.append("P_TRANG_THAI",this.cong_viec.trang_thai)
           cong_viec.append("P_ID_LOAI_CV",this.selected_loai_cv.id_loai_cv)
-          cong_viec.append("P_NGUOI_YEU_CAU",this.cong_viec.nguoi_yeu_cau)
           cong_viec.append("P_ACTION",P_ACTION)
           cong_viec.append("P_NGUOI_NHAP",this.my_info.id_nd)
           if(this.ca_nhan == true)
