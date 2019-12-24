@@ -280,9 +280,6 @@
       </div>
     </form>
   </b-tab-item>
-  <b-tab-item label="Công việc gốc">
-    <cong-viec-goc :id_cv_da="cong_viec.id_cv_da" />
-  </b-tab-item>
 </b-tabs>
 </template>
 
@@ -293,8 +290,7 @@ export default {
     props: ["update","selected_project", "isActiveModal", "cong_viec_edit","ca_nhan", "loai_cv"],
     components:
     {
-      Multiselect,
-      'cong-viec-goc': () => import('@/components/congviec/congviecGoc.vue')
+      Multiselect
     },
     data()
     {

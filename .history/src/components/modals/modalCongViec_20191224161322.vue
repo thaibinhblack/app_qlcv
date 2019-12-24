@@ -281,7 +281,7 @@
     </form>
   </b-tab-item>
   <b-tab-item label="Công việc gốc">
-    <cong-viec-goc :id_cv_da="cong_viec.id_cv_da" />
+
   </b-tab-item>
 </b-tabs>
 </template>

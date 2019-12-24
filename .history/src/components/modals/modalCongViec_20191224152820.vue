@@ -42,7 +42,7 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >KH yêu cầu</label>
             <div class="col-sm-8">
-              <b-checkbox  v-model="cong_viec.type_cv"  style="margin-top:10px;"></b-checkbox>
+              <b-checkbox  v-model="cong_viec.type"  style="margin-top:10px;"></b-checkbox>
             </div>
           </div>
           <div class="form-group row">        
@@ -280,9 +280,6 @@
       </div>
     </form>
   </b-tab-item>
-  <b-tab-item label="Công việc gốc">
-    <cong-viec-goc :id_cv_da="cong_viec.id_cv_da" />
-  </b-tab-item>
 </b-tabs>
 </template>
 
@@ -293,8 +290,7 @@ export default {
     props: ["update","selected_project", "isActiveModal", "cong_viec_edit","ca_nhan", "loai_cv"],
     components:
     {
-      Multiselect,
-      'cong-viec-goc': () => import('@/components/congviec/congviecGoc.vue')
+      Multiselect
     },
     data()
     {
@@ -463,7 +459,7 @@ export default {
           }
           else
           {
-            cong_viec.append("P_TYPE",this.cong_viec.type_cv == true ? 1 : 0)
+            cong_viec.append("P_TYPE",this.cong_viec.type == true ? 1 : 0)
           }
           const app = this;
           this.axios.post(this.$store.state.config.API_URL + 'cong-viec?api_token='+this.$cookies.get('token'),cong_viec).then((response) => {
