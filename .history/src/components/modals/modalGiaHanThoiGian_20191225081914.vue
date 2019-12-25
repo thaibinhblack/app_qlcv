@@ -11,7 +11,16 @@
         <label for="inputPassword3" class="col-sm-4 col-form-label" >Thời gian cam kết</label>
         <div class="col-sm-8">
             <b-field >
-                 <b-input type="text" disabled v-model="cong_viec.ngay_cam_ket"></b-input>
+                  <b-datepicker
+                      :show-week-number="showWeekNumber"
+                      placeholder="Ngày cam kết"
+                      v-model="cong_viec.ngay_cam_ket"
+                      disabled
+                      required
+                      @date-formatter="formatter(date)"
+                      style="z-index:9999"
+                      icon="calendar-today">
+                  </b-datepicker>
               </b-field>
         </div>
     </div>
@@ -74,9 +83,7 @@ export default {
         api_users()
         {
             this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                this.users = response.data.filter((value,index,array) => {
-                    return array[index].id_rule > 0
-                })
+                this.users = response.data
             })
         }
     },

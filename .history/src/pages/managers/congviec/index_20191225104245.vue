@@ -22,7 +22,7 @@
            
             <div class="row">
                 <div class="col-sm-12">
-                     <p class="title" style="font-size:16px;text-align: center; padding: 15px 0;text-transform: uppercase;">Bộ lọc công việc</p>
+                     <p class="title" style="font-size:16px;text-align: center; padding: 15px 0;">Bộ lọc công việc</p>
                 </div>
                 <div class="col-sm-12 item-filter">
                      <b-field>

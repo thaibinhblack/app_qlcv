@@ -22,11 +22,11 @@
            
             <div class="row">
                 <div class="col-sm-12">
-                     <p class="title" style="font-size:16px;text-align: center; padding: 15px 0;text-transform: uppercase;">Bộ lọc công việc</p>
+                     <p class="title" style="font-size:16px;">Bộ lọc công việc</p>
                 </div>
                 <div class="col-sm-12 item-filter">
                      <b-field>
-                        <b-select v-model="cannhan_selected" expanded>
+                        <b-select v-model="cannhan_selected">
                             <option value="0"> --Công việc của dự án--</option>
                             <option value="1"> --Công việc cá nhân--</option>
                             <option value="3" v-if="my_info.id_rule > 0">--Công việc chưa phân công---</option>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-sm-12 item-filter">
                     <b-field>
-                        <b-select v-model="duan_selected" expanded>
+                        <b-select v-model="duan_selected">
                             <option value="0"> --Tất cả  dự án--</option>
                           
                             <option v-for="(da,index) in du_an" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
@@ -44,23 +44,13 @@
                 </div>
                 <div class="col-sm-12 item-filter">
                      <b-field>
-                        <b-select v-model="selected_project" expanded>
+                        <b-select v-model="selected_project">
                             <option value="0"> --Tất cả  dự án khách hàng--</option>
                             <option v-for="(da,index) in du_an_kh" :key="index" :value="da.id_du_an_kh"> {{da.ten_du_an_kh}}</option>
                         </b-select>
                     </b-field>
                 </div>
-               
                 <div class="col-sm-12 item-filter">
-                    <b-field>
-                        <b-select v-model="nhanvien_duan" v-if="my_info.id_rule > 0" expanded>
-                            <option value="0"> --Nhân viên nhận việc--</option>
-                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
-                           
-                        </b-select>
-                    </b-field>
-                </div>
-                 <div class="col-sm-12 item-filter">
                     <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
@@ -77,7 +67,16 @@
                 </div>
                 <div class="col-sm-12 item-filter">
                     <b-field>
-                        <b-select v-model="hinhthuc_loc" expanded>
+                        <b-select v-model="nhanvien_duan" v-if="my_info.id_rule > 0">
+                            <option value="0"> --Nhân viên nhận việc--</option>
+                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
+                           
+                        </b-select>
+                    </b-field>
+                </div>
+                <div class="col-sm-12 item-filter">
+                    <b-field>
+                        <b-select v-model="hinhthuc_loc">
                             <option value="0"> --Chọn hình thức lọc theo thời gian--</option>
                             <option value="1">--Lọc ngày tiếp nhận--</option>
                             <option value="2">--Lọc ngày giao việc--</option>
@@ -454,9 +453,6 @@ export default {
                 this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
-                 this.list4_tmp =  this.list4 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 4
-                })
             }
             else
             {
@@ -470,9 +466,6 @@ export default {
                 })
                 this.list3_tmp = this.list3 = cong_viec.filter((value,index,array) => {
                     return array[index].trang_thai == 3
-                })
-                this.list4_tmp =  this.list4 = cong_viec.filter((value,index,array) => {
-                    return array[index].trang_thai == 4
                 })
             }
             
@@ -625,9 +618,6 @@ export default {
                 })
                 this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
-                })
-                 this.list4_tmp =  this.list4 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 4
                 })
             })
         },
@@ -791,9 +781,6 @@ export default {
                 this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
                 })
-                 this.list4_tmp =  this.list4 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 4
-                })
             })
         },
         filter_date_cv()
@@ -827,9 +814,6 @@ export default {
                         this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
                             return array[index].trang_thai == 3
                         })
-                        this.list4_tmp =  this.list4 = response.data.filter((value,index,array) => {
-                            return array[index].trang_thai == 4
-                        })
                     })
                 }
             }
@@ -847,9 +831,6 @@ export default {
                 })
                 this.list3_tmp = this.list3 = response.data.filter((value,index,array) => {
                     return array[index].trang_thai == 3
-                })
-                 this.list4_tmp =  this.list4 = response.data.filter((value,index,array) => {
-                    return array[index].trang_thai == 4
                 })
             })
         },
@@ -973,7 +954,7 @@ export default {
 .time_filter {height: 36px;padding: 5px;;}
 .item-group-task {margin: 10px 0;}
 .layout-task {min-width: 1200px;}
-.item-filter {margin: 7px 0;}
+.item-filter {margin: 10px 0;}
 .item-filter * {width: 100% !important;}
 .item-filter span.select, .item-filter span.select select {width: 100% !important;}
 </style>

@@ -74,9 +74,7 @@ export default {
         api_users()
         {
             this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                this.users = response.data.filter((value,index,array) => {
-                    return array[index].id_rule > 0
-                })
+                this.users = response.data
             })
         }
     },

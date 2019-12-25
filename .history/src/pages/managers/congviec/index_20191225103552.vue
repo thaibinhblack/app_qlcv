@@ -22,7 +22,7 @@
            
             <div class="row">
                 <div class="col-sm-12">
-                     <p class="title" style="font-size:16px;text-align: center; padding: 15px 0;text-transform: uppercase;">Bộ lọc công việc</p>
+                     <p class="title" style="font-size:16px;">Bộ lọc công việc</p>
                 </div>
                 <div class="col-sm-12 item-filter">
                      <b-field>
@@ -50,17 +50,7 @@
                         </b-select>
                     </b-field>
                 </div>
-               
                 <div class="col-sm-12 item-filter">
-                    <b-field>
-                        <b-select v-model="nhanvien_duan" v-if="my_info.id_rule > 0" expanded>
-                            <option value="0"> --Nhân viên nhận việc--</option>
-                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
-                           
-                        </b-select>
-                    </b-field>
-                </div>
-                 <div class="col-sm-12 item-filter">
                     <b-field>
                             <multiselect :options="loai_cv"
                             v-model="selected_lcv"
@@ -73,6 +63,15 @@
                             placeholder="Loại công việc"
                             label="ten_loai_cv">
                         </multiselect>
+                    </b-field>
+                </div>
+                <div class="col-sm-12 item-filter">
+                    <b-field>
+                        <b-select v-model="nhanvien_duan" v-if="my_info.id_rule > 0" expanded>
+                            <option value="0"> --Nhân viên nhận việc--</option>
+                            <option v-for="(user,index) in users" :key="index" :value="user.id_nd">{{user.display_name}}</option>
+                           
+                        </b-select>
                     </b-field>
                 </div>
                 <div class="col-sm-12 item-filter">
