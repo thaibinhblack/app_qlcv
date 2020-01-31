@@ -103,7 +103,7 @@
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-
+                {{cong_viec.time_nhan_viec}}
                   <vue-timepicker v-model="cong_viec.time_nhan_viec" format="HH:mm:ss"></vue-timepicker>
                 </div>
               <div class="col-sm-4">

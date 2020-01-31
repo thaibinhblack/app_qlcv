@@ -5,8 +5,8 @@
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
-              <div class="col-sm-4 col-form-label">Dự án</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-form-label">Dự án</div>
+              <div class="col-sm-9">
                 <b-field>
                   <multiselect v-model="selected_du_an" :options="LIST_DUAN" label="ten_du_an" :disabled="check_disabled" 
                   track-by="ten_du_an" placeholder="Danh sách dự án"
@@ -15,8 +15,8 @@
               </div> 
          </div>
           <div class="form-group row" >
-              <div class="col-sm-4 col-form-label">Dự án KH</div>
-              <div class="col-sm-8">
+              <div class="col-sm-3 col-form-label">Dự án KH</div>
+              <div class="col-sm-9">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" :disabled="check_disabled"
                   :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
@@ -24,8 +24,8 @@
               </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Loại công việc</label>
+            <div class="col-sm-9">
                 <b-field>
                     <multiselect :options="GROUP_LCV"
                     v-model="selected_loai_cv"
@@ -41,48 +41,48 @@
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >KH yêu cầu</label>
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >KH yêu cầu</label>
             <!-- {{cong_viec.type_cv}} -->
-            <div class="col-sm-8">
+            <div class="col-sm-9">
               <b-checkbox v-if="Object.entries(this.getTaskEdit).length <= 5 || Object.entries(this.getTaskEdit).length === 0" value="1" native-value="1"  v-model="cong_viec.type"  style="margin-top:10px;"></b-checkbox>
               <b-checkbox v-else v-model="KHYC" value="1" native-value="1"  style="margin-top:10px;"></b-checkbox>
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên người yêu cầu</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Tên người yêu cầu</label>
+            <div class="col-sm-9">
               <b-input :disabled="check_disabled" type="text" placeholder="Người yêu cầu" v-model="cong_viec.nguoi_yeu_cau"></b-input>
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên công việc</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Tên công việc</label>
+            <div class="col-sm-9">
               <b-input :disabled="check_disabled" type="text" v-model="cong_viec.ten_cv" required placeholder="Tên công việc" ></b-input>
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3"    class="col-sm-4 col-form-label" >Nội dung</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3"    class="col-sm-3 col-form-label" >Nội dung</label>
+            <div class="col-sm-9">
               <b-input type="textarea"  minlength=""  :disabled="check_disabled"
               maxlength="255" placeholder="Nội dung"  v-model="cong_viec.noi_dung_cv" required  ></b-input>
             </div>
           </div>
            <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Ghi chú</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Ghi chú</label>
+            <div class="col-sm-9">
               <b-input type="text"  minlength=""
               maxlength="255" placeholder="Ghi chú" :disabled="check_disabled"   v-model="cong_viec.ghi_chu" required  ></b-input>
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Người giao việc</label>
+            <div class="col-sm-9">
                 <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER_GIAOVIEC" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
-            <div class="col-sm-8">
+            <label for="inputPassword3"  class="col-sm-3 col-form-label" >Người tiếp nhận</label>
+            <div class="col-sm-9">
             <!-- {{selected_user_tiepnhan}} -->
              <!-- :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1"  -->
               <multiselect  :disabled="check_disabled"   :show-labels="false" v-model="selected_user_tiepnhan" :options="LIST_USER" label="display_name" track-by="id_nd"></multiselect>
@@ -92,8 +92,8 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group row">        
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày tiếp nhận</label>
-              <div class="col-sm-8">
+              <label for="inputPassword3" class="col-sm-3 col-form-label" >Ngày tiếp nhận</label>
+              <div class="col-sm-9">
                 <b-field >
                   <b-input type="date" :disabled="check_disabled" style="width: 100%;"  v-model="cong_viec.ngay_tiep_nhan"></b-input>
                  
@@ -101,12 +101,11 @@
               </div>
             </div>
             <div class="form-group row">        
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
+              <label for="inputPassword3" class="col-sm-3 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-
-                  <vue-timepicker v-model="cong_viec.time_nhan_viec" format="HH:mm:ss"></vue-timepicker>
+                  <vue-timepicker format="HH:mm:ss"></vue-timepicker>
                 </div>
-              <div class="col-sm-4">
+              <div class="col-sm-5">
                 <b-field >
                   
                    <b-input type="date"  :disabled="check_disabled"  style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"></b-input>
@@ -115,11 +114,8 @@
               </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
-                 <div class="col-sm-4">
-                  <vue-timepicker v-model="cong_viec.time_hoan_thanh" format="HH:mm:ss"></vue-timepicker>
-                </div>
-                <div class="col-sm-4">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Ngày hoàn thành</label>
+                <div class="col-sm-9">
                   <b-field >
                      <b-input type="date" :disabled="check_disabled"    style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh"></b-input>
                     <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh" data-date-format="dd-mm-yyyy"> -->
@@ -127,8 +123,8 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày cam kết</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Ngày cam kết</label>
+                <div class="col-sm-9">
                   <b-field >
                      <b-input type="date" :disabled="check_disabled"   style="width: 100%;"  v-model="cong_viec.ngay_cam_ket"></b-input>
                        <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_cam_ket" data-date-format="dd-mm-yyyy"> -->
@@ -136,7 +132,7 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
                   <b-field>
                     <b-input  type="number" :disabled="check_disabled"  v-model="cong_viec.tien_do" required placeholder="Tiến độ" ></b-input>
@@ -149,60 +145,60 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Giờ thực hiện</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Giờ thực hiện</label>
                 
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <b-field>
                       <b-input type="text"   v-model="cong_viec.gio_thuc_hien" placeholder="Giờ thực hiện" ></b-input>
                     </b-field>
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Độ ưu tiên</label>
+                <div class="col-sm-9">
                   <b-input   type="number" :disabled="check_disabled" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input>
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Mã JIRA</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Mã JIRA</label>
+                <div class="col-sm-9">
                   <b-input type="text"  v-model="cong_viec.ma_jra" placeholder="Mã JIIRA" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày thẩm định</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Ngày thẩm định</label>
+                <div class="col-sm-9">
                   <b-input type="date" disabled v-model="cong_viec.ngay_tham_dinh" ></b-input>
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định thời gian</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Thẩm định thời gian</label>
+                <div class="col-sm-9">
                   <b-input type="number" disabled v-model="cong_viec.tham_dinh_tgian" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định chất lượng</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Thẩm định chất lượng</label>
+                <div class="col-sm-9">
                   <b-input type="text" disabled v-model="cong_viec.tham_dinh_chat_luong" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định khối lượng</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label" >Thẩm định khối lượng</label>
+                <div class="col-sm-9">
                   <b-input type="text" disabled v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
                 </div>
               </div>
               <div class="form-group row">        
-                  <label for="inputPassword3" class="col-sm-4 col-form-label" >Người thẩm định</label>
-                  <div class="col-sm-8">
+                  <label for="inputPassword3" class="col-sm-3 col-form-label" >Người thẩm định</label>
+                  <div class="col-sm-9">
                     <b-input type="text" disabled v-model="nguoi_tham_dinh" ></b-input>
                   </div>
               </div>
         
             <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái</label>
-                <div class="col-sm-8">
+              <label for="inputPassword3" class="col-sm-3 col-form-label" >Trạng thái</label>
+                <div class="col-sm-9">
                     <b-field>
                         <b-select v-model="cong_viec.trang_thai" required :disabled="check_disabled"  >
                             <option v-if="cong_viec.trang_thai <= 1" value="1" selected>Chưa thực hiện</option>
@@ -214,8 +210,8 @@
                 </div>
             </div>
             <div class="form-group row">        
-              <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc</label>
-              <div class="col-sm-8">
+              <label for="inputPassword3"  class="col-sm-3 col-form-label" >Người nhập công việc</label>
+              <div class="col-sm-9">
                   <b-input disabled type="text" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
                   <!-- <b-input v-else disabled type="text" v-model="nguoi_nhap"></b-input> -->
               </div>
@@ -284,17 +280,7 @@ export default {
           ngay_giao_viec: new Date().toISOString().substr(0,10),
           ngay_hoan_thanh: new Date().toISOString().substr(0,10),
           ngay_cam_ket: new Date().toISOString().substr(0,10),
-          type: false,
-          time_nhan_viec: {
-            HH: '00',
-            mm: '00',
-            ss: '00'
-          },
-          time_hoan_thanh: {
-            HH: '00',
-            mm: '00',
-            ss: '00'
-          }
+          type: false
         },
         selected_du_an: {},
         selected_du_an_kh: [],
@@ -510,7 +496,6 @@ export default {
         // console.log(this.getTaskEdit)
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-         
           this.selected_du_an = this.LIST_DUAN.filter((value,index,array) => {
             return array[index].id_du_an == this.getTaskEdit.id_du_an
           })[0]
@@ -531,8 +516,7 @@ export default {
             this.nguoi_nhap = response.data
           })
           this.cong_viec = this.getTaskEdit
-          this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
-          this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
+  
         }
         this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an);
         this.api_files()

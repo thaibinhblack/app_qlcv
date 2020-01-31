@@ -103,7 +103,6 @@
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-
                   <vue-timepicker v-model="cong_viec.time_nhan_viec" format="HH:mm:ss"></vue-timepicker>
                 </div>
               <div class="col-sm-4">
@@ -117,7 +116,7 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
-                  <vue-timepicker v-model="cong_viec.time_hoan_thanh" format="HH:mm:ss"></vue-timepicker>
+                  <vue-timepicker format="HH:mm:ss"></vue-timepicker>
                 </div>
                 <div class="col-sm-4">
                   <b-field >
@@ -286,11 +285,6 @@ export default {
           ngay_cam_ket: new Date().toISOString().substr(0,10),
           type: false,
           time_nhan_viec: {
-            HH: '00',
-            mm: '00',
-            ss: '00'
-          },
-          time_hoan_thanh: {
             HH: '00',
             mm: '00',
             ss: '00'
@@ -510,7 +504,6 @@ export default {
         // console.log(this.getTaskEdit)
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-         
           this.selected_du_an = this.LIST_DUAN.filter((value,index,array) => {
             return array[index].id_du_an == this.getTaskEdit.id_du_an
           })[0]
@@ -531,8 +524,7 @@ export default {
             this.nguoi_nhap = response.data
           })
           this.cong_viec = this.getTaskEdit
-          this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
-          this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
+  
         }
         this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an);
         this.api_files()

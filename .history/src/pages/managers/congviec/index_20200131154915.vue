@@ -34,7 +34,7 @@
         </b-tab-item    >
     </b-tabs>
 
-    <b-modal :active.sync="isModalEdit" :width="'100%'" :can-cancel="false">
+    <b-modal :active.sync="isModalEdit" :width="'14500px'" :can-cancel="false">
       <p class="background" style="padding:15px;">Danh mục công việc</p>
         <modal-congviec :isActiveModal="isActiveModal" />
     </b-modal >

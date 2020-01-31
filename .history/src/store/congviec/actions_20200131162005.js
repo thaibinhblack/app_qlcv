@@ -92,8 +92,6 @@ export default {
             form_cong_viec.append("P_ACTION",2)
             form_cong_viec.append("P_NGUOI_NHAP",cong_viec.nguoi_nhap)
             form_cong_viec.append("P_TYPE",cong_viec.type)
-            form_cong_viec.append("P_TIME_NHAN_VIEC", JSON.stringify(cong_viec.time_nhan_viec))
-            form_cong_viec.append("P_TIME_HOAN_THANH", JSON.stringify(cong_viec.time_hoan_thanh))
             axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                 resolve(true)
             }).catch(() => {
