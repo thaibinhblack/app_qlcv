@@ -25,13 +25,13 @@
     </b-modal>
     <b-tabs>
         <b-tab-item label="TASK" >
-            <div class="row layout-task" >
+            <div class="row layout-task" style="margin-top: 10px;">
                 <item-task :list_congviec="list1" :title="'Công việc chưa phân công'" :status="1" />
                 <item-task :list_congviec="list2" :title="'Công việc đang làm'" :status="2" />
                 <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
                 <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
             </div>  
-        </b-tab-item    >
+        </b-tab-item>
     </b-tabs>
 
     <b-modal :active.sync="isModalEdit" :width="'1100px'" :can-cancel="false">

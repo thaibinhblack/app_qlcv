@@ -107,7 +107,7 @@ export default {
                 form.append("FILE_CV",file)
                 form.append("P_ID_CV_DA", form_file.P_ID_CV_DA)
                 axios.post('/api/file-cv?api_token='+axios.defaults.params.api_token,form).then((response) => {
-                    commit("ADD_FILE",file.name)
+                    console.log(response.data)
                 })
             })
         })

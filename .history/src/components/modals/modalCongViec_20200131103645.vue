@@ -466,6 +466,7 @@ export default {
       },
       api_files()
       {
+        console.log('call api')
         this.$store.dispatch("getFile",this.cong_viec.id_cv_da)
       },
       api_up_file()
@@ -474,7 +475,6 @@ export default {
           P_ID_CV_DA: this.cong_viec.id_cv_da,
           FILE_CV: this.$refs.file_cv.files
         })
-        this.files = []
       },
       up_files()
       {

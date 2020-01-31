@@ -45,9 +45,5 @@ export default {
     SET_FILES(state,LIST_FILE)
     {
         state.list_file = LIST_FILE
-    },
-    ADD_FILE(state,NAME_FILE)
-    {
-        state.list_file.push('/upload/congviec/'+NAME_FILE)
     }
 }

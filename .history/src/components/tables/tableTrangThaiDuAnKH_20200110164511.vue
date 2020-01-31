@@ -71,7 +71,7 @@ export default {
                 { name: 'ten_du_an_kh' ,type: 'string'},
                 { name: 'noi_dung_trang_thai' ,type: 'string'},
                 { name: 'ghi_chu_trang_thai', type: 'string' },
-               
+                { name: 'ten_trang_thai', type: 'string'},
                 { name: 'created_at', type: 'date'},
                 { name: 'updated_at', type: 'date'}
             ],

@@ -10,13 +10,17 @@ import store from './store'
 import VueDraggable from 'vue-draggable'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import VueCookies from 'vue-cookies'
-
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 Vue.use(VueCookies)
 // set default config
 VueCookies.config('30d')
 Vue.use(VueDraggable)
-Vue.use(Buefy)
+Vue.use(Buefy, {
+  defaultIconComponent: 'vue-fontawesome',
+  defaultIconPack: 'fas',
+});
 Vue.use(VueAxios,axios)
 Vue.use(VueSession)
 Vue.use(JqxGrid)

@@ -231,7 +231,7 @@
           <nav class="col-sm-12" style="padding: 15px;">
             <ul class="list-file">
               <li v-for="(file,index) in files" :key="index"> {{file.name}} </li>
-              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17,-1)}} </a> </li>
+              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.URL_FILE}} </li>
               <!-- <li> </li> -->
             </ul>
           </nav>
@@ -474,7 +474,6 @@ export default {
           P_ID_CV_DA: this.cong_viec.id_cv_da,
           FILE_CV: this.$refs.file_cv.files
         })
-        this.files = []
       },
       up_files()
       {

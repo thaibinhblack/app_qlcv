@@ -12,7 +12,7 @@
             <p class="background">Danh sách khách hàng</p>
             <JqxGrid ref="myGrid"
                     :width="'99%'" :source="dataAdapter" :columns="columns"  @rowclick="onRowclick($event)"
-                    :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true" :pageable="true" >
+                    :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true">
             </JqxGrid>
             
         </div>

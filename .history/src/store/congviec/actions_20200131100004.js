@@ -107,23 +107,7 @@ export default {
                 form.append("FILE_CV",file)
                 form.append("P_ID_CV_DA", form_file.P_ID_CV_DA)
                 axios.post('/api/file-cv?api_token='+axios.defaults.params.api_token,form).then((response) => {
-                    commit("ADD_FILE",file.name)
-                })
-            })
-        })
-    },
-    getFile({commit},ID_CV_DA)
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/file-cv/'+ID_CV_DA+'?api_token='+axios.defaults.params.api_token).then((response) => {
-                commit("SET_FILES", response.data.result)
-                resolve(response.data)
-            }).catch((error) => {
-                reject({
-                    success: false,
-                    message: 'Lỗi server!',
-                    result: error,
-                    status: 500
+                    console.log(response.data)
                 })
             })
         })

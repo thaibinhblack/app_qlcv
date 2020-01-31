@@ -12,7 +12,7 @@
             <p class="background">Danh sách khách hàng</p>
             <JqxGrid ref="myGrid"
                     :width="'99%'" :source="dataAdapter" :columns="columns"  @rowclick="onRowclick($event)"
-                    :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true" :pageable="true" >
+                    :filterable="true" :selectionmode="'multiplecellsextended'" :showfilterrow="true">
             </JqxGrid>
             
         </div>
@@ -76,7 +76,7 @@ export default {
                 { name: 'tinh_trang_khach_hang', type: 'number' },
                 { name: 'created_at', type: 'date'}
             ],
-            url: this.$store.state.config.API_URL+ 'customers?api_token='+this.$cookies.get('token'),
+            url: this.$store.state.config.API_URL + 'customers?api_token='+this.$cookies.get('token'),
             
             }
     },

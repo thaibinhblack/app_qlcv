@@ -69,7 +69,7 @@ export default {
                 {text: 'Mô tả', datafield: 'mo_ta_du_an', width: 240},
                 {text: 'Ghi chú', datafield: 'ghi_chu_du_an', width: 240, },
                 {text: 'Trạng thái', datafield: 'trang_thai_du_an', width: 50, filtertype: 'checkedlist', hidden: true},
-                {text: 'Trạng Thái', datafield: 'ten_trang_thai', width: 150},
+                {text: 'Trạng Thái', datafield: 'ten_trang_thai', width: 100},
                 {text: 'Ngày tạo', datafield: 'created_at', width: 240},
                 {text: 'Ngày cập nhật', datafield: 'updated_at', width: 240}
             ],

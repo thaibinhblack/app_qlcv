@@ -57,7 +57,7 @@ export default {
     {
         return {
             customer: {
-                trang_thai_kh: 1
+                tinh_trang_khach_hang: 1
             }
         }
     },
@@ -76,7 +76,7 @@ export default {
             customer.append("DIA_CHI_KH",this.customer.dia_chi_kh)
             customer.append("SDT_KH",this.customer.sdt_kh);
             customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien)
-            customer.append("TRANG_THAI_KH",this.customer.trang_thai_kh);
+            customer.append("TRANG_THAI_KH",this.customer.tinh_trang_khach_hang);
             const app = this;
             this.axios.post(this.$store.state.config.API_URL +'customer?api_token='+this.$cookies.get('token'),customer).then((response) => {
                 app.customer = {
@@ -107,10 +107,10 @@ export default {
             customer.append("TEN_KH",this.customer.ten_kh);
             customer.append("DIA_CHI_KH",this.customer.dia_chi_kh)
             customer.append("SDT_KH",this.customer.sdt_kh);
-            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien)
-            customer.append("TRANG_THAI_KH",this.customer.trang_thai_kh);
+            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien_kh)
+            customer.append("TRANG_THAI_KH",this.customer.tinh_trang_khach_hang);
             const app = this;
-            if(!this.customer.trang_thai_kh)
+            if(!this.customer.tinh_trang_khach_hang)
             {
                 app.$buefy.notification.open({
                     duration: 1500,

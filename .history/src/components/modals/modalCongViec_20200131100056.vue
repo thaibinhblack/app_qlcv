@@ -231,8 +231,6 @@
           <nav class="col-sm-12" style="padding: 15px;">
             <ul class="list-file">
               <li v-for="(file,index) in files" :key="index"> {{file.name}} </li>
-              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17,-1)}} </a> </li>
-              <!-- <li> </li> -->
             </ul>
           </nav>
       </div>
@@ -290,7 +288,7 @@ export default {
     },
     computed:{
       ...mapGetters(["getUser", "getTaskEdit", "GROUP_LCV", "LIST_DUAN", "LIST_DUAN_KH", "GROUP_LCV", 
-      "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE"]),
+      "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER"]),
       nguoi_tham_dinh()
       {
         if(this.cong_viec.nguoi_tham_dinh != null)
@@ -464,17 +462,14 @@ export default {
       toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
         this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
       },
-      api_files()
-      {
-        this.$store.dispatch("getFile",this.cong_viec.id_cv_da)
-      },
+
       api_up_file()
       {
+         console.log(this.cong_viec)
          this.$store.dispatch('uploadFile',{
           P_ID_CV_DA: this.cong_viec.id_cv_da,
           FILE_CV: this.$refs.file_cv.files
         })
-        this.files = []
       },
       up_files()
       {
@@ -514,7 +509,6 @@ export default {
   
         }
         this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an);
-        this.api_files()
       // this.api_du_an()
       // this.api_users()
       // this.api_users_giaoviec()
