@@ -139,7 +139,7 @@
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
                   <b-field>
-                    <b-input  type="number" :disabled="check_disabled" min="0" max="100"  v-model="cong_viec.tien_do" required placeholder="Tiến độ" ></b-input>
+                    <b-input  type="number" :disabled="check_disabled"  v-model="cong_viec.tien_do" required placeholder="Tiến độ" ></b-input>
                   </b-field>
                 </div>
                 <div class="col-sm-5">
