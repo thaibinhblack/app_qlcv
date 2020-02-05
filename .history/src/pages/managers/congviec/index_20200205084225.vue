@@ -31,10 +31,7 @@
                 <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
                 <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
             </div>  
-        </b-tab-item>
-        <b-tab-item label="LIST">
-            <data-list-congviec />
-        </b-tab-item>
+        </b-tab-item    >
     </b-tabs>
 
     <b-modal :active.sync="isModalEdit" :width="'100%'" :can-cancel="false">
@@ -88,8 +85,7 @@ export default {
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
         'modal-gia-han': () => import('@/components/modals/modalGiaHanThoiGian.vue'),
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),
-        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
-        'data-list-congviec': () => import('./dataListCongViec.vue')
+        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue')
     },
     data()
     {

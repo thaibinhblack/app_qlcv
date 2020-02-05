@@ -46,13 +46,9 @@ export default {
     {
         state.list_file = LIST_FILE
     },
-    ADD_FILE(state,file)
+    ADD_FILE(state,NAME_FILE)
     {
-        state.list_file.push({
-            id_file_cv: file.id,
-            id_cv_da: file.id_cv_da,
-            url_file: '/upload/congviec/'+file.name
-        })
-        // console.log(state.list_file)
+        state.list_file.push('/upload/congviec/'+NAME_FILE)
+        console.log(state.list_file)
     }
 }

@@ -77,7 +77,7 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
             <div class="col-sm-8">
-                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER_GIAOVIEC" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -240,7 +240,7 @@
           <nav class="col-sm-12" style="padding: 15px;">
             <ul class="list-file">
               <li v-for="(file,index) in files" :key="index"> {{file.name}} </li>
-              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17)}} </a> </li>
+              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17,-1)}} </a> </li>
               <!-- <li> </li> -->
             </ul>
           </nav>
@@ -493,6 +493,9 @@ export default {
          this.$store.dispatch('uploadFile',{
           P_ID_CV_DA: this.cong_viec.id_cv_da,
           FILE_CV: this.$refs.file_cv.files
+        }).then((response) => {
+            console.log(response)
+            this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
         })
         this.files = []
       },
@@ -546,5 +549,5 @@ export default {
 
 <style scoped>
 .multiselect__option--highlight {margin-left: 35px !important;}
-.list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
+.list-file>li {padding: 5px 0;}
 </style>

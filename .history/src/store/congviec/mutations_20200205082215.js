@@ -53,6 +53,6 @@ export default {
             id_cv_da: file.id_cv_da,
             url_file: '/upload/congviec/'+file.name
         })
-        // console.log(state.list_file)
+        console.log(state.list_file)
     }
 }

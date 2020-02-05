@@ -77,7 +77,7 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
             <div class="col-sm-8">
-                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER_GIAOVIEC" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -240,7 +240,7 @@
           <nav class="col-sm-12" style="padding: 15px;">
             <ul class="list-file">
               <li v-for="(file,index) in files" :key="index"> {{file.name}} </li>
-              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17)}} </a> </li>
+              <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17,-1)}} </a> </li>
               <!-- <li> </li> -->
             </ul>
           </nav>
@@ -530,12 +530,13 @@ export default {
           this.axios.get(this.$store.state.config.API_URL + 'user/'+this.getTaskEdit.nguoi_nhap).then((response) => {
             this.nguoi_nhap = response.data
           })
-          this.cong_viec.tien_do = parseInt(this.getTaskEdit.tien_do)
           this.cong_viec = this.getTaskEdit
           this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
           this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
         }
-        this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
+        this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an).then((response) => {
+          console.log(response)
+        });
         this.api_files()
       // this.api_du_an()
       // this.api_users()
@@ -546,5 +547,5 @@ export default {
 
 <style scoped>
 .multiselect__option--highlight {margin-left: 35px !important;}
-.list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
+.list-file>li {padding: 5px 0;}
 </style>

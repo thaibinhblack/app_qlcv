@@ -31,18 +31,15 @@
                 <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
                 <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
             </div>  
-        </b-tab-item>
-        <b-tab-item label="LIST">
-            <data-list-congviec />
-        </b-tab-item>
+        </b-tab-item    >
     </b-tabs>
 
     <b-modal :active.sync="isModalEdit" :width="'100%'" :can-cancel="false">
-      <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
+      <p class="background" style="padding:15px;">Danh mục công việc</p>
         <modal-congviec :isActiveModal="isActiveModal" />
     </b-modal >
     <b-modal :active.sync="isModalBaoCao" :width="'800px'" :can-cancel="false">
-        <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="$store.dispatch('updateModalBaoCao',false)" ></b-button></p>
+        <p class="background">Danh mục báo cáo</p>
         <modal-baocao  />
     </b-modal>
     <b-modal :active.sync="isActiveModalGiaHan">
@@ -50,7 +47,7 @@
     </b-modal>
     <b-modal :active.sync="isModalTime" :width="'500px'" :can-cancel="false">
         <div class="card" >
-            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalTime = false" ></b-button>   </p>
+            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" >Close</b-button>   </p>
              
             <form class="form-rule" style="padding:15px;" @submit.prevent="search_congviec()">
                 <div class="form-group row">
@@ -88,8 +85,7 @@ export default {
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
         'modal-gia-han': () => import('@/components/modals/modalGiaHanThoiGian.vue'),
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),
-        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
-        'data-list-congviec': () => import('./dataListCongViec.vue')
+        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue')
     },
     data()
     {
@@ -174,11 +170,6 @@ export default {
         {
             this.$store.dispatch('fetchCongViec',this.time)
             this.isModalTime = false
-        },
-        close()
-        {
-            this.$store.dispatch("updateModalEdit",false)
-            this.$store.dispatch("resetCongViecEdit")
         }
     },
     created()
@@ -192,7 +183,7 @@ export default {
 <style>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
 .list-group {min-height: 50px;max-height: 420px;overflow: hidden;overflow-y: scroll;height: 420px;padding: 5px;}
-.card-title {padding: 5px; background: #209cee;color: #fff; line-height: 35px}
+.card-title {padding: 5px; background: #209cee;color: #fff;}
 /* .card-task {padding: 10px;} */
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}
@@ -235,5 +226,4 @@ export default {
 .item-filter {margin: 7px 0;}
 .item-filter * {width: 100% !important;}
 .item-filter span.select, .item-filter span.select select {width: 100% !important;}
-.btn-close {background: transparent !important;color: #fff;float: right;border: none}
 </style>

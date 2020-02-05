@@ -77,7 +77,7 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Người giao việc</label>
             <div class="col-sm-8">
-                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                <multiselect  :show-labels="false"  :disabled="check_disabled" v-model="selected_user_giaoviec" :options="LIST_USER_GIAOVIEC" label="display_name" track-by="id_nd" ></multiselect>
             </div>
           </div>
           <div class="form-group row">        
@@ -546,5 +546,5 @@ export default {
 
 <style scoped>
 .multiselect__option--highlight {margin-left: 35px !important;}
-.list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
+.list-file>li {padding: 5px 0;display: inline-block;width: 50%l}
 </style>

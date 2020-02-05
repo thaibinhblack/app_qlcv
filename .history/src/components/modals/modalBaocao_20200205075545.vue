@@ -10,12 +10,12 @@
             </div>
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-5 col-md-3 col-form-label" >Tiến độ ({{getTaskEdit.tien_do}}%)</label>
-                <div class="col-sm-3 col-md-2">
+                <div class="col-sm-3 col-md-3">
                     <b-field>
-                        <b-input type="number" v-model="getTaskEdit.tien_do" min="0" max="100"> </b-input>
+                        <b-input type="number"></b-input>
                     </b-field>
                 </div>
-                <div class="col-sm-4 col-md-7">
+                <div class="col-sm-4 col-md-6">
                     <b-field>
                       <b-slider type="is-success" v-model="getTaskEdit.tien_do" :custom-formatter="val => val + '%'"></b-slider>
                     </b-field>
@@ -52,21 +52,6 @@
                 </div>
             </div>
     </b-tab-item>
-    <b-tab-item label="File báo cáo">
-        <div class="row">
-            <nav class="col-sm-12" style="padding: 15px;">
-                <ul class="list-file">
-                <li v-for="(file,index) in files" :key="index"> {{file.name}} </li>
-                <li v-for="(file,index) in LIST_FILE" :key="index"> {{file.CREATED_AT}} <a target="_blank" :href="$store.state.config.PUBLIC_URL + file.url_file"> {{file.url_file.slice(17)}} </a> </li>
-                <!-- <li> </li> -->
-                </ul>
-            </nav>
-        </div>
-        <div>
-            <input ref="file_cv" type="file" multiple @change="up_files()">
-            <b-button @click="api_up_file()">Lưu file</b-button>
-        </div>
-    </b-tab-item>
 </b-tabs>
 </template>
 
@@ -78,13 +63,12 @@ export default {
     {
         return {
             noidung: "",
-            congviec: [],
-            files: []
+            congviec: []
         }
     },
     computed:
     {
-        ...mapGetters(["getTaskEdit", "INFO_USER", "LIST_BAOCAO", "LIST_FILE"])
+        ...mapGetters(["getTaskEdit", "INFO_USER", "LIST_BAOCAO"])
     },
     methods: {
         api_bao_cao()
@@ -129,22 +113,6 @@ export default {
                 }
             })
         },
-        api_files()
-        {
-            this.$store.dispatch("getFile",this.getTaskEdit.id_cv_da)
-        },
-        api_up_file()
-        {
-            this.$store.dispatch('uploadFile',{
-            P_ID_CV_DA: this.getTaskEdit.id_cv_da,
-            FILE_CV: this.$refs.file_cv.files
-            })
-            this.files = []
-        },
-        up_files()
-        {
-            this.files = this.$refs.file_cv.files
-        }
     },
     created()
     {
@@ -153,9 +121,4 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.list-file { width: 100%;}
-.list-file>li {padding: 5px 0;display: inline-block;width: 50%;overflow: hidden; padding: 5px 7px;}
-</style>
         
