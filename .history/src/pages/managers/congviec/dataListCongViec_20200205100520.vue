@@ -27,9 +27,9 @@
                      <b-table-column label="Tiến độ" centered>
                         {{props.row.tien_do}}%
                     </b-table-column>
-                    <b-table-column width="120">
-                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
-                        <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
+                    <b-table-column>
+                        <b-button icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
+                        <b-button icon-left="update"  @click="$store.dispatch('openGiaHan',element.id_cv_da)"></b-button>
                     </b-table-column>
                  </template>
             </b-table>
@@ -45,6 +45,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-.btn-action {float: left; margin-left: 5px}
-</style>
