@@ -71,7 +71,16 @@
                 <div class="form-group row">
                     <label for="inputNgaySinh" class="col-sm-3 col-form-label" >Ngày sinh</label>
                     <div class="col-sm-9">
+                        {{user.ngay_sinh_nd}}
                         <b-field >
+                            <!-- <b-datepicker
+                                :show-week-number="showWeekNumber"
+                                placeholder="Nhập ngày sinh"
+                                v-model="user.ngay_sinh_nd"
+                                @date-formatter="formatter(date)"
+                                style="z-index:9999"
+                                icon="calendar-today">
+                            </b-datepicker> -->
                             <b-input type="date" v-model="user.ngay_sinh_nd"></b-input>
                         </b-field>
                  </div>

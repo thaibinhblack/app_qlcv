@@ -111,7 +111,7 @@ export default {
                 reject(error)
             })
         })
-    },
+    }
 //UPLOAD FILE CONG VIỆC
     uploadFile({commit},form_file)
     {   

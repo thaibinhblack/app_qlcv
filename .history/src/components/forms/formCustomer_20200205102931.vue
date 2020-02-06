@@ -31,7 +31,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Tình trạng chức năng</label>
             <div class="col-sm-8">
                 <b-field>
-                    <b-select v-model="customer.trang_thai_kh" >
+                    <b-select v-model="customer.tinh_trang_khach_hang" >
                         
                         <option value="1" selected>Đang hoạt động</option>
                         <option value="2">Đang bảo trì</option>
@@ -57,17 +57,14 @@ export default {
     {
         return {
             customer: {
-                trang_thai_kh: 1,
-                ten_kh: "",
-                dia_chi_kh: "",
-                sdt_kh: "",
-                nguoi_dai_dien: ""
+                trang_thai_kh: 1
             }
         }
     },
     watch: {
         customer_edit(newVal)
         {
+            console.log(newVal)
             this.customer = newVal
         }
     },
@@ -84,11 +81,7 @@ export default {
             const app = this;
             this.axios.post(this.$store.state.config.API_URL +'customer?api_token='+this.$cookies.get('token'),customer).then((response) => {
                 app.customer = {
-                    trang_thai_kh: 1,
-                    ten_kh: "",
-                    dia_chi_kh: "",
-                    sdt_kh: "",
-                    nguoi_dai_dien: ""
+                    trang_thai_kh: 1
                 }
                 const type = response.data.success == true ? 'is-success' : 'is-danger'
                 app.$buefy.notification.open({

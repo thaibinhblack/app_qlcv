@@ -51,11 +51,8 @@
         <b-button icon-left="plus" @click="openModalEdit()" class="btn-add-task">Thêm công việc mới</b-button>
         </b-field>
     </div>
-    <b-modal :active.sync="isModalDelete" :width="'300px'" :can-cancel="false">
-        <div class="warnning">
-            <p class="background">Bạn có chắc xóa công việc này? <b-button icon-left="close" class="btn btn-close"></b-button></p>
-            <b-button color="primary" class="success">Chấp nhận</b-button> <b-button color="warning">Hủy bỏ</b-button>
-        </div>
+    <b-modal :active.sync="isModalDelete">
+        123123
     </b-modal>
 </div>
 </template>
@@ -64,12 +61,6 @@
 import draggable from "vuedraggable";
 export default {
     props: ["list_congviec", "title"],
-    data()
-    {
-        return {
-            isModalDelete: false
-        }
-    },
     components: {
         draggable
     },
@@ -78,10 +69,6 @@ export default {
         openModalEdit()
         {
             this.$store.dispatch("updateModalEdit",true)        
-        },
-        deleteCongViec($id)
-        {
-            this.isModalDelete = true
         }
     }
 }

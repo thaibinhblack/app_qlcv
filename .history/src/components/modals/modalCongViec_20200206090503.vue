@@ -19,7 +19,7 @@
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" :disabled="check_disabled"
-                  :multiple="true" :taggable="true" @tag="addTag"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
+                  :multiple="Object.entries(this.getTaskEdit).length <= 5 || Object.entries(this.getTaskEdit).length === 0" :taggable="true" @tag="addTag"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
                 </b-field>
               </div>
           </div>

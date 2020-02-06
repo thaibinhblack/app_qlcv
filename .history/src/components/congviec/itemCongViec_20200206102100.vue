@@ -51,10 +51,9 @@
         <b-button icon-left="plus" @click="openModalEdit()" class="btn-add-task">Thêm công việc mới</b-button>
         </b-field>
     </div>
-    <b-modal :active.sync="isModalDelete" :width="'300px'" :can-cancel="false">
+    <b-modal :active.sync="isModalDelete" :width="'150px'" :can-cancel="false">
         <div class="warnning">
-            <p class="background">Bạn có chắc xóa công việc này? <b-button icon-left="close" class="btn btn-close"></b-button></p>
-            <b-button color="primary" class="success">Chấp nhận</b-button> <b-button color="warning">Hủy bỏ</b-button>
+            <p class="background">Bạn có chắc xóa công việc này?</p>
         </div>
     </b-modal>
 </div>

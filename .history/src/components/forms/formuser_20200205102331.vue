@@ -71,7 +71,16 @@
                 <div class="form-group row">
                     <label for="inputNgaySinh" class="col-sm-3 col-form-label" >Ngày sinh</label>
                     <div class="col-sm-9">
+                        {{user.ngay_sinh_nd}}
                         <b-field >
+                            <!-- <b-datepicker
+                                :show-week-number="showWeekNumber"
+                                placeholder="Nhập ngày sinh"
+                                v-model="user.ngay_sinh_nd"
+                                @date-formatter="formatter(date)"
+                                style="z-index:9999"
+                                icon="calendar-today">
+                            </b-datepicker> -->
                             <b-input type="date" v-model="user.ngay_sinh_nd"></b-input>
                         </b-field>
                  </div>
@@ -208,7 +217,7 @@ export default {
             user.append("EMAIL_ND",this.user.email_nd)
             user.append("GOITINH_ND",this.user.gt_nd)
             user.append("P_ID_RULE",this.user.id_rule)
-            user.append("NGAY_SINH",this.user.ngay_sinh_nd)
+            user.append("NGAY_SINH",this.user.ngay_sinh_nd.getDate() +'-'+this.user.ngay_sinh_nd.getMonth() + '-' + this.user.ngay_sinh_nd.getFullYear())
             const app = this;
             this.axios.post(this.$store.state.config.API_URL + 'user/'+this.user.id_nd+'?api_token='+this.$cookies.get('token'),user).then((response) => {
                 app.$emit('createUser',true)

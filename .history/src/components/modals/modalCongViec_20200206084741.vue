@@ -10,7 +10,7 @@
                 <b-field>
                   <multiselect v-model="selected_du_an" :options="LIST_DUAN" label="ten_du_an" :disabled="check_disabled" 
                   track-by="ten_du_an" placeholder="Danh sách dự án"
-                  :multiple="false"  :show-labels="false" ></multiselect>
+                  :multiple="false"  :show-labels="false"></multiselect>
                 </b-field>
               </div> 
          </div>
@@ -19,7 +19,7 @@
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" :disabled="check_disabled"
-                  :multiple="true" :taggable="true" @tag="addTag"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
+                  :multiple="true" :taggable="true"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
                 </b-field>
               </div>
           </div>
@@ -470,9 +470,9 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
+    
       toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
-        console.log(ten_du_an_kh, id_du_an_kh)
-        // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
+        this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
       },
       api_files()
       {

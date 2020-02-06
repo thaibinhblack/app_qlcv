@@ -38,25 +38,24 @@ export default {
                     {text: 'Địa chỉ KH', datafield: 'dia_chi_kh', width: 240},
                     {text: 'SĐT KH', datafield: 'sdt_kh', width: 240},
                     {text: 'Người đại diện KH', datafield: 'nguoi_dai_dien', width: 240},
-                    // {text: 'Tình trạng KH', datafield: 'trang_thai_kh', width: 240},
-                    {text: 'Tình trạng KHc', datafield: 'trang_thai_kh', width: 150, cellsrenderer: (index, datafield, value, defaultvalue, column, rowdata) => { 
+                    // {text: 'Tình trạng KH', datafield: 'tinh_trang_khach_hang', width: 240},
+                    {text: 'Tình trạng KHc', datafield: 'tinh_trang_kh', width: 150, cellsrenderer: (index, datafield, value, defaultvalue, column, rowdata) => { 
                     // return '<div class="color" style="width:20px;height:20px;background:'+rowdata.color_status+';margin:auto;margin-top:7px;"></div>'
-                        if(rowdata.trang_thai_kh == 1)
+                        if(rowdata.tinh_trang_kh == 1)
                         {
                             return 'Đang hoạt động';
                         }
-                        else if(rowdata.trang_thai_kh == 2)
+                        else if(rowdata.tinh_trang_kh == 2)
                         {
                             return 'Đang bão trì'
                         }
-                        else if(rowdata.trang_thai_kh == 3)
+                        else if(rowdata.tinh_trang_kh == 3)
                         {
                             return 'Ngừng hoạt động'
                         }
                         else
                         {
-                            console.log(rowdata)
-                            return rowdata.trang_thai_kh + 'Chưa có trạng thái'
+                            return 'Chưa có trạng thái'
                         }
                      }},
                     {text: 'Ngày tạo', datafield: 'created_at', width: 120, cellsrenderer: (index, datafield, value, defaultvalue, column, rowdata) => {  
@@ -91,7 +90,7 @@ export default {
                         { name: 'dia_chi_kh', type: 'string' },
                         { name: 'sdt_kh' ,type: 'string'},
                         { name: 'nguoi_dai_dien', type: 'string' },
-                        { name: 'trang_thai_kh', type: 'number' },
+                        { name: 'tinh_trang_kh', type: 'number' },
                         { name: 'created_at', type: 'date'}
                     ],
                     url: this.$store.state.config.API_URL+ 'customers?api_token='+this.$cookies.get('token'),
@@ -111,7 +110,7 @@ export default {
                 { name: 'dia_chi_kh', type: 'string' },
                 { name: 'sdt_kh' ,type: 'string'},
                 { name: 'nguoi_dai_dien', type: 'string' },
-                { name: 'trang_thai_kh', type: 'number' },
+                { name: 'tinh_trang_khach_hang', type: 'number' },
                 { name: 'created_at', type: 'date'}
             ],
             url: this.$store.state.config.API_URL+ 'customers?api_token='+this.$cookies.get('token'),

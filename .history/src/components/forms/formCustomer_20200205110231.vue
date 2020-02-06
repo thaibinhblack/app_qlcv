@@ -57,11 +57,7 @@ export default {
     {
         return {
             customer: {
-                trang_thai_kh: 1,
-                ten_kh: "",
-                dia_chi_kh: "",
-                sdt_kh: "",
-                nguoi_dai_dien: ""
+                trang_thai_kh: 1
             }
         }
     },
@@ -84,11 +80,7 @@ export default {
             const app = this;
             this.axios.post(this.$store.state.config.API_URL +'customer?api_token='+this.$cookies.get('token'),customer).then((response) => {
                 app.customer = {
-                    trang_thai_kh: 1,
-                    ten_kh: "",
-                    dia_chi_kh: "",
-                    sdt_kh: "",
-                    nguoi_dai_dien: ""
+                    trang_thai_kh: 1
                 }
                 const type = response.data.success == true ? 'is-success' : 'is-danger'
                 app.$buefy.notification.open({

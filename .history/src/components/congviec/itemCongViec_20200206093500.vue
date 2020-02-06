@@ -19,10 +19,10 @@
                 
                 <b-button icon-left="more" class="btn-more" >   
                     <ul class="list-action" >
-                        <li @click="$store.dispatch('openTask',element.id_cv_da)">Xem thông tin công việc</li>
-                        <li @click="$store.dispatch('openGiaHan',element.id_cv_da)">Gia hạn công việc</li>
-                        <li @click="$store.dispatch('openBaoCao',element.id_cv_da)">Báo cáo tiến độ</li>
-                        <li @click="deleteCongViec(element.id_cv_da)">Xóa công việc</li>
+                    <li @click="$store.dispatch('openTask',element.id_cv_da)">Xem thông tin công việc</li>
+                    <li @click="$store.dispatch('openGiaHan',element.id_cv_da)">Gia hạn công việc</li>
+                    <li @click="$store.dispatch('openBaoCao',element.id_cv_da)">Báo cáo tiến độ</li>
+                    <li @click="$store.dispatch('deleteCongViec',element.id_cv_da)">Xóa công việc</li>
                     
                     </ul>
                 </b-button>
@@ -51,12 +51,6 @@
         <b-button icon-left="plus" @click="openModalEdit()" class="btn-add-task">Thêm công việc mới</b-button>
         </b-field>
     </div>
-    <b-modal :active.sync="isModalDelete" :width="'300px'" :can-cancel="false">
-        <div class="warnning">
-            <p class="background">Bạn có chắc xóa công việc này? <b-button icon-left="close" class="btn btn-close"></b-button></p>
-            <b-button color="primary" class="success">Chấp nhận</b-button> <b-button color="warning">Hủy bỏ</b-button>
-        </div>
-    </b-modal>
 </div>
 </template>
 
@@ -64,12 +58,6 @@
 import draggable from "vuedraggable";
 export default {
     props: ["list_congviec", "title"],
-    data()
-    {
-        return {
-            isModalDelete: false
-        }
-    },
     components: {
         draggable
     },
@@ -78,10 +66,6 @@ export default {
         openModalEdit()
         {
             this.$store.dispatch("updateModalEdit",true)        
-        },
-        deleteCongViec($id)
-        {
-            this.isModalDelete = true
         }
     }
 }

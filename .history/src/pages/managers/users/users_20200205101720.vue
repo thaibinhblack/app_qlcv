@@ -42,7 +42,7 @@ import { mapGetters } from 'vuex';
     export default {
         components: {
             JqxGrid,
-            // 'modal-user': () => import('@/components/modals/modaluser.vue'),
+            'modal-user': () => import('@/components/modals/modaluser.vue'),
             'form-user': () => import('@/components/forms/formuser.vue'),
             
         },

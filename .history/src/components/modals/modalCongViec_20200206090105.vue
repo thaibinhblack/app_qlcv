@@ -470,9 +470,13 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
+      addTag(newTag)
+      {
+        console.log('new tag',newTag)
+      },  
       toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
         console.log(ten_du_an_kh, id_du_an_kh)
-        // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
+        this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
       },
       api_files()
       {
