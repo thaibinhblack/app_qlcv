@@ -23,19 +23,26 @@
     <b-modal :active.sync="isModalFilter" :width="'500px'" > 
         <model-filter-cv :hinhthuc_loc="hinhthuc_loc" :my_info="my_info" :time="time"/>
     </b-modal>
-    <div class="row layout-task" style="margin-top: 10px;">
-        <item-task :list_congviec="list1" :title="'Công việc chưa phân công'" :status="1" />
-        <item-task :list_congviec="list2" :title="'Công việc đang làm'" :status="2" />
-        <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
-        <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
-    </div>  
+    <b-tabs>
+        <b-tab-item label="TASK" >
+            <div class="row layout-task" >
+                <item-task :list_congviec="list1" :title="'Công việc chưa phân công'" :status="1" />
+                <item-task :list_congviec="list2" :title="'Công việc đang làm'" :status="2" />
+                <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
+                <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
+            </div>  
+        </b-tab-item>
+        <b-tab-item label="LIST">
+            <data-list-congviec />
+        </b-tab-item>
+    </b-tabs>
 
-    <b-modal :active.sync="isModalEdit" :width="'1100px'" :can-cancel="false">
-      <p class="background" style="padding:15px;">Danh mục công việc</p>
+    <b-modal :active.sync="isModalEdit" :width="'100%'" :can-cancel="false">
+      <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
         <modal-congviec :isActiveModal="isActiveModal" />
     </b-modal >
     <b-modal :active.sync="isModalBaoCao" :width="'800px'" :can-cancel="false">
-        <p class="background">Danh mục báo cáo</p>
+        <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="$store.dispatch('updateModalBaoCao',false)" ></b-button></p>
         <modal-baocao  />
     </b-modal>
     <b-modal :active.sync="isActiveModalGiaHan">
@@ -43,7 +50,8 @@
     </b-modal>
     <b-modal :active.sync="isModalTime" :width="'500px'" :can-cancel="false">
         <div class="card" >
-            <p class="background">Thời gian công việc</p>
+            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalTime = false" ></b-button>   </p>
+             
             <form class="form-rule" style="padding:15px;" @submit.prevent="search_congviec()">
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-4 col-form-label" >Thời gian bắt đầu</label>
@@ -80,7 +88,8 @@ export default {
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
         'modal-gia-han': () => import('@/components/modals/modalGiaHanThoiGian.vue'),
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),
-        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue')
+        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
+        'data-list-congviec': () => import('./dataListCongViec.vue')
     },
     data()
     {
@@ -165,6 +174,11 @@ export default {
         {
             this.$store.dispatch('fetchCongViec',this.time)
             this.isModalTime = false
+        },
+        close()
+        {
+            this.$store.dispatch("updateModalEdit",false)
+            this.$store.dispatch("resetCongViecEdit")
         }
     },
     created()
@@ -178,7 +192,7 @@ export default {
 <style>
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
 .list-group {min-height: 50px;max-height: 420px;overflow: hidden;overflow-y: scroll;height: 420px;padding: 5px;}
-.card-title {padding: 5px; background: #209cee;color: #fff;}
+.card-title {padding: 5px; background: #209cee;color: #fff; line-height: 35px}
 /* .card-task {padding: 10px;} */
 #page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}
@@ -201,7 +215,7 @@ export default {
 .list-group-item {position: relative;padding: 20px 5px 0 5px;;margin-top: 15px;}
 
 .list-group-item.error {border-left: 7px solid red;}
-.list-action {position: absolute;right: 0px;bottom: -60px;z-index: 9999;background: #fff;display: none;}
+.list-action {position: absolute;right: 0px;top: 0;z-index: 9999;background: #fff;display: none;}
 .list-action li {padding: 10px 15px;border: 1px solid #e2e2e2;border-bottom: none;cursor: pointer;}
 .list-action li:hover {background-color: #e2e2e2}
 .list-action li:last-child() {border-bottom: 1px solid #e2e2e2;}
@@ -221,4 +235,5 @@ export default {
 .item-filter {margin: 7px 0;}
 .item-filter * {width: 100% !important;}
 .item-filter span.select, .item-filter span.select select {width: 100% !important;}
+.btn-close {background: transparent !important;color: #fff;float: right;border: none}
 </style>

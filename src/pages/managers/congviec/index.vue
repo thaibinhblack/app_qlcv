@@ -184,6 +184,23 @@ export default {
     created()
     {
         axios.defaults.params.api_token = this.$cookies.get('token');
+        if(!this.$cookies.isKey('token'))
+        {
+            this.$router.push('/login')
+        }
+        else
+        {
+            this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
+                    // this.user = response.data[0]
+                    
+                    // console.log(Object.entries(response.data).length)
+                    if(Object.entries(response.data).length === 0)
+                    {
+                        this.$cookies.remove('token')
+                        this.$router.push('/login')
+                    }
+            })
+        }
         this.$store.dispatch('GET_INFO_USER');       
     }
 }
@@ -215,7 +232,7 @@ export default {
 .list-group-item {position: relative;padding: 20px 5px 0 5px;;margin-top: 15px;}
 
 .list-group-item.error {border-left: 7px solid red;}
-.list-action {position: absolute;right: 0px;bottom: -60px;z-index: 9999;background: #fff;display: none;}
+.list-action {position: absolute;right: 0px;top: 0;z-index: 9999;background: #fff;display: none;}
 .list-action li {padding: 10px 15px;border: 1px solid #e2e2e2;border-bottom: none;cursor: pointer;}
 .list-action li:hover {background-color: #e2e2e2}
 .list-action li:last-child() {border-bottom: 1px solid #e2e2e2;}

@@ -1,9 +1,9 @@
 <template>
-<div class="columns" style="height:100%">
-    <div id="sidebar" class="column  sidebar-left is-2" style="background: #e9ebee;padding:15px 0;height:100%;padding-left:15px;">
+<div class="row" style="height:100%">
+    <div id="sidebar" class="col-md-3 col-lg-2" style="background: #e9ebee;padding:15px 0;height:100%;padding-left:15px;">
         <sidebar-left :user="user" />
     </div>
-    <div class="column  is-10">
+    <div class="col-md-9 col-lg-10">
         
         <router-view></router-view>
     </div>
@@ -11,10 +11,10 @@
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex'
+import axios from '@/axios';
 export default {
     components: {
         'sidebar-left': () => import('@/components/sidebars/sidebardleft.vue'),
-        'tool-header': () => import('@/components/sidebars/toolheader.vue')
     },
     data()
     {
@@ -23,20 +23,30 @@ export default {
             user: {}
         }
     },
+    computed:{
+        ...mapGetters(["loading"])
+    },
+    watch:
+    {
+        loading(val)
+        {
+            if(val == true)
+            {
+                this.$buefy.loading.open()
+            }
+            else
+            {
+                this.$buefy.loading.close()
+            }
+        }
+    },
     methods:{
-        ...mapActions(["commitAction_user", "commitAction_rule", "commitUser", "commitAction_customers", "commitAction_danhmuc","commitAction_projects"]),
+        ...mapActions(["commitAction_user", "commitAction_rule", "commitUser", "commitAction_customers", "commitAction_danhmuc",
+        "commitAction_projects", "commitAction_laoicv", "commit_dataset_congviec"]),
         api_function()
         {
             this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
-                // console.log(response.dât)
-                this.user = response.data
-                if(!this.user.id_rule)
-                {
-                    this.$cookies.remove('token')
-                    this.$router.push('/login')
-                }
                 this.axios.get(this.$store.state.config.API_URL + 'function_user?ID_ND'+response.data.id_nd).then((response) => {
-                   console.log(response.data)
                    response.data.results.forEach(result => {
                        if(result.ID_FUNCTION == 3)
                        {
@@ -55,20 +65,17 @@ export default {
             })
         },
         api_get_token(){
+            axios.defaults.params.api_token= this.$cookies.get('token')
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-                if(!response.data[0].id_rule)
+                this.user = response.data[0]
+                this.user.ngay_sinh_nd = this.user.ngay_sinh_nd.slice(0,10)
+                if(Object.entries(response.data).length == 0)
                 {
-                    this.$cookies.remove('token');
+                    this.$cookies.remove('token')
                     this.$router.push('/login')
                 }
                 this.commitUser(response.data[0])
-                // console.log(response.data)
-                // if(response.data[0].id_rule == 0 )
-                // {
-                //     this.$router.push('/cong-viec')
-                // }
                 this.axios.get(this.$store.state.config.API_URL + 'function_user?api_token='+this.$cookies.get('token')+'&ID_ND='+response.data[0].id_nd).then((response) => {
-                    console.log(response.data)
                     response.data.forEach((rule) => {
                         if(rule.id_cn == 1)
                         {
@@ -120,11 +127,27 @@ export default {
                                 xuat: rule.cn_xuat_file
                             })
                         }
+                        if(rule.id_cn == 6)
+                        {   
+                            this.commitAction_laoicv({
+                                xem: rule.cn_xem,
+                                them: rule.cn_tao,
+                                sua: rule.cn_sua,
+                                xoa: rule.cn_xoa,
+                                xuat: rule.cn_xuat_file
+                            })
+                        }
                     })
                 })
             
             })
-        }
+        },
+        api_loai_cv()
+        {
+            this.axios.get(this.$store.state.config.API_URL + 'thong-ke?api_token='+this.$cookies.get('token')).then((response) => {
+              this.commit_dataset_congviec(response.data)
+            })
+        },
     },
     updated()
     {

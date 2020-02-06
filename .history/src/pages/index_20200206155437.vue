@@ -1,16 +1,17 @@
 <template>
-<div class="columns" style="height:100%">
-    <div id="sidebar" class="column  sidebar-left is-2" style="background: #e9ebee;padding:15px 0;height:100%;padding-left:15px;">
+<div class="row" style="height:100%">
+    <div id="sidebar" class="col-md-3 col-lg-2" style="background: #e9ebee;padding:15px 0;height:100%;padding-left:15px;">
         <sidebar-left :user="user" />
     </div>
-    <div class="column  is-10">
+    <div class="col-md-9 col-lg-10">
         
         <router-view></router-view>
     </div>
 </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
+import axios from '@/axios';
 export default {
     components: {
         'sidebar-left': () => import('@/components/sidebars/sidebardleft.vue'),
@@ -22,8 +23,26 @@ export default {
             user: {}
         }
     },
+    computed:{
+        ...mapGetters(["loading"])
+    },
+    watch:
+    {
+        loading(val)
+        {
+            if(val == true)
+            {
+                this.$buefy.loading.open()
+            }
+            else
+            {
+                this.$buefy.loading.close()
+            }
+        }
+    },
     methods:{
-        ...mapActions(["commitAction_user", "commitAction_rule", "commitUser", "commitAction_customers", "commitAction_danhmuc","commitAction_projects", "commitAction_laoicv"]),
+        ...mapActions(["commitAction_user", "commitAction_rule", "commitUser", "commitAction_customers", "commitAction_danhmuc",
+        "commitAction_projects", "commitAction_laoicv", "commit_dataset_congviec"]),
         api_function()
         {
             this.axios.get(this.$store.state.config.API_URL + 'user?api_token='+this.$cookies.get('token')).then((response) => {
@@ -46,13 +65,17 @@ export default {
             })
         },
         api_get_token(){
+            axios.defaults.params.api_token= this.$cookies.get('token')
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
                 this.user = response.data[0]
-                if(!response.data[0].id_rule)
+                
+                console.log(Object.entries(response.data).length)
+                if(Object.entries(response.data).length == 0)
                 {
-                    this.$cookies.remove('token');
+                    this.$cookies.remove('token')
                     this.$router.push('/login')
                 }
+                this.user.ngay_sinh_nd = this.user.ngay_sinh_nd.slice(0,10)
                 this.commitUser(response.data[0])
                 this.axios.get(this.$store.state.config.API_URL + 'function_user?api_token='+this.$cookies.get('token')+'&ID_ND='+response.data[0].id_nd).then((response) => {
                     response.data.forEach((rule) => {
@@ -120,7 +143,13 @@ export default {
                 })
             
             })
-        }
+        },
+        api_loai_cv()
+        {
+            this.axios.get(this.$store.state.config.API_URL + 'thong-ke?api_token='+this.$cookies.get('token')).then((response) => {
+              this.commit_dataset_congviec(response.data)
+            })
+        },
     },
     updated()
     {

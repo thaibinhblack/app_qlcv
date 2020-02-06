@@ -68,12 +68,14 @@ export default {
             axios.defaults.params.api_token= this.$cookies.get('token')
             this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
                 this.user = response.data[0]
-                this.user.ngay_sinh_nd = this.user.ngay_sinh_nd.slice(0,10)
-                if(response.data.length == 0)
+                
+                console.log(Object.entries(response.data).length)
+                if(Object.entries(response.data).length === 0)
                 {
                     this.$cookies.remove('token')
                     this.$router.push('/login')
                 }
+                this.user.ngay_sinh_nd = this.user.ngay_sinh_nd.slice(0,10)
                 this.commitUser(response.data[0])
                 this.axios.get(this.$store.state.config.API_URL + 'function_user?api_token='+this.$cookies.get('token')+'&ID_ND='+response.data[0].id_nd).then((response) => {
                     response.data.forEach((rule) => {
