@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-4 col-md-3">
                         <div class="avatar">
-                            <img v-if="element.avatar != null" :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
+                            <img :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
                             
                         </div>
                     </div>
@@ -114,7 +114,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.avatar {border-radius: 50%;background: #e2e2e2e2; width: 50px;height: 50px;}
-</style>

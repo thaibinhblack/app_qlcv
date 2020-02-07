@@ -491,10 +491,10 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
-      // toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
-      //   // console.log(ten_du_an_kh, id_du_an_kh)
-      //   // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
-      // },
+      toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
+        // console.log(ten_du_an_kh, id_du_an_kh)
+        // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
+      },
       api_files()
       {
         this.$store.dispatch("getFile",this.cong_viec.id_cv_da)

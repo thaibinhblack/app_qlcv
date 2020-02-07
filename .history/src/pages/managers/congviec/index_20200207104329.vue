@@ -50,7 +50,7 @@
     </b-modal>
     <b-modal :active.sync="isModalTime" :width="'500px'" :can-cancel="false">
         <div class="card" >
-            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="close_modal_time()" ></b-button>   </p>
+            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalTime = false" ></b-button>   </p>
              
             <form class="form-rule" style="padding:15px;" @submit.prevent="search_congviec()">
                 <div class="form-group row">
@@ -99,13 +99,13 @@ export default {
             isActiveModal: false,
             isActiveModalGiaHan: false,
             isModalFilter: false,
-            isModalTime: false,
+            isModalTime: true,
             my_info: {},
             hinhthuc_loc: 0,
             time_start: null,
             time_end: null,
             time: {
-                time_start: new Date(new Date().getFullYear() +'-'+new Date().getMonth()+'-01').toISOString().substr(0,10),
+                time_start: new Date().toISOString().substr(0,10),
                 time_end: new Date().toISOString().substr(0,10)
             },
             list1: [],
@@ -179,11 +179,6 @@ export default {
         {
             this.$store.dispatch("updateModalEdit",false)
             this.$store.dispatch("resetCongViecEdit")
-        },
-        close_modal_time()
-        {
-            
-            this.isModalTime = false
         }
     },
     created()
@@ -204,14 +199,9 @@ export default {
                         this.$cookies.remove('token')
                         this.$router.push('/login')
                     }
-                    else
-                    {
-                        this.$store.dispatch('fetchCongViec',null)
-                    }
             })
         }
-        this.$store.dispatch('GET_INFO_USER');  
-             
+        this.$store.dispatch('GET_INFO_USER');       
     }
 }
 </script>

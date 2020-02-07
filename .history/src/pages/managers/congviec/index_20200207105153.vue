@@ -105,7 +105,7 @@ export default {
             time_start: null,
             time_end: null,
             time: {
-                time_start: new Date(new Date().getFullYear() +'-'+new Date().getMonth()+'-01').toISOString().substr(0,10),
+                time_start: new Date().toISOString().substr(0,10),
                 time_end: new Date().toISOString().substr(0,10)
             },
             list1: [],
@@ -182,7 +182,7 @@ export default {
         },
         close_modal_time()
         {
-            
+            this.$store.dispatch('fetchCongViec',null)
             this.isModalTime = false
         }
     },
@@ -204,14 +204,9 @@ export default {
                         this.$cookies.remove('token')
                         this.$router.push('/login')
                     }
-                    else
-                    {
-                        this.$store.dispatch('fetchCongViec',null)
-                    }
             })
         }
-        this.$store.dispatch('GET_INFO_USER');  
-             
+        this.$store.dispatch('GET_INFO_USER');       
     }
 }
 </script>

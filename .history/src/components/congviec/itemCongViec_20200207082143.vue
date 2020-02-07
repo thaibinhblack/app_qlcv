@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-4 col-md-3">
                         <div class="avatar">
-                            <img v-if="element.avatar != null" :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
+                            <img :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
                             
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                        
                     </div>
                 </div>
-                 <p><small style="font-size: 11px;">{{element.ngay_giao_viec.slice(0,10)}} - {{element.ngay_cam_ket.slice(0,10)}}</small></p>
+                 <p><small>{{element.ngay_giao_viec.slice(0,10)}} - {{element.ngay_cam_ket.slice(0,10)}}</small></p>
                     <b-progress type="is-info"  :value="Math.floor(element.tien_do)" show-value style="margin-top:10px;"></b-progress>
             </div>
             </draggable>
@@ -114,7 +114,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.avatar {border-radius: 50%;background: #e2e2e2e2; width: 50px;height: 50px;}
-</style>

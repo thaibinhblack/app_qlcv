@@ -1,10 +1,10 @@
 <template>
 <div class="card" style="padding:15px;">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm02">
                 <p class="title" style="font-size:16px;text-align: center; padding: 15px 0;text-transform: uppercase;">Bộ lọc công việc</p>
         </div>
-        <div class="col-sm-12 item-filter">
+        <div class="col-sm02 item-filter">
                 <b-field>
                 <b-select v-model="cannhan_selected" expanded>
                     <option value="0"> --Công việc của dự án--</option>
@@ -13,7 +13,7 @@
                 </b-select>
             </b-field>
         </div>
-        <div class="col-sm-12 item-filter">
+        <div class="col-sm02 item-filter">
             <b-field>
                 <b-select v-model="filter.id_du_an" expanded @input="FilterCongViecDuAn()">  
                     <option value="0"> --Tất cả  dự án--</option>
@@ -22,7 +22,7 @@
                 </b-select>
             </b-field>
         </div>
-        <div class="col-sm-12 item-filter">
+        <div class="col-sm02 item-filter">
                 <b-field>
                 <b-select v-model="filter.id_du_an_kh" expanded :disabled="LIST_DUAN_KH.length == 0" @input="$store.dispatch('FilterCongViec',filter)">
                     <option value="0"> --Tất cả  dự án khách hàng--</option>
@@ -31,7 +31,7 @@
             </b-field>
         </div>
         
-        <div class="col-sm-12 item-filter">
+        <div class="col-sm02 item-filter">
             <!-- {{LIST_USER}} -->
             <b-field>
                 <b-select v-model="filter.nguoi_nhan_viec" v-if="my_info.id_rule > 0" expanded>
@@ -41,7 +41,7 @@
                 </b-select>
             </b-field>
         </div>
-            <div class="col-sm-12 item-filter">
+            <div class="col-sm02 item-filter">
             <b-field>
                     <multiselect :options="GROUP_LCV"
                     v-model="selected_lcv"
@@ -56,7 +56,7 @@
                 </multiselect>
             </b-field>
         </div>
-        <div class="col-sm-12 item-filter">
+        <div class="col-sm02 item-filter">
             <b-field>
                 <b-select v-model="hinhthuc_loc" expanded>
                     <option value="0"> --Chọn hình thức lọc theo thời gian--</option>
@@ -68,7 +68,7 @@
                 </b-select>
             </b-field>
         </div>
-        <div class="col-sm-12 item-filter" v-if="hinhthuc_loc != 0">
+        <div class="col-sm02 item-filter" v-if="hinhthuc_loc != 0">
             <b-field>
                 <b-input type="date" v-model="time_start"></b-input>
                 <b-input type="date" style="margin-left: 7px;" v-model="time_end"></b-input>

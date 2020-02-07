@@ -6,8 +6,8 @@
                     <b-table-column label="Tên công việc" :width="240">
                         {{props.row.ten_cv}}
                     </b-table-column>
-                    <b-table-column label="Avatar" :width="100" centered>
-                      <div class="avatar" style="margin:auto">
+                    <b-table-column label="Avatar" :width="50" centered>
+                      <div class="avatar">
                         <!-- {{props.row.avatar}} -->
                         <img :src="$store.state.config.PUBLIC_URL + props.row.avatar" alt="">
                       </div>

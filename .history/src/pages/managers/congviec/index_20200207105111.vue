@@ -99,13 +99,13 @@ export default {
             isActiveModal: false,
             isActiveModalGiaHan: false,
             isModalFilter: false,
-            isModalTime: false,
+            isModalTime: true,
             my_info: {},
             hinhthuc_loc: 0,
             time_start: null,
             time_end: null,
             time: {
-                time_start: new Date(new Date().getFullYear() +'-'+new Date().getMonth()+'-01').toISOString().substr(0,10),
+                time_start: new Date().toISOString().substr(0,10),
                 time_end: new Date().toISOString().substr(0,10)
             },
             list1: [],
@@ -182,8 +182,8 @@ export default {
         },
         close_modal_time()
         {
-            
-            this.isModalTime = false
+            this.$store.dispatch('fetchCongViec',null)
+            // this.isModalTime = false
         }
     },
     created()
@@ -204,14 +204,9 @@ export default {
                         this.$cookies.remove('token')
                         this.$router.push('/login')
                     }
-                    else
-                    {
-                        this.$store.dispatch('fetchCongViec',null)
-                    }
             })
         }
-        this.$store.dispatch('GET_INFO_USER');  
-             
+        this.$store.dispatch('GET_INFO_USER');       
     }
 }
 </script>

@@ -6,14 +6,14 @@
                     <b-table-column label="Tên công việc" :width="240">
                         {{props.row.ten_cv}}
                     </b-table-column>
-                    <b-table-column label="Avatar" :width="100" centered>
-                      <div class="avatar" style="margin:auto">
+                    <b-table-column label="Người nhận việc" :width="50">
+                      <div class="avatar">
                         <!-- {{props.row.avatar}} -->
                         <img :src="$store.state.config.PUBLIC_URL + props.row.avatar" alt="">
                       </div>
                       <span>{{props.row.ten_nnv}}</span>
                     </b-table-column>
-                    <b-table-column label="Nội dung" centered :width="300">
+                    <b-table-column label="Nội dung" centered>
                         {{props.row.noi_dung_cv}}
                     </b-table-column>
                       <b-table-column label="Ngày tiếp nhận" centered>

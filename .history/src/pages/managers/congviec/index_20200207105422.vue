@@ -105,7 +105,7 @@ export default {
             time_start: null,
             time_end: null,
             time: {
-                time_start: new Date(new Date().getFullYear() +'-'+new Date().getMonth()+'-01').toISOString().substr(0,10),
+                time_start: new Date(new Date().getFullYear() +'-'+new Date().getMonth()+1+'-01').toISOString().substr(0,10),
                 time_end: new Date().toISOString().substr(0,10)
             },
             list1: [],

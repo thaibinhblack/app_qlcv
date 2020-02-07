@@ -28,24 +28,22 @@
                 </b-button>
                 <div class="row">
                     <div class="status col-md-12">
-                        <div class="color" style="width:40px;height:10px;float:left;border-radius: 5px;margin-top:5px;margin-right:15px;" :style="{'background': element.color_status != null? element.color_status : '#e2e2e2e2'}" ></div> <span style="font-size:12px;"
-                            :title="element.ten_loai_cv">{{element.ten_loai_cv}}</span>
+                        <div class="color" style="width:40px;height:10px;float:left;border-radius: 5px;margin-top:5px;margin-right:15px;" :style="{'background': element.color_status != null? element.color_status : '#e2e2e2e2'}" ></div> <span style="font-size:12px;">{{element.ten_loai_cv}}</span>
                     </div>
                     <div class="col-md-12">
                         <small>{{element.ten_nnv}}</small>
                     </div>
                     <div class="col-sm-4 col-md-3">
                         <div class="avatar">
-                            <img v-if="element.avatar != null" :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
+                            <img :src="$store.state.config.PUBLIC_URL + element.avatar" style="width:50px;height:50px;border-radius:50%;">
                             
                         </div>
                     </div>
                     <div class="col-sm-8 col-md-9">
                         <span class="ten_cv">{{element.ten_cv}} <span v-if="element.ten_du_an_kh"> - {{element.ten_du_an_kh}} </span> </span>  <br/>
-                       
+                        
                     </div>
                 </div>
-                 <p><small style="font-size: 11px;">{{element.ngay_giao_viec.slice(0,10)}} - {{element.ngay_cam_ket.slice(0,10)}}</small></p>
                     <b-progress type="is-info"  :value="Math.floor(element.tien_do)" show-value style="margin-top:10px;"></b-progress>
             </div>
             </draggable>
@@ -114,7 +112,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.avatar {border-radius: 50%;background: #e2e2e2e2; width: 50px;height: 50px;}
-</style>
