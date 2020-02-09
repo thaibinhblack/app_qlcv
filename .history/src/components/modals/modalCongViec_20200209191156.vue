@@ -230,7 +230,7 @@
               <button type="submit" v-if="Object.entries(this.getTaskEdit).length <= 5"  class="btn btn-primary btn-form">Lưu lại</button>
               <button type="submit" v-else class="btn btn-warning btn-form">Cập nhật</button>
               <button type="button" @click="clear()" class="btn btn-success btn-form">Clear</button>
-              <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
+              <button type="button" class="btn btn-close btn-form" @click="close()">Close</button>  
           </div>
       </div>
     </form>
@@ -285,8 +285,6 @@ export default {
           ngay_hoan_thanh: new Date().toISOString().substr(0,10),
           ngay_cam_ket: new Date().toISOString().substr(0,10),
           type: false,
-          nguoi_nhan_viec: 0,
-          nguoi_giao_viec: 0,
           time_nhan_viec: {
             HH: '00',
             mm: '00',
@@ -379,15 +377,8 @@ export default {
         var app = this;
         this.cong_viec.nguoi_nhap = this.my_info.id_nd
         this.cong_viec.id_loai_cv = this.selected_loai_cv.id_loai_cv;
-        if(Object.entries(this.selected_user_tiepnhan).length > 0)
-        {
-           this.cong_viec.nguoi_giao_viec = this.selected_user_giaoviec.id_nd
-        
-        }
-        if(Object.entries(this.selected_user_giaoviec).length > 0)
-        {
-          this.cong_viec.nguoi_nhan_viec = this.selected_user_tiepnhan.id_nd
-        }
+        this.cong_viec.nguoi_giao_viec = this.selected_user_giaoviec.id_nd
+        this.cong_viec.nguoi_nhan_viec = this.selected_user_tiepnhan.id_nd
         this.cong_viec.type = 0;
         if(Object.entries(this.getTaskEdit).length > 5)
         {
@@ -454,12 +445,6 @@ export default {
                     ss: '00'
                   }
                 }
-                this.selected_loai_cv = {}
-                this.selected_user_giaoviec = {}
-                this.selected_user_tiepnhan = {}
-                this.selected_du_an = {}
-                this.selected_du_an_kh = []
-                this.selected_loai_cv = {}
              }
              else{
                 app.$buefy.notification.open({
@@ -506,14 +491,10 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
-      toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
-        // console.log(ten_du_an_kh, id_du_an_kh)
-        // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
-      },
-      addTag({newTag})
-      {
-        console.log(newTag)
-      },
+      // toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
+      //   // console.log(ten_du_an_kh, id_du_an_kh)
+      //   // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
+      // },
       api_files()
       {
         this.$store.dispatch("getFile",this.cong_viec.id_cv_da)

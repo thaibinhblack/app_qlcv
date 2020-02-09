@@ -457,9 +457,6 @@ export default {
                 this.selected_loai_cv = {}
                 this.selected_user_giaoviec = {}
                 this.selected_user_tiepnhan = {}
-                this.selected_du_an = {}
-                this.selected_du_an_kh = []
-                this.selected_loai_cv = {}
              }
              else{
                 app.$buefy.notification.open({
@@ -509,10 +506,6 @@ export default {
       toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
         // console.log(ten_du_an_kh, id_du_an_kh)
         // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
-      },
-      addTag({newTag})
-      {
-        console.log(newTag)
       },
       api_files()
       {

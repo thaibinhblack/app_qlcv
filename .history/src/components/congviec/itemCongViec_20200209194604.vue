@@ -14,7 +14,7 @@
                 class="list-group-item"
                 v-for="(element, index) in list_congviec"
                 :key="index"
-                :class="{coder: element.id_loai_cv == 1, support: element.id_loai_cv == 3, cv_kh: element.type_cv == true, error: new Date(element.ngay_cam_ket).getDate() - new Date(element.ngay_hoan_thanh).getDate()  <= -1}">
+                :class="{coder: element.id_loai_cv == 1, support: element.id_loai_cv == 3, cv_kh: element.type_cv == true, error: new Date(element.ngay_hoan_thanh).getDate() - new Date(element.ngay_cam_ket).getDate()  <= -1}">
                     
                 
                 <b-button icon-left="more" class="btn-more" >   

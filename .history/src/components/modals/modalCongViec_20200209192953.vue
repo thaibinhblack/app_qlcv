@@ -457,9 +457,6 @@ export default {
                 this.selected_loai_cv = {}
                 this.selected_user_giaoviec = {}
                 this.selected_user_tiepnhan = {}
-                this.selected_du_an = {}
-                this.selected_du_an_kh = []
-                this.selected_loai_cv = {}
              }
              else{
                 app.$buefy.notification.open({

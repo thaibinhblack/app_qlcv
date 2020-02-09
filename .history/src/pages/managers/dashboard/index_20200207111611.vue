@@ -7,10 +7,6 @@
                 <p align="right"><small>{{tk.sl}}</small></p>
             </div>
         </div>
-
-        <div class="col-sm-12 col-md-12">
-            <chart-line/>
-        </div>
     </div>
 </div>
 </template>
