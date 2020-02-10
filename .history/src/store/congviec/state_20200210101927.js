@@ -71,11 +71,6 @@ export default {
             hidden: true
         },
         {
-            column: 'gio_thuc_hien',
-            label: 'GIỜ THỰC HIỆN',
-            hidden: true
-        },
-        {
             column: 'tien_do',
             label: 'TIẾN ĐỘ',
             hidden: true

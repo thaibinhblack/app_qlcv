@@ -64,8 +64,5 @@ export default {
     },
     SET_SETTING(state,settings){
         state.settings = JSON.parse(settings)
-    },
-    UPDATE_SETTING(state,settings){
-        state.settings = settings
     }
 }

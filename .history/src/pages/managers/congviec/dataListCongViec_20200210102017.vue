@@ -22,10 +22,7 @@
                       <!-- {{setting.column}} -->
                         {{props.row[setting.column]}}
                     </b-table-column>
-                     <b-table-column width="120">
-                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
-                        <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
-                    </b-table-column>
+
                  </template>
             </b-table>
         </section>
@@ -53,7 +50,9 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("SELECT_SETTING")
+      // this.$store.dispatch("SELECT_SETTING").then((response) => {
+      //   console.log(response)
+      // })
     }
 }
 </script>

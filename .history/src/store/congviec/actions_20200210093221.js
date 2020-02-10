@@ -112,24 +112,12 @@ export default {
             })
         })
     },
-    SELECT_SETTING({commit})
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/cong-viec-setting/1').then((response) => {
-                commit("SET_SETTING",response.data[0].value_setting)
-                resolve(response.data)
-            }).catch((err) => {
-                reject(err)
-            })
-        })
-    },
     SETTING_HIENTHI({commit},P_VALUE_SETTING)
     {
         return new Promise((resolve,reject) => {
             const form_setting = new FormData();
-            form_setting.append("P_VALUE_SETTING",JSON.stringify(P_VALUE_SETTING))
+            form_setting.append("P_VALUE_SETTING",P_VALUE_SETTING)
             axios.post('/api/cong-viec-setting/1?api_token='+axios.defaults.params.api_token,form_setting).then((response) => {
-                commit("UPDATE_SETTING",P_VALUE_SETTING)
                 resolve(response)
             }).catch((error) => {
                 reject(error)

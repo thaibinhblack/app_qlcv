@@ -49,8 +49,5 @@ export default {
         return state.settings.filter((value,index,array) => {
             return array[index].hidden == true
         })
-    },
-    settings: state => {
-        return state.settings
     }
 }

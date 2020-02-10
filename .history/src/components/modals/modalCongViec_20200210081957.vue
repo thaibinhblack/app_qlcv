@@ -1,5 +1,5 @@
 <template>
-<b-tabs @keydown.esc="close()">
+<b-tabs>
   <b-tab-item  label="Thông tin công việc">
     <form @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">

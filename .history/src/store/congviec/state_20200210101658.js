@@ -9,7 +9,7 @@ export default {
     list_file: [],
     settings: [
         {
-            column: 'id_cv_da',
+            column: 'ID_CV_DA',
             label: 'ID CÔNG VIỆC',
             hidden: true
         },
@@ -30,32 +30,32 @@ export default {
         },
     
         {
-            column: 'noi_dung_cv',
+            column: 'NOI_DUNG_CV',
             label: 'NỘI DUNG CÔNG VIỆC',
             hidden: true
         },
         {
-            column: 'ngay_tiep_nhan',
+            column: 'NGAY_TIEP_NHAN',
             label: 'NGÀY TIẾP NHẬN',
             hidden: true
         },
         {
-            column: 'ngay_hoan_thanh',
+            column: 'NGAY_HOAN_THANH',
             label: 'NGÀY HOÀN THÀNH',
             hidden: true
         },
         {
-            column: 'ngay_cam_ket',
+            column: 'NGAY_CAM_KET',
             label: 'NGÀY CAM KẾT',
             hidden: true
         },
         {
-            column: 'do_uu_tien',
+            column: 'DO_UU_TIEN',
             label: 'ĐỘ ƯU TIÊN',
             hidden: true
         },
         {
-            column: 'ma_jara',
+            column: 'MA_JIRA',
             label: 'MÃ JARA',
             hidden: true
         },
@@ -71,17 +71,12 @@ export default {
             hidden: true
         },
         {
-            column: 'gio_thuc_hien',
-            label: 'GIỜ THỰC HIỆN',
-            hidden: true
-        },
-        {
-            column: 'tien_do',
+            column: 'TIEN_DO',
             label: 'TIẾN ĐỘ',
             hidden: true
         },
         {
-            column: 'ghi_chu',
+            column: 'GHI_CHU',
             label: 'GHI CHÚ',
             hidden: true
         }
