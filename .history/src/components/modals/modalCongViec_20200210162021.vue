@@ -9,7 +9,7 @@
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an" 
-                  :options="Object.entries(setting_modal.selected_du_an_setting).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" 
+                  :options="Object.entries(setting_modal).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" 
                   label="ten_du_an" :disabled="check_disabled" 
                   track-by="ten_du_an" placeholder="Danh sách dự án"
                   :multiple="false"  :show-labels="false" ></multiselect>
@@ -31,12 +31,12 @@
             <div class="col-sm-8">
               <!-- {{GROUP_LCV}} -->
                 <b-field>
-                    <multiselect :options="Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV"
+                    <multiselect :options="Object.entries(setting_modal).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV"
                     v-model="selected_loai_cv"
                     :multiple="false"
                     :disabled="check_disabled"
-                    :group-values=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'children'"
-                    :group-label=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'parent' "
+                    :group-values=" Object.entries(setting_modal).length > 0 ? false : 'children'"
+                    :group-label=" Object.entries(setting_modal).length > 0 ? false : 'parent' "
                     :group-select="false"
                     :show-labels="false"
                     track-by="ten_loai_cv"
