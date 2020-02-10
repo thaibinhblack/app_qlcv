@@ -87,5 +87,8 @@ export default {
         }
         
     ],
-    setting_modal: []
+    setting_modal: {
+        selected_du_an_setting: [],
+        selected_loai_cv_setting: []
+    }
 }

@@ -1,6 +1,5 @@
 <template>
     <b-menu id="sidebar">
-        {{active}}
         <b-menu-list>
             <b-menu-item>
                 <template slot="label" >
@@ -65,7 +64,7 @@
             <b-menu-item
                 :active="active.DA"
                 :expand="active.DA"
-                 @click="active.DA = !active.DA"
+                 @click="active.DA = !active.DA">
                 icon="link"
                >
                 <template slot="label" slot-scope="props">

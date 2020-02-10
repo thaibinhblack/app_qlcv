@@ -35,8 +35,8 @@
                     v-model="selected_loai_cv"
                     :multiple="false"
                     :disabled="check_disabled"
-                    :group-values=" Object.entries(setting_modal).length > 0 ? false : 'children'"
-                    :group-label=" Object.entries(setting_modal).length > 0 ? false : 'parent' "
+                    :group-values="false"
+                    :group-label="false"
                     :group-select="false"
                     :show-labels="false"
                     track-by="ten_loai_cv"
@@ -578,23 +578,7 @@ export default {
         this.$store.dispatch("SETTING_MODAL_CV",{
           selected_du_an_setting: this.selected_du_an_setting,
           selected_loai_cv_setting: this.selected_loai_cv_setting
-        }).then(() => {
-           this.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'CẬP NHẬT SETTING MODAL CÔNG VIỆC THÀNH CÔNG',
-                    position: 'is-bottom-left',
-                    type: 'is-success',
-                    hasIcon: true
-                })
-          }).catch(() => {
-            this.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'LỖI! XIN VUI LÒNG THỬ LẠI',
-                    position: 'is-bottom-left',
-                    type: 'is-danger',
-                    hasIcon: true
-                })
-          })
+        })
       }
     },
     created()

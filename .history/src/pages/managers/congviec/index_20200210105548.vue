@@ -37,7 +37,7 @@
         </b-tab-item>
     </b-tabs>
 
-    <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  @on-cancel="close()">
+    <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  :on-cancel="close()">
       <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
         <modal-congviec :isActiveModal="isActiveModal" />
     </b-modal >

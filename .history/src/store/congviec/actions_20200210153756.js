@@ -154,7 +154,6 @@ export default {
         return new Promise((resolve,reject) => {
             axios.get('/api/cong-viec-setting-modal?api_token='+axios.defaults.params.api_token)
             .then((response) => {
-                commit("SET_SETTING_MODAL",response.data[0])
                 resolve(response.data)
             }).catch((err) => {
                 reject(err)

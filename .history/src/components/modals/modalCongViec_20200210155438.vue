@@ -29,14 +29,13 @@
           <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc (*)</label>
             <div class="col-sm-8">
-              <!-- {{GROUP_LCV}} -->
                 <b-field>
-                    <multiselect :options="Object.entries(setting_modal).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV"
+                    <multiselect :options="Object.entries(setting_modal).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV "
                     v-model="selected_loai_cv"
                     :multiple="false"
                     :disabled="check_disabled"
-                    :group-values=" Object.entries(setting_modal).length > 0 ? false : 'children'"
-                    :group-label=" Object.entries(setting_modal).length > 0 ? false : 'parent' "
+                    group-values="children"
+                    group-label="parent"
                     :group-select="false"
                     :show-labels="false"
                     track-by="ten_loai_cv"
@@ -578,23 +577,7 @@ export default {
         this.$store.dispatch("SETTING_MODAL_CV",{
           selected_du_an_setting: this.selected_du_an_setting,
           selected_loai_cv_setting: this.selected_loai_cv_setting
-        }).then(() => {
-           this.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'CẬP NHẬT SETTING MODAL CÔNG VIỆC THÀNH CÔNG',
-                    position: 'is-bottom-left',
-                    type: 'is-success',
-                    hasIcon: true
-                })
-          }).catch(() => {
-            this.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'LỖI! XIN VUI LÒNG THỬ LẠI',
-                    position: 'is-bottom-left',
-                    type: 'is-danger',
-                    hasIcon: true
-                })
-          })
+        })
       }
     },
     created()

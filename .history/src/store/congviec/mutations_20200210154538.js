@@ -71,7 +71,7 @@ export default {
     SET_SETTING_MODAL(state,setting)
     {
         console.log(setting)
-        state.setting_modal = JSON.parse(setting.value_setting)
-        console.log(JSON.parse(setting.value_setting))
+        state.setting_modal = JSON.parse(setting)
+        console.log(JSON.parse(setting))
     }
 }

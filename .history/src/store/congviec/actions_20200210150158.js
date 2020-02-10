@@ -149,18 +149,6 @@ export default {
             })
         })  
     },
-    SELECT_SETTING_MODAL_CV({commit})
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/cong-viec-setting-modal?api_token='+axios.defaults.params.api_token)
-            .then((response) => {
-                commit("SET_SETTING_MODAL",response.data[0])
-                resolve(response.data)
-            }).catch((err) => {
-                reject(err)
-            })
-        })  
-    },
 //UPLOAD FILE CONG VIỆC
     uploadFile({commit},form_file)
     {   

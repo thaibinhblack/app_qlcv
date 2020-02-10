@@ -586,15 +586,7 @@ export default {
                     type: 'is-success',
                     hasIcon: true
                 })
-          }).catch(() => {
-            this.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'LỖI! XIN VUI LÒNG THỬ LẠI',
-                    position: 'is-bottom-left',
-                    type: 'is-danger',
-                    hasIcon: true
-                })
-          })
+        })
       }
     },
     created()
