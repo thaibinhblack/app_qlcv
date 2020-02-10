@@ -111,8 +111,7 @@ export default {
             list1: [],
             list2: [],
             list3: [],
-            list4: [],
-            activeTab: 1
+            list4: []
         }
     },
     computed:

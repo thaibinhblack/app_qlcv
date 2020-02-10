@@ -23,7 +23,7 @@
     <b-modal :active.sync="isModalFilter" :width="'500px'" > 
         <model-filter-cv :hinhthuc_loc="hinhthuc_loc" :my_info="my_info" :time="time"/>
     </b-modal>
-    <b-tabs v-model="activeTab">
+    <b-tabs>
         <b-tab-item label="TASK" >
             <div class="row layout-task" >
                 <item-task :list_congviec="list1" :title="'Công việc chưa phân công'" :status="1" />
@@ -111,8 +111,7 @@ export default {
             list1: [],
             list2: [],
             list3: [],
-            list4: [],
-            activeTab: 1
+            list4: []
         }
     },
     computed:

@@ -112,7 +112,7 @@ export default {
             list2: [],
             list3: [],
             list4: [],
-            activeTab: 1
+            activeTab: 2
         }
     },
     computed:
