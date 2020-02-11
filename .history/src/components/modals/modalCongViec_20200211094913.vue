@@ -115,8 +115,8 @@
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-                  <input type="number" v-model="cong_viec.time_nhan_viec.HH" min="7" max="24" class="tag-time" style="margin-right:5px;"> :
-                  <input type="number" v-model="cong_viec.time_nhan_viec.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
+
+                  <b-input type="number" min="7" max="24"> </b-input>
                 </div>
               <div class="col-sm-4">
                 <b-field >
@@ -129,8 +129,7 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
-                  <input type="number" v-model="cong_viec.time_hoan_thanh.HH" min="7" max="24" class="tag-time" style="margin-right:5px;"> :
-                  <input type="number" v-model="cong_viec.time_hoan_thanh.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
+                  <vue-timepicker v-model="cong_viec.time_hoan_thanh" format="HH:mm:ss"></vue-timepicker>
                 </div>
                 <div class="col-sm-4">
                   <b-field >
@@ -340,13 +339,13 @@ export default {
           nguoi_nhan_viec: 0,
           nguoi_giao_viec: 0,
           time_nhan_viec: {
-            HH: 7,
-            mm: 0,
+            HH: '00',
+            mm: '00',
             ss: '00'
           },
           time_hoan_thanh: {
-            HH: 7,
-            mm: 0,
+            HH: '00',
+            mm: '00',
             ss: '00'
           },
           type_cv: "0",
@@ -494,13 +493,13 @@ export default {
                   ngay_cam_ket: new Date().toISOString().substr(0,10),
                   type: false,
                   time_nhan_viec: {
-                    HH: 7,
-                    mm: 0,
+                    HH: '00',
+                    mm: '00',
                     ss: '00'
                   },
                   time_hoan_thanh: {
-                    HH: 7,
-                    mm: 0,
+                    HH: '00',
+                    mm: '00',
                     ss: '00'
                   },
                   type_cv: "0",
@@ -653,10 +652,4 @@ export default {
 .multiselect__option--highlight {margin-left: 35px !important;}
 .list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
 span.color-warning {color: red}
-.tag-time {    padding: 3px;
-    line-height: unsetpx;
-    line-height: 36px;
-    height: 36px;
-    width: 45px;
-    text-align: center;}
 </style>

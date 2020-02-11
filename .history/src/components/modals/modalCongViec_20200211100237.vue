@@ -115,7 +115,7 @@
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-                  <input type="number" v-model="cong_viec.time_nhan_viec.HH" min="7" max="24" class="tag-time" style="margin-right:5px;"> :
+                  <input type="number" v-model="cong_viec.time_nhan_viec.HH" min="7" max="24" class="tag-time"> :
                   <input type="number" v-model="cong_viec.time_nhan_viec.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
                 </div>
               <div class="col-sm-4">
@@ -129,8 +129,7 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
-                  <input type="number" v-model="cong_viec.time_hoan_thanh.HH" min="7" max="24" class="tag-time" style="margin-right:5px;"> :
-                  <input type="number" v-model="cong_viec.time_hoan_thanh.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
+                  <vue-timepicker v-model="cong_viec.time_hoan_thanh" format="HH:mm:ss"></vue-timepicker>
                 </div>
                 <div class="col-sm-4">
                   <b-field >
