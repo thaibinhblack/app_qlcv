@@ -38,10 +38,13 @@ export default {
     {
         const ItemIndex = state.list_congviec.findIndex((cv) => {
             
-            return cv.id_cv_da == ID_CV_DA
+            if(cv.id_cv_da == ID_CV_DA)
+            {
+                console.log(cv)
+            }
         })
         console.log(ItemIndex, ID_CV_DA, state.list_congviec[-1])
-        state.list_congviec.splice(0,1)
+        state.list_congviec.splice(ItemIndex,1)
     },
     UPDATE_MODAL_BAOCAO(state,boolean)
     {

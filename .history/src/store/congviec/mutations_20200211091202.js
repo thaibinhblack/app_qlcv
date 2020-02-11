@@ -37,11 +37,10 @@ export default {
     DELETE_CONG_VIEC(state,ID_CV_DA)
     {
         const ItemIndex = state.list_congviec.findIndex((cv) => {
-            
-            return cv.id_cv_da == ID_CV_DA
+            cv.id_cv_da == ID_CV_DA
         })
-        console.log(ItemIndex, ID_CV_DA, state.list_congviec[-1])
-        state.list_congviec.splice(0,1)
+        console.log(ItemIndex)
+        state.list_congviec.splice(ItemIndex,1)
     },
     UPDATE_MODAL_BAOCAO(state,boolean)
     {

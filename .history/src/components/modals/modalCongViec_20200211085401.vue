@@ -52,12 +52,12 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >KH yêu cầu</label>
             <!-- {{cong_viec.type_cv}} -->
             <div class="col-sm-8">
-              <b-field>
-                <b-select v-model="cong_viec.type_cv">
+              <b-feild>
+                <b-select>
                   <option value="0">CÔNG VIỆC TỰ NHẬP</option>
                   <option value="1">CÔNG VIỆC KHÁCH HÀNG YÊU CẦU</option>
                 </b-select>
-              </b-field>
+              </b-feild>
             </div>
           </div>
           <div class="form-group row">        
@@ -377,6 +377,10 @@ export default {
         else
          return "Chưa có người thẩm định"
       },
+      KHYC()
+      {
+        return [this.cong_viec.type_cv]
+      },
       check_disabled()
       {
         if(this.cong_viec.nguoi_tham_dinh != null)
@@ -483,7 +487,7 @@ export default {
                     hasIcon: true
                 })
                 this.cong_viec = {
-                  id_du_an_kh: this.selected_du_an.id_du_an_kh,
+                  id_du_an_kh: this.selected_project,
                   tien_do: 0,
                   id_loai_cv: 1,
                   trang_thai: 1,
@@ -501,14 +505,12 @@ export default {
                     HH: '00',
                     mm: '00',
                     ss: '00'
-                  },
-                  type_cv: "0",
-                  do_uu_tien: 1
+                  }
                 }
                 this.selected_loai_cv = {}
-                this.selected_user_giaoviec = this.my_info
-                this.selected_user_tiepnhan = this.my_info
-                // this.selected_du_an = {}
+                this.selected_user_giaoviec = {}
+                this.selected_user_tiepnhan = {}
+                this.selected_du_an = {}
                 this.selected_du_an_kh = []
                 this.selected_loai_cv = {}
              }
@@ -606,7 +608,7 @@ export default {
     {
      
         this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.selected_user_giaoviec = this.selected_user_tiepnhan =  this.my_info = response.data[0]
+            this.my_info = response.data[0]
         })
         // console.log(this.getTaskEdit)
         if(Object.entries(this.getTaskEdit).length > 5)
@@ -636,10 +638,9 @@ export default {
           this.cong_viec.tien_do = parseInt(this.getTaskEdit.tien_do)
           this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
           this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
-          this.api_files()
         }
-        // this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
-        
+        this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
+        this.api_files()
         this.$store.dispatch('SELECT_SETTING_MODAL_CV')
       // this.api_du_an()
       // this.api_users()

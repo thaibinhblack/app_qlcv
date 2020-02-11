@@ -153,7 +153,12 @@ export default {
     },
     created()
     {
-        this.api_cv_goc()
+        if(this.id_cv_da != undefined)
+        {
+            this.api_cv_goc()
+        }
+       
+        
     }
 }
 </script>

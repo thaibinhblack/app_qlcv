@@ -37,11 +37,9 @@ export default {
     DELETE_CONG_VIEC(state,ID_CV_DA)
     {
         const ItemIndex = state.list_congviec.findIndex((cv) => {
-            
-            return cv.id_cv_da == ID_CV_DA
+            cv.id_cv_da == ID_CV_DA
         })
-        console.log(ItemIndex, ID_CV_DA, state.list_congviec[-1])
-        state.list_congviec.splice(0,1)
+        state.list_congviec.splice(ItemIndex,1)
     },
     UPDATE_MODAL_BAOCAO(state,boolean)
     {
@@ -74,22 +72,19 @@ export default {
     {   
         if(setting == undefined)
         {
-            // console.log('undefined')
-            state.setting_modal = {
-                selected_du_an_setting: [],
-                selected_loai_cv_setting: []
-            }
+            console.log('undefined')
+            state.setting_modal = {}
         }
         else
         {
             if(Object.entries(setting).length > 0)
             {
-                // console.log('if')
+                console.log('if')
                 state.setting_modal = JSON.parse(setting.value_setting)
             }
             else
             {
-                // console.log('else')
+                console.log('else')
                 state.setting_modal =  {
                     selected_du_an_setting: [],
                     selected_loai_cv_setting: []

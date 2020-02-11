@@ -483,7 +483,7 @@ export default {
                     hasIcon: true
                 })
                 this.cong_viec = {
-                  id_du_an_kh: this.selected_du_an.id_du_an_kh,
+                  id_du_an_kh: this.selected_project,
                   tien_do: 0,
                   id_loai_cv: 1,
                   trang_thai: 1,

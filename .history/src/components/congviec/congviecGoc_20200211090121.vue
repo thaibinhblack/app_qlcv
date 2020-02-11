@@ -6,15 +6,7 @@
         <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc</label>
         <div class="col-sm-8">
             <b-field>
-                <multiselect :options="loai_cv"
-                v-model="selected_loai_cv"
-                :multiple="false"
-                group-values="children"
-                group-label="parent"
-                :group-select="false"
-                :show-labels="false"
-                track-by="ten_loai_cv"
-                label="ten_loai_cv"></multiselect>
+                <b-input type="text" v-model="cong_viec.ten_loai_cv"></b-input>
             </b-field>
         </div>
         </div>
@@ -69,7 +61,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày tiếp nhận</label>
             <div class="col-sm-8">
             <b-field >
-                <b-input type="date" :disabled="cong_viec.trang_thai == 3 && update == true"   style="width: 100%;"  v-model="cong_viec.ngay_tiep_nhan"></b-input>
+                <b-input type="date"    style="width: 100%;"  v-model="cong_viec.ngay_tiep_nhan"></b-input>
                 
             </b-field>
             </div>
@@ -78,7 +70,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
             <div class="col-sm-8">
             <b-field >
-                <b-input type="date" :disabled="cong_viec.trang_thai == 3 && update == true"   style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"></b-input>
+                <b-input type="date"    style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"></b-input>
                 <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"> -->
             </b-field>
             </div>
@@ -87,7 +79,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
             <div class="col-sm-8">
                 <b-field >
-                    <b-input type="date" :disabled="cong_viec.trang_thai == 3 && update == true"   style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh"></b-input>
+                    <b-input type="date"    style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh"></b-input>
                 <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh" data-date-format="dd-mm-yyyy"> -->
                 </b-field>
             </div>
@@ -96,7 +88,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày cam kết</label>
             <div class="col-sm-8">
                 <b-field >
-                    <b-input type="date" :disabled="cong_viec.trang_thai == 3 && update == true"   style="width: 100%;"  v-model="cong_viec.ngay_cam_ket"></b-input>
+                    <b-input type="date"    style="width: 100%;"  v-model="cong_viec.ngay_cam_ket"></b-input>
                     <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_cam_ket" data-date-format="dd-mm-yyyy"> -->
                 </b-field>
             </div>
@@ -106,15 +98,15 @@
         <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên</label>
             <div class="col-sm-8">
-                <b-input :disabled="update"  type="number" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input>
+                <b-input  type="number" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input>
             </div>
         </div>
         <div class="form-group row">        
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Mã JIRA</label>
             <div class="col-sm-8">
-                <b-input type="text" :disabled="cong_viec.trang_thai == 3 && update == true" v-model="cong_viec.ma_jra" placeholder="Mã JIIRA" ></b-input>
+                <b-input type="text"  v-model="cong_viec.ma_jra" placeholder="Mã JIIRA" ></b-input>
             </div>
-        
+        </div>
         <div class="form-group row">        
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc</label>
             <div class="col-sm-8">
@@ -130,17 +122,12 @@
             <b-button icon-left="close" class="btn btn-close btn-form" @click="close()">Close</b-button>  
         </div>
     </div>
-    </div>
 </div>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
 export default {
     props: ["id_cv_da", "loai_cv"],
-    components: {
-        Multiselect
-    },
     data()
     {
         return {
@@ -166,7 +153,12 @@ export default {
     },
     created()
     {
-        this.api_cv_goc()
+        if(this.id_cv_da != undefined)
+        {
+            this.api_cv_goc()
+        }
+       
+        
     }
 }
 </script>

@@ -53,7 +53,7 @@
             <!-- {{cong_viec.type_cv}} -->
             <div class="col-sm-8">
               <b-field>
-                <b-select v-model="cong_viec.type_cv">
+                <b-select>
                   <option value="0">CÔNG VIỆC TỰ NHẬP</option>
                   <option value="1">CÔNG VIỆC KHÁCH HÀNG YÊU CẦU</option>
                 </b-select>
@@ -483,7 +483,7 @@ export default {
                     hasIcon: true
                 })
                 this.cong_viec = {
-                  id_du_an_kh: this.selected_du_an.id_du_an_kh,
+                  id_du_an_kh: this.selected_project,
                   tien_do: 0,
                   id_loai_cv: 1,
                   trang_thai: 1,
@@ -501,9 +501,7 @@ export default {
                     HH: '00',
                     mm: '00',
                     ss: '00'
-                  },
-                  type_cv: "0",
-                  do_uu_tien: 1
+                  }
                 }
                 this.selected_loai_cv = {}
                 this.selected_user_giaoviec = this.my_info

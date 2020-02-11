@@ -1,8 +1,6 @@
 <template>
 <b-tabs @keydown.esc="close()">
-    <!-- {{getTaskEdit}} -->
   <b-tab-item  label="Thông tin công việc">
-  
     <form @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
@@ -53,10 +51,7 @@
             <!-- {{cong_viec.type_cv}} -->
             <div class="col-sm-8">
               <b-field>
-                <b-select v-model="cong_viec.type_cv">
-                  <option value="0">CÔNG VIỆC TỰ NHẬP</option>
-                  <option value="1">CÔNG VIỆC KHÁCH HÀNG YÊU CẦU</option>
-                </b-select>
+                
               </b-field>
             </div>
           </div>
@@ -348,7 +343,6 @@ export default {
             mm: '00',
             ss: '00'
           },
-          type_cv: "0",
           do_uu_tien: 1
         },
         selected_du_an: {},
@@ -376,6 +370,10 @@ export default {
         }
         else
          return "Chưa có người thẩm định"
+      },
+      KHYC()
+      {
+        return [this.cong_viec.type_cv]
       },
       check_disabled()
       {
@@ -483,7 +481,7 @@ export default {
                     hasIcon: true
                 })
                 this.cong_viec = {
-                  id_du_an_kh: this.selected_du_an.id_du_an_kh,
+                  id_du_an_kh: this.selected_project,
                   tien_do: 0,
                   id_loai_cv: 1,
                   trang_thai: 1,
@@ -501,14 +499,12 @@ export default {
                     HH: '00',
                     mm: '00',
                     ss: '00'
-                  },
-                  type_cv: "0",
-                  do_uu_tien: 1
+                  }
                 }
                 this.selected_loai_cv = {}
-                this.selected_user_giaoviec = this.my_info
-                this.selected_user_tiepnhan = this.my_info
-                // this.selected_du_an = {}
+                this.selected_user_giaoviec = {}
+                this.selected_user_tiepnhan = {}
+                this.selected_du_an = {}
                 this.selected_du_an_kh = []
                 this.selected_loai_cv = {}
              }
@@ -606,12 +602,12 @@ export default {
     {
      
         this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.selected_user_giaoviec = this.selected_user_tiepnhan =  this.my_info = response.data[0]
+          this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info = response.data[0]
         })
         // console.log(this.getTaskEdit)
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-         
+          this.api_files()
           this.selected_du_an = this.LIST_DUAN.filter((value,index,array) => {
             return array[index].id_du_an == this.getTaskEdit.id_du_an
           })[0]
@@ -631,15 +627,13 @@ export default {
           this.axios.get(this.$store.state.config.API_URL + 'user/'+this.getTaskEdit.nguoi_nhap).then((response) => {
             this.nguoi_nhap = response.data
           })
-          
-          this.cong_viec = this.getTaskEdit
           this.cong_viec.tien_do = parseInt(this.getTaskEdit.tien_do)
+          this.cong_viec = this.getTaskEdit
           this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
           this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
-          this.api_files()
         }
         // this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
-        
+    
         this.$store.dispatch('SELECT_SETTING_MODAL_CV')
       // this.api_du_an()
       // this.api_users()
