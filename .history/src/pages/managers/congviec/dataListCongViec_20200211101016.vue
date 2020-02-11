@@ -20,8 +20,7 @@
                  <template slot-scope="props">
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label" >
                       <!-- {{setting.column}} -->
-                        {{setting.column == 'trang_thai' ? (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column]}}
-                        <!-- {{props.row[setting.column]}} -->
+                        {{props.row[setting.column]}}
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
