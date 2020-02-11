@@ -7,10 +7,9 @@
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
-                          <option :value="10">10</option>
                           <option :value="20">20</option>
                           <option :value="50">50</option>
-                          <option :value="100">100</option>
+                          <option :ripple="false"value="100">100</option>
                         </b-select>
                       </b-field></li>
                       <li><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
