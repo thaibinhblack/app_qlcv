@@ -81,6 +81,6 @@ export default {
 .btn-add {border: 1px solid #e2e2e2;}
 .btn-add:hover {background: #209cee;color: #fff;}
 .list-action-data {width: 100%;}
-.list-action-data>li {display: inline-block; margin: 0 5px;}
+.list-action-data>li {display: inline-block;}
 .list-action-data>li:last-child {float: right}
 </style>

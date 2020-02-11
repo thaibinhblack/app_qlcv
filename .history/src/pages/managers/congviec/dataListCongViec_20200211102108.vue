@@ -7,12 +7,12 @@
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
-                          <option :value="20">20</option>
-                          <option :value="50">50</option>
-                          <option :ripple="false"value="100">100</option>
+                          <option value="20">20</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
                         </b-select>
                       </b-field></li>
-                      <li><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
+                      <li><b-button style="float:right" icon-left="settings" @click="isModalSetting = true"></b-button></li>
                 </ul>
                 
             </div>
@@ -80,7 +80,4 @@ export default {
 .section-data {padding: 5px; border-radius: 5px;background: #fff;}
 .btn-add {border: 1px solid #e2e2e2;}
 .btn-add:hover {background: #209cee;color: #fff;}
-.list-action-data {width: 100%;}
-.list-action-data>li {display: inline-block; margin: 0 5px;}
-.list-action-data>li:last-child {float: right}
 </style>
