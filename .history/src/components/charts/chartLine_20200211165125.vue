@@ -1,6 +1,6 @@
 <template>
     <div class="line-chart">
-        <apexchart type="pie" width="700" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
  
@@ -15,13 +15,13 @@ import { mapGetters } from 'vuex';
         },
         data: function () {
             return {
-                series: [],
+                series: [44, 55, 13, 43, 22],
                 chartOptions: {
                     chart: {
                     width: 380,
                     type: 'pie',
                     },
-                    labels: [],
+                    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
                     responsive: [{
                     breakpoint: 480,
                     options: {
@@ -38,14 +38,7 @@ import { mapGetters } from 'vuex';
         },
         created()
         {
-            this.$store.dispatch("fecth_12THANG_LCV").then((response) => {
-                response.forEach((data) => {
-                  
-                    this.series.push(parseInt(data.so_luong))
-                    this.chartOptions.labels.push(data.ten_loai_cv)
-                })
-            })
-              console.log(this.series)
+            
         }
     };
 </script>

@@ -12,7 +12,8 @@ import module_loaicv from './loaiCongViec'
 import module_duan_kh from './du_an_kh'
 import module_congviec from './congviec'
 import module_duan from './duan'
-import module_user from './user'
+import module_users from './user'
+import module_dashboard from './dashboard'
 Vue.use(Vuex)
 
 const state = {
@@ -44,6 +45,8 @@ export default new Vuex.Store({
         module_loaicv,
         module_duan_kh,
         module_congviec,
-        module_duan
+        module_duan,
+        module_users,
+        module_dashboard
     }
 })

@@ -11,7 +11,9 @@ import VueDraggable from 'vue-draggable'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import VueCookies from 'vue-cookies'
 import 'vue2-timepicker/dist/VueTimepicker.css'
+import VueApexCharts from 'vue-apexcharts'
 
+Vue.component('apexchart', VueApexCharts)
 
 Vue.use(VueCookies)
 // set default config
