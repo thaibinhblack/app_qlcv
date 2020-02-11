@@ -156,7 +156,6 @@ export default {
                             trang_thai_du_an: 1,
                             ten_kh: ''
                         }
-                        this.selected_kh = {}
                         app.$buefy.notification.open({
                             duration: 1500,
                             message: response.data.message,

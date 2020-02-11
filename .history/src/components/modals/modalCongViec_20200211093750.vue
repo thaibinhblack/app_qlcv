@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
-              <div class="col-sm-4 col-form-label">Dự án <span class="color-warning">(*)</span></div>
+              <div class="col-sm-4 col-form-label">Dự án (*)</div>
               <div class="col-sm-8">
                 <b-field>
                   <!-- {{selected_du_an}} -->
@@ -21,7 +21,7 @@
               </div> 
          </div>
           <div class="form-group row" >
-              <div class="col-sm-4 col-form-label">Dự án KH <span class="color-warning">(*)</span></div>
+              <div class="col-sm-4 col-form-label">Dự án KH (*)</div>
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" 
@@ -31,7 +31,7 @@
               </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc <span class="color-warning">(*)</span></label>
+            <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc (*)</label>
             <div class="col-sm-8">
               <!-- {{GROUP_LCV}} -->
                 <b-field>
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên công việc <span class="color-warning">(*)</span></label>
+            <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên công việc (*)</label>
             <div class="col-sm-8">
               <b-input :disabled="check_disabled" type="text" v-model="cong_viec.ten_cv" required placeholder="Tên công việc" ></b-input>
             </div>
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ <span class="color-warning">(*)</span> ({{cong_viec.tien_do}}%)</label>
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Tiến độ (*) ({{cong_viec.tien_do}}%)</label>
                 <div class="col-sm-3">
                   <b-field>
                     <b-input  type="number" :disabled="check_disabled" min="0" max="100"  v-model="cong_viec.tien_do" required placeholder="Tiến độ" ></b-input>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên <span class="color-warning">(*)</span> </label>
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên (*) </label>
                 <div class="col-sm-8">
                   <b-input   type="number" :disabled="check_disabled" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input>
                 </div>
@@ -213,7 +213,7 @@
               </div>
         
             <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái <span class="color-warning">(*)</span> </label>
+              <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái (*) </label>
                 <div class="col-sm-8">
                     <b-field>
                         <b-select v-model="cong_viec.trang_thai" required :disabled="check_disabled"  >
@@ -226,7 +226,7 @@
                 </div>
             </div>
             <div class="form-group row">        
-              <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc <span class="color-warning">(*)</span></label>
+              <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhập công việc (*)</label>
               <div class="col-sm-8">
                   <b-input v-if="Object.entries(this.getTaskEdit).length <= 5" disabled type="text" v-model="my_info.display_name" required placeholder="Người nhập công việc" ></b-input>
                   <b-input v-else disabled type="text" v-model="cong_viec.ten_nnhap"></b-input>
@@ -651,5 +651,4 @@ export default {
 <style scoped>
 .multiselect__option--highlight {margin-left: 35px !important;}
 .list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
-span.color-warning {color: red}
 </style>

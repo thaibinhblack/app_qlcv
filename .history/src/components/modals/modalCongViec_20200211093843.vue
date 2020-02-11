@@ -651,5 +651,5 @@ export default {
 <style scoped>
 .multiselect__option--highlight {margin-left: 35px !important;}
 .list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
-span.color-warning {color: red}
+.color-warning {color: red}
 </style>

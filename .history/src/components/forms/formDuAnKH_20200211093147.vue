@@ -103,9 +103,6 @@ export default {
         du_an_kh_edit(newVal)
         {
             this.du_an_kh = newVal
-            this.selected_kh =  this.khach_hang.filter((value,index,array) => {
-                return array[index].id_khach_hang == newVal.id_khach_hang
-            })[0]
         },
         selected_kh(newVal)
         {
@@ -156,7 +153,6 @@ export default {
                             trang_thai_du_an: 1,
                             ten_kh: ''
                         }
-                        this.selected_kh = {}
                         app.$buefy.notification.open({
                             duration: 1500,
                             message: response.data.message,
