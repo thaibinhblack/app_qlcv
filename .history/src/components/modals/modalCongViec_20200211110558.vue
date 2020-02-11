@@ -606,9 +606,11 @@ export default {
     created()
     {
      
-        
+        this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
+             this.selected_user_giaoviec = this.selected_user_tiepnhan  =   this.my_info = response.data[0]
+        })
 
-        // console.log('length',Object.entries(this.getTaskEdit).length)
+        // console.log(Object.entries(this.getTaskEdit).length)
         if(Object.entries(this.getTaskEdit).length > 5)
         {
          
@@ -640,10 +642,7 @@ export default {
           this.api_files()
         }
         else{
-          this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info = response.data[0]
-          })
-         
+          this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info
         }
         // this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)
         
