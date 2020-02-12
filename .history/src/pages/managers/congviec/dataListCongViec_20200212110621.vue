@@ -1,6 +1,6 @@
 <template>
         <section class="section-data" > 
-          <!-- {{setting_modal}}  -->
+          {{setting_modal}} 
             <div class="header header-datalist">
                 
                 <ul class="list-action-data">
@@ -20,7 +20,7 @@
                           <b-select v-model="filter.id_du_an" expanded @input="FilterCongViecDuAn()">  
                               <option value="0"> --Tất cả  dự án--</option>
                               
-                              <option v-for="(da,index) in Object.entries(setting_modal.selected_du_an_setting).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
+                              <option v-for="(da,index) in LIST_DUAN" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
                           </b-select>
                       </b-field>
                     </li>
@@ -87,7 +87,7 @@ export default {
       'modal-setting': () => import('@/components/settings/modalSettingDataCV.vue'),
       'button-export-excel': () => import('./exportExcel.vue')
     },
-    props:["time"],
+    props:["time", "setting_modal"],
     data()
     {
       return {
@@ -111,7 +111,7 @@ export default {
       }
     },
     computed:{
-        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH", "setting_modal"])
+        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH"])
     },
     watch:
     {

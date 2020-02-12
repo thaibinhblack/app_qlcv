@@ -1,6 +1,6 @@
 <template>
         <section class="section-data" > 
-          <!-- {{setting_modal}}  -->
+          {{setting_modal}} 
             <div class="header header-datalist">
                 
                 <ul class="list-action-data">

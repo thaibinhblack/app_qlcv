@@ -1,6 +1,6 @@
 <template>
         <section class="section-data" > 
-          <!-- {{setting_modal}}  -->
+          {{setting_modal}} 
             <div class="header header-datalist">
                 
                 <ul class="list-action-data">
@@ -87,7 +87,7 @@ export default {
       'modal-setting': () => import('@/components/settings/modalSettingDataCV.vue'),
       'button-export-excel': () => import('./exportExcel.vue')
     },
-    props:["time"],
+    props:["time", "setting_modal"],
     data()
     {
       return {
@@ -111,7 +111,7 @@ export default {
       }
     },
     computed:{
-        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH", "setting_modal"])
+        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH"])
     },
     watch:
     {
