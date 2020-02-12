@@ -232,7 +232,7 @@ export default {
         },
         set_ten_du_an()
         {
-            // console.log('test')
+            console.log('test')
             this.du_an_kh.ten_du_an_kh = this.du_an.filter((value,index,array) => {
                 return array[index].id_du_an == this.du_an_kh.id_du_an
             })[0].ten_du_an
