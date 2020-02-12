@@ -9,13 +9,12 @@
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{ data.ten_loai_cv }}</li>
           <li style="font-weight:bold">TỔNG CỘNG</li>
       </ul>
-     
       <ul class="table-chart-pie data-right col-sm-2">
-          <li v-for="(data,index) in data_pie_lcv" :key="index">  {{ data.so_luong }}  </li>
+          <li v-for="(data,index) in data_pie_lcv" :key="index">  1h </li>
           <li  style="font-weight:bold">{{total_pie_lcv}}</li>
       </ul>
-       <ul class="table-chart-pie data-right col-sm-2">
-          <li v-for="(data,index) in data_pie_lcv" :key="index">  1h </li>
+      <ul class="table-chart-pie data-right col-sm-2">
+          <li v-for="(data,index) in data_pie_lcv" :key="index">  {{ data.so_luong }}  </li>
           <li  style="font-weight:bold">{{total_pie_lcv}}</li>
       </ul>
       <ul class="table-chart-pie data-right col-sm-2">

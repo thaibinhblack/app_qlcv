@@ -1,24 +1,18 @@
 <template>
 <div class="data-chart-pie row">
     <p class="background col-sm-6">LOẠI CÔNG VIỆC</p>
-    <p class="background col-sm-2">SL</p>
-    <p class="background col-sm-2">TGIAN</p>
-    <p class="background col-sm-2">TỈ LỆ</p>
+    <p class="background col-sm-3">SỐ LƯỢNG</p>
+    <p class="background col-sm-3">TỈ LỆ</p>
     <section class="data-chart-pie row">
       <ul class="table-chart-pie col-sm-6">    
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{ data.ten_loai_cv }}</li>
           <li style="font-weight:bold">TỔNG CỘNG</li>
       </ul>
-     
-      <ul class="table-chart-pie data-right col-sm-2">
+      <ul class="table-chart-pie data-right col-sm-3">
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{ data.so_luong }}  </li>
           <li  style="font-weight:bold">{{total_pie_lcv}}</li>
       </ul>
-       <ul class="table-chart-pie data-right col-sm-2">
-          <li v-for="(data,index) in data_pie_lcv" :key="index">  1h </li>
-          <li  style="font-weight:bold">{{total_pie_lcv}}</li>
-      </ul>
-      <ul class="table-chart-pie data-right col-sm-2">
+      <ul class="table-chart-pie data-right col-sm-3">
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{((data.so_luong / total_pie_lcv)*100).toFixed(1) +'%' }}</li>
           <li  style="font-weight:bold">100%</li>
       </ul>

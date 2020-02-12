@@ -16,12 +16,9 @@
         <div class="col-sm-12 col-md-6">
            <table-pie />
         </div>
-        <!-- <div class="col-sm-12 lbael-chart-lcv">
+        <div class="col-sm-12 lbael-chart-lcv">
             <label for="lbael-chart-lcv">THỐNG KÊ TỔNG TGIỜ LÀM CỦA LOẠI CÔNG VIỆC TRONG THÁNG {{new Date().getMonth() + 1}}/{{new Date().getFullYear()}}</label>
         </div>
-        <div class="col-sm-12 col-md-6">
-            <chart-pie-time />
-        </div> -->
     </div>
 </div>
 </template>
@@ -31,8 +28,7 @@ export default {
     components:
     {
         'chart-pie': () => import('@/components/charts/chartPie.vue'),
-        'table-pie': () => import("@/components/charts/tableChartPie.vue"),
-        'chart-pie-time': () => import('@/components/charts/chartPieTimeLCV.vue')
+        'table-pie': () => import("@/components/charts/tableChartPie.vue")
     },
     data()
     {
