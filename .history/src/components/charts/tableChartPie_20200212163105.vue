@@ -12,11 +12,11 @@
      
       <ul class="table-chart-pie data-right col-sm-2">
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{data.so_luong}}  </li>
-          <li  style="font-weight:bold">{{total_pie_lcv}}</li>
+          <li  style="font-weight:bold">{{total_time_lcv}}</li>
       </ul>
        <ul class="table-chart-pie data-right col-sm-2">
           <li v-for="(data,index) in data_pie_lcv" :key="index"> {{ data.tgian }} giờ </li>
-          <li  style="font-weight:bold">{{total_time_lcv}}</li>
+          <li  style="font-weight:bold">{{total_pie_lcv}}</li>
       </ul>
       <ul class="table-chart-pie data-right col-sm-2">
           <li v-for="(data,index) in data_pie_lcv" :key="index">  {{((data.so_luong / total_pie_lcv)*100).toFixed(1) +'%' }}</li>

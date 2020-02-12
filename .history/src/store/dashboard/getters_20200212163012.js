@@ -33,7 +33,7 @@ export default {
     total_time_lcv: state => {
          var total = 0;
          state.pies.forEach((pie) => {
-             total = total + parseFloat(pie.tgian)
+             total = total + pie.tgian
          })
          return total;
     }
