@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <p class="background">QUẢN LÍ LỊCH CÔNG TÁC</p>
-            <b-button class="btn btn-add" @click="isModalCalendar = !isModalCalendar">Thêm mới</b-button>
+            <b-button class="btn btn-add">Thêm mới</b-button>
         </div>
         <div class="col-sm-12">
             <vue-cal  
@@ -12,8 +12,7 @@
           :on-event-click="onEventClick" />
         </div>  
         <b-modal :active.sync="isModalCalendar"  width="80%" :can-cancel="false"  @on-cancel="close()">
-            <p class="background" >{{Object.entries(data_event).length > 0 ? data_event.title : 'THÊM MỚI LỊCH CÔNG TÁC'}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
-            <modal-calendar />
+            <p class="background" >{{data_event.title}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
         </b-modal>
     </div>
 </template>
@@ -23,8 +22,7 @@ import VueCal from 'vue-cal'
 export default {
     components:
     {
-         'vue-cal': VueCal,
-         'modal-calendar': () => import('@/components/modals/modalCalendar.vue')
+         'vue-cal': VueCal
     },
     data()
     {

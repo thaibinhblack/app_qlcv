@@ -11,7 +11,7 @@
             events-count-on-year-view
           :on-event-click="onEventClick" />
         </div>  
-        <b-modal :active.sync="isModalCalendar"  width="80%" :can-cancel="false"  @on-cancel="close()">
+        <b-modal :active.sync="isModalCalendar"  width="80%" :can-cancel="false"  @on-cancel="close()" class="row">
             <p class="background" >{{Object.entries(data_event).length > 0 ? data_event.title : 'THÊM MỚI LỊCH CÔNG TÁC'}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
             <modal-calendar />
         </b-modal>

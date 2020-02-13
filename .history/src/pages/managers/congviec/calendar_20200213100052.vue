@@ -13,7 +13,6 @@
         </div>  
         <b-modal :active.sync="isModalCalendar"  width="80%" :can-cancel="false"  @on-cancel="close()">
             <p class="background" >{{Object.entries(data_event).length > 0 ? data_event.title : 'THÊM MỚI LỊCH CÔNG TÁC'}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
-            <modal-calendar />
         </b-modal>
     </div>
 </template>
@@ -23,8 +22,7 @@ import VueCal from 'vue-cal'
 export default {
     components:
     {
-         'vue-cal': VueCal,
-         'modal-calendar': () => import('@/components/modals/modalCalendar.vue')
+         'vue-cal': VueCal
     },
     data()
     {
