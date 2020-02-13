@@ -1,9 +1,9 @@
 <template>
-<b-tabs  >
+<b-tabs @keydown.esc="close()">
     <!-- {{getTaskEdit}} -->
   <b-tab-item  label="Thông tin công việc">
   
-    <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+    <form @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
@@ -131,8 +131,8 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false"  v-model="cong_viec.time_hoan_thanh.HH" :min="1" :max="24" class="tag-time" style="margin-right:5px;"> giờ :
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_hoan_thanh.mm" :min="0" :max="59" class="tag-time" style="margin-left: 5px;"> phút
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false"  v-model="cong_viec.time_hoan_thanh.HH" min="1" max="24" class="tag-time" style="margin-right:5px;"> giờ :
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_hoan_thanh.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;"> phút
                 </div>
                 <div class="col-sm-4">
                   <b-field >

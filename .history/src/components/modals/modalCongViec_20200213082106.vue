@@ -1,9 +1,9 @@
 <template>
-<b-tabs  >
+<b-tabs @keydown.esc="close()">
     <!-- {{getTaskEdit}} -->
   <b-tab-item  label="Thông tin công việc">
   
-    <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+    <form @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">

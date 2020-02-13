@@ -1,21 +1,20 @@
 <template>
-<b-tabs  >
+<b-tabs @keydown.esc="close()">
     <!-- {{getTaskEdit}} -->
   <b-tab-item  label="Thông tin công việc">
   
-    <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+    <form @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
               <div class="col-sm-4 col-form-label">Dự án <span class="color-warning">(*)</span></div>
               <div class="col-sm-8">
-                <b-field :disabled="cong_viec.trang_thai == 3 ?  true : false">
+                <b-field>
                   <!-- {{selected_du_an}} -->
                   <!-- {{Object.entries(setting_modal.selected_du_an_setting).length}} -->
                   <multiselect v-model="selected_du_an" 
-                  :disabled="cong_viec.trang_thai == 3 ?  true : false"
                   :options="Object.entries(setting_modal.selected_du_an_setting).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" 
-                  label="ten_du_an" 
+                  label="ten_du_an" :disabled="check_disabled" 
                   track-by="ten_du_an" placeholder="Danh sách dự án"
                   :multiple="false"  :show-labels="false" ></multiselect>
                 </b-field>
@@ -26,8 +25,7 @@
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" 
-                  :disabled="cong_viec.trang_thai == 3 ?  true : false"
-                  :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" 
+                  :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" :disabled="check_disabled"
                   :multiple="true" :taggable="true" @tag="addTag"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
                 </b-field>
               </div>
@@ -40,7 +38,7 @@
                     <multiselect :options="Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV"
                     v-model="selected_loai_cv"
                     :multiple="false"
-                    :disabled="cong_viec.trang_thai == 3 ?  true : false"
+                    :disabled="check_disabled"
                     :group-values=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'children'"
                     :group-label=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'parent' "
                     :group-select="false"
@@ -117,8 +115,8 @@
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_nhan_viec.HH" min="1" max="24" class="tag-time" style="margin-right:5px;"> giờ :
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_nhan_viec.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;"> phút
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_nhan_viec.HH" min="1" max="24" class="tag-time" style="margin-right:5px;"> :
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_nhan_viec.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
                 </div>
               <div class="col-sm-4">
                 <b-field >
@@ -131,8 +129,8 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false"  v-model="cong_viec.time_hoan_thanh.HH" :min="1" :max="24" class="tag-time" style="margin-right:5px;"> giờ :
-                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_hoan_thanh.mm" :min="0" :max="59" class="tag-time" style="margin-left: 5px;"> phút
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false"  v-model="cong_viec.time_hoan_thanh.HH" min="1" max="24" class="tag-time" style="margin-right:5px;"> :
+                  <input type="number" :disabled="cong_viec.trang_thai == 3 ?  true : false" v-model="cong_viec.time_hoan_thanh.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;">
                 </div>
                 <div class="col-sm-4">
                   <b-field >
@@ -219,7 +217,7 @@
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái <span class="color-warning">(*)</span> </label>
                 <div class="col-sm-8">
                     <b-field>
-                        <b-select v-model="cong_viec.trang_thai" required :disabled="cong_viec.trang_thai == 3 ?  true : false" >
+                        <b-select v-model="cong_viec.trang_thai" required :disabled="check_disabled"  >
                             <option  value="1" selected>Chưa thực hiện</option>
                             <option  value="2">Đang thực hiện</option>
                             <option  value="3">Đã hoàn thành</option>
@@ -314,13 +312,14 @@
 </template>
 
 <script>
+import VueTimepicker from 'vue2-timepicker'
 import Multiselect from 'vue-multiselect'
 import { mapGetters } from 'vuex'
 export default {
     props: ["isActiveModal"],
     components:
     {
-      Multiselect,
+      Multiselect,VueTimepicker,
       'cong-viec-goc': () => import('@/components/congviec/congviecGoc.vue'),
       'form-tham-dinh': () => import('@/components/forms/formThamDinh.vue')
     },
@@ -341,13 +340,13 @@ export default {
           nguoi_nhan_viec: 0,
           nguoi_giao_viec: 0,
           time_nhan_viec: {
-            HH: "07",
-            mm: "00",
+            HH: 7,
+            mm: 0,
             ss: '00'
           },
           time_hoan_thanh: {
-            HH: "07",
-            mm: "00",
+            HH: 7,
+            mm: 0,
             ss: '00'
           },
           type_cv: "0",
