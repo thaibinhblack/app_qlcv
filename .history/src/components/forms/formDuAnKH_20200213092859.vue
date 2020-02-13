@@ -81,7 +81,7 @@ export default {
             khach_hang: [],
             khach_hang_tmp: [],
             search: false,
-            selected_kh: {}
+            selected_kh: null
         }
     },
     computed: {
@@ -109,13 +109,13 @@ export default {
         },
         selected_kh(newVal)
         {
-        //    console.log(newVal)
-            this.du_an.id_khach_hang = newVal.id_khach_hang
+            this.du_an.id_khach_hang = newVal
             this.search = false
-            this.du_an.ten_kh = newVal.ten_kh
-            this.du_an_kh.ten_du_an_kh =  this.du_an_kh.ten_du_an_kh  + ' '+ newVal.ten_kh
-        },
-        
+            this.du_an.ten_kh = this.khach_hang.filter((value,index,array) => {
+                return array[index].id_khach_hang == newVal
+            })[0].ten_kh
+             this.du_an_kh.ten_du_an_kh =  this.du_an_kh.ten_du_an_kh  +  this.du_an.ten_kh
+        }
     },
     methods: {
         api_kh()

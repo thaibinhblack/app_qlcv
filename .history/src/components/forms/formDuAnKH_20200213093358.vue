@@ -21,7 +21,7 @@
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label" >Khách hàng</label>
             <div class="col-sm-9">
-                <multiselect v-model="selected_kh" :options="khach_hang" label="ten_kh" track-by="id_khach_hang"  style="z-index:9999"></multiselect>
+                <multiselect @change="change_customer" v-model="selected_kh" :options="khach_hang" label="ten_kh" track-by="id_khach_hang"  style="z-index:9999"></multiselect>
             </div>
         </div>
        
@@ -107,14 +107,16 @@ export default {
                 return array[index].id_khach_hang == newVal.id_khach_hang
             })[0]
         },
-        selected_kh(newVal)
-        {
-        //    console.log(newVal)
-            this.du_an.id_khach_hang = newVal.id_khach_hang
-            this.search = false
-            this.du_an.ten_kh = newVal.ten_kh
-            this.du_an_kh.ten_du_an_kh =  this.du_an_kh.ten_du_an_kh  + ' '+ newVal.ten_kh
-        },
+        // selected_kh(newVal)
+        // {
+           
+        //     this.du_an.id_khach_hang = newVal
+        //     this.search = false
+        //     this.du_an.ten_kh = this.khach_hang.filter((value,index,array) => {
+        //         return array[index].id_khach_hang == newVal
+        //     })[0].ten_kh
+        //     // this.du_an_kh.ten_du_an_kh =  this.du_an_kh.ten_du_an_kh  +  this.du_an.ten_kh
+        // },
         
     },
     methods: {
@@ -237,6 +239,10 @@ export default {
             this.du_an_kh.ten_du_an_kh = this.du_an.filter((value,index,array) => {
                 return array[index].id_du_an == this.du_an_kh.id_du_an
             })[0].ten_du_an
+        },
+        change_customer()
+        {
+            console.log(this.selected_kh)
         }
     },
     created()

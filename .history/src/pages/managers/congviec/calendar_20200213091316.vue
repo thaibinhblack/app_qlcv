@@ -5,8 +5,8 @@
            hide-weekends
             events-count-on-year-view
           :on-event-click="onEventClick" />  
-        <b-modal :active.sync="isModalCalendar"  width="80%" :can-cancel="false"  @on-cancel="close()">
-            <p class="background" >{{data_event.title}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
+        <b-modal :active.sync="isModalCalendar"  full-screen :can-cancel="false"  @on-cancel="close()">
+            <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
 
         </b-modal>
     </div>
@@ -44,15 +44,14 @@ export default {
                 class: 'health'
                 },
             ],
-            isModalCalendar: false,
-            data_event: {}
+            isModalCalendar: false
         }
     },
     methods:
     {
         onEventClick (event, e) {
             // this.selectedEvent = event
-            this.data_event = event
+            console.log(event)
             this.isModalCalendar = true
 
             // Prevent navigating to narrower view (default vue-cal behavior).
