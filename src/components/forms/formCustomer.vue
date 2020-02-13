@@ -98,6 +98,7 @@ export default {
                     type: type,
                     hasIcon: true
                 })
+                app.$emit('update_khachhang',false)
             }).catch(() => {
                 app.$buefy.notification.open({
                     duration: 1500,

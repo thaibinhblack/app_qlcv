@@ -31,7 +31,7 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Tình trạng chức năng</label>
             <div class="col-sm-8">
                 <b-field>
-                    <b-select v-model="customer.tinh_trang_khach_hang" >
+                    <b-select v-model="customer.trang_thai_kh" >
                         
                         <option value="1" selected>Đang hoạt động</option>
                         <option value="2">Đang bảo trì</option>
@@ -57,7 +57,11 @@ export default {
     {
         return {
             customer: {
-                tinh_trang_khach_hang: 1
+                trang_thai_kh: 1,
+                ten_kh: "",
+                dia_chi_kh: "",
+                sdt_kh: "",
+                nguoi_dai_dien: ""
             }
         }
     },
@@ -75,12 +79,16 @@ export default {
             customer.append("TEN_KH",this.customer.ten_kh);
             customer.append("DIA_CHI_KH",this.customer.dia_chi_kh)
             customer.append("SDT_KH",this.customer.sdt_kh);
-            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien_kh)
-            customer.append("TRANG_THAI_KH",this.customer.tinh_trang_khach_hang);
+            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien)
+            customer.append("TRANG_THAI_KH",this.customer.trang_thai_kh);
             const app = this;
             this.axios.post(this.$store.state.config.API_URL +'customer?api_token='+this.$cookies.get('token'),customer).then((response) => {
                 app.customer = {
-                    trang_thai_kh: 1
+                    trang_thai_kh: 1,
+                    ten_kh: "",
+                    dia_chi_kh: "",
+                    sdt_kh: "",
+                    nguoi_dai_dien: ""
                 }
                 const type = response.data.success == true ? 'is-success' : 'is-danger'
                 app.$buefy.notification.open({
@@ -90,6 +98,7 @@ export default {
                     type: type,
                     hasIcon: true
                 })
+                app.$emit('update_khachhang',false)
             }).catch(() => {
                 app.$buefy.notification.open({
                     duration: 1500,
@@ -107,10 +116,10 @@ export default {
             customer.append("TEN_KH",this.customer.ten_kh);
             customer.append("DIA_CHI_KH",this.customer.dia_chi_kh)
             customer.append("SDT_KH",this.customer.sdt_kh);
-            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien_kh)
-            customer.append("TRANG_THAI_KH",this.customer.tinh_trang_khach_hang);
+            customer.append("NGUOI_DAI_DIEN_KH",this.customer.nguoi_dai_dien)
+            customer.append("TRANG_THAI_KH",this.customer.trang_thai_kh);
             const app = this;
-            if(!this.customer.tinh_trang_khach_hang)
+            if(!this.customer.trang_thai_kh)
             {
                 app.$buefy.notification.open({
                     duration: 1500,

@@ -10,6 +10,7 @@ import store from './store'
 import VueDraggable from 'vue-draggable'
 import JqxGrid from "jqwidgets-scripts/jqwidgets-vue/vue_jqxgrid.vue";
 import VueCookies from 'vue-cookies'
+import 'vue2-timepicker/dist/VueTimepicker.css'
 import VueApexCharts from 'vue-apexcharts'
 import JsonExcel from 'vue-json-excel'
 import 'vue-cal/dist/vuecal.css'

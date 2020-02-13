@@ -30,6 +30,7 @@
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.5.2",
     "vue-axios": "^2.1.5",
+    "vue-cal": "^2.24.0",
     "vue-color": "^2.7.0",
     "vue-cookies": "^1.5.13",
     "vue-draggable": "^2.0.3",
