@@ -69,7 +69,7 @@
                 :checked-rows.sync="checkedRows"
                 :is-row-checkable="(row) => row.trang_thai == 3"
                 checkable
-                class="table-data-cv"
+               
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
                 :data="list_cong_viec">
@@ -186,5 +186,4 @@ export default {
 .list-action-data>li {display: inline-block; margin: 0 5px;}
 .list-action-data>li:last-child, li.right {float: right}
 .filter-duan-kh>.filed {width: 200px !important;;}
-.table-data-cv table tr:nth-child(even) {background: #e2e2e2;}
 </style> 

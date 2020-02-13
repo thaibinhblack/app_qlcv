@@ -13,11 +13,11 @@
                           <option :value="20">20</option>
                           <option :value="50">50</option>
                           <option :value="100">100</option>
-                          <option :value="200">200</option>
-                          <option :value="300">300</option>
-                          <option :value="400">400</option>
-                          <option :value="500">500</option>
-                          <option :value="1000">1000</option>
+                          <option :value="100">200</option>
+                          <option :value="100">300</option>
+                          <option :value="100">400</option>
+                          <option :value="100">500</option>
+                          <option :value="100">1000</option>
                         </b-select>
                       </b-field>
                     </li>
@@ -69,7 +69,7 @@
                 :checked-rows.sync="checkedRows"
                 :is-row-checkable="(row) => row.trang_thai == 3"
                 checkable
-                class="table-data-cv"
+               
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
                 :data="list_cong_viec">
@@ -186,5 +186,4 @@ export default {
 .list-action-data>li {display: inline-block; margin: 0 5px;}
 .list-action-data>li:last-child, li.right {float: right}
 .filter-duan-kh>.filed {width: 200px !important;;}
-.table-data-cv table tr:nth-child(even) {background: #e2e2e2;}
 </style> 

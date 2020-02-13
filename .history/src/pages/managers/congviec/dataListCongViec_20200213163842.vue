@@ -2,10 +2,9 @@
         <section class="section-data" > 
           <!-- {{setting_modal}}  -->
             <div class="header header-datalist">
-                {{checkedRows.length}}
+                {{checkedRows}}
                 <ul class="list-action-data">
                     <li><b-button class="btn btn-add" @click='$store.dispatch("updateModalEdit",true)' >Thêm mới</b-button></li>
-                    <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click='$store.dispatch("updateModalEdit",true)' >Thẩm định</b-button></li>
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -13,11 +12,6 @@
                           <option :value="20">20</option>
                           <option :value="50">50</option>
                           <option :value="100">100</option>
-                          <option :value="200">200</option>
-                          <option :value="300">300</option>
-                          <option :value="400">400</option>
-                          <option :value="500">500</option>
-                          <option :value="1000">1000</option>
                         </b-select>
                       </b-field>
                     </li>
@@ -67,9 +61,9 @@
                 :per-page="perPage"
                 :current-page.sync="currentPage"
                 :checked-rows.sync="checkedRows"
-                :is-row-checkable="(row) => row.trang_thai == 3"
+                :is-row-checkable="(row) => row.trang_thai === 3"
                 checkable
-                class="table-data-cv"
+               
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
                 :data="list_cong_viec">
@@ -186,5 +180,4 @@ export default {
 .list-action-data>li {display: inline-block; margin: 0 5px;}
 .list-action-data>li:last-child, li.right {float: right}
 .filter-duan-kh>.filed {width: 200px !important;;}
-.table-data-cv table tr:nth-child(even) {background: #e2e2e2;}
 </style> 

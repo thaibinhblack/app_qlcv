@@ -6,9 +6,8 @@ export default {
     {
         var total = 0 ;
         state.list_congviec.forEach((cv) => {
-            
+            console.log(parseFloat(cv.gio_thuc_hien))
             total = total + parseFloat(cv.gio_thuc_hien)
-            // console.log(total, parseFloat(cv.gio_thuc_hien))
         })
         return total;
     },

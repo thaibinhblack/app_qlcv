@@ -186,5 +186,5 @@ export default {
 .list-action-data>li {display: inline-block; margin: 0 5px;}
 .list-action-data>li:last-child, li.right {float: right}
 .filter-duan-kh>.filed {width: 200px !important;;}
-.table-data-cv table tr:nth-child(even) {background: #e2e2e2;}
+.table-data-cv tr:nth-child(even) {background: #e2e2e2;}
 </style> 
