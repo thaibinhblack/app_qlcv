@@ -48,7 +48,6 @@ export default new Vuex.Store({
         module_congviec,
         module_duan,
         module_users,
-        module_dashboard,
-        module_lich_cong_tac
+        module_dashboard
     }
 })

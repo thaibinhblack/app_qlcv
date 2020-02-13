@@ -1,5 +1,5 @@
 <template>
-<form style="width:100%;padding:15px;" @submit.prevent="submit_lich_cong_tac()">
+<form style="width:100%;padding:15px;">
 
     <div class="form-group row">
         <label for="inputPassword3" class="col-sm-12 col-form-label" >Tên lịch công tác <span class="color-red">(*)</span></label>
@@ -63,7 +63,6 @@
 import Multiselect from 'vue-multiselect'
 import { mapGetters } from 'vuex'
 export default {
-    props:["cont_tac_edit"],
     components:
     {
         Multiselect
@@ -77,13 +76,13 @@ export default {
                     HH: "07",
                     mm: "00"
                 },
-                date_start: new Date().toISOString().substring(0,10),
+                date_start: new Date().toLocaleDateString(),
                 time_end:{
                     HH: "07",
                     mm: "00"
                 },
-                date_end: new Date().toISOString().substring(0,10),
-                noi_dung_lich_ct: ""
+                date_end: new Date().toLocaleDateString(),
+                noi_dung_lic_ct: ""
 
             },
             selected_user_cong_tac: []
@@ -92,66 +91,6 @@ export default {
     computed:
     {
         ...mapGetters(["LIST_USER"])
-    },
-    watch:
-    {
-        cong_tac_edit(val)
-        {
-            this.cong_tac = val
-        }
-    },
-    methods:
-    {
-        submit_lich_cong_tac()
-        {   var app = this;
-            this.$store.dispatch("create_LICH_CONG_TAC",this.cong_tac).then((response) => {
-                
-                 if(response.success == true)
-                 {
-                    app.$buefy.notification.open({
-                        duration: 1500,
-                        message: response.message,
-                        position: 'is-bottom-left',
-                        type: 'is-success',
-                        hasIcon: true
-                    })
-                    this.cong_tac = {
-                        ten_lich_ct: "",
-                        time_start: {
-                            HH: "07",
-                            mm: "00"
-                        },
-                        date_start: new Date().toISOString().substring(0,10),
-                        time_end:{
-                            HH: "07",
-                            mm: "00"
-                        },
-                        date_end: new Date().toISOString().substring(0,10),
-                        noi_dung_lich_ct: ""
-
-                    }
-                    this.selected_user_cong_tac = []
-                 }
-                 else
-                 {
-                    app.$buefy.notification.open({
-                        duration: 1500,
-                        message: response.message,
-                        position: 'is-bottom-left',
-                        type: 'is-warning',
-                        hasIcon: true
-                    })
-                 }
-             }).catch(() => {
-                app.$buefy.notification.open({
-                    duration: 1500,
-                    message: 'Lỗi server!',
-                    position: 'is-bottom-left',
-                    type: 'is-danger',
-                    hasIcon: true
-                })
-             })
-        }
     },
     created()
     {

@@ -11,9 +11,9 @@
             events-count-on-year-view
           :on-event-click="onEventClick" />
         </div>  
-        <b-modal :active.sync="isModalCalendar"  :width="'80%'" :can-cancel="false"  @on-cancel="close()">
+        <b-modal :active.sync="isModalCalendar"  :width="'90%'" :can-cancel="false"  @on-cancel="close()">
             <p class="background" >{{Object.entries(data_event).length > 0 ? data_event.title : 'THÊM MỚI LỊCH CÔNG TÁC'}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
-            <modal-calendar :cong_tac_edit="cong_tac" />
+            <modal-calendar />
         </b-modal>
     </div>
 </template>
@@ -52,8 +52,7 @@ export default {
                 },
             ],
             isModalCalendar: false,
-            data_event: {},
-            cong_tac: []
+            data_event: {}
         }
     },
     methods:

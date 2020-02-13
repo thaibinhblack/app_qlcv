@@ -643,7 +643,7 @@ export default {
           this.api_files()
         }
         else{
-           this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info
+           this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info = response.data[0]
          
         }
         // this.$store.dispatch("fetchUserQLDA",this.selected_du_an.id_du_an)

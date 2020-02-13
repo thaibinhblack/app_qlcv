@@ -115,22 +115,6 @@ export default {
                         type: 'is-success',
                         hasIcon: true
                     })
-                    this.cong_tac = {
-                        ten_lich_ct: "",
-                        time_start: {
-                            HH: "07",
-                            mm: "00"
-                        },
-                        date_start: new Date().toISOString().substring(0,10),
-                        time_end:{
-                            HH: "07",
-                            mm: "00"
-                        },
-                        date_end: new Date().toISOString().substring(0,10),
-                        noi_dung_lich_ct: ""
-
-                    }
-                    this.selected_user_cong_tac = []
                  }
                  else
                  {

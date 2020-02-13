@@ -130,7 +130,6 @@ export default {
                         noi_dung_lich_ct: ""
 
                     }
-                    this.selected_user_cong_tac = []
                  }
                  else
                  {
