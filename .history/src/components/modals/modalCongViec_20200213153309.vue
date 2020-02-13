@@ -643,8 +643,8 @@ export default {
           this.api_files()
         }
         else{
-          this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
-            this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_info = response.data[0]
+           this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
+            this.selected_user_giaoviec = this.selected_user_tiepnhan = this.my_inforesponse.data[0]
           })
            
          
