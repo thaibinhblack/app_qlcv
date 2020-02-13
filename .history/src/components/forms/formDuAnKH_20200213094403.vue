@@ -74,8 +74,7 @@ export default {
     {
         return {
             du_an_kh : {
-                id_du_an: 0,
-                id_loai_du_an: 0,
+                 id_loai_du_an: 0,
                 trang_thai_du_an: 0,
                 ten_kh: ''
             },
