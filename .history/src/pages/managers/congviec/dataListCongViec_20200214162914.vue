@@ -95,6 +95,7 @@
                 :checked-rows.sync="checkedRows"
                 :is-row-checkable="(row) => row.trang_thai == 3"
                 checkable
+                :row-class="(row, index) => index %2 === 0 && 'is-info'"
                 class="table-data-cv"
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
@@ -110,7 +111,7 @@
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                     <b-table-column label="Thời gian thẩm định">
-                      <input v-model="props.row['tham_dinh_tgian']" type="number">
+                      {{props.row["tham_dinh_tgian"]}}
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>

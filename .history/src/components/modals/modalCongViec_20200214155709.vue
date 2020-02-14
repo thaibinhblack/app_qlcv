@@ -360,8 +360,7 @@ export default {
           },
           type_cv: "0",
           do_uu_tien: 1,
-          trang_thai_td: 0,
-          tham_dinh_tgian: 0
+          trang_thai_td: 0
         },
         selected_du_an: {},
         selected_du_an_kh: [],
@@ -571,7 +570,7 @@ export default {
           ngay_cam_ket: new Date().toISOString().substr(0,10),
           type: false
         }
-        // this.$store.dispatch("updateModalEdit",false)
+        this.$store.dispatch("updateModalEdit",false)
         this.$store.dispatch("resetCongViecEdit")
         // console.log('cong việc close',this.cong_viec)
         

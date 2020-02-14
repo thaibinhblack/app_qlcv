@@ -110,7 +110,7 @@
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                     <b-table-column label="Thời gian thẩm định">
-                      <input v-model="props.row['tham_dinh_tgian']" type="number">
+                      {{props.row["tham_dinh_tgian"]}}
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>

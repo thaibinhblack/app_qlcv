@@ -571,7 +571,7 @@ export default {
           ngay_cam_ket: new Date().toISOString().substr(0,10),
           type: false
         }
-        // this.$store.dispatch("updateModalEdit",false)
+        this.$store.dispatch("updateModalEdit",false)
         this.$store.dispatch("resetCongViecEdit")
         // console.log('cong việc close',this.cong_viec)
         

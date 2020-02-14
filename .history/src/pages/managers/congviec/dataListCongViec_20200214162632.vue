@@ -95,13 +95,14 @@
                 :checked-rows.sync="checkedRows"
                 :is-row-checkable="(row) => row.trang_thai == 3"
                 checkable
+                :row-class="(row, index) => index %2 === 0 && 'is-info'"
                 class="table-data-cv"
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
                 :data="list_cong_viec">
                  <template slot-scope="props">
                    
-                    <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
+                    <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label" numeric sortable >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') :
@@ -110,7 +111,7 @@
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                     <b-table-column label="Thời gian thẩm định">
-                      <input v-model="props.row['tham_dinh_tgian']" type="number">
+                      {{props.row["tham_dinh_tgian"]}}
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
@@ -192,10 +193,6 @@ export default {
         if(val != 0)
         {
           this.list_cong_viec = this.list_cong_viec_tmp.filter((value,index,array) => {
-            if(val == 1)
-            {
-              array[index].tham_dinh_tgian = array[index].gio_thuc_hien
-            }
             return array[index].trang_thai_td == val
           })
         }
