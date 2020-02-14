@@ -240,7 +240,7 @@
       </div>
       <div class="form-group row">
         <!-- {{Object.entries(this.getTaskEdit)}} -->
-          <div class="col-sm-9" v-if="cong_viec.trang_thai_td == 0 && cong_viec.trang_thai != 3">
+          <div class="col-sm-9" v-if="cong_viec.trang_thai_td == 0 && Object.entries(this.getTaskEdit).length <= 5 && cong_viec.trang_thai == 3">
             <!-- {{Object.entries(this.getTaskEdit).length === 0}} -->
               <button type="submit" v-if="Object.entries(this.getTaskEdit).length <= 5"  class="btn btn-primary btn-form">Lưu lại</button>
               <button  type="submit" v-else class="btn btn-warning btn-form">Cập nhật</button>
