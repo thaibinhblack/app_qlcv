@@ -359,8 +359,7 @@ export default {
             ss: '00'
           },
           type_cv: "0",
-          do_uu_tien: 1,
-          trang_thai_td: 0
+          do_uu_tien: 1
         },
         selected_du_an: {},
         selected_du_an_kh: [],
