@@ -241,13 +241,7 @@
       </div>
       <div class="form-group row">
         <!-- {{Object.entries(this.getTaskEdit)}} -->
-          <div class="col-sm-9" v-if="cong_viec.trang_thai_td == 1 && cong_viec.trang_thai == 3">
-              <button v-if="my_info.id_rule == 0" disabled class="btn btn-form"> Chờ thẩm định</button>
-              <button v-if="my_info.id_rule == 1"  @click="tham_dinh()" class="btn btn-primary btn-form">Thẩm định </button>
-              <button v-if="my_info.id_rule == 1" @click="huy_tham_dinh()"  class="btn btn-warning btn-form">Hủy thẩm định </button>
-              <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
-          </div>
-          <div class="col-sm-9" v-else>
+          <div class="col-sm-9" v-if="cong_viec.trang_thai_td != 1 && cong_viec.trang_thai != 3">
             <!-- {{Object.entries(this.getTaskEdit).length === 0}} -->
               <button type="submit" v-if="Object.entries(this.getTaskEdit).length <= 5"  class="btn btn-primary btn-form">Lưu lại</button>
               <button  type="submit" v-else class="btn btn-warning btn-form">Cập nhật</button>
@@ -255,7 +249,12 @@
               <button type="button" @click="clear()" class="btn btn-success btn-form">Clear</button>
               <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
           </div>
-          
+          <div class="col-sm-9" v-else>
+              <button v-if="my_info.id_rule == 0" disabled class="btn btn-form"> Chờ thẩm định</button>
+              <button v-if="my_info.id_rule == 1"  @click="tham_dinh()" class="btn btn-primary btn-form">Thẩm định </button>
+              <button v-if="my_info.id_rule == 1" @click="huy_tham_dinh()"  class="btn btn-warning btn-form">Hủy thẩm định </button>
+              <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
+          </div>
       </div>
     </form>
   </b-tab-item>
