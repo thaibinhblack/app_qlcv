@@ -112,7 +112,7 @@ export default {
             {
                 resolve({
                     success: false,
-                    message: 'Công việc ' +  cong_viec.ten_cv +' tiến độ chưa đạt 100%!',
+                    message: 'Công việc ' +  cong_viec.ten_cv +' tiến độ chưa đạt 100%',
                     result: null,
                     status: 500
                 })

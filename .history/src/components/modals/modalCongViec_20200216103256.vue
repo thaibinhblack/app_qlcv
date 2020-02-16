@@ -234,7 +234,7 @@
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái <span class="color-warning">(*)</span> </label>
                 <div class="col-sm-8">
                     <b-field>
-                        <b-select v-model="cong_viec.trang_thai" required :disabled="cong_viec.trang_thai_td == 1 ?  true : false" @input="selected_trang_thai()" >
+                        <b-select v-model="cong_viec.trang_thai" required :disabled="cong_viec.trang_thai_td == 1 ?  true : false" >
                             <option  value="1" selected>Chưa thực hiện</option>
                             <option  value="2">Đang thực hiện</option>
                             <option  value="3">Đã hoàn thành</option>
@@ -647,13 +647,6 @@ export default {
       tham_dinh()
       {
           this.$store.dispatch("createThamDinhCV",this.cong_viec)
-      },
-      selected_trang_thai()
-      {
-        if(this.cong_viec.trang_thai == 3)
-        {
-          this.cong_viec.tien_do = 100
-        }
       }
     },
     created()

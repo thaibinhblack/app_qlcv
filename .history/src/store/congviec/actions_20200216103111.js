@@ -112,7 +112,7 @@ export default {
             {
                 resolve({
                     success: false,
-                    message: 'Công việc ' +  cong_viec.ten_cv +' tiến độ chưa đạt 100%!',
+                    message: 'Tiến độ chưa đạt 100%',
                     result: null,
                     status: 500
                 })
@@ -120,12 +120,7 @@ export default {
             else
             {
                 axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
-                    resolve({
-                        success: true,
-                        message: 'Bạn vừa thêm công viêc '+ cong_viec.ten_cv,
-                        result: cong_viec,
-                        status: 200
-                    })
+                    resolve(true)
                 }).catch(() => {
                     reject(false)
                 })

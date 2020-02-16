@@ -108,11 +108,11 @@ export default {
             form_cong_viec.append("P_TYPE",cong_viec.type)
             form_cong_viec.append("P_TIME_NHAN_VIEC", JSON.stringify(cong_viec.time_nhan_viec))
             form_cong_viec.append("P_TIME_HOAN_THANH", JSON.stringify(cong_viec.time_hoan_thanh))
-            if(cong_viec.trang_thai == 3 && parseInt(cong_viec.tien_do) < 100)
+            if(cong_viec.trang_thai == 3 && cong_viec.tien_do < 100)
             {
                 resolve({
                     success: false,
-                    message: 'Công việc ' +  cong_viec.ten_cv +' tiến độ chưa đạt 100%!',
+                    message: 'Tiến độ chưa đạt 100%',
                     result: null,
                     status: 500
                 })
@@ -120,12 +120,7 @@ export default {
             else
             {
                 axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
-                    resolve({
-                        success: true,
-                        message: 'Bạn vừa thêm công viêc '+ cong_viec.ten_cv,
-                        result: cong_viec,
-                        status: 200
-                    })
+                    resolve(true)
                 }).catch(() => {
                     reject(false)
                 })
