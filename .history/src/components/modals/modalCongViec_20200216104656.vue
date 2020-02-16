@@ -185,9 +185,8 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên <span class="color-warning">(*)</span> </label>
                 <div class="col-sm-8">
-                  <!-- {{cong_viec.do_uu_tien}} -->
+                  {{cong_viec.do_uu_tien}}
                   <b-select :disabled="cong_viec.trang_thai_td == 1 ?  true : false" v-model="cong_viec.do_uu_tien" >
-                    <option :value="0">Chưa có độ ưu tiên</option>
                     <option :value="1">Cao</option>
                     <option :value="2">Trung bình</option>
                     <option :value="3">Thấp</option>
@@ -589,7 +588,7 @@ export default {
           ngay_cam_ket: new Date().toISOString().substr(0,10),
           type: false
         }
-        this.$store.dispatch("updateModalEdit",false)
+        // this.$store.dispatch("updateModalEdit",false)
         this.$store.dispatch("resetCongViecEdit")
         // console.log('cong việc close',this.cong_viec)
         

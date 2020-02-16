@@ -590,7 +590,7 @@ export default {
           type: false
         }
         this.$store.dispatch("updateModalEdit",false)
-        this.$store.dispatch("resetCongViecEdit")
+        // this.$store.dispatch("resetCongViecEdit")
         // console.log('cong việc close',this.cong_viec)
         
       },
