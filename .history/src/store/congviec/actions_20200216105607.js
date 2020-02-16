@@ -122,7 +122,7 @@ export default {
                 axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                     resolve({
                         success: true,
-                        message: 'Bạn vừa cập nhật công viêc '+ cong_viec.ten_cv,
+                        message: 'Bạn vừa thêm công viêc '+ cong_viec.ten_cv,
                         result: cong_viec,
                         status: 200
                     })

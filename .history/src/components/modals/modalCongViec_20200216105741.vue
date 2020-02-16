@@ -477,7 +477,6 @@ export default {
         if(Object.entries(this.getTaskEdit).length > 5)
         {
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
-            console.log(response)
               if(response.success == true){
                 app.$buefy.notification.open({
                     duration: 1500,

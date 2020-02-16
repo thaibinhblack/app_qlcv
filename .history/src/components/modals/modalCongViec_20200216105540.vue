@@ -477,11 +477,10 @@ export default {
         if(Object.entries(this.getTaskEdit).length > 5)
         {
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
-            console.log(response)
-              if(response.success == true){
+              if(response == true){
                 app.$buefy.notification.open({
                     duration: 1500,
-                    message: response.message,
+                    message: 'Cập nhật công việc thành công!',
                     position: 'is-bottom-left',
                     type: 'is-success',
                     hasIcon: true
