@@ -79,7 +79,7 @@
                     </li>
                 </ul>
                 <div class="col-sm-12" style="margin-top: 15px;">
-                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_cong_viec.toFixed(2)}} giờ</strong> </span>
+                  <span>Tổng số giờ làm việc: <strong>{{total_time_cong_viec.toFixed(2)}} giờ</strong> </span>
                   <!-- {{list_cong_viec}} -->
                 </div>
             </div>

@@ -4,6 +4,7 @@
   <b-tab-item  label="Thông tin công việc">
   
     <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+      {{cong_viec.trang_thai_td}}
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">

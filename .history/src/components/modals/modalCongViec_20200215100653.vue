@@ -4,6 +4,7 @@
   <b-tab-item  label="Thông tin công việc">
   
     <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+      {{cong_viec.trang_thai_td}}
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
@@ -36,23 +37,13 @@
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Loại công việc <span class="color-warning">(*)</span></label>
             <div class="col-sm-8">
               <!-- {{GROUP_LCV}} -->
-                <b-field v-if="Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ">
-                    <multiselect :options="setting_modal.selected_loai_cv_setting"
+                <b-field>
+                    <multiselect :options="Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ?  setting_modal.selected_loai_cv_setting : GROUP_LCV"
                     v-model="selected_loai_cv"
                     :multiple="false"
                     :disabled="cong_viec.trang_thai_td == 1 ?  true : false"
-                    :group-select="false"
-                    :show-labels="false"
-                    track-by="ten_loai_cv"
-                    label="ten_loai_cv"></multiselect>
-                </b-field>
-                <b-field v-else>
-                    <multiselect :options="GROUP_LCV"
-                    v-model="selected_loai_cv"
-                    :multiple="false"
-                    :disabled="cong_viec.trang_thai_td == 1 ?  true : false"
-                    :group-values="'children'"
-                    :group-label="'parent'"
+                    :group-values=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'children'"
+                    :group-label=" Object.entries(setting_modal.selected_loai_cv_setting).length > 0 ? false : 'parent' "
                     :group-select="false"
                     :show-labels="false"
                     track-by="ten_loai_cv"
@@ -174,7 +165,7 @@
                 </div>
             </div>
             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thời gian thực hiện (giờ)</label>
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Giờ thực hiện</label>
                 
                 <div class="col-sm-8">
                     <b-field>
@@ -185,12 +176,7 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên <span class="color-warning">(*)</span> </label>
                 <div class="col-sm-8">
-                  <b-select :disabled="cong_viec.trang_thai_td == 1 ?  true : false" v-model="cong_viec.do_uu_tien" >
-                    <option value="1">Cao</option>
-                    <option value="2">Trung bình</option>
-                    <option value="3">Thấp</option>
-                  </b-select>
-                  <!-- <b-input   type="number" :disabled="cong_viec.trang_thai_td == 1 ?  true : false" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input> -->
+                  <b-input   type="number" :disabled="cong_viec.trang_thai_td == 1 ?  true : false" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input>
                 </div>
             </div>
             <div class="form-group row">        

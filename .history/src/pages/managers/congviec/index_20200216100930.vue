@@ -222,7 +222,7 @@ export default {
 .list-group {min-height: 50px;max-height: 420px;overflow: hidden;overflow-y: scroll;height: 420px;padding: 5px;}
 .card-title {padding: 5px; background: #209cee;color: #fff; line-height: 35px}
 /* .card-task {padding: 10px;} */
-#page-project {background-image: url('../../../assets/images/bacground-login.jpg');min-height: 100%;background-size: cover;background-repeat: no-repeat}
+#page-project {background-image: url('../../../assets/images/banner-login.jpg');min-height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}
 .navbar-start {height: 40px;}
 .navbar-start>a {color: #fff;}
