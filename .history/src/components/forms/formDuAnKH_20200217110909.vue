@@ -108,7 +108,7 @@ export default {
                     id_loai_du_an: 0,
                     trang_thai_du_an: 1,
                     ten_kh: '',
-                    trang_thai_lt: 0
+                     trang_thai_lt: 0
                 }
             }
         },
