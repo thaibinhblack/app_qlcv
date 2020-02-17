@@ -6,11 +6,11 @@ export default {
     },
     UPDATE_DU_AN_KH(state,du_an_kh)
     {
-        // const IndexDuAnKH = state.du_an_kh.findIndex((dakh) => {
-        //     dakh.id_du_an_kh == du_an_kh.id_du_an_kh
-        // })
-        // // const productIndex = state.products.findIndex((p) => p.id == product.id)
-        // Object.assign(state.du_an_kh[IndexDuAnKH], du_an_kh)
+        const IndexDuAnKH = state.du_an_kh.findIndex((dakh) => {
+           return  dakh.id_du_an_kh == du_an_kh.id_du_an_kh
+        })
+        // const productIndex = state.products.findIndex((p) => p.id == product.id)
+        Object.assign(state.du_an_kh[IndexDuAnKH], du_an_kh)
         
     },
 //thông tin khác của dự án
@@ -43,6 +43,5 @@ export default {
             tt.id_trang_thai == id_trang_thai
         })
         state.list_trang_thai.splice(ItemIndex,1)
-    },
-    
+    }
 }

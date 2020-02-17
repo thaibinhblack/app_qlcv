@@ -121,7 +121,7 @@ export default {
             }
             else
             {
-                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then(() => {
+                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                     commit("UPDATE_CONG_VIEC",cong_viec)
                     resolve({
                         success: true,

@@ -44,5 +44,8 @@ export default {
         })
         state.list_trang_thai.splice(ItemIndex,1)
     },
-    
+    UPDATE_DELETE_CV(state,boolean)
+    {
+        state.DELETE_CV_DA_KH = boolean
+    }
 }

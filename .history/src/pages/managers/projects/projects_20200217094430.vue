@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="table-user"  oncontextmenu="return false" onselectstart="return false" ondragstart="return false" style="margin-top:15px">
-                <p class="background">Danh sácch dự án khách hàng  <b-button @click="active_table_dakh = !active_table_dakh" class="btn-minus-plus" :icon-left="active_table_dakh == false ? 'minus': 'plus' "></b-button> </p>
+                <p class="background">Danh sácch dự án khách hàng 1 <b-button @click="active_table_dakh = !active_table_dakh" class="btn-minus-plus" :icon-left="active_table_dakh == false ? 'minus': 'plus' "></b-button> </p>
                 <JqxGrid ref="myGrid"
                         v-if="active_table_dakh == false"
                         :width="'99%'" :source="dataAdapter" :columns="columns"  @rowclick="onRowclick($event)"
@@ -104,7 +104,7 @@ export default {
                         { name: 'mo_ta_du_an', type: 'string' },
                         { name: 'ghi_chu_du_an', type: 'string' },
                         { name: 'trang_thai_du_an' ,type: 'number'},
-                        { name: 'trang_thai_lt',type: 'number'},
+                        { name: 'trang_thai_lt' ,type: 'number'},
                         { name: 'created_at', type: 'date'},
                         { name: 'updated_at', type: 'date'}
                     ],
@@ -184,7 +184,6 @@ export default {
                 { name: 'ghi_chu_du_an', type: 'string' },
                  { name: 'ten_trang_thai', type: 'string'},
                 { name: 'trang_thai_du_an' ,type: 'number'},
-                {name: 'trang_thai_lt', type: 'number'},
                 { name: 'created_at', type: 'date'},
                 { name: 'updated_at', type: 'date'}
             ],

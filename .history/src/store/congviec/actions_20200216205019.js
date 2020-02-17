@@ -28,7 +28,7 @@ export default {
             
             form_cong_viec.append("P_ID_CV_DA",0)
             form_cong_viec.append("P_ID_DU_AN",cong_viec.id_du_an)
-           
+            console.log(cong_viec,store.state.module_congviec.task_edit.id_du_an_kh)
             form_cong_viec.append("P_TEN_CV",cong_viec.ten_cv)
             form_cong_viec.append("P_NOI_DUNG_CV",cong_viec.noi_dung_cv)
             form_cong_viec.append("P_NGAY_TIEP_NHAN",cong_viec.ngay_tiep_nhan)
@@ -81,7 +81,6 @@ export default {
     {
         return new Promise((resolve,reject) => {
             const form_cong_viec = new FormData();
-            // console.log(cong_viec,store.state.module_congviec.task_edit)
             form_cong_viec.append("P_ID_CV_DA",cong_viec.id_cv_da)
             form_cong_viec.append("P_ID_DU_AN",cong_viec.id_du_an)
             form_cong_viec.append("P_TEN_CV",cong_viec.ten_cv)
@@ -121,8 +120,7 @@ export default {
             }
             else
             {
-                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then(() => {
-                    commit("UPDATE_CONG_VIEC",cong_viec)
+                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                     resolve({
                         success: true,
                         message: 'Bạn vừa cập nhật công viêc '+ cong_viec.ten_cv,
@@ -137,32 +135,6 @@ export default {
                 })
             }
            
-        })
-    },
-    insertCongViecDAKH({commit},params)
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/du-an-kh-insert-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?action=1&api_token='+axios.defaults.params.api_token)
-            .then((response) => {
-                commit("UPDATE_DELETE_CV",false)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
-            })
-        })
-    },
-    deleteCongViecDAKH({commit},params)
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/du-an-kh-insert-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?action=2&api_token='+axios.defaults.params.api_token)
-            .then((response) => {
-                commit("UPDATE_DELETE_CV",true)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
-            })
         })
     },
     deleteCongViec({commit},ID_CV_DA)
@@ -210,7 +182,8 @@ export default {
            }
            index = index + 1;
         })
-
+        // console.log(arr_user)
+        // console.log($sql, index,end)
         return new Promise((resolve,reject) => {
             const form_tham_dinh = new FormData();
             form_tham_dinh.append("ARR_CV_DA",$sql)

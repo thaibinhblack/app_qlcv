@@ -22,13 +22,13 @@
               </div> 
          </div>
           <div class="form-group row" >
-              <div class="col-sm-4 col-form-label">Khách hàng <span class="color-warning">(*)</span></div>
+              <div class="col-sm-4 col-form-label">Dự án KH <span class="color-warning">(*)</span></div>
               <div class="col-sm-8">
                 <b-field>
                   <multiselect v-model="selected_du_an_kh" 
                   :disabled="cong_viec.trang_thai_td == 1 ?  true : false"
-                  :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                  :multiple="true" :taggable="true" @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
+                  :options="LIST_DUAN_KH" label="ten_du_an_kh" track-by="id_du_an_kh" 
+                  :multiple="true" :taggable="true" @tag="addTag"  @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
                 </b-field>
               </div>
           </div>
@@ -395,7 +395,7 @@ export default {
     },
     computed:{
       ...mapGetters(["getUser", "getTaskEdit", "GROUP_LCV", "LIST_DUAN", "LIST_DUAN_KH", "GROUP_LCV", 
-      "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal", "DELETE_CV_DA_KH"]),
+      "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal"]),
       nguoi_tham_dinh()
       {
         if(this.cong_viec.nguoi_tham_dinh != null || this.cong_viec.trang_thai_td == 1)
@@ -466,7 +466,6 @@ export default {
         this.cong_viec.id_loai_cv = this.selected_loai_cv.id_loai_cv;
         this.cong_viec.id_du_an = this.selected_du_an.id_du_an
         this.cong_viec.id_du_an_kh = this.selected_du_an_kh[0].id_du_an_kh
-        this.cong_viec.DELETE_CV_DA_KH = this.DELETE_CV_DA_KH
         if(Object.entries(this.selected_user_tiepnhan).length > 0)
         {
            this.cong_viec.nguoi_giao_viec = this.selected_user_giaoviec.id_nd
@@ -479,10 +478,6 @@ export default {
         this.cong_viec.type = 0;
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-          this.$store.dispatch("insertCongViecDAKH",{
-            ID_CV_DA: this.cong_viec.id_cv_da, 
-            ID_DA_KH : this.cong_viec.id_du_an_kh
-          })
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){
@@ -611,15 +606,13 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
-      toggleUnSelectMarket({ ten_kh, id_du_an_kh }) {
-        if(Object.entries(this.getTaskEdit).length > 5)
-        {
-            this.$store.dispatch("deleteCongViecDAKH", {
-            ID_CV_DA: this.cong_viec.id_cv_da,
-            ID_DA_KH: id_du_an_kh,
-            TEN_KH: ten_kh
-          })
-        }
+      toggleUnSelectMarket({ ten_du_an_kh, id_du_an_kh }) {
+        // console.log(ten_du_an_kh, id_du_an_kh)
+        // this.toggleUnSelectLojas(ten_du_an_kh, id_du_an_kh);
+      },
+      addTag({newTag})
+      {
+        console.log(newTag)
       },
       api_files()
       {

@@ -104,7 +104,7 @@ export default {
                         { name: 'mo_ta_du_an', type: 'string' },
                         { name: 'ghi_chu_du_an', type: 'string' },
                         { name: 'trang_thai_du_an' ,type: 'number'},
-                        { name: 'trang_thai_lt',type: 'number'},
+                        { name: 'trang_thai_lt' ,type: 'number'},
                         { name: 'created_at', type: 'date'},
                         { name: 'updated_at', type: 'date'}
                     ],
@@ -184,7 +184,6 @@ export default {
                 { name: 'ghi_chu_du_an', type: 'string' },
                  { name: 'ten_trang_thai', type: 'string'},
                 { name: 'trang_thai_du_an' ,type: 'number'},
-                {name: 'trang_thai_lt', type: 'number'},
                 { name: 'created_at', type: 'date'},
                 { name: 'updated_at', type: 'date'}
             ],

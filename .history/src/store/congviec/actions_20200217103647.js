@@ -81,7 +81,7 @@ export default {
     {
         return new Promise((resolve,reject) => {
             const form_cong_viec = new FormData();
-            // console.log(cong_viec,store.state.module_congviec.task_edit)
+            console.log(cong_viec,store.state.module_congviec.task_edit)
             form_cong_viec.append("P_ID_CV_DA",cong_viec.id_cv_da)
             form_cong_viec.append("P_ID_DU_AN",cong_viec.id_du_an)
             form_cong_viec.append("P_TEN_CV",cong_viec.ten_cv)
@@ -121,7 +121,7 @@ export default {
             }
             else
             {
-                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then(() => {
+                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                     commit("UPDATE_CONG_VIEC",cong_viec)
                     resolve({
                         success: true,
@@ -139,23 +139,10 @@ export default {
            
         })
     },
-    insertCongViecDAKH({commit},params)
-    {
-        return new Promise((resolve,reject) => {
-            axios.get('/api/du-an-kh-insert-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?action=1&api_token='+axios.defaults.params.api_token)
-            .then((response) => {
-                commit("UPDATE_DELETE_CV",false)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
-            })
-        })
-    },
     deleteCongViecDAKH({commit},params)
     {
         return new Promise((resolve,reject) => {
-            axios.get('/api/du-an-kh-insert-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?action=2&api_token='+axios.defaults.params.api_token)
+            axios.get('/api/du-an-kh-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?api_token='+axios.defaults.params.api_token)
             .then((response) => {
                 commit("UPDATE_DELETE_CV",true)
                 resolve(response.data)

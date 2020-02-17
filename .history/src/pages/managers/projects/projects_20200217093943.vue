@@ -60,7 +60,7 @@ export default {
                 {text: 'ID_DU_AN', datafield: 'id_du_an', hidden: true},
                 {text: 'ID_DU_AN_KH', datafield: 'id_du_an_kh', hidden: true},
                 {text: 'ID_KHACH_HANG', datafield: 'id_khach_hang', hidden: true},
-                {text: 'trang_thai_lt', datafield: 'trang_thai_lt', hidden: true},
+                 {text: 'Trạng Thái lập trình', datafield: 'trang_thai_lt', hidden: true},
                 {text: 'Dự án', datafield: 'ten_du_an', width: 240},
                 {text: 'Khách hàng', datafield: 'ten_kh', width: 240},
                 {text: 'Mô tả', datafield: 'mo_ta_du_an', width: 240},
@@ -104,7 +104,7 @@ export default {
                         { name: 'mo_ta_du_an', type: 'string' },
                         { name: 'ghi_chu_du_an', type: 'string' },
                         { name: 'trang_thai_du_an' ,type: 'number'},
-                        { name: 'trang_thai_lt',type: 'number'},
+                        { name: 'trang_thai_lt' ,type: 'number'},
                         { name: 'created_at', type: 'date'},
                         { name: 'updated_at', type: 'date'}
                     ],
@@ -184,7 +184,6 @@ export default {
                 { name: 'ghi_chu_du_an', type: 'string' },
                  { name: 'ten_trang_thai', type: 'string'},
                 { name: 'trang_thai_du_an' ,type: 'number'},
-                {name: 'trang_thai_lt', type: 'number'},
                 { name: 'created_at', type: 'date'},
                 { name: 'updated_at', type: 'date'}
             ],

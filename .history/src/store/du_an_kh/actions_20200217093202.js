@@ -22,7 +22,7 @@ export default {
             form_du_an_kh.append("P_GHI_CHU_DU_AN",du_an_kh.ghi_chu_du_an)
             form_du_an_kh.append("P_TRANG_THAI_DU_AN",du_an_kh.trang_thai_du_an)
             form_du_an_kh.append("P_ID_KHACH_HANG",du_an_kh.id_khach_hang)
-            form_du_an_kh.append("P_TRANG_THAI_LT",du_an_kh.trang_thai_lt)
+            form_du_an_kh.append("P_TRANG_THAI_LT",du_an_kh.id_khach_hang)
             // form_du_an_kh.append("")
             axios.post('/api/du-an-kh/'+du_an_kh.id_du_an_kh+'?api_token='+axios.defaults.params.api_token,form_du_an_kh)
             .then((response) => {

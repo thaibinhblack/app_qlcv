@@ -16,22 +16,7 @@ export default {
     updateDuAnKH({commit},du_an_kh){
         return new Promise((resolve,reject) => {
             const form_du_an_kh = new FormData();
-            form_du_an_kh.append("P_ID_DU_AN",du_an_kh.id_du_an)
-            form_du_an_kh.append("P_TEN_DU_AN_KH",du_an_kh.ten_du_an_kh)
-            form_du_an_kh.append("P_MO_TA_DU_AN",du_an_kh.mo_ta_du_an)
-            form_du_an_kh.append("P_GHI_CHU_DU_AN",du_an_kh.ghi_chu_du_an)
-            form_du_an_kh.append("P_TRANG_THAI_DU_AN",du_an_kh.trang_thai_du_an)
-            form_du_an_kh.append("P_ID_KHACH_HANG",du_an_kh.id_khach_hang)
-            form_du_an_kh.append("P_TRANG_THAI_LT",du_an_kh.trang_thai_lt)
             // form_du_an_kh.append("")
-            axios.post('/api/du-an-kh/'+du_an_kh.id_du_an_kh+'?api_token='+axios.defaults.params.api_token,form_du_an_kh)
-            .then((response) => {
-                commit("UPDATE_DU_AN_KH",du_an_kh)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
-            })
         })
     },
 //thông tin dự án khách hàng

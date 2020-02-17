@@ -121,6 +121,13 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
+        isModalEdit(val)
+        {
+            if(val == false)
+            {
+                // this.search_congviec()
+            }
+        },
         isModalBaoCao(val)
         {
             if(val == false)

@@ -121,7 +121,7 @@ export default {
             }
             else
             {
-                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then(() => {
+                axios.post('/api/capnhat_congviec/'+cong_viec.id_cv_da+'?api_token='+axios.defaults.params.api_token,form_cong_viec).then((response) => {
                     commit("UPDATE_CONG_VIEC",cong_viec)
                     resolve({
                         success: true,
@@ -144,7 +144,7 @@ export default {
         return new Promise((resolve,reject) => {
             axios.get('/api/du-an-kh-insert-delete/'+params.ID_CV_DA+'/'+params.ID_DA_KH+'?action=1&api_token='+axios.defaults.params.api_token)
             .then((response) => {
-                commit("UPDATE_DELETE_CV",false)
+                commit("UPDATE_DELETE_CV",true)
                 resolve(response.data)
             })
             .catch((err) => {

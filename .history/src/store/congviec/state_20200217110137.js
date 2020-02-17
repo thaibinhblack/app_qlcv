@@ -24,7 +24,6 @@ export default {
             label: 'TÊN KHÁCH HÀNG',
             hidden: true
         },
-        
         {
             column: 'ten_cv',
             label: 'TÊN CÔNG VIỆC',

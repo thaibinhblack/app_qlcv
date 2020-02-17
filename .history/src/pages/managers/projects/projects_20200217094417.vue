@@ -28,7 +28,7 @@
             </div>
        </b-tab-item>
        <b-tab-item label="DANH MỤC TRẠNG THÁI">
-           <p class="background">Danh mục trạng thái dự án khách hàng  </p>
+           <p class="background">Danh mục trạng thái dự án khách hàng  1</p>
             <form-trang-thai-du-an @trang_thai_edit="trang_thai_edit = $event" :trang_thai_edit="trang_thai_edit" @update="update_table = $event"/>
             <table-trang-thai style="margin-top:15px;" @trang_thai_edit="trang_thai_edit = $event" @update="update_table = $event" :update="update_table" />
        </b-tab-item>
@@ -104,7 +104,7 @@ export default {
                         { name: 'mo_ta_du_an', type: 'string' },
                         { name: 'ghi_chu_du_an', type: 'string' },
                         { name: 'trang_thai_du_an' ,type: 'number'},
-                        { name: 'trang_thai_lt',type: 'number'},
+                        { name: 'trang_thai_lt' ,type: 'number'},
                         { name: 'created_at', type: 'date'},
                         { name: 'updated_at', type: 'date'}
                     ],
@@ -184,7 +184,6 @@ export default {
                 { name: 'ghi_chu_du_an', type: 'string' },
                  { name: 'ten_trang_thai', type: 'string'},
                 { name: 'trang_thai_du_an' ,type: 'number'},
-                {name: 'trang_thai_lt', type: 'number'},
                 { name: 'created_at', type: 'date'},
                 { name: 'updated_at', type: 'date'}
             ],

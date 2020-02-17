@@ -479,10 +479,7 @@ export default {
         this.cong_viec.type = 0;
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-          this.$store.dispatch("insertCongViecDAKH",{
-            ID_CV_DA: this.cong_viec.id_cv_da, 
-            ID_DA_KH : this.cong_viec.id_du_an_kh
-          })
+          this.$store.dispatch("insertCongViecDAKH",this.cong_viec.id_cv_da, this.cong_viec.id_du_an_kh)
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){
@@ -612,14 +609,11 @@ export default {
         
       },
       toggleUnSelectMarket({ ten_kh, id_du_an_kh }) {
-        if(Object.entries(this.getTaskEdit).length > 5)
-        {
-            this.$store.dispatch("deleteCongViecDAKH", {
-            ID_CV_DA: this.cong_viec.id_cv_da,
-            ID_DA_KH: id_du_an_kh,
-            TEN_KH: ten_kh
-          })
-        }
+        this.$store.dispatch("deleteCongViecDAKH", {
+          ID_CV_DA: this.cong_viec.id_cv_da,
+          ID_DA_KH: id_du_an_kh,
+          TEN_KH: ten_kh
+        })
       },
       api_files()
       {

@@ -43,6 +43,5 @@ export default {
             tt.id_trang_thai == id_trang_thai
         })
         state.list_trang_thai.splice(ItemIndex,1)
-    },
-    
+    }
 }

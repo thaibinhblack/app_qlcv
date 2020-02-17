@@ -13,7 +13,11 @@ export default {
             label: 'ID CÔNG VIỆC',
             hidden: true
         },
-      
+        {
+            column: 'ten_cv',
+            label: 'TÊN CÔNG VIỆC',
+            hidden: true
+        },
         {
             column: 'ten_du_an',
             label: 'TÊN DỰ ÁN',
@@ -22,12 +26,6 @@ export default {
         {
             column: 'ten_kh',
             label: 'TÊN KHÁCH HÀNG',
-            hidden: true
-        },
-        
-        {
-            column: 'ten_cv',
-            label: 'TÊN CÔNG VIỆC',
             hidden: true
         },
         {

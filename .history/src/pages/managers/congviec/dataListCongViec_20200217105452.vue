@@ -252,7 +252,7 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("SELECT_SETTING")
+      // this.$store.dispatch("SELECT_SETTING")
       this.$store.dispatch('SELECT_SETTING_MODAL_CV')
     }
 }

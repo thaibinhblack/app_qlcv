@@ -1,16 +1,21 @@
 <template>
 <form @submit.prevent="api_du_an()" class="form-rule row" style="padding: 15px;">
-    <!-- {{du_an_kh}} -->
     <div class="col-sm-12 col-md-6">
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label" >Loại dự án</label>
             <div class="col-sm-9">
                 <b-field>
-                    <b-select v-model="du_an_kh.id_du_an" required>
+                    <b-select v-model="du_an_kh.id_du_an" required @input="set_ten_du_an()">
                         <option value="0"> --Tất cả loại dự án--</option>
                         <option v-for="(lda,index) in du_an" :key="index" :value="lda.id_du_an"> {{lda.ten_du_an}}</option>
                     </b-select>
                 </b-field>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label" >Tên dự án</label>
+            <div class="col-sm-9">
+                <b-input type="text"  placeholder="Tên dự án - tên dự án tự sinh không cần nhập" v-model="du_an_kh.ten_du_an_kh"></b-input>
             </div>
         </div>
         <div class="form-group row">
@@ -19,18 +24,16 @@
                 <multiselect v-model="selected_kh" :options="khach_hang" label="ten_kh" track-by="id_khach_hang"  style="z-index:9999"></multiselect>
             </div>
         </div>
-
-          <div class="form-group row">
+       
+    </div>
+    <div class="col-sm-12 col-md-6">
+         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label" >Mô tả</label>
             <div class="col-sm-9">
                 <b-input type="textarea" v-model="du_an_kh.mo_ta_du_an" minlength=""
                 maxlength="255" placeholder="Mô tả loại dự án"  ></b-input>
             </div>
         </div>
-       
-    </div>
-    <div class="col-sm-12 col-md-6">
-       
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label" >Ghi chú</label>
             <div class="col-sm-9">
@@ -56,8 +59,8 @@
             <div class="col-sm-9">
                 <b-field>
                     <b-select v-model="du_an_kh.trang_thai_lt" required>
-                        <option :value="0">ĐANG HOẠT ĐỘNG</option>
-                        <option :value="1">NGỪNG HOẠT ĐỘNG</option>
+                        <option value="0">ĐANG HOẠT ĐỘNG</option>
+                        <option value="1">NGỪNG HOẠT ĐỘNG</option>
                     </b-select>
                 </b-field>
             </div>
@@ -124,21 +127,11 @@ export default {
             this.du_an.id_khach_hang = newVal.id_khach_hang
             this.search = false
             this.du_an.ten_kh = newVal.ten_kh
+            this.du_an_kh.ten_du_an_kh =  this.du_an_kh.ten_du_an_kh  + ' '+ newVal.ten_kh
         },
         
     },
     methods: {
-        initValue()
-        {
-            this.du_an_kh = {
-                id_du_an: 0,
-                id_loai_du_an: 0,
-                trang_thai_du_an: 0,
-                ten_kh: '',
-                trang_thai_lt: 0
-            }
-            this.selected_kh = {}
-        },
         api_kh()
         {
             this.axios.get(this.$store.state.config.API_URL + 'customers?api_token='+this.$cookies.get('token')).then((response) => {
@@ -212,7 +205,15 @@ export default {
         },
         updateDuAn()
         {
-            this.du_an_kh.id_khach_hang = this.selected_kh.id_khach_hang
+            const du_an = new FormData();
+            du_an.append("P_ID_DU_AN",this.du_an_kh.id_du_an)
+            du_an.append("P_TEN_DU_AN_KH",this.du_an_kh.ten_du_an_kh)
+            du_an.append("P_MO_TA_DU_AN",this.du_an_kh.mo_ta_du_an)
+            du_an.append("P_GHI_CHU_DU_AN",this.du_an_kh.ghi_chu_du_an)
+            du_an.append("P_TRANG_THAI_DU_AN",this.du_an_kh.trang_thai_du_an)
+            du_an.append("P_ID_KHACH_HANG",this.selected_kh.id_khach_hang)
+            // du_an.append("P_ID_KHACH_HANG",this.du_an.id_khach_hang)
+            // du_an.append("P_ID_KHACH_HANG",this.du_an.id_loai_du_an)
             const app = this;
             if(!this.du_an_kh.trang_thai_du_an)
             {
@@ -226,40 +227,16 @@ export default {
             }
             else
             {
-                this.$store.dispatch('updateDuAnKH',this.du_an_kh)
-                .then((response) => {
-                    if(response.success == false)
-                    {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-right',
-                            type: 'is-warning',
-                            hasIcon: true
-                        })
-                    }
-                    else
-                    {
-                        this.$emit('clear',false)
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-right',
-                            type: 'is-success',
-                            hasIcon: true
-                        })
-                    }
-                }).catch((err) => {{
-                    console.log(err)
+                this.axios.post(this.$store.state.config.API_URL + 'du-an-kh/'+this.du_an_kh.id_du_an_kh+'?api_token='+this.$cookies.get('token'), du_an).then((response) => {
                     app.$buefy.notification.open({
                         duration: 1500,
-                        message: 'Lỗi server!',
+                        message: response.data.message,
                         position: 'is-bottom-right',
-                        type: 'is-danger',
+                        type: 'is-success',
                         hasIcon: true
-                     })
-                }})
-
+                    })
+                    this.$emit('clear',false)
+                })
             }
            
         },

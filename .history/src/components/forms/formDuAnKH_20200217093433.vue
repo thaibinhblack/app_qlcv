@@ -1,6 +1,5 @@
 <template>
 <form @submit.prevent="api_du_an()" class="form-rule row" style="padding: 15px;">
-    <!-- {{du_an_kh}} -->
     <div class="col-sm-12 col-md-6">
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label" >Loại dự án</label>
