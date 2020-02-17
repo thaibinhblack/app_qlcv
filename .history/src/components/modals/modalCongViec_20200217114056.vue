@@ -450,15 +450,7 @@ export default {
           })[0]
         }
       },
-      selected_du_an_kh(val)
-      {
-        val.forEach((du_an_kh) => {
-          this.$store.dispatch("insertCongViecDAKH",{
-              ID_CV_DA: this.cong_viec.id_cv_da, 
-              ID_DA_KH : du_an_kh.id_du_an_kh
-            })
-        })
-      }
+
     },
     methods:
     {
@@ -473,7 +465,7 @@ export default {
         this.cong_viec.nguoi_nhap = this.my_info.id_nd
         this.cong_viec.id_loai_cv = this.selected_loai_cv.id_loai_cv;
         this.cong_viec.id_du_an = this.selected_du_an.id_du_an
-        this.cong_viec.id_du_an_kh = this.selected_du_an_kh[0].id_du_an_kh
+       
         this.cong_viec.DELETE_CV_DA_KH = this.DELETE_CV_DA_KH
         if(Object.entries(this.selected_user_tiepnhan).length > 0)
         {
@@ -487,7 +479,14 @@ export default {
         this.cong_viec.type = 0;
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-
+          if(this.DELETE_CV_DA_KH == true)
+          {
+            this.cong_viec.id_du_an_kh = this.selected_du_an_kh[0].id_du_an_kh
+            this.$store.dispatch("insertCongViecDAKH",{
+              ID_CV_DA: this.cong_viec.id_cv_da, 
+              ID_DA_KH : this.cong_viec.id_du_an_kh
+            })
+          }
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){

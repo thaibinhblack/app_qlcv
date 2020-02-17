@@ -23,6 +23,7 @@
     <b-modal :active.sync="isModalFilter" :width="'500px'" > 
         <model-filter-cv :hinhthuc_loc="hinhthuc_loc" :my_info="my_info" :time="time"/>
     </b-modal>
+    {{activeTab}}
     <b-tabs v-model="activeTab">
         <b-tab-item label="TASK" >
             <div class="row layout-task" >

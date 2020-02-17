@@ -452,12 +452,7 @@ export default {
       },
       selected_du_an_kh(val)
       {
-        val.forEach((du_an_kh) => {
-          this.$store.dispatch("insertCongViecDAKH",{
-              ID_CV_DA: this.cong_viec.id_cv_da, 
-              ID_DA_KH : du_an_kh.id_du_an_kh
-            })
-        })
+        console.log(val)
       }
     },
     methods:
@@ -487,7 +482,13 @@ export default {
         this.cong_viec.type = 0;
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-
+          if(this.DELETE_CV_DA_KH == true)
+          {
+            this.$store.dispatch("insertCongViecDAKH",{
+              ID_CV_DA: this.cong_viec.id_cv_da, 
+              ID_DA_KH : this.cong_viec.id_du_an_kh
+            })
+          }
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){

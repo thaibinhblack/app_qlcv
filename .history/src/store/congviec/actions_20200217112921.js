@@ -31,8 +31,8 @@ export default {
                     time_start = search.time.time_start
                     time_end = search.time.time_end
             }
-            axios.get('/api/cong-viec?api_token='+axios.defaults.params.api_token+'&time_start='+time_start+'&time_end='+time_end+'&P_TRANG_THAI_TD='+search.P_TRANG_THAI_TD).then((response) => {
-                commit("SET_CONGVIEC_CTD",response.data)
+            axios.get('/api/cong-viec?api_token='+axios.defaults.params.api_token+'&time_start='+time_start+'&time_end='+time_end).then((response) => {
+                commit("SET_CONGVIEC",response.data)
                 // console.log('cong việc',response.data)
                 resolve(true)
             }).catch((error) => {
