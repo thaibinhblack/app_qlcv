@@ -690,7 +690,7 @@ export default {
       },
       sendNotifyTelegram()
       {
-        
+        console.log('test')
         if(this.cong_viec.thong_bao == true)
         {
           this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv

@@ -115,7 +115,7 @@
           <div class="form-group row">        
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Gửi thông báo</label>
             <div class="col-sm-8">
-              <b-checkbox v-model="cong_viec.thong_bao" @input="sendNotifyTelegram()"></b-checkbox>
+              <b-checkbox v-model="cong_viec.thong_bao"></b-checkbox>
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true">
                    <b-input type="textarea"  minlength=""  :disabled="cong_viec.trang_thai_td == 1 ?  true : false"
@@ -386,8 +386,7 @@ export default {
           type_cv: "0",
           do_uu_tien: 1,
           trang_thai_td: 0,
-          tham_dinh_tgian: 0,
-          thong_bao: false
+          tham_dinh_tgian: 0
         },
         selected_du_an: {},
         selected_du_an_kh: [],
@@ -400,8 +399,7 @@ export default {
         nguoi_nhap: "",
         files: [],
         check_remove: false,
-        id_du_an_kh_old: 0,
-        
+        id_du_an_kh_old: 0
       }
     },
     computed:{
@@ -577,8 +575,7 @@ export default {
                   },
                   type_cv: "0",
                   do_uu_tien: 1,
-                  trang_thai_td: 0,
-                  thong_bao: false
+                  trang_thai_td: 0
                 }
                 this.selected_loai_cv = {}
                 this.selected_user_giaoviec = this.my_info
@@ -686,14 +683,6 @@ export default {
         if(this.cong_viec.trang_thai == 3)
         {
           this.cong_viec.tien_do = 100
-        }
-      },
-      sendNotifyTelegram()
-      {
-        
-        if(this.cong_viec.thong_bao == true)
-        {
-          this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv
         }
       }
     },
