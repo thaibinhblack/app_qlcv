@@ -119,7 +119,7 @@
                     <!-- <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
                       <input v-model="props.row['tham_dinh_tgian']" type="number">
                     </b-table-column> -->
-                     <b-table-column width="200">
+                     <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
                         <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
                     </b-table-column>
@@ -283,7 +283,7 @@ export default {
 .list-action-data.top {margin-bottom: 10px;}
 .list-action-data.top>li:last-child, li.right {float: right}
 .filter-duan-kh>.filed {width: 200px !important;;}
-.table-data-cv {max-width: 100%;overflow: scroll; width: 100%;}
+.table-data-cv {max-width: 100%;overflow: scroll;}
 .table-data-cv table tr:nth-child(even) {background: #e2e2e2;}
 table td{
   border: 1px solid #ddd;

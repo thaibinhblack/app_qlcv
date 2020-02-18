@@ -119,7 +119,7 @@
                     <!-- <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
                       <input v-model="props.row['tham_dinh_tgian']" type="number">
                     </b-table-column> -->
-                     <b-table-column width="200">
+                     <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTask',props.row.id_cv_da)"></b-button>
                         <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
                     </b-table-column>
