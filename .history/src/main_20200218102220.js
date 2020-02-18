@@ -68,19 +68,24 @@ messaging.getToken().then((currentToken) => {
   // setTokenSentToServer(false);
 });
 import https from 'axios'
-https({ method: 'POST', url: 'https://fcm.googleapis.com/fcm/send', headers: {
-  "Content-Type": "application/json",
-  'Authorization': 'key=AAAACMo-i-4:APA91bFFWFoU8dlf9UlET3NIU1GuucGOPm6dj46uSD927aOap8csfjPUr73Y9VJ1ymmE2L4P3v921COSc2aLZsdNOwzgDb-Z9oaw7kpFHZv-l7SPCYbA0BVWxpg_qiZOx0b58z48MuJD'
-}, data: {
-  "data": {
-    "score": "5x1",
-    "time": "15:10"
-  } ,
-  "to" : "dmMiHhFHG1g5-C3XZ61RsA:APA91bEVCx7Q_UIxji4-uGcof6zshumArPycEsRQGKm03YWEyZbtH1ytueBYsn5XffZOQTGNdfKSRG15V6j0X5eY9ohmo4sii6d4iKc2iHa3l0gWBR-2b2eaYRyUQjAxR_rcf_4qk8D7"
-} }).then((response) => {
-  console.log(response)
-})
 
+https.post('https://fcm.googleapis.com/fcm/send',{
+  headers: {
+    'Authorization': 'Bearer ' + 'AAAACMo-i-4:APA91bHzKdqTX_QoNfkj4OMhBkLsQHNDzK37B6B2sIVgif6uzMx3VH1enf28G3pJmdnpIIFxcJWhyCneCfrJLpIQ5FU5qPts4pqK2CygiZ1DDw7iVy14GRezNjyu38zN2Az10Z2YFHsc'
+  }
+},
+{
+  "to": "dmMiHhFHG1g5-C3XZ61RsA:APA91bEVCx7Q_UIxji4-uGcof6zshumArPycEsRQGKm03YWEyZbtH1ytueBYsn5XffZOQTGNdfKSRG15V6j0X5eY9ohmo4sii6d4iKc2iHa3l0gWBR-2b2eaYRyUQjAxR_rcf_4qk8D7",
+  "notification": {
+    "title": "Breaking News",
+    "body": "New news story available."
+  },
+  "data": {
+    "story_id": "story_12345"
+  }
+}).then((response) => {
+  console.log(response  )
+})
 new Vue({
   render: h => h(App),
   router,
