@@ -449,6 +449,8 @@ export default {
       selected_du_an(val)
       {
           this.$store.dispatch('fetchDuAnKHById',val.id_du_an);
+          
+          // console.log('Dự án khách hàng',this.selected_du_an_kh, this.LIST_DUAN_KH)
       },
       LIST_DUAN_KH()
       {

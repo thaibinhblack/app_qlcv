@@ -449,6 +449,8 @@ export default {
       selected_du_an(val)
       {
           this.$store.dispatch('fetchDuAnKHById',val.id_du_an);
+          
+          // console.log('Dự án khách hàng',this.selected_du_an_kh, this.LIST_DUAN_KH)
       },
       LIST_DUAN_KH()
       {
@@ -491,24 +493,19 @@ export default {
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){
-                
-                if(this.selected_du_an_kh[0])
-                {
-                  this.$store.dispatch("deleteCongViecDAKH", {
-                    ID_CV_DA: this.cong_viec.id_cv_da,
-                    ID_DA_KH: this.cong_viec.id_du_an_kh,
+                this.$store.dispatch("deleteCongViecDAKH", {
+                  ID_CV_DA: this.cong_viec.id_cv_da,
+                  ID_DA_KH: this.cong_viec.id_du_an_kh,
 
-                  })
-                  const array_du_an = []
-                  this.selected_du_an_kh.forEach((du_an_kh) => {
-                    array_du_an.push(du_an_kh.id_du_an_kh)
-                  })
-                  const form = new FormData()
-                  form.append("P_ID_DU_AN_KH",array_du_an)
-                  form.append("P_ID_CV_DA",this.cong_viec.id_cv_da)
-                  this.$store.dispatch('createCongViecKH',form)
-                }
-                
+                })
+                const array_du_an = []
+                this.selected_du_an_kh.forEach((du_an_kh) => {
+                  array_du_an.push(du_an_kh.id_du_an_kh)
+                })
+                const form = new FormData()
+                form.append("P_ID_DU_AN_KH",array_du_an)
+                form.append("P_ID_CV_DA",this.cong_viec.id_cv_da)
+                this.$store.dispatch('createCongViecKH',form)
                 app.$buefy.notification.open({
                     duration: 1500,
                     message: response.message,

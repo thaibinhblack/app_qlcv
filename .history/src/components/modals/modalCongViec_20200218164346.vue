@@ -449,6 +449,8 @@ export default {
       selected_du_an(val)
       {
           this.$store.dispatch('fetchDuAnKHById',val.id_du_an);
+          
+          // console.log('Dự án khách hàng',this.selected_du_an_kh, this.LIST_DUAN_KH)
       },
       LIST_DUAN_KH()
       {
@@ -492,7 +494,7 @@ export default {
             // console.log(response)
               if(response.success == true){
                 
-                if(this.selected_du_an_kh[0])
+                if(this.selected_du_an_kh[[0]])
                 {
                   this.$store.dispatch("deleteCongViecDAKH", {
                     ID_CV_DA: this.cong_viec.id_cv_da,
