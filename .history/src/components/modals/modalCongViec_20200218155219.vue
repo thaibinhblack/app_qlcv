@@ -4,6 +4,8 @@
   <b-tab-item  label="Thông tin công việc">
   
     <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
+      {{cong_viec.id_du_an_kh}}
+      {{selected_du_an_kh}}
       <div class="row">
         <div class="col-sm-12 col-md-6">
           <div class="form-group row">
@@ -29,7 +31,7 @@
                   <multiselect v-model="selected_du_an_kh" 
                   :disabled="cong_viec.trang_thai_td == 1 ?  true : false"
                   :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                  :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
+                  :multiple="true" :taggable="true" @remove="toggleUnSelectMarket"  :show-labels="false"></multiselect>
                 </b-field>
               </div>
           </div>
@@ -451,6 +453,14 @@ export default {
           })[0]
         }
       },
+      selected_du_an_kh(val)
+      {
+        if(Object.entries(this.getTaskEdit).length > 5 && this.DELETE_CV_DA_KH == true)
+        {
+          console.log(val)
+          console.log(this.cong_viec)
+        }
+      }
     },
     methods:
     {
@@ -483,19 +493,12 @@ export default {
           this.$store.dispatch('updateCongViec',this.cong_viec).then((response) => {
             // console.log(response)
               if(response.success == true){
-                this.$store.dispatch("deleteCongViecDAKH", {
-                  ID_CV_DA: this.cong_viec.id_cv_da,
-                  ID_DA_KH: this.cong_viec.id_du_an_kh,
+                // this.$store.dispatch("deleteCongViecDAKH", {
+                //   ID_CV_DA: this.cong_viec.id_cv_da,
+                //   ID_DA_KH: this,
 
-                })
-                const array_du_an = []
-                this.selected_du_an_kh.forEach((du_an_kh) => {
-                  array_du_an.push(du_an_kh.id_du_an_kh)
-                })
-                const form = new FormData()
-                form.append("P_ID_DU_AN_KH",array_du_an)
-                form.append("P_ID_CV_DA",this.cong_viec.id_cv_da)
-                this.$store.dispatch('createCongViecKH',form)
+                // })
+
                 app.$buefy.notification.open({
                     duration: 1500,
                     message: response.message,
@@ -621,7 +624,18 @@ export default {
         // console.log('cong việc close',this.cong_viec)
         
       },
-
+      toggleUnSelectMarket({ ten_kh, id_du_an_kh }) {
+        // if(Object.entries(this.getTaskEdit).length > 5)
+        this.id_du_an_kh_old = id_du_an_kh
+        // {
+        //     this.check_remove = false
+        //     this.$store.dispatch("deleteCongViecDAKH", {
+        //     ID_CV_DA: this.cong_viec.id_cv_da,
+        //     ID_DA_KH: id_du_an_kh,
+        //     TEN_KH: ten_kh
+        //   })
+        // }
+      },
       api_files()
       {
         this.$store.dispatch("getFile",this.cong_viec.id_cv_da)
