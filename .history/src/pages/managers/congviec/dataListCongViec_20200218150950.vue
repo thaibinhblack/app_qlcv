@@ -258,7 +258,7 @@ export default {
               // console.log(  array[index][column].indexOf(this.search[index]))
               // // console.log(  array[index][column].includes(this.search[index]))
               
-              return (el[column]).toLowerCase().indexOf((this.search[index]).toLowerCase()) > -1
+              // return array[index][column].toLowerCase().indexOf(this.search[index].toLowerCase()) > -1
           })
       }
     },

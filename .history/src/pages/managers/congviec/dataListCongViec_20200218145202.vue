@@ -107,7 +107,7 @@
                           <b-tooltip :label="column.label" dashed>
                               {{ column.label }}
                           </b-tooltip>
-                          <input class="from-control" type="text"  v-model="search[index]" @change="search_cv(index, setting.column)" >
+                          <input class="from-control" type="text"  v-model="search[index]" @input="search_cv(index, setting.column)" >
                           <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
                       </template> 
                         {{setting.column == 'trang_thai' ?
@@ -252,13 +252,8 @@ export default {
       },
       search_cv(index,column)
       {
-          console.log(this.search[index])
-          this.list_cong_viec = this.getCongViec.filter((el) => {
-            console.log((el.ten_cv).toLowerCase())
-              // console.log(  array[index][column].indexOf(this.search[index]))
-              // // console.log(  array[index][column].includes(this.search[index]))
-              
-              return (el[column]).toLowerCase().indexOf((this.search[index]).toLowerCase()) > -1
+          this.list_cong_viec = this.getCongViec.filter((value,index,array) => {
+            return array[index][column].includes(this.search[index]) == true
           })
       }
     },

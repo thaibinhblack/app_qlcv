@@ -253,12 +253,11 @@ export default {
       search_cv(index,column)
       {
           console.log(this.search[index])
-          this.list_cong_viec = this.getCongViec.filter((el) => {
-            console.log((el.ten_cv).toLowerCase())
-              // console.log(  array[index][column].indexOf(this.search[index]))
-              // // console.log(  array[index][column].includes(this.search[index]))
+          this.list_cong_viec = this.getCongViec.filter((value,index,array) => {
+              console.log(  array[index][column].indexOf(this.search[index]))
+              // console.log(  array[index][column].includes(this.search[index]))
               
-              return (el[column]).toLowerCase().indexOf((this.search[index]).toLowerCase()) > -1
+              return array[index][column].toLowerCase().indexOf(this.search[index].toLowerCase()) > -1
           })
       }
     },

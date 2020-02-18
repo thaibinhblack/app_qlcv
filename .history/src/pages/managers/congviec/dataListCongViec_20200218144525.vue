@@ -107,8 +107,7 @@
                           <b-tooltip :label="column.label" dashed>
                               {{ column.label }}
                           </b-tooltip>
-                          <input class="from-control" type="text"  v-model="search[index]" @change="search_cv(index, setting.column)" >
-                          <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
+                          <b-input type="text" v-model="search[index]"></b-input>
                       </template> 
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') :
@@ -171,7 +170,14 @@ export default {
     {
       getCongViec(val)
       {
-
+        // this.filter = {
+        //     id_du_an: 0,
+        //     id_du_an_kh: 0,
+        //     id_loai_cv: 0,
+        //     nguoi_nhan_viec: 0,
+        //     time_start: this.time.time_start,
+        //     time_end: this.time.time_end
+        // }
         this.list_cong_viec_tmp = this.list_cong_viec = val
         this.filter_trang_thai = 0
       },
@@ -249,17 +255,6 @@ export default {
               hasIcon: true
           })
         })
-      },
-      search_cv(index,column)
-      {
-          console.log(this.search[index])
-          this.list_cong_viec = this.getCongViec.filter((el) => {
-            console.log((el.ten_cv).toLowerCase())
-              // console.log(  array[index][column].indexOf(this.search[index]))
-              // // console.log(  array[index][column].includes(this.search[index]))
-              
-              return (el[column]).toLowerCase().indexOf((this.search[index]).toLowerCase()) > -1
-          })
       }
     },
     created()

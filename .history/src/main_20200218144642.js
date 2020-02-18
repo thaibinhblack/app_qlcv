@@ -14,19 +14,19 @@ import VueApexCharts from 'vue-apexcharts'
 import JsonExcel from 'vue-json-excel'
 import 'vue-cal/dist/vuecal.css'
 import Vue2Editor from "vue2-editor";
-// import * as firebase from 'firebase'
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAr8HNhmFoSWWCV3QlVa_vvMEz-xBwDGok",
-//   authDomain: "qlcv-4fb4e.firebaseapp.com",
-//   databaseURL: "https://qlcv-4fb4e.firebaseio.com",
-//   projectId: "qlcv-4fb4e",
-//   storageBucket: "qlcv-4fb4e.appspot.com",
-//   messagingSenderId: "37752835054",
-//   appId: "1:37752835054:web:3b12f9edb243325f0c5cff",
-//   measurementId: "G-KSRCK346TK"
-// };
+import * as firebase from 'firebase'
+const firebaseConfig = {
+  apiKey: "AIzaSyAr8HNhmFoSWWCV3QlVa_vvMEz-xBwDGok",
+  authDomain: "qlcv-4fb4e.firebaseapp.com",
+  databaseURL: "https://qlcv-4fb4e.firebaseio.com",
+  projectId: "qlcv-4fb4e",
+  storageBucket: "qlcv-4fb4e.appspot.com",
+  messagingSenderId: "37752835054",
+  appId: "1:37752835054:web:3b12f9edb243325f0c5cff",
+  measurementId: "G-KSRCK346TK"
+};
 
-// firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
 
 
 Vue.use(Vue2Editor);
