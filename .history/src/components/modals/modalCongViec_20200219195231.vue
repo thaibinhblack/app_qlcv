@@ -409,7 +409,7 @@ export default {
       "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal", "DELETE_CV_DA_KH"]),
       nguoi_tham_dinh()
       {
-        if(this.cong_viec.nguoi_tham_dinh != null || this.cong_viec.trang_thai_td == 1 || this.cong_viec.trang_thai_td == 2)
+        if(this.cong_viec.nguoi_tham_dinh != null || this.cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2)
         {
             if(this.cong_viec.nguoi_tham_dinh != null)
             {
