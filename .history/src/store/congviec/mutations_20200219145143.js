@@ -155,7 +155,6 @@ export default {
     {
         tham_dinh.array_list.forEach((element) => {
             const indexCV = state.list_congviec_ctd.findIndex((cv_da) => {
-                console.log(cv_da.id_cv_da,element)
                 cv_da.id_cv_da == element
             })
             // cv.trang_thai_td = 0;

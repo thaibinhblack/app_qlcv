@@ -22,6 +22,34 @@
                         </b-select>
                       </b-field>
                     </li>
+                    <li class="filter-duan-kh">
+                      <b-field style="width: 200px;">
+                          <b-select v-model="filter.id_du_an" expanded @input="FilterCongViecDuAn()">  
+                              <option value="0"> --Tất cả  dự án--</option>
+                              
+                              <option v-for="(da,index) in Object.entries(setting_modal.selected_du_an_setting).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
+                          </b-select>
+                      </b-field>
+                    </li>
+                    <li>
+                      <b-field>
+                          <b-select v-model="filter.id_du_an_kh" expanded :disabled="LIST_DUAN_KH.length == 0" @input="$store.dispatch('FilterCongViec',filter)">
+                              <option value="0"> --Tất cả khách hàng--</option>
+                              <option v-for="(da,index) in LIST_DUAN_KH" :key="index" :value="da.id_du_an_kh"> {{da.TEN_KH}}</option>
+                          </b-select>
+                      </b-field>
+                    </li>
+                    <li>
+                      <b-field>
+                        <b-select v-model="filter_trang_thai">
+                          <option value="0">Trạng Thái</option>
+                          <option value="1">Chưa thực hiện</option>
+                          <option value="2">Đang thực hiện</option>
+                          <option value="3">Hoàn thành</option>
+                          <option value="4">Gia hạn</option>
+                        </b-select>
+                      </b-field>
+                    </li>
                    
                     <li class="right"><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
                     <li > <button-export-excel /></li>
@@ -121,7 +149,53 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_CTD"])
+        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_CTD"])
+    },
+    watch:
+    {
+      getCongViec(val)
+      {
+        // this.filter = {
+        //     id_du_an: 0,
+        //     id_du_an_kh: 0,
+        //     id_loai_cv: 0,
+        //     nguoi_nhan_viec: 0,
+        //     time_start: this.time.time_start,
+        //     time_end: this.time.time_end
+        // }
+        this.list_cong_viec_tmp = this.list_cong_viec = val
+        this.filter_trang_thai = 0
+      },
+      filter_trang_thai(val)
+      {
+        if(val != 0)
+        {
+          this.list_cong_viec = this.list_cong_viec_tmp.filter((value,index,array) => {
+            return array[index].trang_thai == val
+          })
+        }
+        else
+        {
+          this.list_cong_viec = this.list_cong_viec_tmp
+        }
+      },
+      filter_tham_dinh(val)
+      {
+        if(val != 0)
+        {
+          this.list_cong_viec = this.list_cong_viec_tmp.filter((value,index,array) => {
+            if(val == 1)
+            {
+              array[index].tham_dinh_tgian = array[index].gio_thuc_hien
+            }
+            return array[index].trang_thai_td == val
+          })
+        }
+        else
+        {
+          this.list_cong_viec = this.list_cong_viec_tmp
+        }
+      }
     },
     methods:
     {
@@ -165,45 +239,6 @@ export default {
               type: 'is-success',
               hasIcon: true
           })
-        })
-      },
-      tham_dinh()
-      {
-        var array_list = []
-        var array_tgian = []
-        this.checkedRows.forEach((element) => {
-          array_list.push(element.id_cv_da)
-          array_tgian.push(element.tham_dinh_tgian)
-        })
-        this.$store.dispatch("createThamDinhListCV",{
-          array_list: array_list,
-          array_tgian: array_tgian
-        }).then(() => {
-
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-            this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 1
-            })
-             this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 2
-            })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
         })
       }
     },

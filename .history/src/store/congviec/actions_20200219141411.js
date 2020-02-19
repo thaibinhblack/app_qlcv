@@ -289,11 +289,7 @@ export default {
         return new Promise((resolve,reject) => {
             axios.post('/api/tham-dinh-list-cv?api_token='+axios.defaults.params.api_token,form_tham_dinh)
             .then((response) => {
-                commit("UPDATE_CV_DATD",tham_dinh)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
+                console.log(response.data)
             })
         })
     },
@@ -481,11 +477,6 @@ export default {
     {
         commit("UPDATE_MODAL_EDIT",true)
         commit("SEARCH_TASK_TD",id_task)
-    },
-    openTaskDTD({commit},id_task)
-    {
-        commit("UPDATE_MODAL_EDIT",true)
-        commit("SEARCH_TASK_DTD",id_task)
     },
     openBaoCao({commit},id_task)
     {

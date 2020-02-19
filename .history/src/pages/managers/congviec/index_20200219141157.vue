@@ -38,9 +38,7 @@
         <b-tab-item label="CHỜ THẨM ĐỊNH">
             <data-list-cho-tham-dinh :time="time" />
         </b-tab-item>
-        <b-tab-item label="ĐÃ THẨM ĐỊNH">
-            <data-list-da-tham-dinh :time="time" />
-        </b-tab-item>
+        <b-tab-item label="ĐÃ THẨM ĐỊNH"></b-tab-item>
     </b-tabs>
 
     <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  @on-cancel="close()">
@@ -96,8 +94,7 @@ export default {
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),
         'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
         'data-list-congviec': () => import('./dataListCongViec.vue'),
-        'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
-        'data-list-da-tham-dinh': () => import('./dataListDaThamDinh')
+        'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue')
     },
     data()
     {

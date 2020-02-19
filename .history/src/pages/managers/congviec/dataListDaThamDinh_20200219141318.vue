@@ -4,9 +4,6 @@
             <div class="header header-datalist">
                 <!-- {{checkedRows.length}} -->
                 <ul class="list-action-data top">
-                    <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
-                    <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
-   
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -138,80 +135,12 @@ export default {
             this.sortOrder = order
             this.loadAsyncData()
       },
-      gui_tham_dinh()
-      {
-        var app = this;
-        this.$store.dispatch("sendThamDinh",{
-          list_cv: this.checkedRows,
-          tham_dinh: this.filter_tham_dinh})
-        .then(() => {
-          this.checkedRows = []
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: this.filter_tham_dinh == 0 ? 'Gửi thẩm định thành công': 'Hủy thẩm định thành công',
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-          this.filter_tham_dinh = 0
-          this.list_cong_viec = this.getCongViec
-          
-        })
-        .catch(() => {
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: 'Lỗi server! xin vui lòng thử lại!' ,
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-        })
-      },
-      tham_dinh()
-      {
-        var array_list = []
-        var array_tgian = []
-        this.checkedRows.forEach((element) => {
-          array_list.push(element.id_cv_da)
-          array_tgian.push(element.tham_dinh_tgian)
-        })
-        this.$store.dispatch("createThamDinhListCV",{
-          array_list: array_list,
-          array_tgian: array_tgian
-        }).then(() => {
-
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-            this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 1
-            })
-             this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 2
-            })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
-        })
-      }
     },
     created()
     {
-      this.$store.dispatch("fetchCongViecTD",{
+      this.$store.dispatch("fetchCongViecDTD",{
           time: this.time,
-          P_TRANG_THAI_TD: 1
+          P_TRANG_THAI_TD: 2
       })
     }
 }

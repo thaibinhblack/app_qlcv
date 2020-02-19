@@ -39,7 +39,7 @@
             <data-list-cho-tham-dinh :time="time" />
         </b-tab-item>
         <b-tab-item label="ĐÃ THẨM ĐỊNH">
-            <data-list-da-tham-dinh :time="time" />
+            <data-list-cho-tham-dinh :time="time" />
         </b-tab-item>
     </b-tabs>
 
@@ -97,7 +97,7 @@ export default {
         'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
         'data-list-congviec': () => import('./dataListCongViec.vue'),
         'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
-        'data-list-da-tham-dinh': () => import('./dataListDaThamDinh')
+         'data-list-da-tham-dinh': () => import('./dataDaThamDinh.vue')
     },
     data()
     {

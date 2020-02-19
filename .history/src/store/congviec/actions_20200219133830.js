@@ -32,14 +32,7 @@ export default {
                     time_end = search.time.time_end
             }
             axios.get('/api/cong-viec?api_token='+axios.defaults.params.api_token+'&time_start='+time_start+'&time_end='+time_end+'&P_TRANG_THAI_TD='+search.P_TRANG_THAI_TD).then((response) => {
-                if(search.P_TRANG_THAI_TD == 1)
-                {
-                    commit("SET_CONGVIEC_CTD",response.data)
-                }
-                else
-                {
-                    commit("SET_CONGVIEC_DTD",response.data)
-                }
+                commit("SET_CONGVIEC_CTD",response.data)
                 // console.log('cong việc',response.data)
                 resolve(true)
             }).catch((error) => {
@@ -289,11 +282,7 @@ export default {
         return new Promise((resolve,reject) => {
             axios.post('/api/tham-dinh-list-cv?api_token='+axios.defaults.params.api_token,form_tham_dinh)
             .then((response) => {
-                commit("UPDATE_CV_DATD",tham_dinh)
-                resolve(response.data)
-            })
-            .catch((err) => {
-                reject(err)
+                console.log(response.data)
             })
         })
     },
@@ -481,11 +470,6 @@ export default {
     {
         commit("UPDATE_MODAL_EDIT",true)
         commit("SEARCH_TASK_TD",id_task)
-    },
-    openTaskDTD({commit},id_task)
-    {
-        commit("UPDATE_MODAL_EDIT",true)
-        commit("SEARCH_TASK_DTD",id_task)
     },
     openBaoCao({commit},id_task)
     {

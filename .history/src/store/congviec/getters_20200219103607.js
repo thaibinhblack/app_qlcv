@@ -75,8 +75,5 @@ export default {
             ctd.tham_dinh_tgian = ctd.gio_thuc_hien
         })
         return state.list_congviec_ctd
-    },
-    LIST_CONG_VIEC_DTD: state => {
-        return state.list_congviec_dtd
     }
 }

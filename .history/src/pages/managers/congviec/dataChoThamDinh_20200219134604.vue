@@ -171,39 +171,13 @@ export default {
       {
         var array_list = []
         var array_tgian = []
-        this.checkedRows.forEach((element) => {
+        this.LIST_CONG_VIEC_CTD.forEach((element) => {
           array_list.push(element.id_cv_da)
           array_tgian.push(element.tham_dinh_tgian)
         })
         this.$store.dispatch("createThamDinhListCV",{
           array_list: array_list,
           array_tgian: array_tgian
-        }).then(() => {
-
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-            this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 1
-            })
-             this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 2
-            })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
         })
       }
     },

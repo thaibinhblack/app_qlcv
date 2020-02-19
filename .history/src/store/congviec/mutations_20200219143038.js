@@ -143,7 +143,6 @@ export default {
                         cv_da.id_cv_da == cv.id_cv_da
                     })
                     cv.trang_thai_td = 0;
-                    // console.log(indexCV)
                     state.list_congviec_ctd.splice(indexCV,1)
                     state.list_congviec.push(cv)
     
@@ -151,23 +150,15 @@ export default {
             }
     
     },
-    UPDATE_CV_DATD(state,tham_dinh)
+    UPDATE_CV_DTD(state,tham_dinh)
     {
-        tham_dinh.array_list.forEach((element) => {
-            const indexCV = state.list_congviec_ctd.findIndex((cv_da) => {
-                console.log(cv_da.id_cv_da,element)
-                cv_da.id_cv_da == element
+        tham_dinh.forEach((element) => {
+            const IndexCV = state.list_congviec_ctd.findIndex((cv) => {
+                cv.id_cv_da = element.id_cv_da
             })
-            // cv.trang_thai_td = 0;
-            // console.log(indexCV)
-            state.list_congviec_ctd.splice(indexCV,1)
-            // state.list_congviec.push(cv)
-            // console.log(state.list_congviec_ctd,IndexCV, element)
-            // // state.list_congviec_ctd[IndexCV].trang_thai_td = 2
-            // // state.list_congviec_dtd.push(state.list_congviec_ctd[IndexCV])
-            // state.list_congviec_ctd.splice(IndexCV,1)
-            
-            
+            state.list_congviec_ctd.splice(IndexCV,1)
+            element.trang_thai_td = 2
+            state.list_congviec_dtd.push(element)
         })
     },
     UPDATE_DELETE_CV(state,boolean)

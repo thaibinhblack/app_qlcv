@@ -71,12 +71,8 @@ export default {
         return state.DELETE_CV_DA_KH
     },
     LIST_CONG_VIEC_CTD: state => {
-        state.list_congviec_ctd.forEach((ctd) => {
-            ctd.tham_dinh_tgian = ctd.gio_thuc_hien
+        return state.list_congviec_ctd.filter((value,index,array) => {
+            array[index].tgian_tham_dinh = array[index].gio_thuc_hien
         })
-        return state.list_congviec_ctd
-    },
-    LIST_CONG_VIEC_DTD: state => {
-        return state.list_congviec_dtd
     }
 }

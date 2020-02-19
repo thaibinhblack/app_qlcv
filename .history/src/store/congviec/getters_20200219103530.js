@@ -72,11 +72,8 @@ export default {
     },
     LIST_CONG_VIEC_CTD: state => {
         state.list_congviec_ctd.forEach((ctd) => {
-            ctd.tham_dinh_tgian = ctd.gio_thuc_hien
+            ctd.tgian_tham_dinh = ctc.gio_thuc_hien
         })
         return state.list_congviec_ctd
-    },
-    LIST_CONG_VIEC_DTD: state => {
-        return state.list_congviec_dtd
     }
 }

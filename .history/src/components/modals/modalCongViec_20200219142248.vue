@@ -268,8 +268,8 @@
         <!-- {{Object.entries(this.getTaskEdit)}} -->
           <div class="col-sm-9" v-if="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 && cong_viec.trang_thai == 3">
               <!-- <button v-if="my_info.id_rule == 0" disabled class="btn btn-form"> Chờ thẩm định</button> -->
-              <button v-if="cong_viec.trang_thai_td == 1" :disabled="my_info.id_rule == 0 ? true: false"  @click="tham_dinh()" class="btn btn-primary btn-form">Thẩm định </button>
-              <button  v-if="cong_viec.trang_thai_td == 1" @click="huy_tham_dinh()"  class="btn btn-warning btn-form">Hủy thẩm định </button>
+              <button  :disabled="my_info.id_rule == 0 ? true: false"  @click="tham_dinh()" class="btn btn-primary btn-form">Thẩm định </button>
+              <button  @click="huy_tham_dinh()"  class="btn btn-warning btn-form">Hủy thẩm định </button>
               <button type="button" class="btn btn-danger btn-form" @click="close()">Đóng</button>  
           </div>
           <div class="col-sm-9" v-else>
