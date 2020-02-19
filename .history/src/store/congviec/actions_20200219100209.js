@@ -293,8 +293,8 @@ export default {
     {
         return new Promise((resolve,reject) => {
             axios.get('/api/setting-cai-dat-list-cv?api_token='+axios.defaults.params.api_token).then((response) => {
-                // console.log(Object.entries(response.data))
-                commit("SET_SETTING",response.data[0].value_setting)
+                console.log(Object.entries(response.data))
+                // commit("SET_SETTING",response.data[0].value_setting)
                 resolve(response.data)
             }).catch((err) => {
                 reject(err)
