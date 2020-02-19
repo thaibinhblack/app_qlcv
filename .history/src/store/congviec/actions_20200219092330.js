@@ -292,7 +292,7 @@ export default {
     SELECT_SETTING({commit})
     {
         return new Promise((resolve,reject) => {
-            axios.get('/api/setting-cai-dat-list-cv?api_token='+axios.defaults.params.api_token).then((response) => {
+            axios.get('/api/cong-viec-setting/1').then((response) => {
                 commit("SET_SETTING",response.data[0].value_setting)
                 resolve(response.data)
             }).catch((err) => {
