@@ -1,16 +1,27 @@
 export default {
     SET_CONGVIEC(state,list_congviec)
     {
-
+        list_congviec.forEach((element) => {
+            element.time_nhan_viec = JSON.parse(element.time_nhan_viec)
+            element.time_hoan_thanh = JSON.parse(element.time_hoan_thanh)
+        })
         state.list_congviec_tmp = list_congviec
         state.list_congviec = list_congviec
     },
     SET_CONGVIEC_CTD(state,list_congviec)
     {
+        list_congviec.forEach((element) => {
+            element.time_nhan_viec = JSON.parse(element.time_nhan_viec)
+            element.time_hoan_thanh = JSON.parse(element.time_hoan_thanh)
+        })
         state.list_congviec_ctd = list_congviec
     },
     SET_CONGVIEC_DTD(state,list_congviec)
     {
+        list_congviec.forEach((element) => {
+            element.time_nhan_viec = JSON.parse(element.time_nhan_viec)
+            element.time_hoan_thanh = JSON.parse(element.time_hoan_thanh)
+        })
         state.list_congviec_dtd = list_congviec
     },
     UPDATE_MODAL_EDIT(state,modal)

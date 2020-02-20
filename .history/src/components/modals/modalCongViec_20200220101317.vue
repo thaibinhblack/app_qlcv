@@ -552,7 +552,7 @@ export default {
                 form.append("P_ID_DU_AN_KH",array_du_an)
                 form.append("P_ID_CV_DA",response.results)
                 this.$store.dispatch('createCongViecKH',form).then(() => {
-                  
+
                 })
                 app.$buefy.notification.open({
                     duration: 1500,
@@ -741,8 +741,8 @@ export default {
             this.cong_viec.ngay_tham_dinh = new Date().toISOString().substr(0,10)
           }
           this.cong_viec.tien_do = parseInt(this.getTaskEdit.tien_do)
-          this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
-          this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
+          // this.cong_viec.time_nhan_viec = JSON.parse(this.cong_viec.time_nhan_viec)
+          // this.cong_viec.time_hoan_thanh = JSON.parse(this.cong_viec.time_hoan_thanh)
           this.api_files()
         }
         else{

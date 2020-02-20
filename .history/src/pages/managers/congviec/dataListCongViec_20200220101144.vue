@@ -103,17 +103,8 @@
                           <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
                       </template> 
                         <span v-if="setting.column == 'ngay_tiep_nhan' || setting.column == 'ngay_giao_viec' || setting.column == 'ngay_hoan_thanh' || setting.column == 'ngay_cam_ket'">
-                            <span v-if="setting.column == 'ngay_hoan_thanh'">
-                              {{JSON.parse(props.row['time_hoan_thanh']).HH + ':'+JSON.parse(props.row['time_hoan_thanh']).mm+':00 ,'}} {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_tiep_nhan'">
-                              {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_giao_viec'">
-                              {{JSON.parse(props.row['time_nhan_viec']).HH + ':'+JSON.parse(props.row['time_nhan_viec']).mm+':00 ,'}} {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_cam_ket'">
-                              {{props.row[setting.column].substr(0,10)}}
+                            <span v-if="setting.column == 'ngay_giao_viec' || setting.column == 'ngay_hoan_thanh'">
+                              {{setting.cloumn == 'ngay_giao_viec' ? props.row['time_nhan_viec'] : props.row['time_hoan_thanh']}} {{props.row[setting.column].substr(0,10)}}
                             </span>
                         </span>
                         <span v-else>

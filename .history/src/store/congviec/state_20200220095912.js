@@ -56,12 +56,6 @@ export default {
             hidden: true
         },
         {
-            column: 'ngay_giao_viec',
-            label: 'NGÀY NGÀY GIAO VIỆC',
-            width: '200px',
-            hidden: true
-        },
-        {
             column: 'ngay_hoan_thanh',
             label: 'NGÀY HOÀN THÀNH',
             width: '200px',

@@ -272,8 +272,8 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("SELECT_SETTING")
-      this.$store.dispatch('SELECT_SETTING_MODAL_CV')
+      // this.$store.dispatch("SELECT_SETTING")
+      // this.$store.dispatch('SELECT_SETTING_MODAL_CV')
     }
 }
 </script>

@@ -103,20 +103,11 @@
                           <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
                       </template> 
                         <span v-if="setting.column == 'ngay_tiep_nhan' || setting.column == 'ngay_giao_viec' || setting.column == 'ngay_hoan_thanh' || setting.column == 'ngay_cam_ket'">
-                            <span v-if="setting.column == 'ngay_hoan_thanh'">
-                              {{JSON.parse(props.row['time_hoan_thanh']).HH + ':'+JSON.parse(props.row['time_hoan_thanh']).mm+':00 ,'}} {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_tiep_nhan'">
-                              {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_giao_viec'">
-                              {{JSON.parse(props.row['time_nhan_viec']).HH + ':'+JSON.parse(props.row['time_nhan_viec']).mm+':00 ,'}} {{props.row[setting.column].substr(0,10)}}
-                            </span>
-                            <span v-if="setting.column == 'ngay_cam_ket'">
-                              {{props.row[setting.column].substr(0,10)}}
+                            <span v-if="setting.column == 'ngay_giao_viec' || setting.column == 'ngay_hoan_thanh'">
+                              {{setting.cloumn == 'ngay_giao_viec' ? props.row['time_nhan_viec'].HH +  props.row['time_nhan_viec'].mm : props.row['time_hoan_thanh'].HH +  props.row['time_hoan_thanh'].mm }} {{props.row[setting.column].substr(0,10)}}
                             </span>
                         </span>
-                        <span v-else>
+                        <span>
                             {{setting.column == 'trang_thai' ?
                             (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') :
                             (setting.column == 'gio_thuc_hien' ? 1 > props.row[setting.column]  ? '0'+props.row[setting.column] : props.row[setting.column] 
