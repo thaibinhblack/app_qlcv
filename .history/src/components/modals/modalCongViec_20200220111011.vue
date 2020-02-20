@@ -409,9 +409,9 @@ export default {
       "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal", "DELETE_CV_DA_KH"]),
       gio_thuc_hien()
       {
-        if(Object.entries(this.getTaskEdit).length > 5)
+        if(Object.entries(this.getTaskEdit) > 5)
         {
-          return parseFloat(this.cong_viec.gio_thuc_hien).toFixed(2)
+          return this.cong_viec.gio_thuc_hien
         }
         else
         {

@@ -411,7 +411,7 @@ export default {
       {
         if(Object.entries(this.getTaskEdit).length > 5)
         {
-          return parseFloat(this.cong_viec.gio_thuc_hien).toFixed(2)
+          return this.cong_viec.gio_thuc_hien
         }
         else
         {

@@ -409,20 +409,9 @@ export default {
       "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal", "DELETE_CV_DA_KH"]),
       gio_thuc_hien()
       {
-        if(Object.entries(this.getTaskEdit).length > 5)
-        {
-          return parseFloat(this.cong_viec.gio_thuc_hien).toFixed(2)
-        }
-        else
-        {
-          const diffTime = (new Date(this.cong_viec.ngay_hoan_thanh) - new Date(this.cong_viec.ngay_giao_viec)) / (1000 * 60 * 60);
-
-          // console.log(diffTime)
-          var total_time = (parseInt(this.cong_viec.time_hoan_thanh.HH) + parseFloat(this.cong_viec.time_hoan_thanh.mm / 60)  )
-          - (parseInt(this.cong_viec.time_nhan_viec.HH) + parseFloat(this.cong_viec.time_nhan_viec.mm / 60) ) ;
-          return (parseInt(diffTime) + parseFloat(total_time)).toFixed(2)
-        }
-       
+        var total_time = (parseInt(this.cong_viec.time_hoan_thanh.HH) + parseFloat(this.cong_viec.time_hoan_thanh.mm / 60) )
+        - (parseInt(this.cong_viec.time_nhan_viec.HH) + parseFloat(this.cong_viec.time_nhan_viec.mm / 60) ) ;
+        return total_time.toFixed(2)
         
       },
       nguoi_tham_dinh()
@@ -493,7 +482,6 @@ export default {
         this.cong_viec.id_du_an = this.selected_du_an.id_du_an
         // this.cong_viec.id_du_an_kh = this.selected_du_an_kh[0].id_du_an_kh
         // this.cong_viec.DELETE_CV_DA_KH = this.DELETE_CV_DA_KH
-        this.cong_viec.gio_thuc_hien = this.gio_thuc_hien
         if(Object.entries(this.selected_user_tiepnhan).length > 0)
         {
            this.cong_viec.nguoi_giao_viec = this.selected_user_giaoviec.id_nd
