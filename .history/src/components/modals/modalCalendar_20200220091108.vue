@@ -1,6 +1,6 @@
 <template>
 <form style="width:100%;padding:15px;" @submit.prevent="submit_lich_cong_tac()">
-    <!-- {{cong_tac}} -->
+    {{cong_tac}}
     <div class="form-group row">
         <label for="inputPassword3" class="col-sm-12 col-form-label" >Tên lịch công tác <span class="color-red">(*)</span></label>
         <div class="col-sm-12">
@@ -51,10 +51,10 @@
         </div>
         <div class="col-sm-12" style="margin-top: 50px;">
             <!-- {{Object.entries(this.getTaskEdit).length === 0}} -->
-            <button v-if="Object.entries(cong_tac_edit).length == 0" type="submit" class="btn btn-primary btn-form" style="margin-left: 0;">Lưu lại</button>
-            <button v-else type="submit" class="btn btn-warning btn-form">Cập nhật</button>
+            <button type="submit" class="btn btn-primary btn-form" style="margin-left: 0;">Lưu lại</button>
+            <button type="submit" class="btn btn-warning btn-form">Cập nhật</button>
             <button type="button" class="btn btn-success btn-form">Clear</button>
-            <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
+            <button type="button" class="btn btn-danger btn-form" >Close</button>  
         </div>
     </div>
 </form>
@@ -105,108 +105,59 @@ export default {
     {
         submit_lich_cong_tac()
         {   var app = this;
-            this.cong_tac.nhan_vien_di_ct = this.selected_user_cong_tac
-            if(Object.entries(this.cong_tac_edit).length == 0 )
-            {
-                this.$store.dispatch("create_LICH_CONG_TAC",this.cong_tac).then((response) => {
+            this.$store.dispatch("create_LICH_CONG_TAC",this.cong_tac).then((response) => {
                 
-                    if(response.success == true)
-                    {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-left',
-                            type: 'is-success',
-                            hasIcon: true
-                        })
-                        this.cong_tac = {
-                            ten_lich_ct: "",
-                            time_start: {
-                                HH: "07",
-                                mm: "00"
-                            },
-                            date_start: new Date().toISOString().substring(0,10),
-                            time_end:{
-                                HH: "07",
-                                mm: "00"
-                            },
-                            date_end: new Date().toISOString().substring(0,10),
-                            noi_dung_lich_ct: ""
-
-                        }
-                        this.selected_user_cong_tac = []
-                    }
-                    else
-                    {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-left',
-                            type: 'is-warning',
-                            hasIcon: true
-                        })
-                    }
-                }).catch(() => {
+                 if(response.success == true)
+                 {
                     app.$buefy.notification.open({
                         duration: 1500,
-                        message: 'Lỗi server!',
+                        message: response.message,
                         position: 'is-bottom-left',
-                        type: 'is-danger',
+                        type: 'is-success',
                         hasIcon: true
                     })
-                })
-            }
+                    this.cong_tac = {
+                        ten_lich_ct: "",
+                        time_start: {
+                            HH: "07",
+                            mm: "00"
+                        },
+                        date_start: new Date().toISOString().substring(0,10),
+                        time_end:{
+                            HH: "07",
+                            mm: "00"
+                        },
+                        date_end: new Date().toISOString().substring(0,10),
+                        noi_dung_lich_ct: ""
 
-            else
-            {
-                this.$store.dispatch("update_LICH_CONG_TAC",this.cong_tac).then((response) => {
-                    if(response.success == true)
-                    {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-left',
-                            type: 'is-success',
-                            hasIcon: true
-                        })
                     }
-                    else
-                    {
-                        app.$buefy.notification.open({
-                            duration: 1500,
-                            message: response.message,
-                            position: 'is-bottom-left',
-                            type: 'is-warning',
-                            hasIcon: true
-                        })
-                    }
-                }).catch(() => {
-                     app.$buefy.notification.open({
+                    this.selected_user_cong_tac = []
+                 }
+                 else
+                 {
+                    app.$buefy.notification.open({
                         duration: 1500,
-                        message: 'Lỗi server!',
+                        message: response.message,
                         position: 'is-bottom-left',
-                        type: 'is-danger',
+                        type: 'is-warning',
                         hasIcon: true
                     })
+                 }
+             }).catch(() => {
+                app.$buefy.notification.open({
+                    duration: 1500,
+                    message: 'Lỗi server!',
+                    position: 'is-bottom-left',
+                    type: 'is-danger',
+                    hasIcon: true
                 })
-            }
-        },
-        close()
-        {
-            this.$emit('close',false)
+             })
         }
     },
     created()
     {   
-        if(Object.entries(this.cong_tac_edit).length > 0)
-        {
-            
-            this.cong_tac = this.cong_tac_edit
-            this.selected_user_cong_tac = this.cong_tac.nhan_vien_di_ct
-            this.cong_tac.date_start = new Date(this.cong_tac.date_start).toISOString().substr(0,10);
-            this.cong_tac.date_end = new Date(this.cong_tac.date_end).toISOString().substr(0,10);
-        }
-
+        this.cong_tac = this.cong_tac_edit
+        this.cong_tac.time_start = new Date(this.cong_tac.time_start).toISOString().substr(0,10);
         this.$store.dispatch('fetchUsers')
     }
 }

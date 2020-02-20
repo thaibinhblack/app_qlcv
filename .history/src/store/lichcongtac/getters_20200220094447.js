@@ -20,6 +20,9 @@ export default {
     },
 
     LIST_CONG_TAC: state => {
+        state.LIST_CONG_TAC.forEach((element) => {
+            element.nhan_vien_di_ct = JSON.parse(element.nhan_vien_di_ct)
+        })
         return state.LIST_CONG_TAC
     }
 }

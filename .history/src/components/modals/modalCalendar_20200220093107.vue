@@ -51,10 +51,10 @@
         </div>
         <div class="col-sm-12" style="margin-top: 50px;">
             <!-- {{Object.entries(this.getTaskEdit).length === 0}} -->
-            <button v-if="Object.entries(cong_tac_edit).length == 0" type="submit" class="btn btn-primary btn-form" style="margin-left: 0;">Lưu lại</button>
-            <button v-else type="submit" class="btn btn-warning btn-form">Cập nhật</button>
+            <button type="submit" class="btn btn-primary btn-form" style="margin-left: 0;">Lưu lại</button>
+            <button type="submit" class="btn btn-warning btn-form">Cập nhật</button>
             <button type="button" class="btn btn-success btn-form">Clear</button>
-            <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
+            <button type="button" class="btn btn-danger btn-form" >Close</button>  
         </div>
     </div>
 </form>
@@ -190,10 +190,6 @@ export default {
                     })
                 })
             }
-        },
-        close()
-        {
-            this.$emit('close',false)
         }
     },
     created()
@@ -202,7 +198,7 @@ export default {
         {
             
             this.cong_tac = this.cong_tac_edit
-            this.selected_user_cong_tac = this.cong_tac.nhan_vien_di_ct
+            this.selected_user_cong_tac = JSON.parse(this.cong_tac.nhan_vien_di_ct)
             this.cong_tac.date_start = new Date(this.cong_tac.date_start).toISOString().substr(0,10);
             this.cong_tac.date_end = new Date(this.cong_tac.date_end).toISOString().substr(0,10);
         }

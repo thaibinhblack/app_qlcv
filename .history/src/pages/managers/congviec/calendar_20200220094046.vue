@@ -3,6 +3,7 @@
         <div class="col-sm-12">
             <p class="background">QUẢN LÍ LỊCH CÔNG TÁC</p>
             <b-button class="btn btn-add" @click="isModalCalendar = !isModalCalendar">Thêm mới</b-button>
+            {{GET_LICH_CONG_TAC}}
         </div>
         <div class="col-sm-12">
             <vue-cal  
@@ -33,6 +34,7 @@ export default {
             events: [],
             isModalCalendar: false,
             data_event: {},
+            cong_tac: []
         }
     },
     computed:

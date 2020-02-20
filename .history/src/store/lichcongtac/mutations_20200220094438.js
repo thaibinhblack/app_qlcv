@@ -4,7 +4,6 @@ export default {
         lich_cong_tac.forEach((element) => {
             element.time_start = JSON.parse(element.time_start)
             element.time_end = JSON.parse(element.time_end)
-            element.nhan_vien_di_ct = JSON.parse(element.nhan_vien_di_ct)
         })
         state.LIST_CONG_TAC = lich_cong_tac
     },

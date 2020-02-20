@@ -54,7 +54,7 @@
             <button v-if="Object.entries(cong_tac_edit).length == 0" type="submit" class="btn btn-primary btn-form" style="margin-left: 0;">Lưu lại</button>
             <button v-else type="submit" class="btn btn-warning btn-form">Cập nhật</button>
             <button type="button" class="btn btn-success btn-form">Clear</button>
-            <button type="button" class="btn btn-danger btn-form" @click="close()">Close</button>  
+            <button type="button" class="btn btn-danger btn-form" @click="$emit('close',false)">Close</button>  
         </div>
     </div>
 </form>
@@ -190,10 +190,6 @@ export default {
                     })
                 })
             }
-        },
-        close()
-        {
-            this.$emit('close',false)
         }
     },
     created()

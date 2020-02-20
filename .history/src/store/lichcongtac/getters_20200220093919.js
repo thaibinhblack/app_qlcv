@@ -3,8 +3,8 @@ export default {
     {
         var events = []
         state.LIST_CONG_TAC.forEach((element) => {
-            // element.time_start = JSON.parse(element.time_start)
-            // element.time_end = JSON.parse(element.time_end)
+            element.time_start = JSON.parse(element.time_start)
+            element.time_end = JSON.parse(element.time_end)
             events.push({
                 id_lich_ct: element.id_lich_ct,
                 start: element.date_start.substr(0,10) + ' ' + element.time_start.HH+':'+element.time_start.mm+':00',
@@ -20,6 +20,9 @@ export default {
     },
 
     LIST_CONG_TAC: state => {
+        state.LIST_CONG_TAC.forEach((element) => {
+            element.nhan_vien_di_ct = JSON.parse(element.nhan_vien_di_ct)
+        })
         return state.LIST_CONG_TAC
     }
 }

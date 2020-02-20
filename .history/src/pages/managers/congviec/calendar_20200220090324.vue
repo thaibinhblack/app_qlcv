@@ -3,6 +3,7 @@
         <div class="col-sm-12">
             <p class="background">QUẢN LÍ LỊCH CÔNG TÁC</p>
             <b-button class="btn btn-add" @click="isModalCalendar = !isModalCalendar">Thêm mới</b-button>
+            {{GET_LICH_CONG_TAC}}
         </div>
         <div class="col-sm-12">
             <vue-cal  
@@ -13,7 +14,7 @@
         </div>  
         <b-modal :active.sync="isModalCalendar"  :width="'80%'" :can-cancel="false"  @on-cancel="close()">
             <p class="background" >{{Object.entries(data_event).length > 0 ? data_event.ten_lich_ct : 'THÊM MỚI LỊCH CÔNG TÁC'}} <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>  
-            <modal-calendar :cong_tac_edit="data_event"  @close="isModalCalendar = $event" />
+            <modal-calendar :cong_tac_edit="data_event" />
         </b-modal>
     </div>
 </template>
@@ -30,24 +31,36 @@ export default {
     data()
     {
         return {
-            events: [],
+            events: [
+                {
+                start: '2020-02-13 10:30',
+                end: '2020-02-13 11:30',
+                // You can also define event dates with Javascript Date objects:
+                // startDate: new Date(2018, 11 - 1, 16, 10, 30),
+                // endDate: new Date(2018, 11 - 1, 16, 11, 30),
+                title: 'Doctor appointment',
+                content: '<i class="v-icon material-icons">local_hospital</i>',
+                class: 'health'
+                },
+                 {
+                start: '2020-02-13 10:30',
+                end: '2020-02-13 11:30',
+                // You can also define event dates with Javascript Date objects:
+                // startDate: new Date(2018, 11 - 1, 16, 10, 30),
+                // endDate: new Date(2018, 11 - 1, 16, 11, 30),
+                title: 'Doctor appointment',
+                content: '<i class="v-icon material-icons">local_hospital</i>',
+                class: 'health'
+                },
+            ],
             isModalCalendar: false,
             data_event: {},
+            cong_tac: []
         }
     },
     computed:
     {
       ...mapGetters(["GET_LICH_CONG_TAC", "LIST_CONG_TAC"])
-    },
-    watch:
-    {
-      isModalCalendar(val)
-      {
-        if(val == false)
-        {
-          this.data_event = {}
-        }
-      }
     },
     methods:
     {
@@ -66,7 +79,6 @@ export default {
             this.isModalCalendar = false
         }
     },
-  
     created()
     {
       this.$store.dispatch("fetch_LICH_CONG_TAC")

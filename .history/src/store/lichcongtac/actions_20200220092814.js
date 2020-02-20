@@ -47,7 +47,7 @@ export default {
         form_cong_tac.append("P_DATE_END",cong_tac.date_end)
         form_cong_tac.append("P_NHAN_VIEN_CT",JSON.stringify(cong_tac.nhan_vien_di_ct))
         return new Promise((resolve,reject) => {
-            axios.post('/api/lich-cong-tac/'+cong_tac.id_lich_ct+'?api_token='+axios.defaults.params.api_token,form_cong_tac)
+            axios.post('/api/lich-cong-tac'+cong_tac.id_lich_ct+'?api_token='+axios.defaults.params.api_token,form_cong_tac)
             .then((response) => {
                 resolve(response.data)
                 // commit("ADD_LICH_CONG_TAC",cong_tac)
