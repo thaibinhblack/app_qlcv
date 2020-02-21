@@ -493,7 +493,7 @@ export default {
         this.cong_viec.id_du_an = this.selected_du_an.id_du_an
         // this.cong_viec.id_du_an_kh = this.selected_du_an_kh[0].id_du_an_kh
         // this.cong_viec.DELETE_CV_DA_KH = this.DELETE_CV_DA_KH
-        // this.cong_viec.gio_thuc_hien = this.gio_thuc_hien
+        this.cong_viec.gio_thuc_hien = this.gio_thuc_hien
         if(Object.entries(this.selected_user_tiepnhan).length > 0)
         {
            this.cong_viec.nguoi_giao_viec = this.selected_user_giaoviec.id_nd
