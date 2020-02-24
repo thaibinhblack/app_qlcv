@@ -1,6 +1,5 @@
 <template>
 <form @submit.prevent="api_create_customer()" class="form-rule row" style="padding: 15px;">
-    <!-- {{customer}} -->
     <div class="col-sm-12 col-md-6">
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên khách hàng</label>
@@ -34,7 +33,7 @@
                 <b-field>
                     <b-select v-model="customer.trang_thai_kh" >
                         
-                        <option value="1">Đang hoạt động</option>
+                        <option value="1" selected>Đang hoạt động</option>
                         <option value="2">Đang bảo trì</option>
                         <option value="3">Ngừng hoạt động</option>
                     </b-select>

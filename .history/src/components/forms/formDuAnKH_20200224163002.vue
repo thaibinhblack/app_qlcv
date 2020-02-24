@@ -251,7 +251,7 @@ export default {
                             hasIcon: true
                         })
                     }
-                }).catch(() => {{
+                }).catch((err) => {{
                     // console.log(err)
                     app.$buefy.notification.open({
                         duration: 1500,

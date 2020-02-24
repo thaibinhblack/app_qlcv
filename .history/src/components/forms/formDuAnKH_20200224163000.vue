@@ -251,8 +251,8 @@ export default {
                             hasIcon: true
                         })
                     }
-                }).catch(() => {{
-                    // console.log(err)
+                }).catch((err) => {{
+                    console.log(err)
                     app.$buefy.notification.open({
                         duration: 1500,
                         message: 'Lỗi server!',

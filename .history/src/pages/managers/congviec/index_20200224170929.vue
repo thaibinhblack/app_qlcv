@@ -42,7 +42,7 @@
             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
         <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
-           <data-list-trong-ngay :time="time" />
+             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
     </b-tabs>
 

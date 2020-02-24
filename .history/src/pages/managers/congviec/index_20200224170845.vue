@@ -42,7 +42,7 @@
             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
         <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
-           <data-list-trong-ngay :time="time" />
+             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
     </b-tabs>
 
@@ -100,7 +100,6 @@ export default {
         'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
         'data-list-congviec': () => import('./dataListCongViec.vue'),
         'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
-        'data-list-da-tham-dinh': () => import('./dataListDaThamDinh'),
         'data-list-trong-ngay': () => import('./dataCongViecTrongNgay')
     },
     data()

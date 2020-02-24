@@ -1,6 +1,5 @@
 <template>
 <form @submit.prevent="api_create_customer()" class="form-rule row" style="padding: 15px;">
-    <!-- {{customer}} -->
     <div class="col-sm-12 col-md-6">
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-4 col-form-label" >Tên khách hàng</label>

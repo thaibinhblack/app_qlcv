@@ -85,9 +85,7 @@ export default {
             // console.log(newVal)
             if(newVal == false)
             {
-                this.customer_edit = {
-                    trang_thai_kh: 1
-                }
+                this.customer_edit = {}
                 this.source = {
                     datatype: "json",
                     datafields: [
@@ -110,9 +108,7 @@ export default {
         {
             if(val == true)
             {
-                this.customer_edit = {
-                    trang_thai_kh: 1
-                }
+                this.customer_edit = {}
                 this.source = {
                     datatype: "json",
                     datafields: [
