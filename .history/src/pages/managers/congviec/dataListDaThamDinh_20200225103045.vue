@@ -32,9 +32,9 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an_kh" 
-                        placeholder="Chọn khách hàng của dự án"
+                        placeholder="Chọn dự án"
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                        :multiple="false" :taggable="false"  :show-labels="false"></multiselect>
+                        :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
                     <li>
                         <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
@@ -169,10 +169,6 @@ export default {
         {
           this.filter.nguoi_nhan_viec = user.id_nd
         }
-        else
-        {
-          this.filter.nguoi_nhan_viec  = 0
-        }
       },
       selected_loai_cv(lcv)
       {
@@ -199,7 +195,7 @@ export default {
       },
       selected_du_an_kh(du_an)
       {
-        // console.log(du_an)
+        console.log(du_an)
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh

@@ -32,9 +32,9 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an_kh" 
-                        placeholder="Chọn khách hàng của dự án"
+                        placeholder="Chọn dự án"
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                        :multiple="false" :taggable="false"  :show-labels="false"></multiselect>
+                        :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
                     <li>
                         <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
@@ -91,20 +91,22 @@
                 class="table-data-cv"
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
-                :data="list_cong_viec">
+                :data="LIST_CONG_VIEC_DTD">
                  <template slot-scope="props">
                    
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
-                          (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
+                          (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') :
+                          (setting.column == 'gio_thuc_hien' ? 1 > props.row[setting.column]  ? '0'+props.row[setting.column] : props.row[setting.column] 
+                          : props.row[setting.column]) }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                     <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
                       <input v-model="props.row['tham_dinh_tgian']" type="number">
                     </b-table-column>
-                     <b-table-column width="120">
-                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
+                     <b-table-column :width="'200px'">
+                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskDTD',props.row.id_cv_da)"></b-button>
                         <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
                     </b-table-column>
                  </template>
@@ -114,12 +116,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Multiselect from 'vue-multiselect'
 export default {
     components: {
       'modal-setting': () => import('@/components/settings/modalSettingDataCV.vue'),
-      'button-export-excel': () => import('./exportExcel.vue'),
-      Multiselect
+      'button-export-excel': () => import('./exportExcel.vue')
     },
     props:["time"],
     data()
@@ -137,158 +137,36 @@ export default {
               id_loai_cv: 0,
               nguoi_nhan_viec: 0,
               time_start: this.time.time_start,
-              time_end: this.time.time_end,
-              trang_thai_td: 2
+              time_end: this.time.time_end
           },
           list_cong_viec: this.LIST_CONG_VIEC_CTD,
-          list_cong_viec_tmp: this.LIST_CONG_VIEC_CTD,
+          list_cong_viec_tmp: this.getCongViec,
           filter_trang_thai: 0,
           checkedRows: [],
           filter_tham_dinh: 1,
           defaultSortOrder: 'desc',
           sortField: "gio_thuc_hien",
           sortOrder: 'desc',
-          selected_user: null,
-          selected_loai_cv: null,
-          selected_du_an: null,
-          selected_du_an_kh: null
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_DTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
-    },
-    watch:
-    {
-      LIST_CONG_VIEC_DTD(CV)
-      {
-        this.list_cong_viec = CV
-      },
-      selected_user(user)
-      {
-        if(user != null)
-        {
-          this.filter.nguoi_nhan_viec = user.id_nd
-        }
-        else
-        {
-          this.filter.nguoi_nhan_viec  = 0
-        }
-      },
-      selected_loai_cv(lcv)
-      {
-        if(lcv != null)
-        {
-          this.filter.id_loai_cv = lcv.id_loai_cv
-        }
-        else
-        {
-          this.filter.id_loai_cv = 0
-        }
-      },
-      selected_du_an(du_an)
-      {
-          if(du_an != null)
-          {
-             this.$store.dispatch('fetchDuAnKHById',du_an.id_du_an);
-            this.filter.id_du_an = du_an.id_du_an
-          }
-          else
-          {
-            this.filter.id_du_an = 0
-          }
-      },
-      selected_du_an_kh(du_an)
-      {
-        // console.log(du_an)
-        if(du_an != null)
-        {
-          this.filter.id_du_an_kh = du_an.id_du_an_kh
-        }
-        else
-        {
-          this.filter.id_du_an_kh = 0
-        }
-      }
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_DTD"])
     },
     methods:
     {
       FilterCongViecDuAn()
       {
-          this.$store.dispatch('FilterCongViecTD',this.filter)
+          this.filter.id_du_an_kh = 0
+          this.$store.dispatch('fetchDuAnKHById',this.filter.id_du_an);
+          // this.time.id_du_an = newVal;
+          // this.$store.dispatch('FilterCongViecDuAn',this.time)
+          this.$store.dispatch('FilterCongViec',this.filter)
       },
       onSort(field, order) {
             this.sortField = field
             this.sortOrder = order
             this.loadAsyncData()
       },
-      gui_tham_dinh()
-      {
-        var app = this;
-        this.$store.dispatch("sendThamDinh",{
-          list_cv: this.checkedRows,
-          tham_dinh: this.filter_tham_dinh})
-        .then(() => {
-          this.checkedRows = []
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: this.filter_tham_dinh == 0 ? 'Gửi thẩm định thành công': 'Hủy thẩm định thành công',
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-          this.filter_tham_dinh = 0
-          this.list_cong_viec = this.getCongViec
-          
-        })
-        .catch(() => {
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: 'Lỗi server! xin vui lòng thử lại!' ,
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-        })
-      },
-      tham_dinh()
-      {
-        var array_list = []
-        var array_tgian = []
-        this.checkedRows.forEach((element) => {
-          array_list.push(element.id_cv_da)
-          array_tgian.push(element.tham_dinh_tgian)
-        })
-        this.$store.dispatch("createThamDinhListCV",{
-          array_list: array_list,
-          array_tgian: array_tgian
-        }).then(() => {
-
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-            this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 1
-            })
-             this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 2
-            })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
-        })
-      }
     },
     created()
     {

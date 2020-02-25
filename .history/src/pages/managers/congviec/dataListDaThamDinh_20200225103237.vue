@@ -199,7 +199,7 @@ export default {
       },
       selected_du_an_kh(du_an)
       {
-        // console.log(du_an)
+        console.log(du_an)
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh
