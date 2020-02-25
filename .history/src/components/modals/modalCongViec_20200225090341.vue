@@ -2,7 +2,7 @@
 <b-tabs  >
     <!-- {{getTaskEdit}} -->
   <b-tab-item  label="Thông tin công việc">
-  <!-- {{cong_viec}} -->
+  
     <form @keydown.esc="close()" @submit.prevent="api_cong_viec()" style="width:100%;padding:15px;">
       <div class="row">
         <div class="col-sm-12 col-md-6">
@@ -755,7 +755,7 @@ export default {
              this.my_info = response.data[0]
           })
         // console.log('length',Object.entries(this.getTaskEdit).length)
-        if(Object.entries(this.getTaskEdit).length > 6)
+        if(Object.entries(this.getTaskEdit).length > 5)
         {
           this.check_remove = true
           this.selected_du_an = this.LIST_DUAN.filter((value,index,array) => {

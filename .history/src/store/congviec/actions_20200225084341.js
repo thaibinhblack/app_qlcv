@@ -122,7 +122,7 @@ export default {
         })
     },
     updateCongViec({commit},cong_viec)
-    {   console.log(cong_viec)
+    {
         return new Promise((resolve,reject) => {
             const form_cong_viec = new FormData();
             // console.log(cong_viec,store.state.module_congviec.task_edit)
