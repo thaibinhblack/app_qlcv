@@ -452,18 +452,11 @@ export default {
 //công việc dự án
     FilterCongViecTD({commit},filter)
     {
-        var query = "&id_du_an="+filter.id_du_an+"&id_du_an_kh="+filter.id_du_an_kh+'&nguoi_nhan_viec='+filter.nguoi_nhan_viec+"&P_ID_LOAI_CV="+filter.id_loai_cv+'&P_TRANG_THAI_TD='+filter.trang_thai_td;
+        var query = "&id_du_an="+filter.id_du_an+"&id_du_an_kh="+filter.id_du_an_kh+'&nguoi_nhan_viec='+filter.nguoi_nhan_viec+"&P_ID_LOAI_CV="+filter.id_loai_cv;
         return new Promise((resolve,reject) => {
             axios.get('/api/cong-viec?api_token='+axios.defaults.params.api_token+'&time_start='+filter.time_start+'&time_end='+filter.time_end+query).then((response) => {
-                if(filter.trang_thai_td == 1)
-                {
-                    commit("SET_CONGVIEC_CTD",response.data)
-                }
-                else
-                {
-                    commit("SET_CONGVIEC_DTD",response.data)
-                }
-                resolve(response.data)
+                commit("SET_CONGVIEC",response.data)
+                resolve(true)
             }).catch(() => {
                 reject(false)
             })

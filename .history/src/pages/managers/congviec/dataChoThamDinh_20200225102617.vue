@@ -6,7 +6,7 @@
                 <ul class="list-action-data top">
                     <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
                     <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
-                    <!-- {{filter}} -->
+                    {{filter}}
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -176,10 +176,6 @@ export default {
         {
           this.filter.id_loai_cv = lcv.id_loai_cv
         }
-        else
-        {
-          this.filter.id_loai_cv = 0
-        }
       },
       selected_du_an(du_an)
       {
@@ -188,20 +184,12 @@ export default {
              this.$store.dispatch('fetchDuAnKHById',du_an.id_du_an);
             this.filter.id_du_an = du_an.id_du_an
           }
-          else
-          {
-            this.filter.id_du_an = 0
-          }
       },
       selected_du_an_kh(du_an)
       {
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh
-        }
-        else
-        {
-          this.filter.id_du_an_kh = 0
         }
       }
     },

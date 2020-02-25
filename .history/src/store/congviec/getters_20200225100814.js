@@ -76,8 +76,8 @@ export default {
     },
     LIST_CONG_VIEC_CTD: state => {
         state.list_congviec_ctd.forEach((ctd) => {
-            ctd.gio_thuc_hien = parseFloat(ctd.gio_thuc_hien)
-            ctd.tham_dinh_tgian = ctd.gio_thuc_hien 
+            ctd.gio_thuc_hien = ctd.gio_thuc_hien.toFixed(2)
+            ctd.tham_dinh_tgian = ctd.gio_thuc_hien
         })
         return state.list_congviec_ctd
     },

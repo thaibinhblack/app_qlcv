@@ -176,10 +176,6 @@ export default {
         {
           this.filter.id_loai_cv = lcv.id_loai_cv
         }
-        else
-        {
-          this.filter.id_loai_cv = 0
-        }
       },
       selected_du_an(du_an)
       {

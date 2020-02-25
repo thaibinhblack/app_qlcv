@@ -6,7 +6,7 @@
                 <ul class="list-action-data top">
                     <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
                     <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
-                    <!-- {{filter}} -->
+   
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -23,34 +23,8 @@
                       </b-field>
                     </li>
                     <li>
-                       <multiselect v-model="selected_du_an" 
-      
-                        :options="LIST_DUAN" 
-                        label="ten_du_an" 
-                        track-by="ten_du_an" placeholder="Danh sách dự án"
-                        :multiple="false"  :show-labels="false" ></multiselect>
-                    </li>
-                    <li>
-                       <multiselect v-model="selected_du_an_kh" 
-                        placeholder="Chọn dự án"
-                        :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                        :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
-                    </li>
-                    <li>
-                        <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                        <multiselect  :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
-                    </li>
-                    <li>
-                       <multiselect :options="GROUP_LCV"
-                          v-model="selected_loai_cv"
-                          placeholder="Chọn loại công việc"
-                          :multiple="false"
-                          :group-values="'children'"
-                          :group-label="'parent'"
-                          :group-select="false"
-                          :show-labels="false"
-                          track-by="ten_loai_cv"
-                          label="ten_loai_cv"></multiselect>
                     </li>
                     <li class="right"><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
                     <li > <button-export-excel /></li>
@@ -91,13 +65,15 @@
                 class="table-data-cv"
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
-                :data="list_cong_viec">
+                :data="LIST_CONG_VIEC_CTD">
                  <template slot-scope="props">
                    
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
-                          (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
+                          (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') :
+                          (setting.column == 'gio_thuc_hien' ? 1 > props.row[setting.column]  ? '0'+props.row[setting.column] : props.row[setting.column] 
+                          : props.row[setting.column]) }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                     <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
@@ -114,12 +90,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Multiselect from 'vue-multiselect'
 export default {
     components: {
       'modal-setting': () => import('@/components/settings/modalSettingDataCV.vue'),
-      'button-export-excel': () => import('./exportExcel.vue'),
-      Multiselect
+      'button-export-excel': () => import('./exportExcel.vue')
     },
     props:["time"],
     data()
@@ -137,8 +111,7 @@ export default {
               id_loai_cv: 0,
               nguoi_nhan_viec: 0,
               time_start: this.time.time_start,
-              time_end: this.time.time_end,
-              trang_thai_td: 1
+              time_end: this.time.time_end
           },
           list_cong_viec: this.LIST_CONG_VIEC_CTD,
           list_cong_viec_tmp: this.LIST_CONG_VIEC_CTD,
@@ -148,68 +121,20 @@ export default {
           defaultSortOrder: 'desc',
           sortField: "gio_thuc_hien",
           sortOrder: 'desc',
-          selected_user: null,
-          selected_loai_cv: null,
-          selected_du_an: null,
-          selected_du_an_kh: null
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
-    },
-    watch:
-    {
-      LIST_CONG_VIEC_CTD(CV)
-      {
-        this.list_cong_viec = CV
-      },
-      selected_user(user)
-      {
-        if(user != null)
-        {
-          this.filter.nguoi_nhan_viec = user.id_nd
-        }
-      },
-      selected_loai_cv(lcv)
-      {
-        if(lcv != null)
-        {
-          this.filter.id_loai_cv = lcv.id_loai_cv
-        }
-        else
-        {
-          this.filter.id_loai_cv = 0
-        }
-      },
-      selected_du_an(du_an)
-      {
-          if(du_an != null)
-          {
-             this.$store.dispatch('fetchDuAnKHById',du_an.id_du_an);
-            this.filter.id_du_an = du_an.id_du_an
-          }
-          else
-          {
-            this.filter.id_du_an = 0
-          }
-      },
-      selected_du_an_kh(du_an)
-      {
-        if(du_an != null)
-        {
-          this.filter.id_du_an_kh = du_an.id_du_an_kh
-        }
-        else
-        {
-          this.filter.id_du_an_kh = 0
-        }
-      }
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cong_viec", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER"])
     },
     methods:
     {
       FilterCongViecDuAn()
       {
-          this.$store.dispatch('FilterCongViecTD',this.filter)
+          this.filter.id_du_an_kh = 0
+          this.$store.dispatch('fetchDuAnKHById',this.filter.id_du_an);
+          // this.time.id_du_an = newVal;
+          // this.$store.dispatch('FilterCongViecDuAn',this.time)
+          this.$store.dispatch('FilterCongViec',this.filter)
       },
       onSort(field, order) {
             this.sortField = field
