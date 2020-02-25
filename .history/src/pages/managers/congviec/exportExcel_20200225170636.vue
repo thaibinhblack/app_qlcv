@@ -17,8 +17,7 @@ export default {
     data(){
         return {
             json_fields: {
-            'DỰ ÁN': 'ten_du_an',
-            'KHÁCH HÀNG': 'ten_kh',
+            'DỰ ÁN KHÁCH HÀNG': 'ten_du_an_kh',
             'TÊN CÔNG VIỆC': 'ten_cv',
             'LOẠI CÔNG VIỆC': 'ten_loai_cv',
             'NỘI DUNG CÔNG VIỆC': 'noi_dung_cv',
@@ -51,7 +50,7 @@ export default {
     },
     watch:
     {
-        list_cong_viec(val)
+        getCongViec(val)
         {
             this.json_data = val
         }
