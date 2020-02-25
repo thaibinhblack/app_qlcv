@@ -1,7 +1,6 @@
 <template>
 <export-excel
-    :data="json_data"
-    :fields="json_fields">
+    :data   = "json_data">
    <b-button icon-left="download"></b-button> 
 </export-excel>
 
@@ -9,7 +8,6 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    props: ["list_cong_viec"],
     computed:
     {
         ...mapGetters(["getCongViec"])
@@ -37,7 +35,7 @@ export default {
                 }
             }
         },
-        json_data: this.list_cong_viec,
+        json_data: this.getCongViec,
         json_meta: [
             [
                 {

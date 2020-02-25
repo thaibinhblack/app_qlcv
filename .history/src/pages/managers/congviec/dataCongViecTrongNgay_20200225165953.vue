@@ -1,95 +1,14 @@
 <template>
         <section class="section-data" > 
-          <!-- {{setting_modal}}  -->
-            <div class="header header-datalist">
-                <!-- {{checkedRows.length}} -->
-                <ul class="list-action-data top">
-                    <li><b-button class="btn btn-add" @click='$store.dispatch("updateModalEdit",true)' >Thêm mới</b-button></li>
-                    <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
-                    <li>
-                      <b-field>
-                        <b-select v-model="perPage">
-                          <option :value="10">10</option>
-                          <option :value="20">20</option>
-                          <option :value="50">50</option>
-                          <option :value="100">100</option>
-                          <option :value="200">200</option>
-                          <option :value="300">300</option>
-                          <option :value="400">400</option>
-                          <option :value="500">500</option>
-                          <option :value="1000">1000</option>
-                        </b-select>
-                      </b-field>
-                    </li>
-                    <li class="filter-duan-kh">
-                      <b-field style="width: 200px;">
-                          <b-select v-model="filter.id_du_an" expanded @input="FilterCongViecDuAn()">  
-                              <option value="0"> --Tất cả  dự án--</option>
-                              
-                              <option v-for="(da,index) in Object.entries(setting_modal.selected_du_an_setting).length > 0 ?  setting_modal.selected_du_an_setting : LIST_DUAN" :key="index" :value="da.id_du_an"> {{da.ten_du_an}}</option>
-                          </b-select>
-                      </b-field>
-                    </li>
-                    <li>
-                      <b-field>
-                          <b-select v-model="filter.id_du_an_kh" expanded :disabled="LIST_DUAN_KH.length == 0" @input="$store.dispatch('FilterCongViec',filter)">
-                              <option value="0"> --Tất cả khách hàng--</option>
-                              <option v-for="(da,index) in LIST_DUAN_KH" :key="index" :value="da.id_du_an_kh"> {{da.ten_kh}}</option>
-                          </b-select>
-                      </b-field>
-                    </li>
-                    <li>
-                      <b-field>
-                        <b-select v-model="filter_trang_thai">
-                          <option value="0">Trạng Thái</option>
-                          <option value="1">Chưa thực hiện</option>
-                          <option value="2">Đang thực hiện</option>
-                          <option value="3">Hoàn thành</option>
-                          <option value="4">Gia hạn</option>
-                        </b-select>
-                      </b-field>
-                    </li>
-                   
-                    <li class="right"><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
-                    <li > <button-export-excel :list_cong_viec="list_cong_viec"/></li>
-                </ul>
-                <ul class="list-action-data">
-                   <li>
-                      <b-field>
-                        <b-input v-model="filter.time_start" type="date"></b-input>
-                      </b-field>
-                    </li>
-                    <li>
-                      <b-field>
-                        <b-input v-model="filter.time_end" type="date"></b-input>
-                      </b-field>
-                    </li>
-                    <li>
-                      <b-button style="margin-bottom: 5px;vertical-align: unset !importtant;" icon-left="arrow-right"
-                        @click="FilterCongViecDuAn()"></b-button>
-                    </li>
-                </ul>
-                <div class="col-sm-12" style="margin-top: 15px;">
-                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_cong_viec.toFixed(2)}} giờ</strong> </span>
-                  <!-- {{list_cong_viec}} -->
-                </div>
-            </div>
-
-            <b-modal :active.sync="isModalSetting" :width="'100%'" full-screen>
-                <modal-setting />
-            </b-modal>
 
              <b-table
                 :paginated="isPaginated"
                 :per-page="perPage"
-                :current-page.sync="currentPage"
-                :checked-rows.sync="checkedRows"
-                :is-row-checkable="(row) => row.trang_thai == 3"
-                checkable
+               
                 class="table-data-cv"
                 :pagination-simple="isPaginationSimple"
                 :pagination-position="paginationPosition"
-                :data="list_cong_viec">
+                :data="LIST_CONG_VIEC_TRONGNGAY">
                  <template slot-scope="props">
                     
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label" :width="setting.width" >
@@ -139,10 +58,6 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    components: {
-      'modal-setting': () => import('@/components/settings/modalSettingDataCV.vue'),
-      'button-export-excel': () => import('./exportExcel.vue')
-    },
     props:["time"],
     data()
     {
@@ -173,11 +88,11 @@ export default {
       }
     },
     computed:{
-        ...mapGetters(["getCongViec", "GET_SETTING", "LIST_DUAN", "LIST_DUAN_KH", "setting_modal", "total_time_cong_viec", "INFO_USER"])
+        ...mapGetters(["LIST_CONG_VIEC_TRONGNGAY", "GET_SETTING"])
     },
     watch:
     {
-      getCongViec(val)
+      LIST_CONG_VIEC_TRONGNGAY(val)
       {
 
         this.list_cong_viec_tmp = this.list_cong_viec = val
@@ -216,48 +131,8 @@ export default {
     },
     methods:
     {
-      FilterCongViecDuAn()
-      {
-          this.filter.id_du_an_kh = 0
-          this.$store.dispatch('fetchDuAnKHById',this.filter.id_du_an);
-          // this.time.id_du_an = newVal;
-          // this.$store.dispatch('FilterCongViecDuAn',this.time)
-          this.$store.dispatch('FilterCongViec',this.filter)
-      },
-      onSort(field, order) {
-            this.sortField = field
-            this.sortOrder = order
-            this.loadAsyncData()
-      },
-      gui_tham_dinh()
-      {
-        var app = this;
-        this.$store.dispatch("sendThamDinh",{
-          list_cv: this.checkedRows,
-          tham_dinh: this.filter_tham_dinh})
-        .then(() => {
-          this.checkedRows = []
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: this.filter_tham_dinh == 0 ? 'Gửi thẩm định thành công': 'Hủy thẩm định thành công',
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-          this.filter_tham_dinh = 0
-          this.list_cong_viec = this.getCongViec
-          
-        })
-        .catch(() => {
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: 'Lỗi server! xin vui lòng thử lại!' ,
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-        })
-      },
+
+
       search_cv(index,column)
       {
           // console.log(this.search[index])
@@ -272,8 +147,8 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("SELECT_SETTING")
-      this.$store.dispatch('SELECT_SETTING_MODAL_CV')
+      this.$store.dispatch("fetchCongViecTrongNgay")
+    //   this.$store.dispatch('SELECT_SETTING_MODAL_CV')
     }
 }
 </script>
