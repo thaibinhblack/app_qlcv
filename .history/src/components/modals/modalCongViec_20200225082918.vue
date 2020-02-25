@@ -197,7 +197,7 @@
                 
                 <div class="col-sm-4">
                     <b-field>
-                      <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="total_phut_gio" placeholder="Phút tính tạm" ></b-input>
+                      <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="total_phut_gio()" placeholder="Phút tính tạm" ></b-input>
                     </b-field>
                 </div>
 
@@ -418,12 +418,23 @@ export default {
         files: [],
         check_remove: false,
         id_du_an_kh_old: 0,
-        total_phut_gio: 0
+        
       }
     },
     computed:{
       ...mapGetters(["getUser", "getTaskEdit", "GROUP_LCV", "LIST_DUAN", "LIST_DUAN_KH", "GROUP_LCV", 
       "LIST_USER_GIAOVIEC", "LIST_USER", "get_list_lcv", "INFO_USER", "LIST_FILE", "setting_modal", "DELETE_CV_DA_KH"]),
+      total_phut_gio:
+      {
+        get()
+        {
+          return 0
+        },
+        set(val)
+        {
+          return 0
+        }
+      },
       gio_thuc_hien()
       {
         if(Object.entries(this.getTaskEdit).length > 5)
@@ -477,10 +488,6 @@ export default {
     },
     watch:
     {
-      total_phut_gio(val)
-      {
-        this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
-      },
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv

@@ -480,7 +480,7 @@ export default {
       total_phut_gio(val)
       {
         this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
-      },
+      }
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv

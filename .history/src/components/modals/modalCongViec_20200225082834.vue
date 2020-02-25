@@ -197,7 +197,7 @@
                 
                 <div class="col-sm-4">
                     <b-field>
-                      <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="total_phut_gio" placeholder="Phút tính tạm" ></b-input>
+                      <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.gio_thuc_hien" placeholder="Phút tính tạm" ></b-input>
                     </b-field>
                 </div>
 
@@ -418,7 +418,7 @@ export default {
         files: [],
         check_remove: false,
         id_du_an_kh_old: 0,
-        total_phut_gio: 0
+        
       }
     },
     computed:{
@@ -477,10 +477,6 @@ export default {
     },
     watch:
     {
-      total_phut_gio(val)
-      {
-        this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
-      },
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv

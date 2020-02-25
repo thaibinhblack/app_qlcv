@@ -133,15 +133,6 @@
                 </b-field>
               </div>
             </div>
-             <div class="form-group row">        
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Hạn hoàn thành</label>
-              <div class="col-sm-8">
-                <b-field >
-                  <b-input type="date" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" style="width: 100%;"  v-model="cong_viec.han_hoan_thanh"></b-input>
-                 
-                </b-field>
-              </div>
-            </div>
             <div class="form-group row">        
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày giao việc</label>
               <div class="col-sm-4">
@@ -150,13 +141,26 @@
               </div>
               <div class="col-sm-4">
                 <b-field >
-                  <!-- <b-input type="datetime-local"></b-input> -->
+                  
                    <b-input type="date"  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"  style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"></b-input>
                   <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"> -->
                 </b-field>
               </div>
             </div>
-
+             <div class="form-group row">        
+              <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày phải hoàn thành</label>
+              <div class="col-sm-4">
+                  <input type="number" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.time_nhan_viec.HH" min="1" max="24" class="tag-time" style="margin-right:5px;"> giờ :
+                  <input type="number" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.time_nhan_viec.mm" min="0" max="59" class="tag-time" style="margin-left: 5px;"> phút
+              </div>
+              <div class="col-sm-4">
+                <b-field >
+                  
+                   <b-input type="date"  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"  style="width: 100%;"  v-model="cong_viec.ngay_hoan_thanh"></b-input>
+                  <!-- <input type="date" style="width: 100%;"  v-model="cong_viec.ngay_giao_viec"> -->
+                </b-field>
+              </div>
+            </div>
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày hoàn thành</label>
                  <div class="col-sm-4">
@@ -195,13 +199,7 @@
             <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Thời gian thực hiện (giờ)</label>
                 
-                <div class="col-sm-4">
-                    <b-field>
-                      <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="total_phut_gio" placeholder="Phút tính tạm" ></b-input>
-                    </b-field>
-                </div>
-
-                <div class="col-sm-4">
+                <div class="col-sm-8">
                     <b-field>
                       <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.gio_thuc_hien" placeholder="Thời gian thực hiện (giờ)" ></b-input>
                     </b-field>
@@ -385,7 +383,6 @@ export default {
           ngay_giao_viec: new Date().toISOString().substr(0,10),
           ngay_hoan_thanh: new Date().toISOString().substr(0,10),
           ngay_cam_ket: new Date().toISOString().substr(0,10),
-          han_hoan_thanh: new Date().toISOString().substring(0,10),
           type: false,
           gio_thuc_hien: 0,
           nguoi_nhan_viec: 0,
@@ -418,7 +415,7 @@ export default {
         files: [],
         check_remove: false,
         id_du_an_kh_old: 0,
-        total_phut_gio: 0
+        
       }
     },
     computed:{
@@ -477,10 +474,6 @@ export default {
     },
     watch:
     {
-      total_phut_gio(val)
-      {
-        this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
-      },
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv

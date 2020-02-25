@@ -154,8 +154,6 @@ export default {
             form_cong_viec.append("P_TYPE",cong_viec.type)
             form_cong_viec.append("P_TIME_NHAN_VIEC", JSON.stringify(cong_viec.time_nhan_viec))
             form_cong_viec.append("P_TIME_HOAN_THANH", JSON.stringify(cong_viec.time_hoan_thanh))
-            form_cong_viec.append("P_HAN_HOAN_THANH",cong_viec.han_hoan_thanh)
-
             if(cong_viec.trang_thai == 3 && parseInt(cong_viec.tien_do) < 100)
             {
                 resolve({

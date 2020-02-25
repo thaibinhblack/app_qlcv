@@ -418,7 +418,7 @@ export default {
         files: [],
         check_remove: false,
         id_du_an_kh_old: 0,
-        total_phut_gio: 0
+        
       }
     },
     computed:{
@@ -477,10 +477,6 @@ export default {
     },
     watch:
     {
-      total_phut_gio(val)
-      {
-        this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
-      },
       selected_loai_cv(val)
       {
         this.cong_viec.id_loai_cv = val.id_loai_cv
