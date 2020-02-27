@@ -219,7 +219,7 @@ export default {
                     })
                     if(cong_viec.thong_bao == true)
                     {
-                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
+                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8A/sendMessage",{
                             'chat_id': '-1001463887834', //808314484
                             'text':   cong_viec.noi_dung_thong_bao
                         });

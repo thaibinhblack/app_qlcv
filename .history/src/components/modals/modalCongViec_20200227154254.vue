@@ -124,12 +124,9 @@
             <div class="col-sm-8">
               <b-checkbox v-model="cong_viec.thong_bao" @input="sendNotifyTelegram()"></b-checkbox>
               <b-checkbox v-model="cong_viec.thong_bao_private" @input="getIdTelegram()"></b-checkbox>
-               <b-checkbox v-model="cong_viec.sms" @input="getIdTelegram()"></b-checkbox>
+               <b-checkbox v-model="cong_viec.thong_bao_private" @input="getIdTelegram()"></b-checkbox>
             </div>
-            <div class="col-sm-8 offset-4" v-if="cong_viec.sms == true">
-              <b-input type="text" v-model="cong_viec.sdt_nd" @input="sendNotifyTelegram()"></b-input>
-            </div>
-            <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true || cong_viec.thong_bao_private == true || cong_viec.sms == true">
+            <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true || cong_viec.thong_bao_private == true">
                    <b-input type="textarea"  minlength=""  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"
                     maxlength="1000" placeholder="Nội dung"  v-model="cong_viec.noi_dung_thong_bao"   ></b-input>
             </div>
@@ -433,8 +430,7 @@ export default {
         id_du_an_kh_old: 0,
         total_phut_gio: 0,
         reset: false,
-        thong_bao_private: false,
-        sms: false
+        thong_bao_private: false
       }
     },
     computed:{
@@ -496,7 +492,6 @@ export default {
       selected_user_tiepnhan()
       {
         this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
-        this.cong_viec.sdt_nd = this.selected_user_tiepnhan.sdt_nd
       },
       total_phut_gio(val)
       {
@@ -552,10 +547,7 @@ export default {
           type_cv: "0",
           do_uu_tien: 1,
           trang_thai_td: 0,
-          thong_bao: false,
-          reset: false,
-          thong_bao_private: false,
-          sms: false
+          thong_bao: false
         }
         this.total_phut_gio = 0
         this.selected_loai_cv = {}
@@ -777,9 +769,9 @@ export default {
       sendNotifyTelegram()
       {
         
-        if(this.cong_viec.thong_bao == true || this.cong_viec.sms == true)
+        if(this.cong_viec.thong_bao == true)
         {
-          this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv  + ' Hạn hoàn thành: '+this.cong_viec.han_hoan_thanh
+          this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv
         }
       },
       getIdTelegram()
@@ -787,7 +779,7 @@ export default {
         this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
         if(this.cong_viec.thong_bao_private == true)
           {
-            this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv + ' Hạn hoàn thành: '+this.cong_viec.han_hoan_thanh
+            this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv
           }
       }
     },

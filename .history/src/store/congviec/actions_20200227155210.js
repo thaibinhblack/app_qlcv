@@ -130,7 +130,7 @@ export default {
                     }
                     if(cong_viec.thong_bao_private == true)
                     {
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
+                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
                             'chat_id': cong_viec.id_telegram, //808314484
                             'text':   cong_viec.noi_dung_thong_bao
                         });
@@ -226,7 +226,7 @@ export default {
                     }
                     if(cong_viec.thong_bao_private == true)
                     {
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
+                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
                             'chat_id': cong_viec.id_telegram, //808314484
                             'text':   cong_viec.noi_dung_thong_bao
                         });
@@ -246,9 +246,7 @@ export default {
                                 xmls,
                                 {headers:
                                     {'Content-Type': 'text/xml'}
-                                }).then(res=>{
-                        console.log(res.data);
-                        }).catch(err=>{console.log(err)});
+                                })
                         }
                     }).catch(() => {
                         reject({
@@ -359,7 +357,7 @@ export default {
                     list_tham_dinh: array_cv.list_cv,
                     action_tham_dinh: array_cv.tham_dinh
                 })
-                https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
+                https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
                     'chat_id': '808314484', //-1001463887834
                     'text':   store.state.module_users.info_user.display_name + content
                 });
