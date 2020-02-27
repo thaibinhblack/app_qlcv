@@ -123,7 +123,7 @@
             <label for="inputPassword3"  class="col-sm-4 col-form-label" >Gửi thông báo</label>
             <div class="col-sm-8">
               <b-checkbox v-model="cong_viec.thong_bao" @input="sendNotifyTelegram()"></b-checkbox>
-              <b-checkbox v-model="cong_viec.thong_bao_private" @input="getIdTelegram()"></b-checkbox>
+              <b-checkbox v-model="cong_viec.thong_bao_private"></b-checkbox>
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true || cong_viec.thong_bao_private == true">
                    <b-input type="textarea"  minlength=""  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"
@@ -488,10 +488,6 @@ export default {
     },
     watch:
     {
-      selected_user_tiepnhan()
-      {
-        this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
-      },
       total_phut_gio(val)
       {
         this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
@@ -772,11 +768,6 @@ export default {
         {
           this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv
         }
-      },
-      getIdTelegram()
-      {
-        this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
-        console.log(this.selected_user_tiepnhan.id_telegram)
       }
     },
     created()

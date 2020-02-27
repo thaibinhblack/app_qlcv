@@ -488,10 +488,6 @@ export default {
     },
     watch:
     {
-      selected_user_tiepnhan()
-      {
-        this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
-      },
       total_phut_gio(val)
       {
         this.cong_viec.gio_thuc_hien = parseFloat((val)/60).toFixed(2)
@@ -775,7 +771,6 @@ export default {
       },
       getIdTelegram()
       {
-        this.cong_viec.id_telegram = this.selected_user_tiepnhan.id_telegram
         console.log(this.selected_user_tiepnhan.id_telegram)
       }
     },

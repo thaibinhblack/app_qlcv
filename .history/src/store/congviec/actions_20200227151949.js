@@ -198,20 +198,6 @@ export default {
                         result: cong_viec,
                         status: 200
                     })
-                    if(cong_viec.thong_bao == true)
-                    {
-                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
-                            'chat_id': '-1001463887834', //808314484
-                            'text':   cong_viec.noi_dung_thong_bao
-                        });
-                    }
-                    if(cong_viec.thong_bao_private == true)
-                    {
-                        https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
-                            'chat_id': cong_viec.id_telegram, //808314484
-                            'text':   cong_viec.noi_dung_thong_bao
-                        });
-                    }
                 }).catch(() => {
                     reject({
                         success: false,
