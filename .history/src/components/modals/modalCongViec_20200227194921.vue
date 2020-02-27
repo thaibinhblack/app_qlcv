@@ -417,8 +417,7 @@ export default {
           do_uu_tien: 1,
           trang_thai_td: 0,
           tham_dinh_tgian: 0,
-          thong_bao: false,
-          ma_jira: ""
+          thong_bao: false
         },
         selected_du_an: {},
         selected_du_an_kh: [],

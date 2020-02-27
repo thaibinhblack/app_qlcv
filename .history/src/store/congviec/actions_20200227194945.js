@@ -178,7 +178,7 @@ export default {
             form_cong_viec.append("P_NGAY_CAM_KET", cong_viec.ngay_cam_ket)
             form_cong_viec.append("P_GIO_THUC_HIEN",cong_viec.gio_thuc_hien)
             form_cong_viec.append("P_DO_UU_TIEN",cong_viec.do_uu_tien)
-            form_cong_viec.append("P_MA_JIRA",cong_viec.ma_jira)
+            form_cong_viec.append("P_MA_JIRA",cong_viec.ma_jara)
             form_cong_viec.append("P_NGUOI_GIAO_VIEC",cong_viec.nguoi_giao_viec)
             form_cong_viec.append("P_NGUOI_NHAN_VIEC",cong_viec.nguoi_nhan_viec)
             form_cong_viec.append("P_TIEN_DO",cong_viec.tien_do)
