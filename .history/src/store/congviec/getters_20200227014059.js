@@ -1,6 +1,5 @@
 export default {
     getCongViec: state => {
-        
         return state.list_congviec;
     },
     LIST_CONG_VIEC_TRONGNGAY: state => {
@@ -105,8 +104,5 @@ export default {
     },
     LIST_CONG_VIEC_DTD: state => {
         return state.list_congviec_dtd
-    },
-    LIST_CONG_VIEC_PHANCONG: state => {
-        return state.list_cong_viec_phan_cong
     }
 }

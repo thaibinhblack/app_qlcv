@@ -137,10 +137,6 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
-        activeTab(tab)
-        {
-            console.log(tab)
-        },
         isModalBaoCao(val)
         {
             if(val == false)

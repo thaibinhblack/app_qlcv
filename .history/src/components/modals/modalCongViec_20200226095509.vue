@@ -105,21 +105,11 @@
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhận việc</label>
+            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
              <!-- :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1"  -->
               <multiselect  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" :show-labels="false" v-model="selected_user_tiepnhan" :options="LIST_USER" label="display_name" track-by="id_nd"></multiselect>
-            </div>
-          </div>
-          <div class="form-group row">        
-            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Không reset dữ liệu</label>
-            <div class="col-sm-8">
-              <b-checkbox v-model="reset" ></b-checkbox>
-            </div>
-            <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true">
-                   <b-input type="textarea"  minlength=""  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"
-                    maxlength="1000" placeholder="Nội dung"  v-model="cong_viec.noi_dung_thong_bao"   ></b-input>
             </div>
           </div>
           <div class="form-group row">        
@@ -376,7 +366,7 @@
 import Multiselect from 'vue-multiselect'
 import { mapGetters } from 'vuex'
 export default {
-    props: ["isActiveModal", "time"],
+    props: ["isActiveModal"],
     components:
     {
       Multiselect,
@@ -429,8 +419,7 @@ export default {
         files: [],
         check_remove: false,
         id_du_an_kh_old: 0,
-        total_phut_gio: 0,
-        reset: false
+        total_phut_gio: 0
       }
     },
     computed:{
@@ -517,42 +506,6 @@ export default {
     },
     methods:
     {
-      initValue()
-      {
-        this.cong_viec = {
-          id_du_an_kh: this.selected_du_an.id_du_an_kh,
-          tien_do: 0,
-          id_loai_cv: 1,
-          trang_thai: 1,
-          ngay_tiep_nhan: new Date().toISOString().substr(0,10),
-          ngay_giao_viec: new Date().toISOString().substr(0,10),
-          ngay_hoan_thanh: new Date().toISOString().substr(0,10),
-          ngay_cam_ket: new Date().toISOString().substr(0,10),
-          han_hoan_thanh: new Date().toISOString().substr(0,10),
-          type: false,
-          time_nhan_viec: {
-            HH: '07',
-            mm: '00',
-            ss: '00'
-          },
-          time_hoan_thanh: {
-            HH: '07',
-            mm: '00',
-            ss: '00'
-          },
-          type_cv: "0",
-          do_uu_tien: 1,
-          trang_thai_td: 0,
-          thong_bao: false
-        }
-        this.total_phut_gio = 0
-        this.selected_loai_cv = {}
-        this.selected_user_giaoviec = this.my_info
-        this.selected_user_tiepnhan = this.my_info
-        // this.selected_du_an = {}
-        this.selected_du_an_kh = []
-        this.selected_loai_cv = {}
-      },
       formatDate (date) {
           if (!date) return null
           const [year, month, day] = date.split('-')
@@ -636,7 +589,6 @@ export default {
            this.$store.dispatch('createCongViec',this.cong_viec).then((response) => {
              if(response.success != false)
              {
-
                 const array_du_an = []
                 this.selected_du_an_kh.forEach((du_an_kh) => {
                   array_du_an.push(du_an_kh.id_du_an_kh)
@@ -654,11 +606,39 @@ export default {
                     type: 'is-success',
                     hasIcon: true
                 })
-                if(this.reset == false)
-                {
-                  this.initValue()
+                this.cong_viec = {
+                  id_du_an_kh: this.selected_du_an.id_du_an_kh,
+                  tien_do: 0,
+                  id_loai_cv: 1,
+                  trang_thai: 1,
+                  ngay_tiep_nhan: new Date().toISOString().substr(0,10),
+                  ngay_giao_viec: new Date().toISOString().substr(0,10),
+                  ngay_hoan_thanh: new Date().toISOString().substr(0,10),
+                  ngay_cam_ket: new Date().toISOString().substr(0,10),
+                  han_hoan_thanh: new Date().toISOString().substr(0,10),
+                  type: false,
+                  time_nhan_viec: {
+                    HH: '07',
+                    mm: '00',
+                    ss: '00'
+                  },
+                  time_hoan_thanh: {
+                    HH: '07',
+                    mm: '00',
+                    ss: '00'
+                  },
+                  type_cv: "0",
+                  do_uu_tien: 1,
+                  trang_thai_td: 0,
+                  thong_bao: false
                 }
-                
+                this.total_phut_gio = 0
+                this.selected_loai_cv = {}
+                this.selected_user_giaoviec = this.my_info
+                this.selected_user_tiepnhan = this.my_info
+                // this.selected_du_an = {}
+                this.selected_du_an_kh = []
+                this.selected_loai_cv = {}
              }
              else{
                 app.$buefy.notification.open({
@@ -702,7 +682,6 @@ export default {
         }
         this.$store.dispatch("updateModalEdit",false)
         this.$store.dispatch("resetCongViecEdit")
-        this.$emit('close',false)
         // console.log('cong việc close',this.cong_viec)
         
       },
@@ -778,7 +757,7 @@ export default {
         this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
              this.my_info = response.data[0]
           })
-        console.log('length',this.getTaskEdit)
+        // console.log('length',Object.entries(this.getTaskEdit).length)
         if(Object.entries(this.getTaskEdit).length > 6)
         {
           this.check_remove = true

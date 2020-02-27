@@ -287,6 +287,7 @@ export default {
     },
     created()
     {
+        this.$store.dispatch('fetchCongViecPhanCong',this.filter)
       this.$store.dispatch("fetchCongViecTD",{
           time: this.time,
           P_TRANG_THAI_TD: 1

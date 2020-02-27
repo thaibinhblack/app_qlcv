@@ -4,7 +4,7 @@
             <div class="header header-datalist">
                 <!-- {{checkedRows.length}} -->
                 <ul class="list-action-data top">
-                    <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
+                    <li><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
                     <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
                     <!-- {{filter}} -->
                     <li>
@@ -36,7 +36,7 @@
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
                         :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
-                    <li v-if="INFO_USER.id_rule > 0">
+                    <li>
                         <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
                     </li>

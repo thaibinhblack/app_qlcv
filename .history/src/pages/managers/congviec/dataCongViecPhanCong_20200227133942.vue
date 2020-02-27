@@ -155,11 +155,11 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_PHANCONG", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
-      LIST_CONG_VIEC_CTD(CV)
+      LIST_CONG_VIEC_PHANCONG(CV)
       {
         this.list_cong_viec = CV
       },
@@ -287,10 +287,7 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("fetchCongViecTD",{
-          time: this.time,
-          P_TRANG_THAI_TD: 1
-      })
+        this.$store.dispatch('fetchCongViecPhanCong',this.filter)
     }
 }
 </script>

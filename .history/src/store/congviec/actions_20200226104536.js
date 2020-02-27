@@ -21,21 +21,6 @@ export default {
             })
         })
     },
-    fetchCongViecPhanCong({commit},filter)
-    {
-        return new Promise((resolve,reject) => 
-        {
-            var query = "&id_du_an="+filter.id_du_an+"&id_du_an_kh="+filter.id_du_an_kh+'&nguoi_nhan_viec='+filter.nguoi_nhan_viec+"&P_ID_LOAI_CV="+filter.id_loai_cv;
-            axios.get('/api/cong-viec-phan-cong?api_token='+axios.defaults.params.api_token
-                +'&time_start='+filter.time_start+'&time_end='
-                +filter.time_end+query).then((response) => {
-                commit("SET_CONG_VIEC_PC",response.data)
-                resolve(response.data)
-            }).catch((error) => {
-                reject(error)
-            })
-        })
-    },
     fetchCongViecTrongNgay({commit})
     {
         return new Promise((resolve, reject) => {
@@ -335,7 +320,7 @@ export default {
             form_tham_dinh.append("P_THAM_DINH_CHAT_LUONG",thamdinh.tham_dinh_chat_luong)
             form_tham_dinh.append("P_THAM_DINH_KHOI_LUONG",thamdinh.tham_dinh_khoi_luong)
             axios.post('/api/tham-dinh-cong-viec/'+axios.defaults.params.id_cv_da +'?api_token='+axios.defaults.params.api_token,form_tham_dinh).then((response) => {
-                resolve(response.data)
+                resolve(true)
             }).catch(() => {
                 reject(false)
             })

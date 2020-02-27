@@ -41,17 +41,14 @@
         <b-tab-item label="ĐÃ THẨM ĐỊNH">
             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
-        <b-tab-item label="CÔNG VIỆC ĐÃ PHÂN CÔNG">
-            <data-list-phan-cong :time="time" />
-        </b-tab-item>
-         <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
+        <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
            <data-list-trong-ngay :time="time" />
         </b-tab-item>
     </b-tabs>
 
     <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  @on-cancel="close()">
       <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
-        <modal-congviec :isActiveModal="isActiveModal" :time="time" @close="isActiveModal = $event" />
+        <modal-congviec :isActiveModal="isActiveModal" />
     </b-modal >
     <b-modal :active.sync="isModalBaoCao" :width="'800px'" :can-cancel="false">
         <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="$store.dispatch('updateModalBaoCao',false)" ></b-button></p>
@@ -104,8 +101,7 @@ export default {
         'data-list-congviec': () => import('./dataListCongViec.vue'),
         'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
         'data-list-da-tham-dinh': () => import('./dataListDaThamDinh'),
-        'data-list-trong-ngay': () => import('./dataCongViecTrongNgay'),
-        'data-list-phan-cong': () => import('./dataCongViecPhanCong')
+        'data-list-trong-ngay': () => import('./dataCongViecTrongNgay')
     },
     data()
     {
@@ -137,10 +133,6 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
-        activeTab(tab)
-        {
-            console.log(tab)
-        },
         isModalBaoCao(val)
         {
             if(val == false)
@@ -174,22 +166,12 @@ export default {
                 this.$store.dispatch('fetchLCV')
             }
         },
-        isModalEdit(boolean)
+        isActiveModal(boolean)
         {
-            // console.log('boolean',boolean)
             if(boolean == false)
             {
-                // console.log('reset')
                 this.$store.dispatch('fetchCongViec',null)
-                this.$store.dispatch("fetchCongViecTD",{
-                    time: this.time,
-                    P_TRANG_THAI_TD: 1
-                })
-                 this.$store.dispatch("fetchCongViecTD",{
-                    time: this.time,
-                    P_TRANG_THAI_TD: 2
-                })
-
+                
             }
         }
 

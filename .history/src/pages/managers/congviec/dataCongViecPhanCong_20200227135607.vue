@@ -4,9 +4,7 @@
             <div class="header header-datalist">
                 <!-- {{checkedRows.length}} -->
                 <ul class="list-action-data top">
-                    <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
-                    <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
-                    <!-- {{filter}} -->
+                   
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -71,10 +69,6 @@
                         @click="FilterCongViecDuAn()"></b-button>
                     </li>
                 </ul>
-                <div class="col-sm-12" style="margin-top: 15px;">
-                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_cho_tham_dinh.toFixed(2)}} giờ</strong> </span>
-                  <!-- {{list_cong_viec}} -->
-                </div>
             </div>
 
             <b-modal :active.sync="isModalSetting" :width="'100%'" full-screen>
@@ -99,9 +93,6 @@
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
-                    </b-table-column>
-                    <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
-                      <input v-model="props.row['tham_dinh_tgian']" type="number">
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
@@ -155,11 +146,11 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_PHANCONG", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
-      LIST_CONG_VIEC_CTD(CV)
+      LIST_CONG_VIEC_PHANCONG(CV)
       {
         this.list_cong_viec = CV
       },
@@ -195,6 +186,7 @@ export default {
       },
       selected_du_an_kh(du_an)
       {
+        console.log(du_an)
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh
@@ -209,88 +201,18 @@ export default {
     {
       FilterCongViecDuAn()
       {
-          this.$store.dispatch('FilterCongViecTD',this.filter)
+          this.$store.dispatch('fetchCongViecPhanCong',this.filter)
       },
       onSort(field, order) {
             this.sortField = field
             this.sortOrder = order
             this.loadAsyncData()
       },
-      gui_tham_dinh()
-      {
-        var app = this;
-        this.$store.dispatch("sendThamDinh",{
-          list_cv: this.checkedRows,
-          tham_dinh: this.filter_tham_dinh})
-        .then(() => {
-          this.checkedRows = []
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: this.filter_tham_dinh == 0 ? 'Gửi thẩm định thành công': 'Hủy thẩm định thành công',
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-          this.filter_tham_dinh = 0
-          this.list_cong_viec = this.getCongViec
-          
-        })
-        .catch(() => {
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: 'Lỗi server! xin vui lòng thử lại!' ,
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-        })
-      },
-      tham_dinh()
-      {
-        var array_list = []
-        var array_tgian = []
-        this.checkedRows.forEach((element) => {
-          array_list.push(element.id_cv_da)
-          array_tgian.push(element.tham_dinh_tgian)
-        })
-        this.$store.dispatch("createThamDinhListCV",{
-          array_list: array_list,
-          array_tgian: array_tgian
-        }).then(() => {
 
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-            this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 1
-            })
-             this.$store.dispatch("fetchCongViecTD",{
-                time: this.time,
-                P_TRANG_THAI_TD: 2
-            })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
-        })
-      }
     },
     created()
     {
-      this.$store.dispatch("fetchCongViecTD",{
-          time: this.time,
-          P_TRANG_THAI_TD: 1
-      })
+        this.$store.dispatch('fetchCongViecPhanCong',this.filter)
     }
 }
 </script>

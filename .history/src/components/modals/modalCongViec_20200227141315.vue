@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="form-group row">        
-            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người nhận việc</label>
+            <label for="inputPassword3"  class="col-sm-4 col-form-label" >Người tiếp nhận</label>
             <div class="col-sm-8">
             <!-- {{selected_user_tiepnhan}} -->
              <!-- :disabled="selected_user_tiepnhan && update || my_info.id_rule == 1"  -->

@@ -335,7 +335,7 @@ export default {
             form_tham_dinh.append("P_THAM_DINH_CHAT_LUONG",thamdinh.tham_dinh_chat_luong)
             form_tham_dinh.append("P_THAM_DINH_KHOI_LUONG",thamdinh.tham_dinh_khoi_luong)
             axios.post('/api/tham-dinh-cong-viec/'+axios.defaults.params.id_cv_da +'?api_token='+axios.defaults.params.api_token,form_tham_dinh).then((response) => {
-                resolve(response.data)
+                resolve(true)
             }).catch(() => {
                 reject(false)
             })

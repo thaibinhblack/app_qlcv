@@ -41,7 +41,7 @@
         <b-tab-item label="ĐÃ THẨM ĐỊNH">
             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
-        <b-tab-item label="CÔNG VIỆC ĐÃ PHÂN CÔNG">
+        <b-tab-item label="CÔNG VIỆC DÃ PHÂN CÔNG">
             <data-list-phan-cong :time="time" />
         </b-tab-item>
          <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
@@ -137,10 +137,6 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
-        activeTab(tab)
-        {
-            console.log(tab)
-        },
         isModalBaoCao(val)
         {
             if(val == false)

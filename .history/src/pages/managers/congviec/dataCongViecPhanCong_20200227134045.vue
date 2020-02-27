@@ -100,9 +100,6 @@
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
-                    <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
-                      <input v-model="props.row['tham_dinh_tgian']" type="number">
-                    </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
                         <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
@@ -155,11 +152,11 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_PHANCONG", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
-      LIST_CONG_VIEC_CTD(CV)
+      LIST_CONG_VIEC_PHANCONG(CV)
       {
         this.list_cong_viec = CV
       },
@@ -287,10 +284,7 @@ export default {
     },
     created()
     {
-      this.$store.dispatch("fetchCongViecTD",{
-          time: this.time,
-          P_TRANG_THAI_TD: 1
-      })
+        this.$store.dispatch('fetchCongViecPhanCong',this.filter)
     }
 }
 </script>

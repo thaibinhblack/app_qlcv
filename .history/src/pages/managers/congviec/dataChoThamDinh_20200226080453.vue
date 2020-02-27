@@ -36,7 +36,7 @@
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
                         :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
-                    <li v-if="INFO_USER.id_rule > 0">
+                    <li>
                         <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
                     </li>

@@ -41,11 +41,11 @@
         <b-tab-item label="ĐÃ THẨM ĐỊNH">
             <data-list-da-tham-dinh :time="time" />
         </b-tab-item>
-        <b-tab-item label="CÔNG VIỆC ĐÃ PHÂN CÔNG">
-            <data-list-phan-cong :time="time" />
-        </b-tab-item>
-         <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
+        <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
            <data-list-trong-ngay :time="time" />
+        </b-tab-item>
+        <b-tab-item label="CÔNG VIỆC DÃ PHÂN CÔNG">
+            <data-list-trong-ngay :time="time" />
         </b-tab-item>
     </b-tabs>
 
@@ -104,8 +104,7 @@ export default {
         'data-list-congviec': () => import('./dataListCongViec.vue'),
         'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
         'data-list-da-tham-dinh': () => import('./dataListDaThamDinh'),
-        'data-list-trong-ngay': () => import('./dataCongViecTrongNgay'),
-        'data-list-phan-cong': () => import('./dataCongViecPhanCong')
+        'data-list-trong-ngay': () => import('./dataCongViecTrongNgay')
     },
     data()
     {
@@ -137,10 +136,6 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
-        activeTab(tab)
-        {
-            console.log(tab)
-        },
         isModalBaoCao(val)
         {
             if(val == false)
