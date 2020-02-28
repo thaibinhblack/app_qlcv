@@ -125,17 +125,16 @@
             <div class="col-sm-8">
               <b-checkbox v-model="cong_viec.thong_bao" @input="sendNotifyTelegram()"></b-checkbox>
               <b-checkbox v-model="cong_viec.thong_bao_private" @input="getIdTelegram()"></b-checkbox>
-              <b-checkbox v-model="cong_viec.thong_bao_rieng" @input="sendNotifyTelegram()"></b-checkbox>
+              <b-checkbox v-model="cong_viec.thong_bao_rieng"></b-checkbox>
                <!-- <b-checkbox v-model="cong_viec.sms" @input="getIdTelegram()"></b-checkbox> -->
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao_rieng == true">
-              <!-- {{selected_user_thongbao}} -->
               <multiselect  :show-labels="false" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="selected_user_thongbao" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.sms == true">
               <b-input type="text" v-model="cong_viec.sdt_nd" @input="sendNotifyTelegram()"></b-input>
             </div>
-            <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true || cong_viec.thong_bao_private == true || cong_viec.sms == true  || cong_viec.thong_bao_rieng == true">
+            <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao == true || cong_viec.thong_bao_private == true || cong_viec.sms == true">
                    <b-input type="textarea"  minlength=""  :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"
                     maxlength="1000" placeholder="Nội dung"  v-model="cong_viec.noi_dung_thong_bao"   ></b-input>
             </div>
@@ -509,7 +508,6 @@ export default {
       },
       selected_user_thongbao(user)
       {
-        
         this.cong_viec.user_thongbao = user.id_telegram
       },
       selected_user_tiepnhan()
@@ -797,8 +795,10 @@ export default {
       sendNotifyTelegram()
       {
         
-        this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv  + ' Hạn hoàn thành: '+this.cong_viec.han_hoan_thanh
-
+        if(this.cong_viec.thong_bao == true || this.cong_viec.sms == true)
+        {
+          this.cong_viec.noi_dung_thong_bao = this.selected_user_giaoviec.display_name + ' giao việc cho ' + this.selected_user_tiepnhan.display_name+ ' Tên công việc là: ' + this.cong_viec.ten_cv  + ' Hạn hoàn thành: '+this.cong_viec.han_hoan_thanh
+        }
       },
       getIdTelegram()
       {
@@ -816,7 +816,7 @@ export default {
         this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
              this.my_info = response.data[0]
           })
-        // console.log('length',this.getTaskEdit)
+        console.log('length',this.getTaskEdit)
         if(Object.entries(this.getTaskEdit).length > 6)
         {
           this.check_remove = true

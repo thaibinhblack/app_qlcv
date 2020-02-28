@@ -213,6 +213,7 @@ export default {
                         result: cong_viec,
                         status: 200
                     })
+                    console.log(cong_viec)
                     if(cong_viec.thong_bao == true)
                     {
                         https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
@@ -223,20 +224,12 @@ export default {
                     if(cong_viec.thong_bao_private == true)
                     {
 
+                        console.log('private',cong_viec)
                         https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
                             'chat_id': cong_viec.id_telegram, //808314484
                             'text':   cong_viec.noi_dung_thong_bao
                         });
                     }
-                    console.log(cong_viec)
-                    if(cong_viec.thong_bao_rieng == true)
-                    {
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
-                            'chat_id': cong_viec.user_thongbao, //808314484
-                            'text':  cong_viec.noi_dung_thong_bao
-                        });
-                    }
-
                     if(cong_viec.nguoi_giao_viec == cong_viec.nguoi_nhap && cong_viec.notify_telegram == 1 && cong_viec.trang_thai == 3 && cong_viec.trang_thai_td == 0)
                     {
                         // console.log(cong_viec)

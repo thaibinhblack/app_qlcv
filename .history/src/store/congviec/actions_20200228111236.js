@@ -135,20 +135,25 @@ export default {
                             'text':   cong_viec.noi_dung_thong_bao
                         });
                     }
-                    if(cong_viec.thong_bao_rieng == true)
+
+                    if(cong_viec.sms == true)
                     {
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
-                            'chat_id': cong_viec.user_thongbao, //808314484
-                            'text':  cong_viec.noi_dung_thong_bao
-                        });
-                    }
-                    if(cong_viec.nguoi_giao_viec == cong_viec.nguoi_nhap && cong_viec.notify_telegram == 1 && cong_viec.trang_thai == 3 && cong_viec.trang_thai_td == 0)
-                    {
-                        // console.log(cong_viec)
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
-                            'chat_id': cong_viec.id_telegram_giaoviec, //808314484
-                            'text':   cong_viec.ten_nnv + ' Báo cáo hoàn thành công việc '+ cong_viec.ten_cv
-                        });
+                        let xmls='<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">\
+                        <soap:Body>\
+                        <SendSMS xmlns="http://tempuri.org/">\
+                            <sdt>'+cong_viec.sdt_nd+'</sdt>\
+                            <noidung>'+cong_viec.noi_dung_thong_bao+'</noidung>\
+                        </SendSMS>\
+                        </soap:Body>\
+                        </soap:Envelope>';
+
+                        https.post('http://10.102.13.6/services/WSSMS.asmx?op=SendSMS',
+                                xmls,
+                                {headers:
+                                    {'Content-Type': 'text/xml'}
+                                }).then(res=>{
+                        console.log(res.data);
+                        }).catch(err=>{console.log(err)});
                     }
                     commit("ADD_CONGVIEC",cong_viec)
                     resolve(response.data)
@@ -213,6 +218,7 @@ export default {
                         result: cong_viec,
                         status: 200
                     })
+                    console.log(cong_viec)
                     if(cong_viec.thong_bao == true)
                     {
                         https.post("https://api.telegram.org/bot984384864:AAHL9TTvMytHSHiRJA4eEd5O3fv4njLCbK8/sendMessage",{
@@ -223,23 +229,15 @@ export default {
                     if(cong_viec.thong_bao_private == true)
                     {
 
+                        console.log('private',cong_viec)
                         https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
                             'chat_id': cong_viec.id_telegram, //808314484
                             'text':   cong_viec.noi_dung_thong_bao
                         });
                     }
-                    console.log(cong_viec)
-                    if(cong_viec.thong_bao_rieng == true)
-                    {
-                        https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
-                            'chat_id': cong_viec.user_thongbao, //808314484
-                            'text':  cong_viec.noi_dung_thong_bao
-                        });
-                    }
-
                     if(cong_viec.nguoi_giao_viec == cong_viec.nguoi_nhap && cong_viec.notify_telegram == 1 && cong_viec.trang_thai == 3 && cong_viec.trang_thai_td == 0)
                     {
-                        // console.log(cong_viec)
+                        console.log(cong_viec)
                         https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
                             'chat_id': cong_viec.id_telegram_giaoviec, //808314484
                             'text':   cong_viec.ten_nnv + ' Báo cáo hoàn thành công việc '+ cong_viec.ten_cv

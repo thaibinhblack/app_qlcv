@@ -129,7 +129,6 @@
                <!-- <b-checkbox v-model="cong_viec.sms" @input="getIdTelegram()"></b-checkbox> -->
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.thong_bao_rieng == true">
-              <!-- {{selected_user_thongbao}} -->
               <multiselect  :show-labels="false" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="selected_user_thongbao" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
             </div>
             <div class="col-sm-8 offset-4" v-if="cong_viec.sms == true">

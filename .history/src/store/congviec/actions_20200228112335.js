@@ -228,7 +228,7 @@ export default {
                             'text':   cong_viec.noi_dung_thong_bao
                         });
                     }
-                    console.log(cong_viec)
+                    
                     if(cong_viec.thong_bao_rieng == true)
                     {
                         https.post("https://api.telegram.org/bot1011574544:AAE6pfGCqY0f1fm9_qhDvtK8vGWvHYBrY9A/sendMessage",{
