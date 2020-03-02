@@ -109,7 +109,6 @@ export default {
     LIST_CONG_VIEC_DTD: state => {
         state.list_congviec_dtd.forEach((ctd) => {
             ctd.gio_thuc_hien = parseFloat(ctd.gio_thuc_hien)
-            ctd.tham_dinh_tgian = parseFloat(ctd.tham_dinh_tgian)
         })
         return state.list_congviec_dtd
     },
