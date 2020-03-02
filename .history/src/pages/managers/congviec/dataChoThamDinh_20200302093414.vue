@@ -105,7 +105,7 @@
                     </b-table-column>
                      <b-table-column width="120">
                         <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
-                        <b-button class="btn-action" icon-left="update"  @click="tham_dinh_chitiet(props.row)"></b-button>
+                        <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row)"></b-button>
                     </b-table-column>
                  </template>
             </b-table>

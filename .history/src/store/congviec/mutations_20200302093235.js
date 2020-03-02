@@ -185,10 +185,9 @@ export default {
     UPDATE_CV_DTD(state,data)
     {
         const IndexTD = state.list_congviec_ctd.findIndex((cv) => 
-            cv.id_cv_da == data.data.id_cv_da
+            cv.id_cv_da == data.id_cv_da
         )
-        console.log(data)
         state.list_congviec_ctd.splice(IndexTD,1)
-        state.list_congviec_dtd.push(data.data)
+        state.list_congviec_dtd.push(data)
     }
 }
