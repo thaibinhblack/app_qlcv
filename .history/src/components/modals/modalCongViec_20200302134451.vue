@@ -279,13 +279,13 @@
              <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định chất lượng</label>
                 <div class="col-sm-8">
-                  <b-input type="text" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1  ? false: true" v-model="cong_viec.tham_dinh_chat_luong" ></b-input>
+                  <b-input type="text" :disabled="my_info.id_rule > 0 ? false: true" v-model="cong_viec.tham_dinh_chat_luong" ></b-input>
                 </div>
             </div>
              <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định khối lượng</label>
                 <div class="col-sm-8">
-                  <b-input type="text" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1 ? false: true" v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
+                  <b-input type="text" :disabled="my_info.id_rule > 0 ? false: true" v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
                 </div>
               </div>
               <div class="form-group row">        

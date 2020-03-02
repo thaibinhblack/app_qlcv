@@ -98,12 +98,12 @@
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
-                     <b-table-column style="width:200px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
+                     <b-table-column style="width:250px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
                       <b-field style="margin-right: 5px;float: left;">
-                        <input style="width: 80px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row, props.index)" />
+                        <b-input style="width: 100px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row, props.index)" />
                       </b-field>
                       <b-field style="display: flex;">
-                        <input style="width: 100px;" v-model="props.row['tham_dinh_tgian']" type="number" />
+                        <input style="width: 150px;" v-model="props.row['tham_dinh_tgian']" type="number" />
                       </b-field>
                     </b-table-column>
                      <b-table-column width="120">

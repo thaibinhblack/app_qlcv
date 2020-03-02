@@ -51,7 +51,7 @@
 
     <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  @on-cancel="close()">
       <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
-        <modal-congviec @submit="check_submit = $event" :isActiveModal="isActiveModal" :time="time" @close="isActiveModal = $event" />
+        <modal-congviec :isActiveModal="isActiveModal" :time="time" @close="isActiveModal = $event" />
     </b-modal >
     <b-modal :active.sync="isModalBaoCao" :width="'800px'" :can-cancel="false">
         <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="$store.dispatch('updateModalBaoCao',false)" ></b-button></p>
@@ -140,7 +140,7 @@ export default {
     watch:{
         activeTab(tab)
         {
-            // console.log(tab)
+            console.log(tab)
         },
         isModalBaoCao(val)
         {
@@ -178,7 +178,7 @@ export default {
         check_submit(boolean)
         {
             // console.log('boolean',boolean)
-            if(boolean == true)
+            if(boolean == false)
             {
                 // console.log('reset')
                 this.$store.dispatch('fetchCongViec',null)
@@ -190,9 +190,8 @@ export default {
                     time: this.time,
                     P_TRANG_THAI_TD: 2
                 })
-                 this.check_submit = false
+
             }
-           
         }
 
     },

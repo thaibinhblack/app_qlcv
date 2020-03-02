@@ -117,8 +117,9 @@
                             </span>
                         </span>
                         <span v-else>
-                              {{setting.column == 'trang_thai' ?
-                          (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
+                            {{setting.column == 'trang_thai' ?
+                            (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành'))
+                            : props.row[setting.column]) }}
                         </span>
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>

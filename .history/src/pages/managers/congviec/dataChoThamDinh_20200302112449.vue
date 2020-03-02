@@ -4,6 +4,9 @@
             <div class="header header-datalist">
                 <!-- {{checkedRows.length}} -->
                 <ul class="list-action-data top">
+                    <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="gui_tham_dinh()" >{{filter_tham_dinh == 0 ? 'Gửi thẩm định' : 'Hủy thẩm định'}}</b-button></li>
+                    <li v-if="INFO_USER.id_rule > 0"><b-button :disabled="checkedRows.length > 0 ? false : true" class="btn btn-add" @click="tham_dinh()" >Thẩm định</b-button></li>
+                    <!-- {{filter}} -->
                     <li>
                       <b-field>
                         <b-select v-model="perPage">
@@ -29,11 +32,11 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an_kh" 
-                        placeholder="Chọn khách hàng của dự án"
+                        placeholder="Chọn dự án"
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                        :multiple="false" :taggable="false"  :show-labels="false"></multiselect>
+                        :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
-                    <li>
+                    <li v-if="INFO_USER.id_rule > 0">
                         <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
                     </li>
@@ -50,7 +53,7 @@
                           label="ten_loai_cv"></multiselect>
                     </li>
                     <li class="right"><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
-                    <li > <button-export-excel :list_cong_viec="list_cong_viec"/></li>
+                    <li > <button-export-excel :list_cong_viec="list_cong_viec" /></li>
                 </ul>
                 <ul class="list-action-data">
                    <li>
@@ -68,9 +71,8 @@
                         @click="FilterCongViecDuAn()"></b-button>
                     </li>
                 </ul>
-                <div class="col-sm-12" style="margin-top: 15px;"> 
-                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_da_tham_dinh.toFixed(2)}} giờ</strong> </span> <br />
-                     <span style="float:right">Tổng số giờ đã chấm : <strong>{{total_time_da_tham_dinh_thucte.toFixed(2)}} giờ</strong> </span>
+                <div class="col-sm-12" style="margin-top: 15px;">
+                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_cho_tham_dinh.toFixed(2)}} giờ</strong> </span>
                   <!-- {{list_cong_viec}} -->
                 </div>
             </div>
@@ -92,22 +94,22 @@
                 :data="list_cong_viec">
                  <template slot-scope="props">
                    
-                   <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
+                    <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
-                     <b-table-column style="width:200px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
+                    <b-table-column label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
                       <b-field style="margin-right: 5px;float: left;">
-                        <input style="width: 80px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row, props.index)" />
+                        <b-input style="width: 70px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row,index)" />
                       </b-field>
                       <b-field style="display: flex;">
-                        <input style="width: 100px;" v-model="props.row['tham_dinh_tgian']" type="number" />
+                        <b-input style="width: 100px;" v-model="props.row['tham_dinh_tgian']" type="number" />
                       </b-field>
                     </b-table-column>
                      <b-table-column width="120">
-                        <b-button  class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskDTD',props.row.id_cv_da)"></b-button>
+                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
                         <b-button v-if="INFO_USER.id_rule > 0" class="btn-action" icon-left="update"  @click="tham_dinh_chitiet(props.row)"></b-button>
                     </b-table-column>
                  </template>
@@ -141,7 +143,7 @@ export default {
               nguoi_nhan_viec: 0,
               time_start: this.time.time_start,
               time_end: this.time.time_end,
-              trang_thai_td: 2
+              trang_thai_td: 1
           },
           list_cong_viec: this.LIST_CONG_VIEC_CTD,
           list_cong_viec_tmp: this.LIST_CONG_VIEC_CTD,
@@ -158,12 +160,11 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_da_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_DTD", "LIST_USER",
-         "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN", "total_time_da_tham_dinh_thucte"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_CTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
-      LIST_CONG_VIEC_DTD(CV)
+      LIST_CONG_VIEC_CTD(CV)
       {
         this.list_cong_viec = CV
       },
@@ -172,10 +173,6 @@ export default {
         if(user != null)
         {
           this.filter.nguoi_nhan_viec = user.id_nd
-        }
-        else
-        {
-          this.filter.nguoi_nhan_viec  = 0
         }
       },
       selected_loai_cv(lcv)
@@ -203,7 +200,6 @@ export default {
       },
       selected_du_an_kh(du_an)
       {
-        // console.log(du_an)
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh
@@ -218,8 +214,8 @@ export default {
     {
       cal_time(data,index)
       {
-        // console.log(data,props)
-          this.list_cong_viec[index].tham_dinh_tgian = parseFloat(data.thoi_gian_tmp / 60).toFixed(2)
+        console.log(data)
+          // this.list_cong_viec[index].tham_dinh_tgian = parseFloat(data.thoi_gian_tmp / 60).toFixed(2)
       },
       FilterCongViecDuAn()
       {
@@ -298,12 +294,51 @@ export default {
               })
         })
       },
+      tham_dinh()
+      {
+        var array_list = []
+        var array_tgian = []
+        this.checkedRows.forEach((element) => {
+          array_list.push(element.id_cv_da)
+          array_tgian.push(element.tham_dinh_tgian)
+        })
+        this.$store.dispatch("createThamDinhListCV",{
+          array_list: array_list,
+          array_tgian: array_tgian
+        }).then(() => {
+              
+             this.$buefy.notification.open({
+                  duration: 1500,
+                  message: 'Thẩm định công việc thành công!' ,
+                  position: 'is-bottom-left',
+                  type: 'is-success',
+                  hasIcon: true
+              })
+            this.$store.dispatch("fetchCongViecTD",{
+                time: this.time,
+                P_TRANG_THAI_TD: 1
+            })
+             this.$store.dispatch("fetchCongViecTD",{
+                time: this.time,
+                P_TRANG_THAI_TD: 2
+            })
+        })
+        .catch(() => {
+           this.$buefy.notification.open({
+                  duration: 1500,
+                  message: 'Lỗi server!' ,
+                  position: 'is-bottom-left',
+                  type: 'is-danger',
+                  hasIcon: true
+              })
+        })
+      }
     },
     created()
     {
       this.$store.dispatch("fetchCongViecTD",{
           time: this.time,
-          P_TRANG_THAI_TD: 2
+          P_TRANG_THAI_TD: 1
       })
     }
 }

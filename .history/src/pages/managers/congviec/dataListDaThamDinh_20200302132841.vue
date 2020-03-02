@@ -70,7 +70,7 @@
                 </ul>
                 <div class="col-sm-12" style="margin-top: 15px;"> 
                   <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_da_tham_dinh.toFixed(2)}} giờ</strong> </span> <br />
-                     <span style="float:right">Tổng số giờ đã chấm : <strong>{{total_time_da_tham_dinh_thucte.toFixed(2)}} giờ</strong> </span>
+                     <span style="float:right">Tổng số giờ làm việc : <strong>{{total_time_da_tham_dinh.toFixed(2)}} giờ</strong> </span>
                   <!-- {{list_cong_viec}} -->
                 </div>
             </div>
@@ -92,23 +92,18 @@
                 :data="list_cong_viec">
                  <template slot-scope="props">
                    
-                   <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
+                    <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
-                     <b-table-column style="width:200px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
-                      <b-field style="margin-right: 5px;float: left;">
-                        <input style="width: 80px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row, props.index)" />
-                      </b-field>
-                      <b-field style="display: flex;">
-                        <input style="width: 100px;" v-model="props.row['tham_dinh_tgian']" type="number" />
-                      </b-field>
+                    <b-table-column label="Thời gian thẩm định"> 
+                      {{props.row['tham_dinh_tgian']}}
                     </b-table-column>
                      <b-table-column width="120">
-                        <b-button  class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskDTD',props.row.id_cv_da)"></b-button>
-                        <b-button v-if="INFO_USER.id_rule > 0" class="btn-action" icon-left="update"  @click="tham_dinh_chitiet(props.row)"></b-button>
+                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
+                        <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
                     </b-table-column>
                  </template>
             </b-table>
@@ -158,8 +153,7 @@ export default {
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_da_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_DTD", "LIST_USER",
-         "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN", "total_time_da_tham_dinh_thucte"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_da_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_DTD", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
@@ -216,11 +210,6 @@ export default {
     },
     methods:
     {
-      cal_time(data,index)
-      {
-        // console.log(data,props)
-          this.list_cong_viec[index].tham_dinh_tgian = parseFloat(data.thoi_gian_tmp / 60).toFixed(2)
-      },
       FilterCongViecDuAn()
       {
           this.$store.dispatch('FilterCongViecTD',this.filter)
@@ -259,19 +248,19 @@ export default {
           })
         })
       },
-      tham_dinh_chitiet(data)
+      tham_dinh()
       {
-        // this.checkedRows.push(data)
         var array_list = []
         var array_tgian = []
-        array_list.push(data.id_cv_da)
-        array_tgian.push(data.tham_dinh_tgian)
+        this.checkedRows.forEach((element) => {
+          array_list.push(element.id_cv_da)
+          array_tgian.push(element.tham_dinh_tgian)
+        })
         this.$store.dispatch("createThamDinhListCV",{
           array_list: array_list,
-          array_tgian: array_tgian,
-          data: data
+          array_tgian: array_tgian
         }).then(() => {
-              
+
              this.$buefy.notification.open({
                   duration: 1500,
                   message: 'Thẩm định công việc thành công!' ,
@@ -279,14 +268,14 @@ export default {
                   type: 'is-success',
                   hasIcon: true
               })
-            // this.$store.dispatch("fetchCongViecTD",{
-            //     time: this.time,
-            //     P_TRANG_THAI_TD: 1
-            // })
-            //  this.$store.dispatch("fetchCongViecTD",{
-            //     time: this.time,
-            //     P_TRANG_THAI_TD: 2
-            // })
+            this.$store.dispatch("fetchCongViecTD",{
+                time: this.time,
+                P_TRANG_THAI_TD: 1
+            })
+             this.$store.dispatch("fetchCongViecTD",{
+                time: this.time,
+                P_TRANG_THAI_TD: 2
+            })
         })
         .catch(() => {
            this.$buefy.notification.open({
@@ -297,7 +286,7 @@ export default {
                   hasIcon: true
               })
         })
-      },
+      }
     },
     created()
     {

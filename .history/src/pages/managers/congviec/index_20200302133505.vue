@@ -190,9 +190,9 @@ export default {
                     time: this.time,
                     P_TRANG_THAI_TD: 2
                 })
-                 this.check_submit = false
+
             }
-           
+            this.check_submit = false
         }
 
     },

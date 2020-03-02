@@ -78,14 +78,13 @@ export default {
         return state.isModalBaoCao
     },
     getTaskEdit: state => {
-        console.log(state.task_edit)
         state.task_edit.ngay_tiep_nhan = state.task_edit.ngay_tiep_nhan != null ?  state.task_edit.ngay_tiep_nhan.slice(0,10) : null
         state.task_edit.ngay_giao_viec =  state.task_edit.ngay_giao_viec != null ? state.task_edit.ngay_giao_viec.slice(0,10) : null
         state.task_edit.ngay_hoan_thanh =  state.task_edit.ngay_hoan_thanh != null ? state.task_edit.ngay_hoan_thanh.slice(0,10) : null
         state.task_edit.ngay_cam_ket =   state.task_edit.ngay_cam_ket != null ? state.task_edit.ngay_cam_ket.slice(0,10) : null
         state.task_edit.ngay_tham_dinh =   state.task_edit.ngay_tham_dinh != null ? state.task_edit.ngay_tham_dinh.slice(0,10) : null
         state.task_edit.han_hoan_thanh =   state.task_edit.han_hoan_thanh != null ? state.task_edit.han_hoan_thanh.slice(0,10) : null
-        
+        // console.log(state.task_edit)
         return state.task_edit
     },
     LIST_BAOCAO: state => {
