@@ -21,7 +21,7 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an" 
-                        class="m200"
+      
                         :options="LIST_DUAN" 
                         label="ten_du_an" 
                         track-by="ten_du_an" placeholder="Danh sách dự án"
@@ -29,20 +29,16 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an_kh" 
-                        class="m200"
                         placeholder="Chọn khách hàng của dự án"
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
                         :multiple="false" :taggable="false"  :show-labels="false"></multiselect>
                     </li>
                     <li>
-                        <multiselect
-                        class="m200" 
-                        placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                        <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
                     </li>
                     <li>
                        <multiselect :options="GROUP_LCV"
-                          class="m200"
                           v-model="selected_loai_cv"
                           placeholder="Chọn loại công việc"
                           :multiple="false"
@@ -95,7 +91,14 @@
                 :pagination-position="paginationPosition"
                 :data="list_cong_viec">
                  <template slot-scope="props">
-                   
+                   <template slot="header" slot-scope="{ column }">
+                          <b-tooltip :label="column.label" dashed>
+                              {{ column.label }}
+                          </b-tooltip>
+                          <br />
+                          <input class="from-control" type="text" :style="{width: setting.width}"  v-model="search[index]" @change="search_cv(index, setting.column)" >
+                          <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
+                      </template> 
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?

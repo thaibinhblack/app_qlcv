@@ -42,7 +42,6 @@
                     </li>
                     <li>
                        <multiselect :options="GROUP_LCV"
-                          class="m200"
                           v-model="selected_loai_cv"
                           placeholder="Chọn loại công việc"
                           :multiple="false"

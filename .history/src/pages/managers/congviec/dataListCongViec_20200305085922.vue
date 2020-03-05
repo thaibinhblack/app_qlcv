@@ -307,5 +307,5 @@ table th {
   text-align: left;
   color: white;
 }
-.m200 {max-width: 200px;}
+
 </style> 
