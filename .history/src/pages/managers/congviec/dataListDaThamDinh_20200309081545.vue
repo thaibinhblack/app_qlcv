@@ -6,7 +6,7 @@
                 <ul class="list-action-data top">
                     <li>
                       <b-field>
-                        <b-select class="height43" v-model="perPage">
+                        <b-select v-model="perPage">
                           <option :value="10">10</option>
                           <option :value="20">20</option>
                           <option :value="50">50</option>

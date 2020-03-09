@@ -391,7 +391,6 @@ export default {
         return new Promise((resolve,reject) => {
             axios.post('/api/tham-dinh-list-cv?api_token='+axios.defaults.params.api_token,form_tham_dinh)
             .then((response) => {
-                resolve(response.data)
                 if(tham_dinh.trang_thai_td == 1)
                 {
                     commit("UPDATE_CV_DTD",tham_dinh)
@@ -400,7 +399,7 @@ export default {
                 {
                     commit("UPDATE_TGIAN_TD",tham_dinh)
                 }
-                
+                resolve(response.data)
             })
             .catch((err) => {
                 reject(err)

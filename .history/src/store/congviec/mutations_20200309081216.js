@@ -194,7 +194,7 @@ export default {
     UPDATE_TGIAN_TD(state,tham_dinh)
     {
         const IndexTD = state.list_congviec_ctd.findIndex((cv) => 
-            cv.id_cv_da == tham_dinh.data.id_cv_da
+            cv.id_cv_da == data.data.id_cv_da
         )
         Object.assign(state.list_congviec_ctd[IndexTD], tham_dinh.data)
     }

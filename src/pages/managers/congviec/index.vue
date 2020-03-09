@@ -251,6 +251,9 @@ export default {
 </script>
 
 <style>
+.height43 {height: 43px;}
+.height43 select {height: 43px;}
+.list-action-data {display: flex}
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
 .list-group {min-height: 50px;max-height: 420px;overflow: hidden;overflow-y: scroll;height: 420px;padding: 5px;}
 .card-title {padding: 5px; background: #209cee;color: #fff; line-height: 35px}

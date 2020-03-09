@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12">
             <ul class="list-filter">
                 
-                <li><a href="/"><b-button icon-left="home" size="6"></b-button></a></li>
+                <li><a href="/dashboard"><b-button icon-left="home" size="6"></b-button></a></li>
                 <li><b-field>
                         <b-button icon-left="update" @click="reset_cong_viec()">
                         </b-button>
@@ -23,7 +23,7 @@
     <b-modal :active.sync="isModalFilter" :width="'500px'" > 
         <model-filter-cv :hinhthuc_loc="hinhthuc_loc" :my_info="my_info" :time="time"/>
     </b-modal>
-    <b-tabs>
+    <b-tabs v-model="activeTab">
         <b-tab-item label="TASK" >
             <div class="row layout-task" >
                 <item-task :list_congviec="list1" :title="'Công việc chưa phân công'" :status="1" />
@@ -31,15 +31,30 @@
                 <item-task :list_congviec="list3" :title="'Công việc đã hoàn thành'" :status="3" />
                 <item-task :list_congviec="list4" :title="'Công việc gia hạn'" :status="4" />
             </div>  
-        </b-tab-item    >
+        </b-tab-item>
+        <b-tab-item label="LIST" active>
+            <data-list-congviec :time="time" />
+        </b-tab-item>
+        <b-tab-item label="CHỜ THẨM ĐỊNH">
+            <data-list-cho-tham-dinh :time="time" />
+        </b-tab-item>
+        <b-tab-item label="ĐÃ THẨM ĐỊNH">
+            <data-list-da-tham-dinh :time="time" />
+        </b-tab-item>
+        <b-tab-item label="CÔNG VIỆC ĐÃ PHÂN CÔNG">
+            <data-list-phan-cong :time="time" />
+        </b-tab-item>
+         <b-tab-item label="CÁC CÔNG VIỆC THÊM TRONG NGÀY">
+           <data-list-trong-ngay :time="time" />
+        </b-tab-item>
     </b-tabs>
 
-    <b-modal :active.sync="isModalEdit" :width="'100%'" :can-cancel="false">
-      <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalEdit = false" ></b-button></p>
-        <modal-congviec :isActiveModal="isActiveModal" />
+    <b-modal :active.sync="isModalEdit" :width="'100%'" full-screen :can-cancel="false"  @on-cancel="close()">
+      <p class="background" >Danh mục công việc <b-button icon-left="close" class="btn btn-close btn-form" @click="close()" ></b-button></p>
+        <modal-congviec @submit="check_submit = $event" :isActiveModal="isActiveModal" :time="time" @close="isActiveModal = $event" />
     </b-modal >
     <b-modal :active.sync="isModalBaoCao" :width="'800px'" :can-cancel="false">
-        <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalBaoCao = false" ></b-button></p>
+        <p class="background">Danh mục báo cáo <b-button icon-left="close" class="btn btn-close btn-form" @click="$store.dispatch('updateModalBaoCao',false)" ></b-button></p>
         <modal-baocao  />
     </b-modal>
     <b-modal :active.sync="isActiveModalGiaHan">
@@ -47,7 +62,7 @@
     </b-modal>
     <b-modal :active.sync="isModalTime" :width="'500px'" :can-cancel="false">
         <div class="card" >
-            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="isModalTime = false" ></b-button>   </p>
+            <p class="background">Thời gian công việc  <b-button icon-left="close" class="btn btn-close btn-form" @click="close_modal_time()" ></b-button>   </p>
              
             <form class="form-rule" style="padding:15px;" @submit.prevent="search_congviec()">
                 <div class="form-group row">
@@ -85,7 +100,12 @@ export default {
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
         'modal-gia-han': () => import('@/components/modals/modalGiaHanThoiGian.vue'),
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),
-        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue')
+        'model-filter-cv': () => import('@/components/modals/modalFilterCongViec.vue'),
+        'data-list-congviec': () => import('./dataListCongViec.vue'),
+        'data-list-cho-tham-dinh': () => import('./dataChoThamDinh.vue'),
+        'data-list-da-tham-dinh': () => import('./dataListDaThamDinh'),
+        'data-list-trong-ngay': () => import('./dataCongViecTrongNgay'),
+        'data-list-phan-cong': () => import('./dataCongViecPhanCong')
     },
     data()
     {
@@ -95,19 +115,21 @@ export default {
             isActiveModal: false,
             isActiveModalGiaHan: false,
             isModalFilter: false,
-            isModalTime: true,
+            isModalTime: false,
             my_info: {},
             hinhthuc_loc: 0,
             time_start: null,
             time_end: null,
             time: {
-                time_start: new Date().toISOString().substr(0,10),
+                time_start: new Date(new Date().getFullYear(),new Date().getMonth() ,1).toISOString().substr(0,10),
                 time_end: new Date().toISOString().substr(0,10)
             },
             list1: [],
             list2: [],
             list3: [],
-            list4: []
+            list4: [],
+            activeTab: 1,
+            check_submit: false
         }
     },
     computed:
@@ -116,12 +138,9 @@ export default {
          "getCongViecByStatus4", "isModalEdit", "INFO_USER", "isModalGiaHan", "isModalBaoCao"])
     },
     watch:{
-        isModalEdit(val)
+        activeTab(tab)
         {
-            if(val == false)
-            {
-                this.search_congviec()
-            }
+            // console.log(tab)
         },
         isModalBaoCao(val)
         {
@@ -155,6 +174,25 @@ export default {
                 this.$store.dispatch('fetchDuAn');
                 this.$store.dispatch('fetchLCV')
             }
+        },
+        check_submit(boolean)
+        {
+            // console.log('boolean',boolean)
+            if(boolean == true)
+            {
+                // console.log('reset')
+                this.$store.dispatch('fetchCongViec',null)
+                this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 1
+                })
+                 this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 2
+                })
+                 this.check_submit = false
+            }
+           
         }
 
     },
@@ -170,22 +208,57 @@ export default {
         {
             this.$store.dispatch('fetchCongViec',this.time)
             this.isModalTime = false
+        },
+        close()
+        {
+            this.$store.dispatch("updateModalEdit",false)
+            this.$store.dispatch("resetCongViecEdit")
+        },
+        close_modal_time()
+        {
+            
+            this.isModalTime = false
         }
     },
     created()
     {
         axios.defaults.params.api_token = this.$cookies.get('token');
-        this.$store.dispatch('GET_INFO_USER');       
+        if(!this.$cookies.isKey('token'))
+        {
+            this.$router.push('/login')
+        }
+        else
+        {
+            this.axios.get(this.$store.state.config.API_URL + 'token?api_token='+this.$cookies.get('token')).then((response) => {
+                    // this.user = response.data[0]
+                    
+                    // console.log(Object.entries(response.data).length)
+                    if(Object.entries(response.data).length === 0)
+                    {
+                        this.$cookies.remove('token')
+                        this.$router.push('/login')
+                    }
+                    else
+                    {
+                        this.$store.dispatch('fetchCongViec',null)
+                    }
+            })
+        }
+        this.$store.dispatch('GET_INFO_USER');  
+             
     }
 }
 </script>
 
 <style>
+.height43 {height: 43px;}
+.height43 select {height: 43px;}
+.list-action-data {display: flex}
 .list-group-item.cv_kh {border-left: 7px solid #209cee;}
 .list-group {min-height: 50px;max-height: 420px;overflow: hidden;overflow-y: scroll;height: 420px;padding: 5px;}
 .card-title {padding: 5px; background: #209cee;color: #fff; line-height: 35px}
 /* .card-task {padding: 10px;} */
-#page-project {background-image: url('../../../assets/images/banner-project.jpg');height: 100%;background-size: cover;background-repeat: no-repeat}
+#page-project {background-image: url('../../../assets/images/bacground-login.jpg');min-height: 100%;background-size: cover;background-repeat: no-repeat}
 .menu-left {background: transparent}
 .navbar-start {height: 40px;}
 .navbar-start>a {color: #fff;}
@@ -206,7 +279,7 @@ export default {
 .list-group-item {position: relative;padding: 20px 5px 0 5px;;margin-top: 15px;}
 
 .list-group-item.error {border-left: 7px solid red;}
-.list-action {position: absolute;right: 0px;bottom: -60px;z-index: 9999;background: #fff;display: none;}
+.list-action {position: absolute;right: 0px;top: 0;z-index: 9999;background: #fff;display: none;}
 .list-action li {padding: 10px 15px;border: 1px solid #e2e2e2;border-bottom: none;cursor: pointer;}
 .list-action li:hover {background-color: #e2e2e2}
 .list-action li:last-child() {border-bottom: 1px solid #e2e2e2;}
