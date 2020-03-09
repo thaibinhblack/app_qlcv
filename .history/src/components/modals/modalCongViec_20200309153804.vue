@@ -249,6 +249,19 @@
                 </div>
             </div>
             <div class="form-group row">        
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên <span class="color-warning">(*)</span> </label>
+                <div class="col-sm-8">
+                  <!-- {{cong_viec.do_uu_tien}} -->
+                  <b-select :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" >
+                    <option :value="0">Chưa có độ ưu tiên</option>
+                    <option :value="1">Cao</option>
+                    <option :value="2">Trung bình</option>
+                    <option :value="3">Thấp</option>
+                  </b-select>
+                  <!-- <b-input   type="number" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input> -->
+                </div>
+            </div>
+            <div class="form-group row">        
                 <label for="inputPassword3" class="col-sm-4 col-form-label" >Mã JIRA</label>
                 <div class="col-sm-8">
                   <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false"  v-model="cong_viec.ma_jira" placeholder="Mã JIIRA" ></b-input>

@@ -198,8 +198,8 @@
                 </div>
             </div>
              <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái / Độ ưu tiên <span class="color-warning">(*)</span> </label>
-                <div class="col-sm-4">
+              <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái <span class="color-warning">(*)</span> </label>
+                <div class="col-sm-8">
                     <b-field>
                         <b-select style="width: 100%;" v-model="cong_viec.trang_thai" required :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" @input="selected_trang_thai()" >
                             <option  value="1" selected>Chưa thực hiện</option>
@@ -208,16 +208,6 @@
                             <option  value="4">Công việc gia hạn</option>
                         </b-select>
                     </b-field>
-                </div>
-                <div class="col-sm-4">
-                  <!-- {{cong_viec.do_uu_tien}} -->
-                  <b-select :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" >
-                    <option :value="0">Chưa có độ ưu tiên</option>
-                    <option :value="1">Cao</option>
-                    <option :value="2">Trung bình</option>
-                    <option :value="3">Thấp</option>
-                  </b-select>
-                  <!-- <b-input   type="number" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input> -->
                 </div>
             </div>
             <div class="form-group row">        
@@ -246,6 +236,19 @@
                     <b-field>
                       <b-input type="text" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.gio_thuc_hien" placeholder="Thời gian thực hiện (giờ)" ></b-input>
                     </b-field>
+                </div>
+            </div>
+            <div class="form-group row">        
+                <label for="inputPassword3" class="col-sm-4 col-form-label" >Độ ưu tiên <span class="color-warning">(*)</span> </label>
+                <div class="col-sm-8">
+                  <!-- {{cong_viec.do_uu_tien}} -->
+                  <b-select :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" >
+                    <option :value="0">Chưa có độ ưu tiên</option>
+                    <option :value="1">Cao</option>
+                    <option :value="2">Trung bình</option>
+                    <option :value="3">Thấp</option>
+                  </b-select>
+                  <!-- <b-input   type="number" :disabled="cong_viec.trang_thai_td == 1 || cong_viec.trang_thai_td == 2 ?  true : false" v-model="cong_viec.do_uu_tien" maxlength="1" max="9" min="1" required placeholder="Độ ưu tiên" ></b-input> -->
                 </div>
             </div>
             <div class="form-group row">        
