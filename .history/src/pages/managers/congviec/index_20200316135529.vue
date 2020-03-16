@@ -227,13 +227,15 @@ export default {
             if(boolean == true)
             {
                 // console.log('reset')
-                 this.$store.state.isLoading  = true
-                this.$store.dispatch('fetchCongViec',null).then(() => {
-                     this.$store.state.isLoading  = false
-                }).catch(() => {
-                     this.$store.state.isLoading  = false
+                this.$store.dispatch('fetchCongViec',null)
+                this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 1
                 })
-               
+                 this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 2
+                })
                  this.check_submit = false
             }
            

@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
-import store from '@/store'
+
 Vue.use(VueRouter)
 
 const routes =  [
@@ -85,16 +85,16 @@ const router =  new VueRouter({
 
 router.beforeResolve((to, from, next) => {
     // If this isn't an initial page load.
-    console.log('loading befoore')
-    store.state.isLoading = true
+    if (to.name) {
+      
+        
+    }
     next()
   })
   
   router.afterEach((to, from) => {
-    setTimeout(() => {
-        store.state.isLoading = false
-    }, 3 * 1000)
-    
+    // Complete the animation of the route progress bar.
+
   })
 
 export default router

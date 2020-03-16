@@ -616,7 +616,7 @@ export default {
         commit("UPDATE_MODAL_EDIT",true)
         commit("SEARCH_TASK_DTD",id_task)
     },
-    openTaskPC({commit},id_task)
+    openTaskPCD({commit},id_task)
     {
         commit("UPDATE_MODAL_EDIT",true)
         commit("SEARCH_TASK_PC",id_task)

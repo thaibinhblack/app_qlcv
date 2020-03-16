@@ -4,6 +4,7 @@
             <div class="header header-datalist">
                 <!-- {{checkedRows.length}} -->
                 <ul class="list-action-data top">
+                   
                     <li>
                       <b-field>
                         <b-select class="height43" v-model="perPage">
@@ -29,20 +30,18 @@
                     </li>
                     <li>
                        <multiselect v-model="selected_du_an_kh" 
-                        class="m200"
-                        placeholder="Chọn khách hàng "
+                       class="m200"
+                        placeholder="Chọn dự án"
                         :options="LIST_DUAN_KH" label="ten_kh" track-by="id_du_an_kh" 
-                        :multiple="false" :taggable="false"  :show-labels="false"></multiselect>
+                        :multiple="true" :taggable="true"  :show-labels="false"></multiselect>
                     </li>
-                    <li>
-                        <multiselect
-                        class="m200" 
-                        placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
+                    <li v-if="INFO_USER.id_rule > 0">
+                        <multiselect placeholder="Chọn người nhận việc" :show-labels="false"  v-model="selected_user" :options="LIST_USER" label="display_name" track-by="id_nd" ></multiselect>
 
                     </li>
                     <li>
                        <multiselect :options="GROUP_LCV"
-                          class="m200"
+                       class="m200"
                           v-model="selected_loai_cv"
                           placeholder="Chọn loại công việc"
                           :multiple="false"
@@ -54,7 +53,7 @@
                           label="ten_loai_cv"></multiselect>
                     </li>
                     <li class="right"><b-button icon-left="settings" @click="isModalSetting = true"></b-button></li>
-                    <li > <button-export-excel :list_cong_viec="list_cong_viec"/></li>
+                    <li > <button-export-excel :list_cong_viec="list_cong_viec" /></li>
                 </ul>
                 <ul class="list-action-data">
                    <li>
@@ -72,11 +71,6 @@
                         @click="FilterCongViecDuAn()"></b-button>
                     </li>
                 </ul>
-                <div class="col-sm-12" style="margin-top: 15px;"> 
-                  <span style="float:right">Tổng số giờ làm việc: <strong>{{total_time_da_tham_dinh.toFixed(2)}} giờ</strong> </span> <br />
-                     <span style="float:right">Tổng số giờ đã chấm : <strong>{{total_time_da_tham_dinh_thucte.toFixed(2)}} giờ</strong> </span>
-                  <!-- {{list_cong_viec}} -->
-                </div>
             </div>
 
             <b-modal :active.sync="isModalSetting" :width="'100%'" full-screen>
@@ -97,22 +91,22 @@
                  <template slot-scope="props">
                    
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
+                      <template slot="header" slot-scope="{ column }">
+                          <b-tooltip :label="column.label" dashed>
+                              {{ column.label }}
+                          </b-tooltip>
+                          <br />
+                          <input class="from-control" type="text" :style="{width: setting.width}"  v-model="search[index]" @change="search_cv(index, setting.column)" >
+                          <!-- <b-input type="text" v-model="search[index]" @input="search_cv(index, setting.column)"></b-input> -->
+                      </template> 
                       <!-- {{setting.column}} -->
                         {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
-                     <b-table-column style="width:200px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 
-                      <b-field style="margin-right: 5px;float: left;">
-                        <input style="width: 80px;" v-model="props.row.thoi_gian_tmp" type="number" @input="cal_time(props.row, props.index)" />
-                      </b-field>
-                      <b-field style="display: flex;">
-                        <input style="width: 100px;" v-model="props.row['tham_dinh_tgian']" type="number" />
-                      </b-field>
-                    </b-table-column>
                      <b-table-column width="120">
-                        <b-button  class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskDTD',props.row.id_cv_da)"></b-button>
-                        <b-button v-if="INFO_USER.id_rule > 0" class="btn-action" icon-left="update"  @click="tham_dinh_chitiet(props.row)"></b-button>
+                        <b-button class="btn-action" icon-left="pen"  @click="$store.dispatch('openTaskTD',props.row.id_cv_da)"></b-button>
+                        <b-button class="btn-action" icon-left="update"  @click="$store.dispatch('openBaoCao',props.row.id_cv_da)"></b-button>
                     </b-table-column>
                  </template>
             </b-table>
@@ -145,7 +139,7 @@ export default {
               nguoi_nhan_viec: 0,
               time_start: this.time.time_start,
               time_end: this.time.time_end,
-              trang_thai_td: 2
+              trang_thai_td: 1
           },
           list_cong_viec: this.LIST_CONG_VIEC_CTD,
           list_cong_viec_tmp: this.LIST_CONG_VIEC_CTD,
@@ -158,16 +152,16 @@ export default {
           selected_user: null,
           selected_loai_cv: null,
           selected_du_an: null,
-          selected_du_an_kh: null
+          selected_du_an_kh: null,
+          search: []
       }
     },
     computed:{
-        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_da_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_DTD", "LIST_USER",
-         "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN", "total_time_da_tham_dinh_thucte"])
+        ...mapGetters([ "GET_SETTING", "setting_modal", "total_time_cho_tham_dinh", "INFO_USER", "LIST_CONG_VIEC_PHANCONG", "LIST_USER", "GROUP_LCV", "LIST_DUAN_KH", "LIST_DUAN"])
     },
     watch:
     {
-      LIST_CONG_VIEC_DTD(CV)
+      LIST_CONG_VIEC_PHANCONG(CV)
       {
         this.list_cong_viec = CV
       },
@@ -176,10 +170,6 @@ export default {
         if(user != null)
         {
           this.filter.nguoi_nhan_viec = user.id_nd
-        }
-        else
-        {
-          this.filter.nguoi_nhan_viec  = 0
         }
       },
       selected_loai_cv(lcv)
@@ -207,7 +197,7 @@ export default {
       },
       selected_du_an_kh(du_an)
       {
-        // console.log(du_an)
+        console.log(du_an)
         if(du_an != null)
         {
           this.filter.id_du_an_kh = du_an.id_du_an_kh
@@ -220,86 +210,35 @@ export default {
     },
     methods:
     {
-      cal_time(data,index)
-      {
-        // console.log(data,props)
-          this.list_cong_viec[index].tham_dinh_tgian = parseFloat(data.thoi_gian_tmp / 60).toFixed(2)
-      },
       FilterCongViecDuAn()
       {
-          this.$store.dispatch('FilterCongViecTD',this.filter)
+          this.$store.dispatch('fetchCongViecPhanCong',this.filter)
       },
       onSort(field, order) {
             this.sortField = field
             this.sortOrder = order
             this.loadAsyncData()
       },
-      gui_tham_dinh()
+      search_cv(index,column)
       {
-        var app = this;
-        this.$store.dispatch("sendThamDinh",{
-          list_cv: this.checkedRows,
-          tham_dinh: this.filter_tham_dinh})
-        .then(() => {
-          this.checkedRows = []
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: this.filter_tham_dinh == 0 ? 'Gửi thẩm định thành công': 'Hủy thẩm định thành công',
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-          this.filter_tham_dinh = 0
-          this.list_cong_viec = this.getCongViec
-          
-        })
-        .catch(() => {
-          app.$buefy.notification.open({
-              duration: 1500,
-              message: 'Lỗi server! xin vui lòng thử lại!' ,
-              position: 'is-bottom-left',
-              type: 'is-success',
-              hasIcon: true
-          })
-        })
-      },
-      tham_dinh_chitiet(data)
-      {
-        // this.checkedRows.push(data)
-        var array_list = []
-        var array_tgian = []
-        array_list.push(data.id_cv_da)
-        array_tgian.push(data.tham_dinh_tgian)
-        this.$store.dispatch("createThamDinhListCV",{
-          array_list: array_list,
-          array_tgian: array_tgian,
-          data: data,
-          trang_thai_td: 2
-        }).then(() => {
+        if(this.search[index] == '')
+        {
+          this.list_cong_viec = this.LIST_CONG_VIEC_PHANCONG
+        }
+        else
+        {
+           this.list_cong_viec = this.list_cong_viec.filter((el) => {
+            // console.log((el.ten_cv).toLowerCase())
+              // console.log(  array[index][column].indexOf(this.search[index]))
+              // // console.log(  array[index][column].includes(this.search[index]))
               
-             this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Thẩm định công việc thành công!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-success',
-                  hasIcon: true
-              })
-        })
-        .catch(() => {
-           this.$buefy.notification.open({
-                  duration: 1500,
-                  message: 'Lỗi server!' ,
-                  position: 'is-bottom-left',
-                  type: 'is-danger',
-                  hasIcon: true
-              })
-        })
-      },
+              return (el[column]).toLowerCase().indexOf((this.search[index]).toLowerCase()) > -1
+          })
+        }
+      }
+       
+
     },
-    created()
-    {
-     
-    }
 }
 </script>
 <style>

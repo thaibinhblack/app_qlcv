@@ -8,5 +8,7 @@ export default {
     INFO_USER: state => {
         return state.info_user
     },
-
+    isLoading: state => {
+        return state.isLoading
+    }
 }

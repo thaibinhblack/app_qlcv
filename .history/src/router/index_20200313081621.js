@@ -85,16 +85,12 @@ const router =  new VueRouter({
 
 router.beforeResolve((to, from, next) => {
     // If this isn't an initial page load.
-    console.log('loading befoore')
     store.state.isLoading = true
     next()
   })
   
   router.afterEach((to, from) => {
-    setTimeout(() => {
-        store.state.isLoading = false
-    }, 3 * 1000)
-    
+    store.state.isLoading = false
   })
 
 export default router

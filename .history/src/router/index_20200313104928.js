@@ -93,7 +93,7 @@ router.beforeResolve((to, from, next) => {
   router.afterEach((to, from) => {
     setTimeout(() => {
         store.state.isLoading = false
-    }, 3 * 1000)
+    }, 2 * 1000)
     
   })
 

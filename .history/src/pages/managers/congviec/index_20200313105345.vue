@@ -143,49 +143,9 @@ export default {
     watch:{
         activeTab(tab)
         {
-            // console.log(tab)
-           if(tab == 0 || tab == 1)
+           if(tab == 1 || tab == 2)
            {
-                this.$store.state.isLoading = true
-                this.$store.dispatch('fetchCongViec',null).then(() => {
-                    this.$store.state.isLoading  = false
-                }).catch(() => {
-                    this.$store.state.isLoading  = false
-                    
-                })
-           }
-           if(tab == 2)
-           {
-                this.$store.state.isLoading = true
-                this.$store.dispatch("fetchCongViecTD",{
-                    time: this.time,
-                    P_TRANG_THAI_TD: 1
-                }).then(() => {
-                     this.$store.state.isLoading  = false
-                }).catch(() => {
-                     this.$store.state.isLoading  = false
-                })
-           }
-           if(tab == 3)
-           {
-                this.$store.state.isLoading = true
-                this.$store.dispatch("fetchCongViecTD",{
-                    time: this.time,
-                    P_TRANG_THAI_TD: 2
-                }).then(() => {
-                     this.$store.state.isLoading  = false
-                }).catch(() => {
-                     this.$store.state.isLoading  = false
-                })
-           }
-           if(tab == 5)
-           {    
-               this.$store.state.isLoading = true
-                this.$store.dispatch("fetchCongViecTrongNgay").then(() => {
-                    this.$store.state.isLoading  = false
-                }).catch(() => {
-                     this.$store.state.isLoading  = false
-                })
+                this.$store.dispatch('fetchCongViec',null)
            }
         },
         isModalBaoCao(val)
@@ -227,13 +187,15 @@ export default {
             if(boolean == true)
             {
                 // console.log('reset')
-                 this.$store.state.isLoading  = true
-                this.$store.dispatch('fetchCongViec',null).then(() => {
-                     this.$store.state.isLoading  = false
-                }).catch(() => {
-                     this.$store.state.isLoading  = false
+                this.$store.dispatch('fetchCongViec',null)
+                this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 1
                 })
-               
+                 this.$store.dispatch("fetchCongViecTD",{
+                    time: this.time,
+                    P_TRANG_THAI_TD: 2
+                })
                  this.check_submit = false
             }
            
@@ -266,7 +228,6 @@ export default {
     },
     created()
     {
-        this.$store.state.isLoading = true
         axios.defaults.params.api_token = this.$cookies.get('token');
         if(!this.$cookies.isKey('token'))
         {
@@ -286,12 +247,7 @@ export default {
             })
         }
         this.$store.dispatch('GET_INFO_USER');  
-        this.$store.dispatch('fetchCongViec',null).then(() => {
-            this.$store.state.isLoading  = false
-        }).catch(() => {
-            this.$store.state.isLoading  = false
-            
-        })     
+             
     }
 }
 </script>

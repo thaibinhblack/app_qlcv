@@ -91,10 +91,8 @@ router.beforeResolve((to, from, next) => {
   })
   
   router.afterEach((to, from) => {
-    setTimeout(() => {
-        store.state.isLoading = false
-    }, 3 * 1000)
-    
+    console.log('loading after')
+    store.state.isLoading = false
   })
 
 export default router
