@@ -15,7 +15,7 @@
           <li  style="font-weight:bold">{{total_pie_lcv}}</li>
       </ul>
        <ul class="table-chart-pie data-right col-sm-2">
-          <li v-for="(data,index) in data_pie_lcv" :key="index"> {{ data.tgian }} giờ </li>
+          <li v-for="(data,index) in data_pie_lcv" :key="index"> {{ parseFloat(data.tgian).toFixed(2) }} giờ </li>
           <li  style="font-weight:bold">{{total_time_lcv.toFixed(2)}}</li>
       </ul>
       <ul class="table-chart-pie data-right col-sm-2">

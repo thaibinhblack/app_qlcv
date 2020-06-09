@@ -15,7 +15,7 @@ import JsonExcel from 'vue-json-excel'
 import 'vue-cal/dist/vuecal.css'
 import Vue2Editor from "vue2-editor";
 import excel from 'vue-excel-export'
- 
+import './assets/style.css'
 Vue.use(excel)
 // import * as firebase from 'firebase'
 // const firebaseConfig = {

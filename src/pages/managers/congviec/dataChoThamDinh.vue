@@ -98,8 +98,16 @@
                    
                     <b-table-column  v-for="(setting,index) in GET_SETTING" :key="index" :label="setting.label"  >
                       <!-- {{setting.column}} -->
-                        {{setting.column == 'trang_thai' ?
+                        <span class="ten_cv" v-if="setting.column == 'ten_cv'"  @click="$store.dispatch('openTask',props.row.id_cv_da)">
+                            {{props.row[setting.column]}}
+                          </span>
+                        <span v-else-if="setting.column == 'noi_dung_cv'" >
+                           {{(props.row[setting.column]) != null ? (props.row[setting.column]).slice(0,50) +'...' : props.row[setting.column]  }}
+                        </span>
+                        <span v-else>
+                           {{setting.column == 'trang_thai' ?
                           (props.row[setting.column] == 1 ? 'Chưa thực hiện' : props.row[setting.column] == 2 ? 'Đang thực hiện' : 'Hoàn thành') : props.row[setting.column] }}
+                        </span>
                         <!-- {{props.row[setting.column]}} -->
                     </b-table-column>
                      <b-table-column style="width:200px;" label="Thời gian thẩm định" v-if="INFO_USER.id_rule > 0"> 

@@ -60,6 +60,28 @@ const routes =  [
             {
                 path: 'lich-cong-tac',
                 component: () => import('@/pages/managers/congviec/calendar.vue')
+            },
+            {
+                path: 'question',
+                component: () => import('@/pages/study/question.vue')
+            },
+            {
+                path: 'ds-du-an',
+                component: () => import('@/pages/managers/congviec/tableDuAnKH.vue')
+            },
+            {
+                path: 'ds-cv-can-theo-doi',
+                component: () => import('@/pages/managers/congviec/dataCVCanTheoDoi.vue')
+            }
+        ]
+    },
+    {
+        path: '/study',
+        component: () => import('@/pages/study/index.vue'),
+        children: [
+            {
+                path: 'oracle',
+                component: () => import("@/pages/study/oracle/index.vue")
             }
         ]
     },
@@ -73,8 +95,12 @@ const routes =  [
     },
     {
         path: '/cong-viec',
-        component: () => import('@/pages/managers/congviec/index.vue')
+        component: () => import('@/pages/managers/congviec/indexv2.vue')
     },
+    // {
+    //     path: '/cong-viec2',
+    //     component: () => import('@/pages/managers/congviec/indexv2.vue')
+    // },
 ]
 
   

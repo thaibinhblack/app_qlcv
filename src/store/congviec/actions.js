@@ -21,6 +21,19 @@ export default {
             })
         })
     },
+    fetchCongViecCon({commit},ID_PARENT)
+    {
+        return new Promise((resolve,reject) => {
+            axios.get(`/api/cong-viec-con/${ID_PARENT}`)
+            .then((response) => {
+                commit("SET_LIST_SUBTASK",response.data)
+                resolve(response.data)
+            })
+            .catch((err) => {
+                 reject(err)
+            })
+        })
+    },
     fetchCongViecPhanCong({commit},filter)
     {
         return new Promise((resolve,reject) => 
@@ -83,9 +96,9 @@ export default {
             form_cong_viec.append("P_ID_DU_AN",cong_viec.id_du_an)
             form_cong_viec.append("P_TEN_CV",cong_viec.ten_cv)
             form_cong_viec.append("P_NOI_DUNG_CV",cong_viec.noi_dung_cv)
-            form_cong_viec.append("P_NGAY_TIEP_NHAN",cong_viec.ngay_tiep_nhan)
+            form_cong_viec.append("P_NGAY_TIEP_NHAN",cong_viec.ngay_tiep_nhan + ' '+cong_viec.time_nv)
             form_cong_viec.append("P_NGAY_GIAO_VIEC", cong_viec.ngay_giao_viec)
-            form_cong_viec.append("P_NGAY_HOAN_THANH", cong_viec.ngay_hoan_thanh)
+            form_cong_viec.append("P_NGAY_HOAN_THANH", cong_viec.ngay_hoan_thanh + ' '+ cong_viec.time_ht)
             form_cong_viec.append("P_NGAY_CAM_KET", cong_viec.ngay_cam_ket)
             form_cong_viec.append("P_GIO_THUC_HIEN",cong_viec.gio_thuc_hien)
             form_cong_viec.append("P_DO_UU_TIEN",cong_viec.do_uu_tien)
@@ -103,11 +116,13 @@ export default {
             form_cong_viec.append("P_ID_LOAI_CV",cong_viec.id_loai_cv)
             form_cong_viec.append("P_NGUOI_YEU_CAU",cong_viec.nguoi_yeu_cau)
             form_cong_viec.append("P_ACTION",1)
-            form_cong_viec.append("P_TIME_NHAN_VIEC", JSON.stringify(cong_viec.time_nhan_viec))
-            form_cong_viec.append("P_TIME_HOAN_THANH", JSON.stringify(cong_viec.time_hoan_thanh))
+            form_cong_viec.append("P_TIME_NHAN_VIEC", "")
+            form_cong_viec.append("P_TIME_HOAN_THANH", "")
             form_cong_viec.append("P_NGUOI_NHAP",cong_viec.nguoi_nhap)
             form_cong_viec.append("P_TYPE",cong_viec.type_cv)
             form_cong_viec.append("P_HAN_HOAN_THANH",cong_viec.han_hoan_thanh)
+            form_cong_viec.append("P_FLOW",cong_viec.flow)
+            form_cong_viec.append("P_PARENT",cong_viec.parent)
             if(cong_viec.trang_thai == 3 && cong_viec.tien_do < 100)
             {
                 resolve({
@@ -160,7 +175,7 @@ export default {
     },
     updateCongViec({commit},cong_viec)
     {   
-        // console.log(cong_viec)
+        console.log('cong_viec',cong_viec)
         return new Promise((resolve,reject) => {
             const form_cong_viec = new FormData();
             // console.log(cong_viec,store.state.module_congviec.task_edit)
@@ -168,9 +183,9 @@ export default {
             form_cong_viec.append("P_ID_DU_AN",cong_viec.id_du_an)
             form_cong_viec.append("P_TEN_CV",cong_viec.ten_cv)
             form_cong_viec.append("P_NOI_DUNG_CV",cong_viec.noi_dung_cv)
-            form_cong_viec.append("P_NGAY_TIEP_NHAN",cong_viec.ngay_tiep_nhan)
-            form_cong_viec.append("P_NGAY_GIAO_VIEC", cong_viec.ngay_giao_viec)
-            form_cong_viec.append("P_NGAY_HOAN_THANH", cong_viec.ngay_hoan_thanh)
+            form_cong_viec.append("P_NGAY_TIEP_NHAN",cong_viec.ngay_tiep_nhan + ' '+cong_viec.time_nv)
+            form_cong_viec.append("P_NGAY_GIAO_VIEC", cong_viec.ngay_giao_viec + ' '+cong_viec.time_nv)
+            form_cong_viec.append("P_NGAY_HOAN_THANH", cong_viec.ngay_hoan_thanh + ' '+ cong_viec.time_ht)
             form_cong_viec.append("P_NGAY_CAM_KET", cong_viec.ngay_cam_ket)
             form_cong_viec.append("P_GIO_THUC_HIEN",cong_viec.gio_thuc_hien)
             form_cong_viec.append("P_DO_UU_TIEN",cong_viec.do_uu_tien)
@@ -190,10 +205,11 @@ export default {
             form_cong_viec.append("P_ACTION",2)
             form_cong_viec.append("P_NGUOI_NHAP",cong_viec.nguoi_nhap)
             form_cong_viec.append("P_TYPE",cong_viec.type)
-            form_cong_viec.append("P_TIME_NHAN_VIEC", JSON.stringify(cong_viec.time_nhan_viec))
-            form_cong_viec.append("P_TIME_HOAN_THANH", JSON.stringify(cong_viec.time_hoan_thanh))
+            form_cong_viec.append("P_TIME_NHAN_VIEC","")
+            form_cong_viec.append("P_TIME_HOAN_THANH","")
             form_cong_viec.append("P_HAN_HOAN_THANH",cong_viec.han_hoan_thanh)
-
+            form_cong_viec.append("P_FLOW",cong_viec.flow)
+            form_cong_viec.append("P_PARENT",cong_viec.parent)
             if(cong_viec.trang_thai == 3 && parseInt(cong_viec.tien_do) < 100)
             {
                 resolve({
@@ -414,6 +430,7 @@ export default {
             form_tham_dinh.append("P_THAM_DINH_TGIAN",thamdinh.tham_dinh_tgian)
             form_tham_dinh.append("P_THAM_DINH_CHAT_LUONG",thamdinh.tham_dinh_chat_luong)
             form_tham_dinh.append("P_THAM_DINH_KHOI_LUONG",thamdinh.tham_dinh_khoi_luong)
+            form_tham_dinh.append("P_DANH_GIA",thamdinh.danh_gia)
             axios.post('/api/tham-dinh-cong-viec/'+axios.defaults.params.id_cv_da +'?api_token='+axios.defaults.params.api_token,form_tham_dinh).then((response) => {
                 resolve(response.data)
             }).catch(() => {
@@ -633,5 +650,13 @@ export default {
     updateModalEdit({commit},boolean)
     {
         commit("UPDATE_MODAL",boolean)
+    },
+    createSubTask({commit},cong_viec)
+    {
+        var form_data = new FormData();
+        form_data.append("P_CONGVIEC", JSON.stringify(cong_viec));
+        axios.post('/api/cong-viec-con',form_data).then((response) => {
+            console.log(response.data)
+        })
     }
 }

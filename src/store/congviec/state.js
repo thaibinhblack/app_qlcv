@@ -130,5 +130,6 @@ export default {
         selected_du_an_setting: [],
         selected_loai_cv_setting: []
     },
-    DELETE_CV_DA_KH: false
+    DELETE_CV_DA_KH: false,
+    LIST_SUBTASK: []
 }

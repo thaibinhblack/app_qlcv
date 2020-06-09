@@ -203,5 +203,9 @@ export default {
             cv.id_cv_da == tham_dinh.data.id_cv_da
         )
         Object.assign(state.list_congviec_ctd[IndexTD], tham_dinh.data)
+    },
+    SET_LIST_SUBTASK(state, list_subtask)
+    {
+        state.LIST_SUBTASK = list_subtask
     }
 }

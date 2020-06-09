@@ -194,7 +194,6 @@
                   </b-field>
                 </div>
             </div>
-
              <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 col-form-label" >Trạng thái / Độ ưu tiên <span class="color-warning">(*)</span> </label>
                 <div class="col-sm-4">
@@ -260,36 +259,14 @@
                   <b-input v-else disabled type="text" v-model="cong_viec.ten_nnhap"></b-input>
               </div>
             </div>
+
              <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Ngày thẩm định</label>
-                <div class="col-sm-8">
-                  <b-input type="date" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1 ? false: true" v-model="cong_viec.ngay_tham_dinh" ></b-input>
-                </div>
-            </div>
-            <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định thời gian</label>
-                <div class="col-sm-8">
-                  <b-input type="number" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1  ? false: true" v-model="cong_viec.tham_dinh_tgian" ></b-input>
-                </div>
-            </div>
-             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định chất lượng</label>
-                <div class="col-sm-8">
-                  <b-input type="text" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1  ? false: true" v-model="cong_viec.tham_dinh_chat_luong" ></b-input>
-                </div>
-            </div>
-             <div class="form-group row">        
-                <label for="inputPassword3" class="col-sm-4 col-form-label" >Thẩm định khối lượng</label>
-                <div class="col-sm-8">
-                  <b-input type="text" :disabled="my_info.id_rule > 0 && cong_viec.trang_thai_td == 1 ? false: true" v-model="cong_viec.tham_dinh_khoi_luong" ></b-input>
-                </div>
+              <label for="inputPassword3"  class="col-sm-4 col-form-label" >Công việc con</label>
+              <div class="col-sm-8">
+                  <label class="btn btn-info" @click="openSubTaskModel()" > + </label>
               </div>
-              <div class="form-group row">        
-                  <label for="inputPassword3" class="col-sm-4 col-form-label" >Người thẩm định</label>
-                  <div class="col-sm-8">
-                    <b-input type="text" disabled v-model="nguoi_tham_dinh" ></b-input>
-                  </div>
-              </div>
+            </div>
+
         
           
         </div>
@@ -329,7 +306,7 @@
       </div>
   </b-tab-item>
   <b-tab-item label="Thẩm định" v-if="my_info.id_rule > 0">
-    <form-tham-dinh :id_cv_da="cong_viec.id_cv_da" />
+    <form-tham-dinh :id_cv_da="cong_viec.id_cv_da" :data="cong_viec" :nguoi_tham_dinh="nguoi_tham_dinh" :my_info="my_info" />
   </b-tab-item>
   <b-tab-item label="Công việc gốc" v-if="Object.entries(this.getTaskEdit).length <= 5 || Object.entries(this.getTaskEdit).length === 0 && this.getTaskEdit != 0" >
     <cong-viec-goc :id_cv_da="cong_viec.id_cv_da" :loai_cv="GROUP_LCV" />
@@ -373,6 +350,7 @@
         </div>
       </div>
   </b-tab-item>
+  <modal-sub-task :cong_viec="cong_viec" :setting_modal="setting_modal" :openSubTask="openSubTask"  @close="openSubTask = $event"/>
 </b-tabs>
 </template>
 
@@ -385,8 +363,9 @@ export default {
     {
       Multiselect,
       'cong-viec-goc': () => import('@/components/congviec/congviecGoc.vue'),
-      'form-tham-dinh': () => import('@/components/forms/formThamDinh.vue')
-    },
+      'form-tham-dinh': () => import('@/components/forms/formThamDinh.vue'),
+      'modal-sub-task': () => import ("./modalSubTask.vue")
+     },
     data()
     {
       return {
@@ -438,7 +417,8 @@ export default {
         error: {
           time_nhan_viec: '',
           time_hoan_thanh: ''
-        }
+        },
+        openSubTask: false
       }
     },
     computed:{
@@ -897,6 +877,23 @@ export default {
           this.cong_viec.flow = 0
         }
         
+      },
+      openSubTaskModel()
+      {
+        if(Object.entries(this.getTaskEdit).length > 6)
+        {
+          this.openSubTask = !this.openSubTask
+        }
+        else
+        {
+            this.$buefy.notification.open({
+                duration: 1500,
+                message: 'BẠN CHƯA TẠO CÔNG VIỆC',
+                position: 'is-bottom-left',
+                type: 'is-warning',
+                hasIcon: true
+            })
+        }
       }
     },
     created()
@@ -960,3 +957,22 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.multiselect__option--highlight {margin-left: 35px !important;}
+.list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
+span.color-warning {color: red}
+.tag-time {    padding: 3px;
+    line-height: unsetpx;
+    line-height: 36px;
+    height: 36px;
+    width: 45px;
+    text-align: center;}
+    .group-time {display: flex;}
+    .group-time>input{width: 100px}
+    .group-time>input:first-child {border-right:none}
+    .group-time>input:last-child {border-left: none;text-align: left}
+    .group-time>input:last-child:focus, .group-time>input:first-child:focus {outline:none;}
+    .item-time {text-align: center}
+    .group-time.active input{color: red;}
+</style>

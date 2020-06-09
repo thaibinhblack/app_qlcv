@@ -92,7 +92,7 @@ import axios from '@/axios'
 import { mapGetters } from 'vuex';
 export default {
     components: {
-        'modal-congviec': () => import('@/components/modals/modalCongViec.vue'),
+        'modal-congviec': () => import('@/components/modals/modalCongViecv2.vue'),
         'modal-baocao': () => import('@/components/modals/modalBaocao.vue'),
         'modal-gia-han': () => import('@/components/modals/modalGiaHanThoiGian.vue'),
         'item-task': () => import('@/components/congviec/itemCongViec.vue'),

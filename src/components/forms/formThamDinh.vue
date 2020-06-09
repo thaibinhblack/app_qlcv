@@ -2,37 +2,28 @@
 <form @submit.prevent="api_tham_dinh()">
     <div class="row">
         <div class="form-group col-sm-12 col-md-6 row">
-        <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
-        <div class="col-sm-8">
-            <b-field>
-            <b-input type="text" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
-            </b-field>
-        </div> 
+            <div class="col-sm-4 col-form-label">Thẩm định thời gian</div>
+            <div class="col-sm-8">
+                <b-field>
+                    <b-input :disabled="my_info.id_rule > 0 ? false : true" type="text" v-model="thamdinh.tham_dinh_tgian" placeholder="Thẩm định thời gian"></b-input>
+                </b-field>
+            </div> 
+        </div>
+
+          <div class="form-group col-sm-12 col-md-6 row">
+            <div class="col-sm-4 col-form-label">Đánh giá</div>
+            <div class="col-sm-8">
+                <b-field>
+                    <b-input :disabled="my_info.id_rule > 0 ? false : true" type="text" v-model="thamdinh.danh_gia" placeholder="Đánh giá công việc"></b-input>
+                </b-field>
+            </div> 
         </div>
 
         <div class="form-group col-sm-12 col-md-6 row">
-        <div class="col-sm-4 col-form-label">Thẩm định chất lượng</div>
+        <div class="col-sm-4 col-form-label">Người thẩm định</div>
         <div class="col-sm-8">
             <b-field>
-            <b-input type="text" v-model="thamdinh.tham_dinh_chat_luong" placeholder="Thẩm định chất lượng"></b-input>
-            </b-field>
-        </div> 
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6 row">
-        <div class="col-sm-4 col-form-label">Thẩm định khối lượng</div>
-        <div class="col-sm-8">
-            <b-field>
-            <b-input type="text" v-model="thamdinh.tham_dinh_khoi_luong" placeholder="Thẩm định khối lượng"></b-input>
-            </b-field>
-        </div> 
-        </div>
-
-        <div class="form-group col-sm-12 col-md-6 row">
-        <div class="col-sm-4 col-form-label">Người thẩm định {{INFO_USER.display_name}}</div>
-        <div class="col-sm-8">
-            <b-field>
-            <b-input disabled type="text" v-model="INFO_USER.display_name" @input="INFO_USER.display_name" ></b-input>
+            <b-input disabled type="text" v-model="nguoi_tham_dinh"  ></b-input>
             </b-field>
         </div> 
         </div>
@@ -56,13 +47,11 @@
 import axios from '@/axios'
 import { mapGetters } from 'vuex';
 export default {
-    props: ["id_cv_da"],
+    props: ["id_cv_da", "data", "nguoi_tham_dinh", "my_info"],
     data()
     {
         return {
-            thamdinh: {
-                 ngay_tham_dinh: new Date().toISOString().substr(0,10)
-            }
+            thamdinh: this.data
         }
     },
     computed: {
@@ -75,7 +64,7 @@ export default {
             axios.defaults.params.id_cv_da = this.id_cv_da
             var app = this;
             this.$store.dispatch('createThamDinhCV',this.thamdinh).then((response) => {
-            if(response == true)
+            if(response.success == true)
             {
                 app.$buefy.notification.open({
                         duration: 1500,

@@ -118,11 +118,30 @@
                     </b-icon>
                 </template>
                 <b-menu-item v-if="getAction_loaicv.xem == '6.1'" icon="" label="Danh mục loại công việc" @click="$router.push('/loai-cv')"></b-menu-item>
+                <b-menu-item icon="" label="Danh sách dự án" @click="$router.push('/ds-du-an')"></b-menu-item>
                 <b-menu-item icon="" label="Danh sách công việc" @click="$router.push('/cong-viec')"></b-menu-item>
                 <b-menu-item icon="" label="Lịch công tác" @click="$router.push('/lich-cong-tac')"></b-menu-item>
             </b-menu-item>
         </b-menu-list>
 
+         <b-menu-list>
+            <b-menu-item
+                icon="briefcase"
+                :active="active.ST"
+                :expand="active.ST"
+                @click="active.ST = !active.ST"
+               >
+                <template slot="label" slot-scope="props">
+                    Quản lý học tập
+                    <b-icon
+                        class="is-pulled-right"
+                        :icon="props.expanded ? 'menu-down' : 'menu-up'">
+                    </b-icon>
+                </template>
+                <b-menu-item icon="" label="Bài tập" @click="$router.push('/question')"></b-menu-item>
+                <b-menu-item icon="" label="Oracle" @click="$router.push('/study/oracle')"></b-menu-item>
+            </b-menu-item>
+        </b-menu-list>
 
         <b-menu-list>
             <b-menu-item
@@ -145,7 +164,8 @@ import { mapGetters } from 'vuex'
                     ADMIN: false,
                     DA: false,
                     TT: false,
-                    CV: false
+                    CV: false,
+                    ST: false
                 }
             }
         },

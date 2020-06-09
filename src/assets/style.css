@@ -1,0 +1,51 @@
+.table-cv {table-layout: fixed;}
+.p15 {padding:15px;}
+table.table-cv  {
+table-layout: fixed;
+border-collapse: collapse;;
+}
+table.table-cv  thead {vertical-align:middle; text-align: center;}
+
+table {margin: 7px 0 ;}
+table.table-cv  td, table.table-cv  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+table.table-cv  tr:nth-child(even){background-color: #f2f2f2;}
+
+table.table-cv  tr:hover {background-color: #ddd;}
+.ml-10 {margin-left: 10px;;}
+.form-group {margin-bottom: 5px !important;}
+.modal-sub-task {position: fixed;z-index: 99990;width: 100%;height: 100%;top: 0;left: 0;
+background-color: #fafafa47;display: none;}
+.content-modal-sub-task {
+    position: fixed;top: 0; width: 50%;height: 100%; right: 0;
+    background: #F1F9F9;
+    
+}
+.body-content {
+    padding: 15px;
+    height: calc(100% - 50px);
+    overflow: hidden scroll;
+}
+.footer-content {padding: 5px 15px;background-color: #f2f2f2;;}
+
+.multiselect__option--highlight {margin-left: 35px !important;}
+.list-file>li {padding: 5px 0;display: inline-block;width: 50%;}
+span.color-warning {color: red}
+.tag-time {    padding: 3px;
+line-height: unsetpx;
+line-height: 36px;
+height: 36px;
+width: 45px;
+text-align: center;}
+.group-time {display: flex;}
+.group-time>input{width: 100px}
+.group-time>input:first-child {border-right:none}
+.group-time>input:last-child {border-left: none;text-align: left}
+.group-time>input:last-child:focus, .group-time>input:first-child:focus {outline:none;}
+.item-time {text-align: center}
+.group-time.active input{color: red;}
+.modal-sub-task.active {display: block;}
+label.btn {cursor: pointer;}
+.ten_cv:hover {color: blue;cursor: pointer;}

@@ -36,5 +36,8 @@ export default {
              total = total + parseFloat(pie.tgian)
          })
          return total;
+    },
+    tk_du_an_kh: state => {
+        return state.tk_du_an_kh
     }
 }
