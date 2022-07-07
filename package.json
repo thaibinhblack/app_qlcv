@@ -24,7 +24,7 @@
     "firebase": "^7.8.2",
     "jqgrid": "^4.6.4",
     "jqwidgets-scripts": "^8.3.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "postcss-loader": "^3.0.0",
     "v-select2-component": "^0.4.1",
     "vue": "^2.6.10",
